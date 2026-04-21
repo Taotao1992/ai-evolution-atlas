@@ -1,0 +1,28 @@
+<svg width="560" height="420" viewBox="0 0 560 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="560" height="420" rx="28" fill="#0E1824" />
+  <rect x="24" y="24" width="512" height="372" rx="24" fill="#122436" stroke="rgba(255,255,255,0.08)" />
+  <rect x="56" y="72" width="164" height="276" rx="22" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.06)" />
+  <rect x="246" y="72" width="88" height="276" rx="22" fill="rgba(93,217,255,0.14)" stroke="rgba(93,217,255,0.28)" />
+  <rect x="360" y="72" width="144" height="276" rx="22" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.06)" />
+  <circle cx="102" cy="118" r="10" fill="#FFB67B" />
+  <circle cx="148" cy="164" r="10" fill="#87FFC1" />
+  <circle cx="112" cy="226" r="10" fill="#5DD9FF" />
+  <circle cx="172" cy="286" r="10" fill="#FFB67B" />
+  <circle cx="148" cy="328" r="10" fill="#87FFC1" />
+  <path d="M102 118L278 118" stroke="rgba(255,255,255,0.18)" stroke-width="2" />
+  <path d="M148 164L278 164" stroke="rgba(255,255,255,0.18)" stroke-width="2" />
+  <path d="M112 226L278 226" stroke="rgba(255,255,255,0.18)" stroke-width="2" />
+  <path d="M172 286L278 286" stroke="rgba(255,255,255,0.18)" stroke-width="2" />
+  <path d="M148 328L278 328" stroke="rgba(255,255,255,0.18)" stroke-width="2" />
+  <path d="M302 118L432 142" stroke="rgba(93,217,255,0.44)" stroke-width="2" />
+  <path d="M302 164L432 192" stroke="rgba(93,217,255,0.44)" stroke-width="2" />
+  <path d="M302 226L432 236" stroke="rgba(93,217,255,0.44)" stroke-width="2" />
+  <path d="M302 286L432 288" stroke="rgba(93,217,255,0.44)" stroke-width="2" />
+  <path d="M302 328L432 334" stroke="rgba(93,217,255,0.44)" stroke-width="2" />
+  <rect x="404" y="124" width="56" height="36" rx="12" fill="rgba(255,255,255,0.08)" />
+  <rect x="404" y="174" width="56" height="36" rx="12" fill="rgba(255,255,255,0.08)" />
+  <rect x="404" y="224" width="56" height="36" rx="12" fill="rgba(255,255,255,0.08)" />
+  <rect x="404" y="274" width="56" height="36" rx="12" fill="rgba(255,255,255,0.08)" />
+  <rect x="404" y="324" width="56" height="36" rx="12" fill="rgba(255,255,255,0.08)" />
+  <text x="56" y="48" fill="#F2F7FB" font-family="IBM Plex Mono, monospace" font-size="18">STATISTICAL LEARNING</text>
+</svg>

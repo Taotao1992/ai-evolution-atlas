@@ -3,21 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Evolution Atlas | From ML to World Models</title>
+    <title>AI Evolution Atlas | History, Interfaces, and World Models</title>
     <meta
       name="description"
-      content="A polished interactive website tracing the history of AI from machine learning and deep learning to LLMs, agents, OpenClaw, harness engineering, and world models."
+      content="A redesigned interactive website about AI history, from machine learning and deep learning to LLMs, agents, OpenClaw, Seedance, Happy Oyster, harness engineering, and world models."
     />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
     <script type="module" src="./main.js" defer></script>
   </head>
   <body>
+    <div class="page-glow" aria-hidden="true"></div>
     <div class="top-progress" aria-hidden="true">
       <span id="scroll-progress"></span>
     </div>
@@ -27,14 +29,14 @@
         <span class="brand-mark">AI</span>
         <span class="brand-copy">
           <strong>Evolution Atlas</strong>
-          <small>From ML to World Models</small>
+          <small>History, interfaces, and world models</small>
         </span>
       </a>
 
       <nav class="site-nav" aria-label="Primary navigation">
-        <a href="#story">Story</a>
-        <a href="#milestones">Milestones</a>
-        <a href="#atlas">Atlas</a>
+        <a href="#history">History</a>
+        <a href="#frontier">Frontier</a>
+        <a href="#library">Library</a>
         <a href="#watch">Watch</a>
         <a href="#future">Future</a>
       </nav>
@@ -43,505 +45,243 @@
     <main>
       <section id="top" class="section hero" data-section="top">
         <div class="hero-copy">
-          <p class="eyebrow">An Interactive, Curated History of Artificial Intelligence</p>
-          <h1>
-            AI history is the story of how machines learned to
-            <span>predict</span>, then <span>represent</span>, then <span>speak</span>, then
-            <span>act</span>, and maybe one day <span>simulate the world</span>.
-          </h1>
+          <p class="eyebrow">A redesigned map of AI, beyond hype cycles</p>
+          <h1>How AI learned to predict, perceive, generate, act, and maybe simulate worlds.</h1>
           <p class="hero-lead">
-            This site turns the AI timeline into a richer English-language atlas: part visual essay, part
-            reading list, part project map, and part video library. It follows the arc from statistical
-            machine learning to deep learning, LLMs, agents, OpenClaw, harness engineering, and the world
-            model bet.
+            This version is built as a richer sci-tech editorial site: tighter typography, original
+            illustrations, interactive history modules, stronger source links, and new frontier chapters on
+            Seedance, Happy Oyster, OpenClaw, harness engineering, and the world model bet.
           </p>
 
           <div class="hero-actions">
-            <a class="button button-primary" href="#milestones">Explore the timeline</a>
-            <a class="button button-secondary" href="#atlas">Open the resource atlas</a>
+            <a class="button button-primary" href="#history">Open the history map</a>
+            <a class="button button-secondary" href="#frontier">Jump to frontier systems</a>
           </div>
 
-          <div class="hero-stats">
-            <article class="stat-card reveal">
-              <div class="stat-number">
-                <span class="stat-value" data-count="70">0</span>
-                <span class="stat-suffix">+</span>
-              </div>
-              <p>years of acceleration from symbolic AI to agent systems</p>
+          <div class="hero-metrics">
+            <article class="metric-card">
+              <strong data-count="9">0</strong>
+              <span>major eras on the interactive timeline</span>
             </article>
-            <article class="stat-card reveal">
-              <div class="stat-number">
-                <span class="stat-value" data-count="7">0</span>
-              </div>
-              <p>major capability shifts across the timeline</p>
+            <article class="metric-card">
+              <strong data-count="24">0</strong>
+              <span>curated papers, blogs, projects, and videos</span>
             </article>
-            <article class="stat-card reveal">
-              <div class="stat-number">
-                <span class="stat-value" data-count="21">0</span>
-              </div>
-              <p>curated links spanning papers, projects, guides, and videos</p>
+            <article class="metric-card">
+              <strong data-count="9">0</strong>
+              <span>original SVG visuals generated for the site</span>
             </article>
           </div>
         </div>
 
-        <div class="hero-panel">
-          <article class="signal-card" data-tilt>
-            <div class="signal-head">
-              <span>Capability ladder</span>
-              <span>1956 → next</span>
-            </div>
+        <div class="hero-visual">
+          <img src="./assets/hero-cosmos.svg" alt="Abstract AI evolution visualization" />
 
-            <div class="signal-grid" aria-hidden="true">
-              <div class="signal-node">
-                <strong>ML</strong>
-                <span>pattern extraction</span>
-              </div>
-              <div class="signal-node">
-                <strong>DL</strong>
-                <span>representation learning</span>
-              </div>
-              <div class="signal-node">
-                <strong>LLM</strong>
-                <span>language as interface</span>
-              </div>
-              <div class="signal-node">
-                <strong>Agents</strong>
-                <span>tools + memory + loops</span>
-              </div>
-              <div class="signal-node">
-                <strong>OpenClaw</strong>
-                <span>personal, local, always-on</span>
-              </div>
-              <div class="signal-node">
-                <strong>Harness</strong>
-                <span>ops, guardrails, evaluation</span>
-              </div>
-              <div class="signal-node signal-node-wide">
-                <strong>World Models?</strong>
-                <span>simulation, imagination, planning</span>
-              </div>
-            </div>
-
-            <p class="signal-copy">
-              The modern shift is not just about bigger models. It is about moving from isolated prediction
-              toward systems that can use tools, recover from failure, coordinate workflows, and eventually
-              reason over simulated futures.
-            </p>
-          </article>
-
-          <div class="micro-grid">
-            <article class="micro-card reveal">
-              <p class="micro-label">Big idea</p>
-              <h2>Language turned AI into a universal control surface.</h2>
-              <p>Prompting replaced many bespoke interfaces, which opened the door to fast experimentation.</p>
+          <div class="hero-sidecards">
+            <article class="sidecard">
+              <p class="sidecard-label">Core transition</p>
+              <h2>Model quality is no longer the whole story.</h2>
+              <p>The outer system layer now decides whether AI feels toy-like or product-grade.</p>
             </article>
-
-            <article class="micro-card reveal">
-              <p class="micro-label">Right now</p>
-              <h2>The winning edge is shifting from model quality to system quality.</h2>
-              <p>Reliable tools, observability, orchestration, and evaluation increasingly define the product.</p>
+            <article class="sidecard">
+              <p class="sidecard-label">New layer</p>
+              <h2>Interfaces are becoming worlds.</h2>
+              <p>
+                Seedance and Happy Oyster both point to a future where AI is not only text, but dynamic
+                media and interactive space.
+              </p>
             </article>
           </div>
         </div>
       </section>
 
-      <section id="story" class="section story-section" data-section="story">
-        <div class="section-heading reveal">
-          <p class="eyebrow">The Story</p>
-          <h2>From algorithms, to interfaces, to operating systems for work</h2>
-          <p>
-            AI is easier to understand when you treat it as a chain of capability upgrades. Machine learning
-            made prediction scalable. Deep learning made representation learning dominant. LLMs turned
-            language into a general-purpose interface. Agents started closing the loop between reasoning and
-            action. Frontier terms like OpenClaw and harness engineering matter because they show where AI is
-            going operationally, not just academically.
-          </p>
-        </div>
-
-        <div class="shift-grid">
-          <article class="shift-card reveal">
-            <p class="shift-number">01</p>
-            <h3>Learning from data</h3>
-            <p>Statistical ML transformed AI from rule writing into model fitting and generalization.</p>
-          </article>
-          <article class="shift-card reveal">
-            <p class="shift-number">02</p>
-            <h3>Learning representations</h3>
-            <p>Deep nets reduced reliance on hand-engineered features and unlocked computer vision at scale.</p>
-          </article>
-          <article class="shift-card reveal">
-            <p class="shift-number">03</p>
-            <h3>Learning a language interface</h3>
-            <p>Transformers and instruction tuning turned text into the front door for hundreds of tasks.</p>
-          </article>
-          <article class="shift-card reveal">
-            <p class="shift-number">04</p>
-            <h3>Learning to operate in environments</h3>
-            <p>Agents, tools, OpenClaw, and harnesses pushed AI from answering toward doing.</p>
-          </article>
+      <section class="section ribbon-section">
+        <div class="signal-ribbon">
+          <span>1956 Dartmouth</span>
+          <span>1958 Perceptron</span>
+          <span>1986 Backprop</span>
+          <span>2012 AlexNet</span>
+          <span>2017 Transformer</span>
+          <span>2020 GPT-3</span>
+          <span>2024 Agent wave</span>
+          <span>2025-2026 Seedance / OpenClaw / Harness / Happy Oyster</span>
+          <span>Next: world models</span>
         </div>
       </section>
 
-      <section id="milestones" class="section milestones-section" data-section="milestones">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Milestones</p>
-          <h2>The AI timeline, with readings, projects, and videos embedded into it</h2>
+      <section id="history" class="section history-section" data-section="history">
+        <div class="section-heading">
+          <p class="eyebrow">AI history</p>
+          <h2>A better timeline, with stronger sources and less hand-wavy storytelling</h2>
           <p>
-            This is not a museum wall of dates. Each milestone points to a representative artifact you can
-            actually read, build with, or watch.
+            Instead of one giant paragraph, the history is split into milestone states. Click across the
+            timeline to see the capability shift, why it mattered, and which papers, official pages, or
+            talks best represent the moment.
           </p>
         </div>
 
-        <div class="milestone-grid">
-          <article class="milestone-card milestone-card-wide reveal">
-            <div class="milestone-top">
-              <div>
-                <p class="milestone-year">1956 → 2000s</p>
-                <p class="milestone-tag">Statistical machine learning</p>
-              </div>
-              <div class="milestone-visual milestone-visual-ml" aria-hidden="true">
-                <span>features</span>
-                <span>labels</span>
-                <span>generalize</span>
-              </div>
-            </div>
-            <h3>Prediction became data-driven and industrial.</h3>
-            <p>
-              The statistical turn made supervised learning practical. Feature engineering, model selection,
-              and generalization became the core playbook for real-world AI systems.
-            </p>
-            <div class="link-row">
-              <a href="https://cacm.acm.org/research/a-few-useful-things-to-know-about-machine-learning/" target="_blank" rel="noreferrer">Read the classic ACM article</a>
-              <a href="https://scikit-learn.org/stable/" target="_blank" rel="noreferrer">Browse scikit-learn</a>
-            </div>
-          </article>
+        <div class="history-shell">
+          <div class="timeline-nav" id="timeline-nav" role="tablist" aria-label="AI history timeline"></div>
 
-          <article class="milestone-card reveal">
-            <div class="milestone-top">
-              <div>
-                <p class="milestone-year">2012</p>
-                <p class="milestone-tag">Deep learning</p>
-              </div>
-              <div class="milestone-visual milestone-visual-dl" aria-hidden="true">
-                <span>pixels</span>
-                <span>layers</span>
-                <span>features</span>
-              </div>
+          <article class="timeline-detail" id="timeline-detail">
+            <div class="timeline-art">
+              <img id="timeline-image" src="./assets/ml-matrix.svg" alt="" />
             </div>
-            <h3>AlexNet made representation learning impossible to ignore.</h3>
-            <p>Computer vision performance jumped because deep nets learned the features that older pipelines required humans to craft.</p>
-            <div class="link-row">
-              <a href="https://proceedings.neurips.cc/paper_files/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html" target="_blank" rel="noreferrer">Read the AlexNet paper</a>
-              <a href="https://www.youtube.com/watch?v=aircAruvnKk" target="_blank" rel="noreferrer">Watch 3Blue1Brown on neural nets</a>
-            </div>
-          </article>
-
-          <article class="milestone-card reveal">
-            <div class="milestone-top">
-              <div>
-                <p class="milestone-year">2017 → 2023</p>
-                <p class="milestone-tag">LLMs</p>
+            <div class="timeline-copy">
+              <p class="detail-kicker" id="timeline-era">Era</p>
+              <h3 id="timeline-title">Loading timeline item</h3>
+              <p class="timeline-summary" id="timeline-summary"></p>
+              <div class="detail-grid">
+                <div>
+                  <p class="detail-label">What changed</p>
+                  <p id="timeline-shift"></p>
+                </div>
+                <div>
+                  <p class="detail-label">Why it matters</p>
+                  <p id="timeline-why"></p>
+                </div>
               </div>
-              <div class="milestone-visual milestone-visual-llm" aria-hidden="true">
-                <span>tokens</span>
-                <span>attention</span>
-                <span>context</span>
-              </div>
-            </div>
-            <h3>Transformers turned language into the dominant interface for AI.</h3>
-            <p>The key shift was not only better text generation. It was the emergence of natural language as a universal task layer.</p>
-            <div class="link-row">
-              <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noreferrer">Read “Attention Is All You Need”</a>
-              <a href="https://www.youtube.com/watch?v=zjkBMFhNj_g" target="_blank" rel="noreferrer">Watch Karpathy’s LLM intro</a>
-            </div>
-          </article>
-
-          <article class="milestone-card milestone-card-wide reveal">
-            <div class="milestone-top">
-              <div>
-                <p class="milestone-year">2024 → now</p>
-                <p class="milestone-tag">Agents</p>
-              </div>
-              <div class="milestone-visual milestone-visual-agent" aria-hidden="true">
-                <span>observe</span>
-                <span>plan</span>
-                <span>act</span>
-                <span>recover</span>
-              </div>
-            </div>
-            <h3>AI moved from “answering” to “operating”.</h3>
-            <p>
-              Agents connect models to tools, memory, APIs, and environments. The most important modern
-              question is no longer “what can the model say?” but “what can the system do safely and
-              repeatedly?”
-            </p>
-            <div class="link-row">
-              <a href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noreferrer">Read Anthropic’s agent playbook</a>
-              <a href="https://openai.github.io/openai-agents-python/" target="_blank" rel="noreferrer">Explore the OpenAI Agents SDK</a>
-              <a href="https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf" target="_blank" rel="noreferrer">Open the practical guide</a>
-            </div>
-          </article>
-
-          <article class="milestone-card reveal">
-            <div class="milestone-top">
-              <div>
-                <p class="milestone-year">Frontier layer</p>
-                <p class="milestone-tag">OpenClaw</p>
-              </div>
-              <div class="milestone-visual milestone-visual-openclaw" aria-hidden="true">
-                <span>channels</span>
-                <span>voice</span>
-                <span>devices</span>
-              </div>
-            </div>
-            <h3>The personal assistant idea became much more concrete.</h3>
-            <p>OpenClaw represents the “your own assistant, on your own devices” direction in the current agent wave.</p>
-            <div class="link-row">
-              <a href="https://github.com/openclaw/openclaw" target="_blank" rel="noreferrer">View the OpenClaw repo</a>
-              <a href="https://docs.openclaw.ai/" target="_blank" rel="noreferrer">Open the docs</a>
-            </div>
-          </article>
-
-          <article class="milestone-card reveal">
-            <div class="milestone-top">
-              <div>
-                <p class="milestone-year">Operational layer</p>
-                <p class="milestone-tag">Harness engineering</p>
-              </div>
-              <div class="milestone-visual milestone-visual-harness" aria-hidden="true">
-                <span>tools</span>
-                <span>guardrails</span>
-                <span>evals</span>
-              </div>
-            </div>
-            <h3>Reliability moved outside the model and into the surrounding system.</h3>
-            <p>Harness engineering is about the shell around the model: context, tooling, evaluation, safety, and observability.</p>
-            <div class="link-row">
-              <a href="https://harnessengineering.academy/" target="_blank" rel="noreferrer">Visit the academy</a>
-              <a href="https://www.youtube.com/watch?v=am_oeAoUhew" target="_blank" rel="noreferrer">Watch the OpenAI talk</a>
-            </div>
-          </article>
-
-          <article class="milestone-card milestone-card-wide reveal">
-            <div class="milestone-top">
-              <div>
-                <p class="milestone-year">Next horizon</p>
-                <p class="milestone-tag">World models</p>
-              </div>
-              <div class="milestone-visual milestone-visual-world" aria-hidden="true">
-                <span>compress</span>
-                <span>simulate</span>
-                <span>imagine</span>
-              </div>
-            </div>
-            <h3>The next leap may be less about longer context windows and more about internal simulation.</h3>
-            <p>
-              World models try to learn a compact latent representation of an environment so an agent can
-              imagine outcomes before acting. That makes them a compelling candidate for the next major AI
-              interface shift.
-            </p>
-            <div class="link-row">
-              <a href="https://arxiv.org/abs/1803.10122" target="_blank" rel="noreferrer">Read the World Models paper</a>
-              <a href="https://worldmodels.github.io/" target="_blank" rel="noreferrer">Open the interactive paper</a>
-              <a href="https://danijar.com/project/dreamerv3/" target="_blank" rel="noreferrer">Explore DreamerV3</a>
+              <div class="chip-row" id="timeline-chips"></div>
+              <div class="link-list" id="timeline-links"></div>
             </div>
           </article>
         </div>
       </section>
 
-      <section class="section systems-section">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Why OpenClaw And Harness Matter</p>
-          <h2>These are not just buzzwords. They reveal the system layer around modern AI.</h2>
+      <section id="frontier" class="section frontier-section" data-section="frontier">
+        <div class="section-heading">
+          <p class="eyebrow">Frontier systems</p>
+          <h2>Where the website gets current: OpenClaw, Seedance, Happy Oyster, harnesses, and world models</h2>
           <p>
-            OpenClaw points toward personal, local, always-on assistants. Harness engineering points toward
-            the infrastructure that makes those assistants reliable. Together, they help explain why the AI
-            frontier feels less like “just another model release” and more like the birth of an operating
-            layer for work.
+            These are not all the same thing. Some are products. Some are infrastructure ideas. Some are
+            research bets. But together they show how AI is moving from chat interfaces toward richer media,
+            longer-running systems, and more world-like interaction.
           </p>
         </div>
 
-        <div class="systems-grid">
-          <article class="system-card reveal">
-            <p class="system-tag">OpenClaw</p>
-            <h3>A representative project for personal agent infrastructure</h3>
-            <p>
-              The most interesting thing about OpenClaw is not only that it is an assistant. It is that it
-              runs across channels, devices, voice, and workflows in a way that feels much closer to a
-              long-running personal operating layer.
-            </p>
-            <ul class="system-list">
-              <li>Local-first feel and device ownership</li>
-              <li>Multi-channel presence instead of one chat box</li>
-              <li>Closer to a personal AI environment than a demo</li>
-            </ul>
-          </article>
+        <div class="frontier-shell">
+          <div class="frontier-tabs" id="frontier-tabs" role="tablist" aria-label="Frontier topics"></div>
 
-          <article class="system-card reveal">
-            <p class="system-tag">Harness Engineering</p>
-            <h3>The difference between a capable model and a trustworthy product</h3>
-            <p>
-              Harnesses define how models see tools, manage memory, recover from failure, escalate to
-              humans, and prove that a workflow is working. This is where modern agent quality increasingly
-              lives.
-            </p>
-            <div class="stack-grid">
-              <div class="stack-tile">
-                <strong>Model</strong>
-                <span>reasoning and generation</span>
+          <article class="frontier-panel" id="frontier-panel">
+            <div class="frontier-media">
+              <img id="frontier-image" src="./assets/media-surface.svg" alt="" />
+            </div>
+            <div class="frontier-copy">
+              <p class="detail-kicker" id="frontier-kicker">Topic</p>
+              <h3 id="frontier-title">Loading topic</h3>
+              <p class="timeline-summary" id="frontier-summary"></p>
+              <div class="detail-grid">
+                <div>
+                  <p class="detail-label">Interpretation</p>
+                  <p id="frontier-interpretation"></p>
+                </div>
+                <div>
+                  <p class="detail-label">Why now</p>
+                  <p id="frontier-why"></p>
+                </div>
               </div>
-              <div class="stack-tile">
-                <strong>Tools</strong>
-                <span>browsers, code, APIs, files</span>
-              </div>
-              <div class="stack-tile">
-                <strong>Memory</strong>
-                <span>context, state, history</span>
-              </div>
-              <div class="stack-tile">
-                <strong>Control</strong>
-                <span>guardrails, approvals, limits</span>
-              </div>
-              <div class="stack-tile">
-                <strong>Observability</strong>
-                <span>traces, metrics, evals</span>
-              </div>
-              <div class="stack-tile">
-                <strong>Recovery</strong>
-                <span>retry, rollback, human takeover</span>
-              </div>
+              <div class="chip-row" id="frontier-chips"></div>
+              <div class="link-list" id="frontier-links"></div>
             </div>
           </article>
         </div>
-
-        <aside class="note-card reveal">
-          <p class="note-title">Reading note</p>
-          <p>
-            OpenClaw and harness engineering are frontier-era additions to the narrative. They are included
-            here because they help explain the transition from models as software features to AI as a
-            persistent, operational system.
-          </p>
-        </aside>
       </section>
 
-      <section id="atlas" class="section atlas-section" data-section="atlas">
-        <div class="section-heading section-heading-inverse reveal">
-          <p class="eyebrow">Interactive Atlas</p>
-          <h2>The click-through resource layer</h2>
+      <section id="library" class="section library-section" data-section="library">
+        <div class="section-heading section-heading-inverse">
+          <p class="eyebrow">Curated library</p>
+          <h2>Papers, blogs, official docs, and videos in one living shelf</h2>
           <p>
-            Filter the atlas by how you want to learn: read core papers and essays, build with project docs
-            and codebases, or watch the best video explainers and talks.
+            Filter the collection by how you want to learn. The goal here is not quantity. It is a more
+            credible and more useful shortlist.
           </p>
         </div>
 
-        <div class="atlas-shell reveal">
-          <div class="atlas-toolbar" role="toolbar" aria-label="Resource filters">
-            <button class="filter-pill is-active" type="button" data-filter="all">All resources</button>
-            <button class="filter-pill" type="button" data-filter="read">Read</button>
-            <button class="filter-pill" type="button" data-filter="build">Build</button>
-            <button class="filter-pill" type="button" data-filter="watch">Watch</button>
-          </div>
+        <div class="library-toolbar" role="toolbar" aria-label="Library filters">
+          <button class="filter-pill is-active" type="button" data-filter="all">All</button>
+          <button class="filter-pill" type="button" data-filter="paper">Papers</button>
+          <button class="filter-pill" type="button" data-filter="blog">Blogs</button>
+          <button class="filter-pill" type="button" data-filter="project">Projects</button>
+          <button class="filter-pill" type="button" data-filter="video">Videos</button>
+        </div>
 
-          <div class="atlas-meta">
-            <p class="atlas-count">
-              Showing <span id="resource-count">0</span> curated resources
-            </p>
-            <p class="atlas-note">
-              Selected card opens a richer explainer panel with why it matters and where it fits in the AI
-              story.
-            </p>
-          </div>
+        <div class="library-meta">
+          <p>Showing <span id="library-count">0</span> curated items</p>
+        </div>
 
-          <div class="atlas-layout">
-            <div id="resource-grid" class="resource-grid" aria-live="polite"></div>
+        <div class="library-layout">
+          <div class="library-grid" id="library-grid"></div>
 
-            <aside class="resource-detail" id="resource-detail">
-              <p class="detail-eyebrow">Selected resource</p>
-              <h3 id="detail-title">Loading...</h3>
-              <p id="detail-summary"></p>
-              <div id="detail-tags" class="detail-tags"></div>
-              <div class="detail-block">
-                <p class="detail-label">Why it matters</p>
-                <p id="detail-why"></p>
-              </div>
-              <div class="detail-block">
+          <aside class="library-detail" id="library-detail">
+            <p class="detail-kicker">Selected resource</p>
+            <h3 id="library-title">Loading resource</h3>
+            <p class="timeline-summary" id="library-summary"></p>
+            <div class="detail-grid">
+              <div>
                 <p class="detail-label">Best for</p>
-                <p id="detail-best-for"></p>
+                <p id="library-best"></p>
               </div>
-              <div class="detail-links">
-                <a id="detail-link" class="button button-primary" href="/" target="_blank" rel="noreferrer">Open resource</a>
+              <div>
+                <p class="detail-label">Why it belongs here</p>
+                <p id="library-why"></p>
               </div>
-            </aside>
-          </div>
+            </div>
+            <div class="chip-row" id="library-chips"></div>
+            <a id="library-link" class="button button-primary" href="/" target="_blank" rel="noreferrer">
+              Open resource
+            </a>
+          </aside>
         </div>
-
-        <noscript>
-          <p class="noscript-note">JavaScript is required for the interactive resource atlas.</p>
-        </noscript>
       </section>
 
       <section id="watch" class="section watch-section" data-section="watch">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Watchlist</p>
-          <h2>A video wall for the AI timeline</h2>
+        <div class="section-heading">
+          <p class="eyebrow">Watch</p>
+          <h2>A more visual learning layer</h2>
           <p>
-            If you prefer learning visually, this wall pulls together strong YouTube explainers and talks
-            that match the same arc as the written timeline above.
+            This wall leans into strong video explainers and talks. It exists because AI is easier to grasp
+            when some of the abstract shifts are seen, not only read.
           </p>
         </div>
 
-        <div id="video-wall" class="video-wall"></div>
+        <div class="watch-grid" id="watch-grid"></div>
       </section>
 
       <section id="future" class="section future-section" data-section="future">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Future Horizon</p>
-          <h2>Where the next shift may come from</h2>
+        <div class="section-heading">
+          <p class="eyebrow">Future</p>
+          <h2>What happens if the next interface is not text, but simulation?</h2>
           <p>
-            If LLMs made language the interface and agents made action the interface, world models may make
-            simulation the interface. That would move AI closer to systems that test plans internally before
-            they commit to the real world.
+            The strongest future branch in this story is world modeling: AI systems that learn latent
+            structure, preview consequences, and reason over possible futures before acting in the real one.
           </p>
         </div>
 
         <div class="future-grid">
-          <article class="future-card reveal">
-            <p class="future-tag">World models</p>
-            <h3>Internal simulation before external action</h3>
-            <p>Compress environments, imagine outcomes, and search over futures instead of reacting one step at a time.</p>
+          <article class="future-card">
+            <img src="./assets/world-shell.svg" alt="Abstract world model illustration" />
+            <h3>World models could shift AI from reactive generation to internal planning.</h3>
+            <p>
+              This is why the bridge from generative AI to embodied and agentic AI may run through simulation.
+            </p>
           </article>
-          <article class="future-card reveal">
-            <p class="future-tag">Embodied systems</p>
-            <h3>Agents will inherit the constraints of robotics and the physical world</h3>
-            <p>Latency, uncertainty, safety, and real-time perception become much harder when pixels turn into motors.</p>
+          <article class="future-card">
+            <img src="./assets/agent-loop.svg" alt="Abstract agent orchestration illustration" />
+            <h3>Harnesses, evaluations, and recovery systems will become default product architecture.</h3>
+            <p>Control surfaces will matter just as much as model intelligence.</p>
           </article>
-          <article class="future-card reveal">
-            <p class="future-tag">Multi-agent coordination</p>
-            <h3>One assistant may turn into a network of specialists</h3>
-            <p>Future products may feel less like one super-model and more like a coordinated organization of agents.</p>
+          <article class="future-card">
+            <img src="./assets/media-surface.svg" alt="Abstract multimodal media illustration" />
+            <h3>Interfaces are becoming audiovisual, spatial, and world-like.</h3>
+            <p>Seedance and Happy Oyster fit here as signs of interface expansion, not just model scaling.</p>
           </article>
-          <article class="future-card reveal">
-            <p class="future-tag">Governed intelligence</p>
-            <h3>Control, audit, and escalation will become first-class product features</h3>
-            <p>The strongest AI systems will likely be the ones that know when to ask for help, not just when to act.</p>
-          </article>
-        </div>
-
-        <div class="closing-panel reveal">
-          <p class="eyebrow">GitHub-ready</p>
-          <h2>This site stays fully static, but behaves like an interactive guide.</h2>
-          <p>
-            That means it remains simple to host on GitHub Pages while still offering a richer experience:
-            animation, filtering, a clickable resource atlas, embedded-quality external links, and a more
-            visual mix of text, diagrams, and video thumbnails.
-          </p>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
       <p>AI Evolution Atlas</p>
-      <p>Curated snapshot for April 21, 2026</p>
+      <p>Refreshed for April 21, 2026</p>
     </footer>
   </body>
 </html>

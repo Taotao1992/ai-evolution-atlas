@@ -1,0 +1,31 @@
+<svg width="560" height="420" viewBox="0 0 560 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="560" height="420" rx="28" fill="#0B1621" />
+  <rect x="24" y="24" width="512" height="372" rx="24" fill="#101F2E" stroke="rgba(255,255,255,0.08)" />
+  <rect x="60" y="94" width="74" height="228" rx="20" fill="rgba(255,255,255,0.06)" />
+  <rect x="158" y="74" width="86" height="268" rx="24" fill="rgba(93,217,255,0.14)" stroke="rgba(93,217,255,0.24)" />
+  <rect x="268" y="58" width="98" height="300" rx="26" fill="rgba(135,255,193,0.12)" stroke="rgba(135,255,193,0.24)" />
+  <rect x="390" y="88" width="110" height="240" rx="24" fill="rgba(255,182,123,0.12)" stroke="rgba(255,182,123,0.22)" />
+  <circle cx="96" cy="132" r="8" fill="#5DD9FF" />
+  <circle cx="96" cy="184" r="8" fill="#87FFC1" />
+  <circle cx="96" cy="236" r="8" fill="#FFB67B" />
+  <circle cx="96" cy="288" r="8" fill="#5DD9FF" />
+  <g opacity="0.46">
+    <path d="M104 132L184 106" stroke="rgba(255,255,255,0.18)" />
+    <path d="M104 184L184 162" stroke="rgba(255,255,255,0.18)" />
+    <path d="M104 236L184 236" stroke="rgba(255,255,255,0.18)" />
+    <path d="M104 288L184 304" stroke="rgba(255,255,255,0.18)" />
+    <path d="M228 110L294 92" stroke="rgba(255,255,255,0.18)" />
+    <path d="M228 170L294 164" stroke="rgba(255,255,255,0.18)" />
+    <path d="M228 234L294 238" stroke="rgba(255,255,255,0.18)" />
+    <path d="M228 296L294 312" stroke="rgba(255,255,255,0.18)" />
+    <path d="M344 86L426 128" stroke="rgba(255,255,255,0.18)" />
+    <path d="M344 162L426 176" stroke="rgba(255,255,255,0.18)" />
+    <path d="M344 236L426 236" stroke="rgba(255,255,255,0.18)" />
+    <path d="M344 312L426 286" stroke="rgba(255,255,255,0.18)" />
+  </g>
+  <rect x="414" y="120" width="62" height="34" rx="12" fill="rgba(255,255,255,0.08)" />
+  <rect x="414" y="168" width="62" height="34" rx="12" fill="rgba(255,255,255,0.08)" />
+  <rect x="414" y="216" width="62" height="34" rx="12" fill="rgba(255,255,255,0.08)" />
+  <rect x="414" y="264" width="62" height="34" rx="12" fill="rgba(255,255,255,0.08)" />
+  <text x="60" y="50" fill="#F2F7FB" font-family="IBM Plex Mono, monospace" font-size="18">DEEP REPRESENTATION STACK</text>
+</svg>

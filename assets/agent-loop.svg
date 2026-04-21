@@ -1,0 +1,26 @@
+<svg width="560" height="420" viewBox="0 0 560 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="560" height="420" rx="28" fill="#09131E" />
+  <rect x="24" y="24" width="512" height="372" rx="24" fill="#0F2131" stroke="rgba(255,255,255,0.08)" />
+  <circle cx="280" cy="210" r="84" fill="rgba(93,217,255,0.12)" stroke="rgba(93,217,255,0.22)" />
+  <circle cx="280" cy="210" r="30" fill="#5DD9FF" />
+  <text x="245" y="216" fill="#08111A" font-family="IBM Plex Mono, monospace" font-size="18">AI</text>
+  <g opacity="0.9">
+    <circle cx="280" cy="84" r="30" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.12)" />
+    <text x="246" y="90" fill="#F2F7FB" font-family="IBM Plex Mono, monospace" font-size="16">TOOLS</text>
+    <circle cx="422" cy="210" r="30" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.12)" />
+    <text x="382" y="216" fill="#F2F7FB" font-family="IBM Plex Mono, monospace" font-size="16">MEMORY</text>
+    <circle cx="280" cy="336" r="30" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.12)" />
+    <text x="234" y="342" fill="#F2F7FB" font-family="IBM Plex Mono, monospace" font-size="16">EVALS</text>
+    <circle cx="138" cy="210" r="30" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.12)" />
+    <text x="100" y="216" fill="#F2F7FB" font-family="IBM Plex Mono, monospace" font-size="16">ACT</text>
+  </g>
+  <path d="M280 124V154" stroke="rgba(93,217,255,0.42)" stroke-width="3" stroke-linecap="round" />
+  <path d="M366 210H336" stroke="rgba(135,255,193,0.42)" stroke-width="3" stroke-linecap="round" />
+  <path d="M280 266V296" stroke="rgba(255,182,123,0.42)" stroke-width="3" stroke-linecap="round" />
+  <path d="M194 210H224" stroke="rgba(93,217,255,0.42)" stroke-width="3" stroke-linecap="round" />
+  <path d="M280 64C340 64 396 118 422 180" stroke="rgba(255,255,255,0.12)" stroke-width="2" stroke-dasharray="8 10" />
+  <path d="M450 210C450 274 402 326 338 348" stroke="rgba(255,255,255,0.12)" stroke-width="2" stroke-dasharray="8 10" />
+  <path d="M280 356C220 356 164 304 138 242" stroke="rgba(255,255,255,0.12)" stroke-width="2" stroke-dasharray="8 10" />
+  <path d="M110 210C110 146 158 94 222 72" stroke="rgba(255,255,255,0.12)" stroke-width="2" stroke-dasharray="8 10" />
+  <text x="54" y="50" fill="#F2F7FB" font-family="IBM Plex Mono, monospace" font-size="18">AGENT ORCHESTRATION LOOP</text>
+</svg>

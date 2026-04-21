@@ -1,0 +1,62 @@
+<svg width="860" height="760" viewBox="0 0 860 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="40" y1="40" x2="780" y2="700" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E1C2B" />
+      <stop offset="1" stop-color="#123752" />
+    </linearGradient>
+    <radialGradient id="glowA" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(228 196) rotate(90) scale(188 188)">
+      <stop stop-color="#5DD9FF" stop-opacity="0.62" />
+      <stop offset="1" stop-color="#5DD9FF" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glowB" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(622 530) rotate(90) scale(202 202)">
+      <stop stop-color="#87FFC1" stop-opacity="0.45" />
+      <stop offset="1" stop-color="#87FFC1" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glowC" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(666 180) rotate(90) scale(150 150)">
+      <stop stop-color="#FFB67B" stop-opacity="0.4" />
+      <stop offset="1" stop-color="#FFB67B" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect x="24" y="24" width="812" height="712" rx="42" fill="url(#bg)" />
+  <rect x="24" y="24" width="812" height="712" rx="42" stroke="rgba(255,255,255,0.08)" />
+  <rect x="70" y="70" width="720" height="620" rx="34" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" />
+  <path d="M104 630C188 588 248 532 318 442C384 356 454 280 558 244C618 224 676 212 744 210" stroke="rgba(93,217,255,0.45)" stroke-width="3" stroke-linecap="round" stroke-dasharray="10 12" />
+  <path d="M140 518C226 484 294 430 352 356C422 268 510 194 662 146" stroke="rgba(135,255,193,0.38)" stroke-width="2" stroke-linecap="round" />
+  <circle cx="228" cy="196" r="188" fill="url(#glowA)" />
+  <circle cx="622" cy="530" r="202" fill="url(#glowB)" />
+  <circle cx="666" cy="180" r="150" fill="url(#glowC)" />
+  <g opacity="0.86">
+    <circle cx="194" cy="560" r="18" fill="#5DD9FF" />
+    <circle cx="194" cy="560" r="36" fill="#5DD9FF" fill-opacity="0.14" />
+    <text x="226" y="566" fill="#F2F7FB" font-family="IBM Plex Mono, monospace" font-size="18">ML</text>
+  </g>
+  <g opacity="0.94">
+    <circle cx="314" cy="450" r="20" fill="#87FFC1" />
+    <circle cx="314" cy="450" r="44" fill="#87FFC1" fill-opacity="0.12" />
+    <text x="348" y="456" fill="#F2F7FB" font-family="IBM Plex Mono, monospace" font-size="18">DL</text>
+  </g>
+  <g opacity="0.96">
+    <circle cx="444" cy="344" r="22" fill="#FFB67B" />
+    <circle cx="444" cy="344" r="50" fill="#FFB67B" fill-opacity="0.12" />
+    <text x="480" y="350" fill="#F2F7FB" font-family="IBM Plex Mono, monospace" font-size="18">LLM</text>
+  </g>
+  <g>
+    <circle cx="584" cy="254" r="22" fill="#5DD9FF" />
+    <circle cx="584" cy="254" r="48" fill="#5DD9FF" fill-opacity="0.1" />
+    <text x="620" y="260" fill="#F2F7FB" font-family="IBM Plex Mono, monospace" font-size="18">AGENT</text>
+  </g>
+  <g>
+    <circle cx="668" cy="476" r="22" fill="#87FFC1" />
+    <circle cx="668" cy="476" r="50" fill="#87FFC1" fill-opacity="0.1" />
+    <text x="534" y="482" fill="#F2F7FB" font-family="IBM Plex Mono, monospace" font-size="18">WORLD MODEL?</text>
+  </g>
+  <g opacity="0.4">
+    <path d="M108 116H754" stroke="rgba(255,255,255,0.08)" />
+    <path d="M108 196H754" stroke="rgba(255,255,255,0.08)" />
+    <path d="M108 276H754" stroke="rgba(255,255,255,0.08)" />
+    <path d="M108 356H754" stroke="rgba(255,255,255,0.08)" />
+    <path d="M108 436H754" stroke="rgba(255,255,255,0.08)" />
+    <path d="M108 516H754" stroke="rgba(255,255,255,0.08)" />
+    <path d="M108 596H754" stroke="rgba(255,255,255,0.08)" />
+  </g>
+</svg>

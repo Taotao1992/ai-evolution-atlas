@@ -1,0 +1,24 @@
+<svg width="560" height="420" viewBox="0 0 560 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="surfaceBg" x1="32" y1="32" x2="520" y2="388" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0D1A28" />
+      <stop offset="1" stop-color="#122B40" />
+    </linearGradient>
+  </defs>
+  <rect width="560" height="420" rx="28" fill="url(#surfaceBg)" />
+  <rect x="24" y="24" width="512" height="372" rx="24" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" />
+  <rect x="54" y="78" width="220" height="264" rx="28" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.08)" />
+  <rect x="300" y="106" width="206" height="208" rx="28" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.08)" />
+  <rect x="84" y="112" width="160" height="108" rx="18" fill="rgba(93,217,255,0.14)" />
+  <circle cx="132" cy="162" r="28" fill="#5DD9FF" fill-opacity="0.55" />
+  <path d="M98 206C116 174 146 154 176 156C206 158 226 176 238 196" stroke="#87FFC1" stroke-width="6" stroke-linecap="round" />
+  <path d="M344 156H462" stroke="rgba(255,255,255,0.18)" stroke-width="8" stroke-linecap="round" />
+  <path d="M344 194H430" stroke="rgba(255,255,255,0.18)" stroke-width="8" stroke-linecap="round" />
+  <path d="M344 232H446" stroke="rgba(255,255,255,0.18)" stroke-width="8" stroke-linecap="round" />
+  <rect x="84" y="246" width="160" height="56" rx="16" fill="rgba(255,182,123,0.16)" />
+  <circle cx="116" cy="274" r="12" fill="#FFB67B" />
+  <rect x="344" y="264" width="118" height="18" rx="9" fill="rgba(135,255,193,0.2)" />
+  <path d="M268 200C290 194 306 188 324 176C352 156 370 130 390 98" stroke="rgba(93,217,255,0.34)" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 10" />
+  <path d="M268 244C294 246 316 250 344 262C376 276 402 298 430 322" stroke="rgba(255,182,123,0.34)" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 10" />
+  <text x="54" y="50" fill="#F2F7FB" font-family="IBM Plex Mono, monospace" font-size="18">MULTIMODAL MEDIA INTERFACE</text>
+</svg>

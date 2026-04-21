@@ -1,0 +1,23 @@
+<svg width="560" height="420" viewBox="0 0 560 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="shellGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(280 210) rotate(90) scale(160 160)">
+      <stop stop-color="#5DD9FF" stop-opacity="0.55" />
+      <stop offset="1" stop-color="#5DD9FF" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="560" height="420" rx="28" fill="#0A1520" />
+  <rect x="24" y="24" width="512" height="372" rx="24" fill="#0F2030" stroke="rgba(255,255,255,0.08)" />
+  <circle cx="280" cy="210" r="160" fill="url(#shellGlow)" />
+  <circle cx="280" cy="210" r="118" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" />
+  <circle cx="280" cy="210" r="78" fill="rgba(135,255,193,0.1)" stroke="rgba(135,255,193,0.24)" />
+  <path d="M164 210C164 161.95 201.95 124 250 124H310C358.05 124 396 161.95 396 210C396 258.05 358.05 296 310 296H250C201.95 296 164 258.05 164 210Z" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-dasharray="8 10" />
+  <path d="M200 162C238 180 322 180 360 162" stroke="#5DD9FF" stroke-width="4" stroke-linecap="round" />
+  <path d="M200 258C238 240 322 240 360 258" stroke="#87FFC1" stroke-width="4" stroke-linecap="round" />
+  <path d="M280 132V288" stroke="rgba(255,255,255,0.14)" stroke-width="2" />
+  <path d="M186 210H374" stroke="rgba(255,255,255,0.14)" stroke-width="2" />
+  <circle cx="280" cy="102" r="12" fill="#FFB67B" />
+  <circle cx="386" cy="210" r="12" fill="#5DD9FF" />
+  <circle cx="280" cy="318" r="12" fill="#87FFC1" />
+  <circle cx="174" cy="210" r="12" fill="#FFB67B" />
+  <text x="54" y="50" fill="#F2F7FB" font-family="IBM Plex Mono, monospace" font-size="18">WORLD MODEL SHELL</text>
+</svg>
