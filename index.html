@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Evolution Atlas | 人工智能演进史</title>
+    <meta
+      name="description"
+      content="一个精美、专业的单页网站，梳理人工智能从 Machine Learning、Deep Learning、LLM，到 Agents、OpenClaw、Harness Engineering 与 World Models 的演进脉络。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./main.js" defer></script>
+  </head>
+  <body>
+    <div class="top-progress" aria-hidden="true">
+      <span id="scroll-progress"></span>
+    </div>
+
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="AI Evolution Atlas">
+        <span class="brand-mark">AI</span>
+        <span class="brand-copy">
+          <strong>Evolution Atlas</strong>
+          <small>From ML to World Models</small>
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="主导航">
+        <a href="#eras">演进阶段</a>
+        <a href="#timeline">时间线</a>
+        <a href="#systems">系统时代</a>
+        <a href="#future">未来</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="top" class="section hero" data-section="top">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">A Curated Single-Page Story of Artificial Intelligence</p>
+          <h1>
+            人工智能的历史，<br />
+            <span>不只是模型升级</span>，<br />
+            更是从 <span>预测</span> 走向 <span>执行</span>，<br />
+            再走向 <span>世界理解</span>。
+          </h1>
+          <p class="hero-lead">
+            从 Machine Learning、Deep Learning、LLM，到 Agents、OpenClaw、
+            Harness Engineering，再到可能的 World Models，这条脉络展示的不是单点技术突破，而是 AI
+            如何一步步获得表示、语言、工具、记忆、自治与规划能力。
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#timeline">浏览时间线</a>
+            <a class="button button-secondary" href="#future">查看未来章节</a>
+          </div>
+
+          <div class="hero-stats">
+            <article class="stat-card reveal">
+              <div class="stat-number">
+                <span class="stat-value" data-count="70">0</span>
+                <span class="stat-suffix">+</span>
+              </div>
+              <p>AI 加速演进的年代</p>
+            </article>
+            <article class="stat-card reveal">
+              <div class="stat-number">
+                <span class="stat-value" data-count="7">0</span>
+              </div>
+              <p>关键范式跃迁</p>
+            </article>
+            <article class="stat-card reveal">
+              <div class="stat-number">
+                <span class="stat-value" data-count="1">0</span>
+              </div>
+              <p>主线问题：如何让机器真正理解并行动</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="hero-panel reveal">
+          <article class="insight-card" data-tilt>
+            <div class="insight-head">
+              <span>Evolution Signal</span>
+              <span>1950s → 2030s?</span>
+            </div>
+
+            <div class="signal-grid" aria-hidden="true">
+              <div class="signal-node">
+                <strong>ML</strong>
+                <span>prediction</span>
+              </div>
+              <div class="signal-node">
+                <strong>DL</strong>
+                <span>representation</span>
+              </div>
+              <div class="signal-node">
+                <strong>LLM</strong>
+                <span>language interface</span>
+              </div>
+              <div class="signal-node">
+                <strong>Agent</strong>
+                <span>tools + memory</span>
+              </div>
+              <div class="signal-node signal-node-wide">
+                <strong>World Model?</strong>
+                <span>simulation + planning</span>
+              </div>
+            </div>
+
+            <p class="insight-copy">
+              AI 的重心正在从“学会分类”转向“学会生成”，再转向“学会完成任务”；下一步很可能不是更长的上下文，而是更强的环境建模与可验证规划。
+            </p>
+          </article>
+
+          <div class="micro-grid">
+            <article class="micro-card">
+              <p class="micro-label">Now</p>
+              <h2>Agents are becoming products</h2>
+              <p>模型正在被包装成可调用工具、可连接工作流、可长期运行的系统。</p>
+            </article>
+
+            <article class="micro-card">
+              <p class="micro-label">Shift</p>
+              <h2>Model → System</h2>
+              <p>真正拉开差距的，越来越不是底座模型本身，而是外层工程能力。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="eras" class="section" data-section="eras">
+        <div class="section-heading reveal">
+          <p class="eyebrow">The Big Shift</p>
+          <h2>从算法时代，到系统时代</h2>
+          <p>
+            如果把 AI 看成一条能力链，那么每一次范式跃迁，本质上都在回答一个更高阶的问题：机器能不能从数据里学？能不能自己提取表示？能不能用语言压缩世界？能不能像一个执行者一样调用工具？能不能在行动之前先构造一个内在世界？
+          </p>
+        </div>
+
+        <div class="era-grid">
+          <article class="era-card reveal">
+            <p class="era-tag">Machine Learning</p>
+            <h3>从规则到统计</h3>
+            <p>机器不再只依赖人工写死的规则，而是开始从数据中拟合模式，形成第一代可规模化预测系统。</p>
+          </article>
+
+          <article class="era-card reveal">
+            <p class="era-tag">Deep Learning</p>
+            <h3>从特征到表示</h3>
+            <p>深度神经网络把“表示学习”变成核心，让系统能够端到端地从大规模数据中抽取层级特征。</p>
+          </article>
+
+          <article class="era-card reveal">
+            <p class="era-tag">LLM</p>
+            <h3>从任务到通用语言接口</h3>
+            <p>语言模型把自然语言变成统一控制面板，让“写提示词”逐步取代“为每个任务单独造界面”。</p>
+          </article>
+
+          <article class="era-card reveal">
+            <p class="era-tag">Agents & Beyond</p>
+            <h3>从回答到行动</h3>
+            <p>当模型开始接入工具、记忆与环境，它就不再只是聊天对象，而是任务执行系统的核心组件。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="timeline" class="section timeline-section" data-section="timeline">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Timeline</p>
+          <h2>AI 演进时间线</h2>
+          <p>
+            这条时间线聚焦的是“能力接口”如何变化：从特征工程，到表示学习，到语言接口，再到可观测、可治理的代理系统。
+          </p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <div class="timeline-year">1950s–2000s</div>
+            <div class="timeline-card">
+              <p class="timeline-tag">ML / Machine Learning</p>
+              <h3>机器开始从样本中学习，而不只靠人手写规则</h3>
+              <p>
+                统计学习把 AI 从纯符号推理拉向 data-driven
+                方法。线性模型、决策树、SVM、贝叶斯方法与特征工程，构成了现代 AI 最早的工业基础。
+              </p>
+              <ul class="timeline-points">
+                <li>关键词：supervised learning、feature engineering、generalization</li>
+                <li>代表意义：AI 第一次具备可规模化部署的预测能力</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-year">2012</div>
+            <div class="timeline-card">
+              <p class="timeline-tag">DL / Deep Learning</p>
+              <h3>深度网络让“表示学习”成为主角</h3>
+              <p>
+                AlexNet 及其后续浪潮让业界重新认识到深层神经网络的力量。视觉、语音、推荐系统开始全面受益于大模型、大数据与 GPU。
+              </p>
+              <ul class="timeline-points">
+                <li>关键词：CNN、backpropagation、GPU acceleration</li>
+                <li>代表意义：机器不仅会拟合，还能自己学出更强特征</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-year">2017–2023</div>
+            <div class="timeline-card">
+              <p class="timeline-tag">LLM / Large Language Models</p>
+              <h3>语言成为通用接口，模型开始具备跨任务迁移能力</h3>
+              <p>
+                Transformer 改写了序列建模范式。随后，大规模预训练与指令对齐让模型从“语言预测器”进化为“通用文本操作系统”。
+              </p>
+              <ul class="timeline-points">
+                <li>关键词：Transformer、pretraining、instruction tuning</li>
+                <li>代表意义：自然语言第一次变成大规模的人机协作接口</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-year">2024</div>
+            <div class="timeline-card">
+              <p class="timeline-tag">Agent Era</p>
+              <h3>AI 从“会说”走向“会做”</h3>
+              <p>
+                当模型开始调用工具、使用浏览器、读写文件、维护状态并分解任务，agent
+                时代就开始了。一个回答不再是终点，而是执行流程的入口。
+              </p>
+              <ul class="timeline-points">
+                <li>关键词：tool use、memory、workflow orchestration</li>
+                <li>代表意义：模型成为行动链条中的推理核心</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-year">2025–2026</div>
+            <div class="timeline-card">
+              <p class="timeline-tag">OpenClaw</p>
+              <h3>开放个人 agent 形态，把 AI 拉近到“我的设备、我的通道、我的工作流”</h3>
+              <p>
+                OpenClaw 代表的是这一波 personal AI assistant
+                的一个清晰方向：agent 不只是网页上的聊天框，而是一个运行在用户自己环境中的常驻系统，能连接消息、文件、浏览器、语音与自动化动作。
+              </p>
+              <ul class="timeline-points">
+                <li>关键词：local control、multi-channel assistant、always-on agent</li>
+                <li>代表意义：agent 从 demo 走向真实用户工作流</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-year">2026</div>
+            <div class="timeline-card">
+              <p class="timeline-tag">Harness Engineering</p>
+              <h3>模型外面的工程层，开始成为真正的竞争壁垒</h3>
+              <p>
+                Harness Engineering 是 agent
+                生产化语境中的新关键词。它强调：可靠 agent 不只是模型本身，而是包裹在外面的工具接口、上下文管理、状态机、监控、评估、安全与治理系统。
+              </p>
+              <ul class="timeline-points">
+                <li>关键词：observability、guardrails、evaluation、governance</li>
+                <li>代表意义：AI 进入“系统工程”阶段，而不再只是“提示工程”阶段</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-year">Next</div>
+            <div class="timeline-card">
+              <p class="timeline-tag">World Models</p>
+              <h3>下一站，可能不是更会说，而是更会预演真实世界</h3>
+              <p>
+                如果未来的 AI 需要更稳定地规划、试错、长期行动，它就可能需要某种 world model：
+                一个能压缩环境、预测变化、在行动前进行内部模拟的世界表征层。
+              </p>
+              <ul class="timeline-points">
+                <li>关键词：simulation、latent planning、environment modeling</li>
+                <li>代表意义：AI 或将从“语言推理”进一步走向“世界推理”</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="systems" class="section systems-section" data-section="systems">
+        <div class="section-heading reveal">
+          <p class="eyebrow">System Age</p>
+          <h2>从模型到系统，差距是怎么被拉开的</h2>
+          <p>
+            进入 agent
+            时代后，真正决定体验与可靠性的，越来越不是底座模型参数量，而是它被怎样约束、观测、编排、测试与治理。
+          </p>
+        </div>
+
+        <div class="systems-layout">
+          <article class="feature-panel reveal">
+            <p class="feature-tag">OpenClaw</p>
+            <h3>开放、个人、常驻的 agent 形态</h3>
+            <p>
+              在这波 agent 浪潮里，OpenClaw 代表的是“用户主权型 agent”的想象：AI
+              运行在你的设备和你的渠道里，服务你的消息流、文件流和工作流，而不是只存在于一个封闭聊天窗口。
+            </p>
+            <div class="pill-row">
+              <span>personal assistant</span>
+              <span>own your workflow</span>
+              <span>tool-connected</span>
+            </div>
+          </article>
+
+          <article class="feature-panel reveal">
+            <p class="feature-tag">Harness Engineering</p>
+            <h3>没有 harness，只有模型；有了 harness，才是产品</h3>
+            <p>
+              Harness 是把模型变成系统的中间层。它定义工具边界、管理上下文、记录状态、验证输出、处理失败，并在需要时强制人类确认。
+            </p>
+
+            <div class="system-stack">
+              <div class="stack-item">
+                <span>01</span>
+                <strong>Model</strong>
+                <p>语言、视觉、多模态推理能力</p>
+              </div>
+              <div class="stack-item">
+                <span>02</span>
+                <strong>Tools & Skills</strong>
+                <p>浏览器、文件、邮件、代码、数据库、外部 API</p>
+              </div>
+              <div class="stack-item">
+                <span>03</span>
+                <strong>Memory & Context</strong>
+                <p>短期上下文、长期记忆、任务状态与角色约束</p>
+              </div>
+              <div class="stack-item">
+                <span>04</span>
+                <strong>Control & Safety</strong>
+                <p>权限、确认机制、审计日志、回退与防注入策略</p>
+              </div>
+              <div class="stack-item">
+                <span>05</span>
+                <strong>Evaluation & Ops</strong>
+                <p>可观测性、测试、指标、失败恢复与持续改进</p>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="matrix reveal">
+          <article class="matrix-card">
+            <p class="matrix-label">ML</p>
+            <h3>核心能力</h3>
+            <p>从数据拟合可泛化的预测函数。</p>
+          </article>
+          <article class="matrix-card">
+            <p class="matrix-label">DL</p>
+            <h3>核心能力</h3>
+            <p>端到端学习层级表示，减少人工特征依赖。</p>
+          </article>
+          <article class="matrix-card">
+            <p class="matrix-label">LLM</p>
+            <h3>核心能力</h3>
+            <p>把语言变成跨任务接口，统一理解与生成。</p>
+          </article>
+          <article class="matrix-card">
+            <p class="matrix-label">Agent</p>
+            <h3>核心能力</h3>
+            <p>把推理与工具、环境、记忆和执行串联起来。</p>
+          </article>
+          <article class="matrix-card">
+            <p class="matrix-label">Harness</p>
+            <h3>核心能力</h3>
+            <p>让 agent 变得稳定、可控、可测、可运营。</p>
+          </article>
+          <article class="matrix-card">
+            <p class="matrix-label">World Model?</p>
+            <h3>核心能力</h3>
+            <p>在行动前预演环境、预测后果并优化规划。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="future" class="section future-section" data-section="future">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Future Horizon</p>
+          <h2>未来可能长什么样</h2>
+          <p>
+            如果把今天的 agent 看成“会调用工具的语言系统”，那么未来的 AI
+            很可能是“会理解环境、会预演后果、会长期协调资源的行动系统”。
+          </p>
+        </div>
+
+        <div class="future-grid">
+          <article class="future-card reveal">
+            <p class="future-tag">World Models</p>
+            <h3>更强的环境表征</h3>
+            <p>AI 不只预测下一个 token，还尝试压缩“世界会怎样变化”，从而支持更稳的规划与试错。</p>
+          </article>
+
+          <article class="future-card reveal">
+            <p class="future-tag">Embodied Agents</p>
+            <h3>从数字空间走向物理空间</h3>
+            <p>当 agent 连接机器人、传感器和实时控制系统，它将面对更复杂的时间、空间与安全约束。</p>
+          </article>
+
+          <article class="future-card reveal">
+            <p class="future-tag">Multi-Agent Systems</p>
+            <h3>从单智能体到组织级协作</h3>
+            <p>未来系统可能不是一个超级助手，而是一组可通信、可分工、可审计的 agent 网络。</p>
+          </article>
+
+          <article class="future-card reveal">
+            <p class="future-tag">Governed Intelligence</p>
+            <h3>治理会成为一等公民</h3>
+            <p>权限、审计、可解释性、责任边界与人类确认，将和模型能力同样重要。</p>
+          </article>
+        </div>
+
+        <aside class="note-card reveal">
+          <p class="note-title">内容注记</p>
+          <p>
+            本页将 OpenClaw 与 Harness Engineering 视为 2025-2026 年 agent
+            时代的代表性术语；World Models 则被视为下一阶段值得重点关注的方向，强调的是“模拟、预演、规划”能力，而不是单纯扩大语言模型规模。
+          </p>
+        </aside>
+      </section>
+
+      <section class="section cta-section reveal">
+        <div class="cta-panel">
+          <p class="eyebrow">GitHub Ready</p>
+          <h2>这个网站已经按纯静态结构组织，可以直接挂到 GitHub Pages。</h2>
+          <p>
+            你只需要把仓库 push 到 GitHub，启用 Pages
+            或使用仓库自带的 Actions workflow，就能把这个站点发布出去。
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>AI Evolution Atlas</p>
+      <p>Snapshot updated for April 21, 2026</p>
+    </footer>
+  </body>
+</html>
