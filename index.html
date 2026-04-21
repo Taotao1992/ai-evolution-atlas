@@ -3,285 +3,350 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Evolution Atlas | History, Interfaces, and World Models</title>
+    <title>AI Evolution Atlas | A brighter, richer map of AI history and what comes next</title>
     <meta
       name="description"
-      content="A redesigned interactive website about AI history, from machine learning and deep learning to LLMs, agents, OpenClaw, Seedance, Happy Oyster, harness engineering, and world models."
+      content="An interactive English website about AI history, today's coding-agent landscape, harness engineering, and the future of world models."
     />
     <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
     <script type="module" src="./main.js" defer></script>
   </head>
   <body>
-    <div class="page-glow" aria-hidden="true"></div>
-    <div class="top-progress" aria-hidden="true">
-      <span id="scroll-progress"></span>
-    </div>
+    <div class="background-grid" aria-hidden="true"></div>
+    <div class="background-glow glow-a" aria-hidden="true"></div>
+    <div class="background-glow glow-b" aria-hidden="true"></div>
+    <div class="background-glow glow-c" aria-hidden="true"></div>
+    <div class="scroll-meter" aria-hidden="true"><span id="scroll-progress"></span></div>
 
     <header class="site-header">
       <a class="brand" href="#top" aria-label="AI Evolution Atlas">
         <span class="brand-mark">AI</span>
         <span class="brand-copy">
           <strong>Evolution Atlas</strong>
-          <small>History, interfaces, and world models</small>
+          <small>April 21, 2026 edition</small>
         </span>
       </a>
 
       <nav class="site-nav" aria-label="Primary navigation">
-        <a href="#history">History</a>
-        <a href="#frontier">Frontier</a>
-        <a href="#library">Library</a>
-        <a href="#watch">Watch</a>
-        <a href="#future">Future</a>
+        <a href="#signals">Now</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#harness">Harness</a>
+        <a href="#future">World Models</a>
+        <a href="#atlas">Atlas</a>
       </nav>
+
+      <a class="header-cta" href="#atlas">Open sources</a>
     </header>
 
     <main>
       <section id="top" class="section hero" data-section="top">
         <div class="hero-copy">
-          <p class="eyebrow">A redesigned map of AI, beyond hype cycles</p>
-          <h1>How AI learned to predict, perceive, generate, act, and maybe simulate worlds.</h1>
+          <p class="eyebrow">A brighter, more useful AI map</p>
+          <h1>From the birth of AI to coding agents, harnesses, and world models.</h1>
           <p class="hero-lead">
-            This version is built as a richer sci-tech editorial site: tighter typography, original
-            illustrations, interactive history modules, stronger source links, and new frontier chapters on
-            Seedance, Happy Oyster, OpenClaw, harness engineering, and the world model bet.
+            This rebuild fixes the broken images, replaces the dark theme with a bright editorial system,
+            expands the historical timeline, and adds dedicated interactive chapters for Codex, Cursor,
+            Claude Code, OpenClaw, harness engineering, and the fast-growing world-model frontier.
           </p>
 
           <div class="hero-actions">
-            <a class="button button-primary" href="#history">Open the history map</a>
-            <a class="button button-secondary" href="#frontier">Jump to frontier systems</a>
+            <a class="button button-primary" href="#timeline">Explore the timeline</a>
+            <a class="button button-secondary" href="#signals">See what is moving now</a>
           </div>
 
-          <div class="hero-metrics">
-            <article class="metric-card">
-              <strong data-count="9">0</strong>
-              <span>major eras on the interactive timeline</span>
+          <div class="hero-stats">
+            <article class="stat-card">
+              <strong data-count="16">0</strong>
+              <span>timeline milestones with representative works</span>
             </article>
-            <article class="metric-card">
-              <strong data-count="24">0</strong>
-              <span>curated papers, blogs, projects, and videos</span>
+            <article class="stat-card">
+              <strong data-count="6">0</strong>
+              <span>live frontier surfaces from coding tools to spatial interfaces</span>
             </article>
-            <article class="metric-card">
-              <strong data-count="9">0</strong>
-              <span>original SVG visuals generated for the site</span>
+            <article class="stat-card">
+              <strong data-count="36">0</strong>
+              <span>curated links across papers, docs, companies, projects, and videos</span>
             </article>
           </div>
         </div>
 
         <div class="hero-visual">
-          <img src="./assets/hero-cosmos.svg" alt="Abstract AI evolution visualization" />
+          <figure class="hero-figure">
+            <img src="./assets/hero-bright-atlas.svg" alt="Bright illustration of AI history and frontier systems" />
+          </figure>
 
-          <div class="hero-sidecards">
-            <article class="sidecard">
-              <p class="sidecard-label">Core transition</p>
-              <h2>Model quality is no longer the whole story.</h2>
-              <p>The outer system layer now decides whether AI feels toy-like or product-grade.</p>
-            </article>
-            <article class="sidecard">
-              <p class="sidecard-label">New layer</p>
-              <h2>Interfaces are becoming worlds.</h2>
+          <div class="hero-notes">
+            <article class="note-card">
+              <p class="note-kicker">Latest product shift</p>
+              <h2>Codex, Cursor, Claude Code, and OpenClaw are pushing AI from replies to running systems.</h2>
               <p>
-                Seedance and Happy Oyster both point to a future where AI is not only text, but dynamic
-                media and interactive space.
+                The current competition is not only about model quality. It is about loops, memory, tools,
+                reviews, automations, and the surfaces around the model.
+              </p>
+            </article>
+            <article class="note-card">
+              <p class="note-kicker">Future bet</p>
+              <h2>World models could turn AI from reactive generation into simulation-driven planning.</h2>
+              <p>
+                That is why this version ends with a much deeper world-model chapter, including companies,
+                projects, papers, and demos.
               </p>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section ribbon-section">
-        <div class="signal-ribbon">
-          <span>1956 Dartmouth</span>
-          <span>1958 Perceptron</span>
-          <span>1986 Backprop</span>
-          <span>2012 AlexNet</span>
-          <span>2017 Transformer</span>
-          <span>2020 GPT-3</span>
-          <span>2024 Agent wave</span>
-          <span>2025-2026 Seedance / OpenClaw / Harness / Happy Oyster</span>
-          <span>Next: world models</span>
-        </div>
-      </section>
-
-      <section id="history" class="section history-section" data-section="history">
+      <section id="signals" class="section card-section" data-section="signals">
         <div class="section-heading">
-          <p class="eyebrow">AI history</p>
-          <h2>A better timeline, with stronger sources and less hand-wavy storytelling</h2>
+          <p class="eyebrow">What is moving now</p>
+          <h2>Six live surfaces worth watching right now</h2>
           <p>
-            Instead of one giant paragraph, the history is split into milestone states. Click across the
-            timeline to see the capability shift, why it mattered, and which papers, official pages, or
-            talks best represent the moment.
+            Click across the current frontier. This chapter focuses on official product surfaces and docs so
+            the story stays current instead of drifting into recycled hype.
           </p>
         </div>
 
-        <div class="history-shell">
-          <div class="timeline-nav" id="timeline-nav" role="tablist" aria-label="AI history timeline"></div>
+        <div class="signals-shell">
+          <div class="signal-list" id="signal-list" role="tablist" aria-label="Current AI surfaces"></div>
 
-          <article class="timeline-detail" id="timeline-detail">
-            <div class="timeline-art">
-              <img id="timeline-image" src="./assets/ml-matrix.svg" alt="" />
+          <article class="detail-card spotlight-card">
+            <div class="detail-media">
+              <img id="signal-image" src="./assets/frontier-board.svg" alt="" />
             </div>
-            <div class="timeline-copy">
-              <p class="detail-kicker" id="timeline-era">Era</p>
-              <h3 id="timeline-title">Loading timeline item</h3>
-              <p class="timeline-summary" id="timeline-summary"></p>
+            <div class="detail-copy">
+              <p class="detail-kicker" id="signal-kicker">Surface</p>
+              <h3 id="signal-title">Loading current frontier item</h3>
+              <p class="detail-summary" id="signal-summary"></p>
+
               <div class="detail-grid">
-                <div>
-                  <p class="detail-label">What changed</p>
-                  <p id="timeline-shift"></p>
-                </div>
                 <div>
                   <p class="detail-label">Why it matters</p>
-                  <p id="timeline-why"></p>
+                  <p id="signal-why"></p>
+                </div>
+                <div>
+                  <p class="detail-label">Current signal</p>
+                  <p id="signal-current"></p>
                 </div>
               </div>
-              <div class="chip-row" id="timeline-chips"></div>
-              <div class="link-list" id="timeline-links"></div>
+
+              <div class="bullet-list" id="signal-bullets"></div>
+              <div class="chip-row" id="signal-chips"></div>
+              <div class="resource-links" id="signal-links"></div>
             </div>
           </article>
         </div>
       </section>
 
-      <section id="frontier" class="section frontier-section" data-section="frontier">
+      <section id="timeline" class="section timeline-section" data-section="timeline">
         <div class="section-heading">
-          <p class="eyebrow">Frontier systems</p>
-          <h2>Where the website gets current: OpenClaw, Seedance, Happy Oyster, harnesses, and world models</h2>
+          <p class="eyebrow">History</p>
+          <h2>A detailed timeline from early AI ambitions to the agent era</h2>
           <p>
-            These are not all the same thing. Some are products. Some are infrastructure ideas. Some are
-            research bets. But together they show how AI is moving from chat interfaces toward richer media,
-            longer-running systems, and more world-like interaction.
+            This is the long arc: foundational ideas, deep learning’s breakthroughs, the language-model
+            interface shift, and the recent rise of coding agents and harness engineering.
           </p>
         </div>
 
-        <div class="frontier-shell">
-          <div class="frontier-tabs" id="frontier-tabs" role="tablist" aria-label="Frontier topics"></div>
+        <div class="timeline-shell">
+          <div class="timeline-track" id="timeline-track" aria-label="AI timeline"></div>
 
-          <article class="frontier-panel" id="frontier-panel">
-            <div class="frontier-media">
-              <img id="frontier-image" src="./assets/media-surface.svg" alt="" />
-            </div>
-            <div class="frontier-copy">
-              <p class="detail-kicker" id="frontier-kicker">Topic</p>
-              <h3 id="frontier-title">Loading topic</h3>
-              <p class="timeline-summary" id="frontier-summary"></p>
-              <div class="detail-grid">
-                <div>
-                  <p class="detail-label">Interpretation</p>
-                  <p id="frontier-interpretation"></p>
-                </div>
-                <div>
-                  <p class="detail-label">Why now</p>
-                  <p id="frontier-why"></p>
-                </div>
-              </div>
-              <div class="chip-row" id="frontier-chips"></div>
-              <div class="link-list" id="frontier-links"></div>
-            </div>
-          </article>
-        </div>
-      </section>
+          <article class="detail-card timeline-card">
+            <p class="detail-kicker" id="timeline-year">Year</p>
+            <h3 id="timeline-title">Loading timeline item</h3>
+            <p class="detail-summary" id="timeline-summary"></p>
 
-      <section id="library" class="section library-section" data-section="library">
-        <div class="section-heading section-heading-inverse">
-          <p class="eyebrow">Curated library</p>
-          <h2>Papers, blogs, official docs, and videos in one living shelf</h2>
-          <p>
-            Filter the collection by how you want to learn. The goal here is not quantity. It is a more
-            credible and more useful shortlist.
-          </p>
-        </div>
-
-        <div class="library-toolbar" role="toolbar" aria-label="Library filters">
-          <button class="filter-pill is-active" type="button" data-filter="all">All</button>
-          <button class="filter-pill" type="button" data-filter="paper">Papers</button>
-          <button class="filter-pill" type="button" data-filter="blog">Blogs</button>
-          <button class="filter-pill" type="button" data-filter="project">Projects</button>
-          <button class="filter-pill" type="button" data-filter="video">Videos</button>
-        </div>
-
-        <div class="library-meta">
-          <p>Showing <span id="library-count">0</span> curated items</p>
-        </div>
-
-        <div class="library-layout">
-          <div class="library-grid" id="library-grid"></div>
-
-          <aside class="library-detail" id="library-detail">
-            <p class="detail-kicker">Selected resource</p>
-            <h3 id="library-title">Loading resource</h3>
-            <p class="timeline-summary" id="library-summary"></p>
             <div class="detail-grid">
               <div>
-                <p class="detail-label">Best for</p>
-                <p id="library-best"></p>
+                <p class="detail-label">Representative work</p>
+                <p id="timeline-work"></p>
               </div>
               <div>
-                <p class="detail-label">Why it belongs here</p>
-                <p id="library-why"></p>
+                <p class="detail-label">Why it changed the field</p>
+                <p id="timeline-impact"></p>
               </div>
             </div>
-            <div class="chip-row" id="library-chips"></div>
-            <a id="library-link" class="button button-primary" href="/" target="_blank" rel="noreferrer">
-              Open resource
-            </a>
-          </aside>
+
+            <div class="bullet-list" id="timeline-bullets"></div>
+            <div class="chip-row" id="timeline-chips"></div>
+            <div class="resource-links" id="timeline-links"></div>
+          </article>
         </div>
       </section>
 
-      <section id="watch" class="section watch-section" data-section="watch">
+      <section id="harness" class="section card-section harness-section" data-section="harness">
         <div class="section-heading">
-          <p class="eyebrow">Watch</p>
-          <h2>A more visual learning layer</h2>
+          <p class="eyebrow">Harness engineering</p>
+          <h2>The outer system layer is becoming the product</h2>
           <p>
-            This wall leans into strong video explainers and talks. It exists because AI is easier to grasp
-            when some of the abstract shifts are seen, not only read.
+            Harness engineering is where coding agents become dependable: instructions, skills, rules,
+            hooks, evals, review loops, CI, background jobs, and recovery paths. Click a skill below to see
+            examples, resources, and concrete artifacts.
           </p>
         </div>
 
-        <div class="watch-grid" id="watch-grid"></div>
+        <div class="harness-shell">
+          <div class="harness-side">
+            <figure class="section-figure">
+              <img src="./assets/harness-studio.svg" alt="Bright diagram of a harness engineering workflow" />
+            </figure>
+            <div class="sample-grid" id="harness-samples"></div>
+          </div>
+
+          <div class="harness-main">
+            <div class="skill-cluster" id="harness-skill-list" role="tablist" aria-label="Harness skills"></div>
+
+            <article class="detail-card harness-card">
+              <p class="detail-kicker" id="harness-kicker">Harness skill</p>
+              <h3 id="harness-title">Loading harness skill</h3>
+              <p class="detail-summary" id="harness-summary"></p>
+
+              <div class="detail-grid">
+                <div>
+                  <p class="detail-label">Artifacts to expect</p>
+                  <div class="artifact-list" id="harness-artifacts"></div>
+                </div>
+                <div>
+                  <p class="detail-label">Why teams care</p>
+                  <p id="harness-why"></p>
+                </div>
+              </div>
+
+              <div class="chip-row" id="harness-chips"></div>
+              <div class="resource-links" id="harness-links"></div>
+            </article>
+          </div>
+        </div>
       </section>
 
       <section id="future" class="section future-section" data-section="future">
         <div class="section-heading">
           <p class="eyebrow">Future</p>
-          <h2>What happens if the next interface is not text, but simulation?</h2>
+          <h2>World models, spatial intelligence, and the simulation turn</h2>
           <p>
-            The strongest future branch in this story is world modeling: AI systems that learn latent
-            structure, preview consequences, and reason over possible futures before acting in the real one.
+            This chapter goes deeper than a single slogan. It tracks current companies, public products,
+            open projects, published papers, and video explainers around world modeling and adjacent
+            physical-AI systems.
           </p>
         </div>
 
-        <div class="future-grid">
-          <article class="future-card">
-            <img src="./assets/world-shell.svg" alt="Abstract world model illustration" />
-            <h3>World models could shift AI from reactive generation to internal planning.</h3>
-            <p>
-              This is why the bridge from generative AI to embodied and agentic AI may run through simulation.
-            </p>
-          </article>
-          <article class="future-card">
-            <img src="./assets/agent-loop.svg" alt="Abstract agent orchestration illustration" />
-            <h3>Harnesses, evaluations, and recovery systems will become default product architecture.</h3>
-            <p>Control surfaces will matter just as much as model intelligence.</p>
-          </article>
-          <article class="future-card">
-            <img src="./assets/media-surface.svg" alt="Abstract multimodal media illustration" />
-            <h3>Interfaces are becoming audiovisual, spatial, and world-like.</h3>
-            <p>Seedance and Happy Oyster fit here as signs of interface expansion, not just model scaling.</p>
-          </article>
+        <div class="future-shell">
+          <div class="future-side">
+            <figure class="section-figure">
+              <img src="./assets/world-observatory.svg" alt="Bright illustration of world models and simulation layers" />
+            </figure>
+
+            <div class="principle-grid">
+              <article class="principle-card">
+                <p class="detail-label">Shift</p>
+                <h3>From next-token continuation to consequence modeling</h3>
+              </article>
+              <article class="principle-card">
+                <p class="detail-label">Medium</p>
+                <h3>From chat windows to navigable and controllable worlds</h3>
+              </article>
+              <article class="principle-card">
+                <p class="detail-label">Use case</p>
+                <h3>From demos to robotics, simulation, planning, and spatial creation</h3>
+              </article>
+            </div>
+          </div>
+
+          <div class="future-main">
+            <div class="tab-row" id="world-tab-row" role="tablist" aria-label="World model categories"></div>
+            <div class="world-grid" id="world-grid"></div>
+
+            <article class="detail-card world-card">
+              <p class="detail-kicker" id="world-kicker">World model resource</p>
+              <h3 id="world-title">Loading world-model item</h3>
+              <p class="detail-summary" id="world-summary"></p>
+
+              <div class="detail-grid">
+                <div>
+                  <p class="detail-label">Best for</p>
+                  <p id="world-best"></p>
+                </div>
+                <div>
+                  <p class="detail-label">Why it belongs here</p>
+                  <p id="world-why"></p>
+                </div>
+              </div>
+
+              <div class="chip-row" id="world-chips"></div>
+              <div class="resource-links" id="world-links"></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="atlas" class="section atlas-section" data-section="atlas">
+        <div class="section-heading">
+          <p class="eyebrow">Resource atlas</p>
+          <h2>Search, filter, and jump into the best links on the page</h2>
+          <p>
+            This is the fast lane if you already know what you want: papers, docs, products, company pages,
+            or videos.
+          </p>
+        </div>
+
+        <div class="atlas-toolbar">
+          <label class="search-field" aria-label="Search resources">
+            <span>Search</span>
+            <input id="atlas-search" type="search" placeholder="Try: Codex, world model, hooks, Genie, Cursor..." />
+          </label>
+
+          <div class="filter-row" role="toolbar" aria-label="Atlas filters">
+            <button class="filter-pill is-active" type="button" data-filter="all">All</button>
+            <button class="filter-pill" type="button" data-filter="paper">Papers</button>
+            <button class="filter-pill" type="button" data-filter="article">Articles</button>
+            <button class="filter-pill" type="button" data-filter="docs">Docs</button>
+            <button class="filter-pill" type="button" data-filter="product">Products</button>
+            <button class="filter-pill" type="button" data-filter="company">Companies</button>
+            <button class="filter-pill" type="button" data-filter="video">Videos</button>
+          </div>
+        </div>
+
+        <div class="atlas-meta">
+          <p>Showing <span id="atlas-count">0</span> curated links</p>
+        </div>
+
+        <div class="atlas-layout">
+          <div class="atlas-grid" id="atlas-grid"></div>
+
+          <aside class="detail-card atlas-card">
+            <p class="detail-kicker" id="atlas-kicker">Selected resource</p>
+            <h3 id="atlas-title">Loading resource</h3>
+            <p class="detail-summary" id="atlas-summary"></p>
+
+            <div class="detail-grid">
+              <div>
+                <p class="detail-label">Category</p>
+                <p id="atlas-type"></p>
+              </div>
+              <div>
+                <p class="detail-label">Why open it</p>
+                <p id="atlas-why"></p>
+              </div>
+            </div>
+
+            <div class="chip-row" id="atlas-chips"></div>
+            <a id="atlas-link" class="button button-primary" href="/" target="_blank" rel="noreferrer">
+              Open resource
+            </a>
+          </aside>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
       <p>AI Evolution Atlas</p>
-      <p>Refreshed for April 21, 2026</p>
+      <p>English edition rebuilt on April 21, 2026</p>
     </footer>
   </body>
 </html>

@@ -33,6 +33,7 @@ jobs:
         run: |
           mkdir -p dist
           cp index.html styles.css main.js dist/
+          cp -R assets dist/
           touch dist/.nojekyll
 
       - name: Upload artifact
