@@ -1,0 +1,4 @@
+interface:
+  display_name: "Teaching Video Editing"
+  short_description: "Guide tutor video editing work"
+  default_prompt: "Use $teaching-video-editing to prepare or carry out a tutor video editing task safely."

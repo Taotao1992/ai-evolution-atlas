@@ -1,0 +1,4 @@
+interface:
+  display_name: "Teaching Penalties and Results"
+  short_description: "Handle penalties, Turnitin, release"
+  default_prompt: "Use $teaching-late-penalty-turnitin-results to apply late penalties, check Turnitin, and release results carefully."
