@@ -1,0 +1,4 @@
+interface:
+  display_name: "Teaching StudyDesk Setup"
+  short_description: "Set up StudyDesk teaching spaces"
+  default_prompt: "Use $teaching-studydesk-setup to set up or verify a StudyDesk course shell safely."
