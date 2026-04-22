@@ -1,0 +1,4 @@
+interface:
+  display_name: "Teaching Finalise Grades"
+  short_description: "Finalise grades and examiner return"
+  default_prompt: "Use $teaching-finalise-grades-and-return to finalise grades and prepare the examiner return carefully."
