@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7c95f">
+  <title>Jamie Daily Practice / Jamie 每日训练</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Kenmore South Prep Support</p>
+        <h1>Jamie Daily Practice <span>/ Jamie 每日训练</span></h1>
+      </div>
+      <div class="top-actions" aria-label="Daily navigation">
+        <button id="todayButton" class="ghost-button" type="button">Today / 今天</button>
+        <label class="date-field">
+          <span>Date / 日期</span>
+          <input id="datePicker" type="date" min="2026-05-04" max="2026-05-31">
+        </label>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="side-panel">
+        <section class="panel">
+          <div class="panel-heading">
+            <h2>May Plan / 5月计划</h2>
+            <span id="weekBadge" class="badge"></span>
+          </div>
+          <div id="dayRail" class="day-rail" aria-label="May 2026 training days"></div>
+        </section>
+
+        <section class="panel">
+          <h2>Daily Metrics / 每日记录</h2>
+          <div class="metric-grid">
+            <label>STOP success / STOP 成功<input data-daily="stopSuccess" type="number" min="0" inputmode="numeric"></label>
+            <label>STOP chances / STOP 机会<input data-daily="stopChances" type="number" min="0" inputmode="numeric"></label>
+            <label>Initiations / 主动沟通<input data-daily="initiations" type="number" min="0" inputmode="numeric"></label>
+            <label>Core models / 核心词建模<input data-daily="coreModels" type="number" min="0" inputmode="numeric"></label>
+            <label>Longest table min / 桌面最长分钟<input data-daily="tableMinutes" type="number" min="0" inputmode="numeric"></label>
+            <label>Drink times / 喝水次数<input data-daily="drinkTimes" type="number" min="0" inputmode="numeric"></label>
+            <label>Toilet routines / 如厕routine<input data-daily="toiletTimes" type="number" min="0" inputmode="numeric"></label>
+            <label>Best reinforcer / 最有效强化物<input data-daily="reinforcer" type="text"></label>
+          </div>
+          <label class="note-field">Risk or notes / 风险或备注<textarea data-daily="riskNotes" rows="4"></textarea></label>
+        </section>
+
+        <section class="panel utility-panel">
+          <h2>Backup / 备份</h2>
+          <button id="exportJson" type="button">Export JSON / 导出JSON</button>
+          <button id="exportCsv" type="button">Export CSV / 导出CSV</button>
+          <label class="import-label">
+            Import JSON / 导入JSON
+            <input id="importJson" type="file" accept="application/json">
+          </label>
+          <button id="clearDay" class="danger" type="button">Clear This Day / 清空当天</button>
+          <p id="saveState" class="save-state">Saved locally / 已本地保存</p>
+        </section>
+      </aside>
+
+      <section class="main-panel">
+        <section class="hero-card">
+          <div class="hero-copy">
+            <p id="selectedDateLabel" class="eyebrow"></p>
+            <h2 id="dayTitle"></h2>
+            <p id="dayFocus"></p>
+          </div>
+          <div class="progress-card" aria-live="polite">
+            <div class="progress-ring" id="progressRing"><span id="progressText">0%</span></div>
+            <p><strong id="completedCount">0/0</strong><br>Done / 已完成</p>
+          </div>
+        </section>
+
+        <section class="visual-strip">
+          <div>
+            <h2>Visual Sheet / 视觉图卡</h2>
+            <p>Wordless images for pointing and matching. / 无文字图片，可用于指认和配对。</p>
+          </div>
+          <button id="toggleSheet" class="ghost-button" type="button">Show / 显示</button>
+        </section>
+        <img id="visualSheet" class="visual-sheet" src="./assets/aac-visual-card-sheet.png" alt="Wordless AAC visual card sheet" hidden>
+
+        <section>
+          <div class="section-heading">
+            <h2>Today's Training / 今日训练内容</h2>
+            <button id="markAllDone" type="button">Mark All Done / 全部完成</button>
+          </div>
+          <div id="taskList" class="task-list"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <template id="taskTemplate">
+    <article class="task-card">
+      <div class="task-visual"></div>
+      <div class="task-body">
+        <div class="task-topline">
+          <span class="domain-pill"></span>
+          <span class="minutes-pill"></span>
+        </div>
+        <h3></h3>
+        <p class="task-goal"></p>
+        <div class="task-columns">
+          <div>
+            <h4>Steps / 步骤</h4>
+            <ol class="steps"></ol>
+          </div>
+          <div>
+            <h4>Materials / 材料</h4>
+            <ul class="materials"></ul>
+            <h4>Adult Script / 成人话术</h4>
+            <p class="script-box"></p>
+          </div>
+        </div>
+        <div class="task-controls">
+          <label>Status / 状态
+            <select data-field="status">
+              <option value="not-started">Not started / 未开始</option>
+              <option value="done">Done / 完成</option>
+              <option value="hard">Hard / 困难</option>
+              <option value="skipped">Skipped / 跳过</option>
+            </select>
+          </label>
+          <label>Support / 辅助
+            <select data-field="support">
+              <option value="">Choose / 选择</option>
+              <option value="independent">Independent / 独立</option>
+              <option value="prompted">Prompted / 提示后完成</option>
+              <option value="full-support">Full support / 全辅助</option>
+            </select>
+          </label>
+          <label>Minutes / 分钟<input data-field="minutesDone" type="number" min="0" inputmode="numeric"></label>
+          <label>Success / 成功<input data-field="successes" type="number" min="0" inputmode="numeric"></label>
+          <label>Chances / 机会<input data-field="opportunities" type="number" min="0" inputmode="numeric"></label>
+        </div>
+        <label class="note-field">Task notes / 单项备注<textarea data-field="notes" rows="2"></textarea></label>
+      </div>
+    </article>
+  </template>
+
+  <script src="./app.js"></script>
+</body>
+</html>

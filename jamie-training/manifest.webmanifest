@@ -1,0 +1,10 @@
+{
+  "name": "Jamie Daily Practice / Jamie 每日训练",
+  "short_name": "Jamie Practice",
+  "description": "Bilingual daily home-training checklist and record tracker for Jamie.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f7f6",
+  "theme_color": "#f7c95f"
+}
