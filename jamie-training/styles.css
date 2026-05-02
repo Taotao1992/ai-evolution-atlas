@@ -73,6 +73,11 @@ button:active,
   background: #ffd9d0;
 }
 
+.small-button {
+  padding: 7px 10px;
+  box-shadow: 0 3px 0 #18334a;
+}
+
 .app-shell {
   width: min(1500px, calc(100vw - 24px));
   margin: 0 auto;
@@ -149,6 +154,8 @@ h4 {
 .date-field,
 .metric-grid label,
 .task-controls label,
+.sync-grid label,
+.secret-field,
 .note-field {
   display: grid;
   gap: 5px;
@@ -268,12 +275,79 @@ textarea {
   gap: 10px;
 }
 
-.import-label {
+.sync-panel {
+  display: grid;
+  gap: 10px;
+}
+
+.helper-text,
+.privacy-note {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.privacy-note {
+  border-left: 5px solid var(--coral);
+  border-radius: 0 8px 8px 0;
+  background: #fff1ed;
+  padding: 9px 10px;
+}
+
+.setup-details {
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  padding: 9px 10px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.setup-details summary {
+  color: var(--ink);
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.setup-details p {
+  margin-top: 8px;
+}
+
+.sync-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.toggle-row input {
+  width: 20px;
+  min-height: 20px;
+}
+
+.sync-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.import-label,
+.avatar-upload {
   display: block;
   text-align: center;
 }
 
-.import-label input {
+.import-label input,
+.avatar-upload input {
   display: none;
 }
 
@@ -286,13 +360,43 @@ textarea {
 
 .hero-card {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 190px;
+  grid-template-columns: 230px minmax(0, 1fr) 190px;
   gap: 18px;
   align-items: stretch;
   padding: 20px;
   background:
     radial-gradient(circle at 16px 16px, rgba(23, 48, 71, .11) 2px, transparent 2px) 0 0 / 22px 22px,
     var(--paper);
+}
+
+.jamie-profile {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  border: 2px solid #18334a;
+  border-radius: 8px;
+  background: #fff;
+  padding: 12px;
+}
+
+.jamie-profile img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  object-fit: cover;
+  background: #f7fbf8;
+}
+
+.avatar-upload {
+  margin-top: 9px;
+  padding: 8px 10px;
+}
+
+.jamie-profile .small-button {
+  width: 100%;
+  margin-top: 8px;
 }
 
 .hero-copy p:last-child {
@@ -358,6 +462,16 @@ textarea {
   margin-bottom: 12px;
 }
 
+.evidence-strip {
+  margin: 0 0 12px;
+  border: 2px solid #18334a;
+  border-radius: 8px;
+  background: #fffdf8;
+  padding: 12px 14px;
+  color: #3c5870;
+  font-weight: 750;
+}
+
 .task-list {
   display: grid;
   gap: 14px;
@@ -405,6 +519,17 @@ textarea {
   margin-top: 9px;
   color: #3f5a71;
   font-weight: 700;
+}
+
+.method-box {
+  margin-top: 10px;
+  border-left: 5px solid var(--mint);
+  border-radius: 0 8px 8px 0;
+  background: #effaf7;
+  padding: 10px;
+  color: #2d5360;
+  font-size: 14px;
+  font-weight: 800;
 }
 
 .task-columns {
@@ -486,7 +611,8 @@ textarea {
   }
 
   .metric-grid,
-  .task-controls {
+  .task-controls,
+  .sync-grid {
     grid-template-columns: 1fr;
   }
 

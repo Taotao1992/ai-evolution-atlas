@@ -1,7 +1,11 @@
 (() => {
   const STORAGE_KEY = "jamie-training-records-v1";
+  const SYNC_KEY = "jamie-training-github-sync-v1";
+  const AVATAR_KEY = "jamie-training-avatar-v1";
   const START_DATE = "2026-05-04";
   const END_DATE = "2026-05-31";
+  const SYNC_DEBOUNCE_MS = 8000;
+  const SYNC_POLL_MS = 30000;
 
   const bilingual = (en, zh) => `${en} / ${zh}`;
   const pair = (en, zh) => ({ en, zh, text: bilingual(en, zh) });
@@ -1643,20 +1647,45 @@
     exportCsv: document.querySelector("#exportCsv"),
     importJson: document.querySelector("#importJson"),
     clearDay: document.querySelector("#clearDay"),
-    saveState: document.querySelector("#saveState")
+    saveState: document.querySelector("#saveState"),
+    syncBadge: document.querySelector("#syncBadge"),
+    syncState: document.querySelector("#syncState"),
+    syncEnabled: document.querySelector("#syncEnabled"),
+    githubOwner: document.querySelector("#githubOwner"),
+    githubRepo: document.querySelector("#githubRepo"),
+    githubBranch: document.querySelector("#githubBranch"),
+    githubPath: document.querySelector("#githubPath"),
+    githubToken: document.querySelector("#githubToken"),
+    saveSyncSettings: document.querySelector("#saveSyncSettings"),
+    syncNow: document.querySelector("#syncNow"),
+    pullNow: document.querySelector("#pullNow"),
+    jamieAvatar: document.querySelector("#jamieAvatar"),
+    avatarUpload: document.querySelector("#avatarUpload"),
+    avatarReset: document.querySelector("#avatarReset")
   };
 
   const dailyInputs = Array.from(document.querySelectorAll("[data-daily]"));
   let records = loadRecords();
+  let syncConfig = loadSyncConfig();
   let selectedDate = getInitialDate();
+  let syncTimer = null;
+  let pollTimer = null;
+  let applyingRemote = false;
 
   initialise();
 
   function initialise() {
     elements.datePicker.value = selectedDate;
+    fillSyncInputs();
+    loadAvatar();
     renderDayRail();
     renderSelectedDay();
     attachGlobalEvents();
+    updateSyncBadge();
+    startSyncPolling();
+    if (syncConfig.enabled && syncConfig.token) {
+      syncPullNow({ silent: true });
+    }
   }
 
   function attachGlobalEvents() {
@@ -1675,7 +1704,11 @@
     dailyInputs.forEach((input) => {
       input.addEventListener("input", () => {
         const record = ensureDayRecord(selectedDate);
-        record.daily[input.dataset.daily] = input.value;
+        activateRecord(record);
+        const field = input.dataset.daily;
+        const now = new Date().toISOString();
+        record.daily[field] = input.value;
+        record.dailyUpdatedAt[field] = now;
         touchAndSave(record);
         renderProgress();
         renderDayRail();
@@ -1690,12 +1723,19 @@
     elements.markAllDone.addEventListener("click", () => {
       const plan = plans[selectedDate];
       const record = ensureDayRecord(selectedDate);
+      activateRecord(record);
+      const now = new Date().toISOString();
       plan.tasks.forEach((task) => {
         record.tasks[task.id] = {
           ...record.tasks[task.id],
           status: "done",
           minutesDone: record.tasks[task.id]?.minutesDone || String(task.minutes),
-          updatedAt: new Date().toISOString()
+          fieldUpdatedAt: {
+            ...record.tasks[task.id]?.fieldUpdatedAt,
+            status: now,
+            minutesDone: now
+          },
+          updatedAt: now
         };
       });
       touchAndSave(record);
@@ -1707,7 +1747,14 @@
       if (!window.confirm(`Clear records for ${label.en} / 清空 ${label.zh} 的记录？`)) {
         return;
       }
-      delete records[selectedDate];
+      const now = new Date().toISOString();
+      records[selectedDate] = {
+        daily: {},
+        dailyUpdatedAt: {},
+        tasks: {},
+        deletedAt: now,
+        updatedAt: now
+      };
       saveRecords();
       renderSelectedDay();
       setSaveState("Cleared / 已清空");
@@ -1716,6 +1763,34 @@
     elements.exportJson.addEventListener("click", exportJson);
     elements.exportCsv.addEventListener("click", exportCsv);
     elements.importJson.addEventListener("change", importJson);
+
+    elements.saveSyncSettings.addEventListener("click", () => {
+      syncConfig = readSyncInputs();
+      saveSyncConfig(syncConfig);
+      updateSyncBadge();
+      startSyncPolling();
+      setSyncState(syncConfig.enabled ? "Sync settings saved / 同步设置已保存" : "Sync saved but off / 设置已保存，同步未开启");
+      if (syncConfig.enabled && syncConfig.token) {
+        syncPullNow({ silent: true });
+      }
+    });
+
+    elements.syncNow.addEventListener("click", () => syncPushNow());
+    elements.pullNow.addEventListener("click", () => syncPullNow());
+    elements.avatarUpload.addEventListener("change", storeLocalAvatar);
+    elements.avatarReset.addEventListener("click", resetAvatar);
+
+    window.addEventListener("focus", () => {
+      if (syncConfig.enabled && syncConfig.token) {
+        syncPullNow({ silent: true });
+      }
+    });
+
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden && syncConfig.enabled && syncConfig.token) {
+        syncPullNow({ silent: true });
+      }
+    });
   }
 
   function renderDayRail() {
@@ -1771,6 +1846,7 @@
       fragment.querySelector(".minutes-pill").textContent = `${task.minutes} min / 分钟`;
       fragment.querySelector("h3").textContent = task.title.text;
       fragment.querySelector(".task-goal").textContent = task.goal.text;
+      fragment.querySelector(".method-box").textContent = methodFor(task).text;
       renderList(fragment.querySelector(".steps"), task.steps);
       renderList(fragment.querySelector(".materials"), task.materials);
       fragment.querySelector(".script-box").textContent = task.script.text;
@@ -1815,9 +1891,16 @@
     if (!control) return;
 
     const record = ensureDayRecord(selectedDate);
+    activateRecord(record);
     const taskRecord = record.tasks[taskId] || {};
-    taskRecord[control.dataset.field] = control.value;
-    taskRecord.updatedAt = new Date().toISOString();
+    const now = new Date().toISOString();
+    const field = control.dataset.field;
+    taskRecord[field] = control.value;
+    taskRecord.fieldUpdatedAt = {
+      ...taskRecord.fieldUpdatedAt,
+      [field]: now
+    };
+    taskRecord.updatedAt = now;
     record.tasks[taskId] = taskRecord;
 
     const card = control.closest(".task-card");
@@ -1845,14 +1928,22 @@
     if (!records[dateKey]) {
       records[dateKey] = {
         daily: {},
+        dailyUpdatedAt: {},
         tasks: {},
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       };
     }
     if (!records[dateKey].daily) records[dateKey].daily = {};
+    if (!records[dateKey].dailyUpdatedAt) records[dateKey].dailyUpdatedAt = {};
     if (!records[dateKey].tasks) records[dateKey].tasks = {};
     return records[dateKey];
+  }
+
+  function activateRecord(record) {
+    if (record.deletedAt) {
+      delete record.deletedAt;
+    }
   }
 
   function touchAndSave(record) {
@@ -1872,17 +1963,406 @@
     }
   }
 
-  function saveRecords() {
+  function saveRecords(options = {}) {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify({
       version: 1,
       savedAt: new Date().toISOString(),
       records
     }));
     setSaveState(`Saved ${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} / 已保存`);
+    if (!options.skipSync && !applyingRemote) {
+      scheduleSync("local change");
+    }
   }
 
   function setSaveState(message) {
     elements.saveState.textContent = message;
+  }
+
+  function loadSyncConfig() {
+    const fallback = {
+      enabled: false,
+      owner: "Taotao1992",
+      repo: "ai-evolution-atlas",
+      branch: "main",
+      path: "jamie-training-data/records.json",
+      token: ""
+    };
+    try {
+      const raw = window.localStorage.getItem(SYNC_KEY);
+      if (!raw) return fallback;
+      return { ...fallback, ...JSON.parse(raw) };
+    } catch (error) {
+      console.warn("Could not load sync settings", error);
+      return fallback;
+    }
+  }
+
+  function saveSyncConfig(config) {
+    window.localStorage.setItem(SYNC_KEY, JSON.stringify(config));
+  }
+
+  function fillSyncInputs() {
+    elements.githubOwner.value = syncConfig.owner || "";
+    elements.githubRepo.value = syncConfig.repo || "";
+    elements.githubBranch.value = syncConfig.branch || "main";
+    elements.githubPath.value = syncConfig.path || "jamie-training-data/records.json";
+    elements.githubToken.value = syncConfig.token || "";
+    elements.syncEnabled.checked = Boolean(syncConfig.enabled);
+  }
+
+  function readSyncInputs() {
+    return {
+      enabled: elements.syncEnabled.checked,
+      owner: elements.githubOwner.value.trim(),
+      repo: elements.githubRepo.value.trim(),
+      branch: elements.githubBranch.value.trim() || "main",
+      path: elements.githubPath.value.trim() || "jamie-training-data/records.json",
+      token: elements.githubToken.value.trim()
+    };
+  }
+
+  function updateSyncBadge() {
+    if (!syncConfig.enabled) {
+      elements.syncBadge.textContent = "Off / 未开启";
+      return;
+    }
+    if (!syncConfig.token) {
+      elements.syncBadge.textContent = "Needs token / 需 token";
+      return;
+    }
+    elements.syncBadge.textContent = "On / 已开启";
+  }
+
+  function setSyncState(message) {
+    elements.syncState.textContent = message;
+  }
+
+  function scheduleSync() {
+    if (!syncConfig.enabled || !syncConfig.token) return;
+    window.clearTimeout(syncTimer);
+    setSyncState("Waiting to sync / 等待同步...");
+    syncTimer = window.setTimeout(() => syncPushNow({ silent: true }), SYNC_DEBOUNCE_MS);
+  }
+
+  function startSyncPolling() {
+    window.clearInterval(pollTimer);
+    if (!syncConfig.enabled || !syncConfig.token) return;
+    pollTimer = window.setInterval(() => {
+      if (!document.hidden) {
+        syncPullNow({ silent: true });
+      }
+    }, SYNC_POLL_MS);
+  }
+
+  async function syncPullNow(options = {}) {
+    if (!hasSyncConfig()) return;
+    try {
+      if (!options.silent) setSyncState("Pulling from GitHub / 正在从 GitHub 拉取...");
+      const remote = await fetchRemoteRecords();
+      const merged = mergeRecordSets(records, remote.records);
+      if (merged.changed) {
+        applyingRemote = true;
+        records = merged.records;
+        saveRecords({ skipSync: true });
+        applyingRemote = false;
+        renderSelectedDay();
+      }
+      setSyncState(`Pulled ${formatClock()} / 已拉取`);
+    } catch (error) {
+      applyingRemote = false;
+      setSyncState(`Pull failed / 拉取失败: ${error.message}`);
+    }
+  }
+
+  async function syncPushNow(options = {}) {
+    if (!hasSyncConfig()) return;
+    window.clearTimeout(syncTimer);
+    try {
+      if (!options.silent) setSyncState("Syncing to GitHub / 正在同步到 GitHub...");
+      let remote = await fetchRemoteRecords();
+      let merged = mergeRecordSets(records, remote.records);
+      let payload = makeRemotePayload(merged.records);
+      try {
+        await putRemoteRecords(payload, remote.sha);
+      } catch (error) {
+        if (!/409|conflict/i.test(error.message)) throw error;
+        remote = await fetchRemoteRecords();
+        merged = mergeRecordSets(merged.records, remote.records);
+        payload = makeRemotePayload(merged.records);
+        await putRemoteRecords(payload, remote.sha);
+      }
+      applyingRemote = true;
+      records = merged.records;
+      saveRecords({ skipSync: true });
+      applyingRemote = false;
+      renderSelectedDay();
+      setSyncState(`Synced ${formatClock()} / 已同步`);
+    } catch (error) {
+      applyingRemote = false;
+      setSyncState(`Sync failed / 同步失败: ${error.message}`);
+    }
+  }
+
+  function hasSyncConfig() {
+    syncConfig = readSyncInputs();
+    saveSyncConfig(syncConfig);
+    updateSyncBadge();
+    if (!syncConfig.enabled) {
+      setSyncState("Auto sync is off / 自动同步未开启");
+      return false;
+    }
+    if (!syncConfig.owner || !syncConfig.repo || !syncConfig.branch || !syncConfig.path || !syncConfig.token) {
+      setSyncState("Complete sync settings first / 请先填完整同步设置");
+      return false;
+    }
+    return true;
+  }
+
+  async function fetchRemoteRecords() {
+    const url = githubContentsUrl();
+    const response = await fetch(url, { headers: githubHeaders() });
+    if (response.status === 404) {
+      return { records: {}, sha: null };
+    }
+    if (!response.ok) {
+      throw new Error(`GitHub GET ${response.status}`);
+    }
+    const data = await response.json();
+    const content = data.content ? decodeBase64(data.content.replace(/\s/g, "")) : "{}";
+    const payload = JSON.parse(content || "{}");
+    return {
+      records: payload.records || payload || {},
+      sha: data.sha || null
+    };
+  }
+
+  async function putRemoteRecords(payload, sha) {
+    const body = {
+      message: `Update Jamie training records ${new Date().toISOString().slice(0, 10)}`,
+      content: encodeBase64(JSON.stringify(payload, null, 2)),
+      branch: syncConfig.branch
+    };
+    if (sha) body.sha = sha;
+
+    const response = await fetch(githubContentsUrl(false), {
+      method: "PUT",
+      headers: githubHeaders(),
+      body: JSON.stringify(body)
+    });
+
+    if (!response.ok) {
+      const text = await response.text();
+      throw new Error(`GitHub PUT ${response.status}: ${text.slice(0, 180)}`);
+    }
+  }
+
+  function githubContentsUrl(includeRef = true) {
+    const safePath = syncConfig.path.split("/").map(encodeURIComponent).join("/");
+    const base = `https://api.github.com/repos/${encodeURIComponent(syncConfig.owner)}/${encodeURIComponent(syncConfig.repo)}/contents/${safePath}`;
+    return includeRef ? `${base}?ref=${encodeURIComponent(syncConfig.branch)}` : base;
+  }
+
+  function githubHeaders() {
+    return {
+      "Accept": "application/vnd.github+json",
+      "Authorization": `Bearer ${syncConfig.token}`,
+      "X-GitHub-Api-Version": "2022-11-28",
+      "Content-Type": "application/json"
+    };
+  }
+
+  function makeRemotePayload(nextRecords) {
+    return {
+      version: 2,
+      updatedAt: new Date().toISOString(),
+      app: "Jamie Daily Practice",
+      mergePolicy: "field-level latest-updatedAt wins",
+      records: nextRecords
+    };
+  }
+
+  function mergeRecordSets(localRecords, remoteRecords) {
+    const merged = clone(localRecords);
+    let changed = false;
+    const dates = new Set([...Object.keys(localRecords || {}), ...Object.keys(remoteRecords || {})]);
+    dates.forEach((dateKey) => {
+      const before = JSON.stringify(merged[dateKey] || null);
+      merged[dateKey] = mergeDayRecord(localRecords?.[dateKey], remoteRecords?.[dateKey]);
+      if (JSON.stringify(merged[dateKey] || null) !== before) {
+        changed = true;
+      }
+    });
+    return { records: merged, changed };
+  }
+
+  function mergeDayRecord(localDay, remoteDay) {
+    if (!localDay) return clone(remoteDay);
+    if (!remoteDay) return clone(localDay);
+
+    const localDeleteWins = localDay.deletedAt && laterThan(localDay.deletedAt, remoteDay.updatedAt);
+    const remoteDeleteWins = remoteDay.deletedAt && laterThan(remoteDay.deletedAt, localDay.updatedAt);
+    if (localDeleteWins && !remoteDeleteWins) return clone(localDay);
+    if (remoteDeleteWins && !localDeleteWins) return clone(remoteDay);
+
+    const merged = {
+      ...clone(localDay),
+      ...clone(remoteDay),
+      createdAt: minDate(localDay.createdAt, remoteDay.createdAt) || localDay.createdAt || remoteDay.createdAt,
+      updatedAt: maxDate(localDay.updatedAt, remoteDay.updatedAt) || new Date().toISOString(),
+      daily: {},
+      dailyUpdatedAt: {},
+      tasks: {}
+    };
+    delete merged.deletedAt;
+
+    const dailyFields = new Set([
+      ...Object.keys(localDay.daily || {}),
+      ...Object.keys(remoteDay.daily || {})
+    ]);
+    dailyFields.forEach((field) => {
+      const localTime = localDay.dailyUpdatedAt?.[field] || localDay.updatedAt || "";
+      const remoteTime = remoteDay.dailyUpdatedAt?.[field] || remoteDay.updatedAt || "";
+      const useRemote = laterThan(remoteTime, localTime);
+      merged.daily[field] = useRemote ? remoteDay.daily?.[field] : localDay.daily?.[field];
+      merged.dailyUpdatedAt[field] = useRemote ? remoteTime : localTime;
+    });
+
+    const taskIds = new Set([
+      ...Object.keys(localDay.tasks || {}),
+      ...Object.keys(remoteDay.tasks || {})
+    ]);
+    taskIds.forEach((taskId) => {
+      merged.tasks[taskId] = mergeTaskRecord(localDay.tasks?.[taskId], remoteDay.tasks?.[taskId], localDay.updatedAt, remoteDay.updatedAt);
+    });
+
+    return merged;
+  }
+
+  function mergeTaskRecord(localTask, remoteTask, localDayTime, remoteDayTime) {
+    if (!localTask) return clone(remoteTask);
+    if (!remoteTask) return clone(localTask);
+
+    const fields = new Set([
+      ...Object.keys(localTask || {}),
+      ...Object.keys(remoteTask || {})
+    ]);
+    fields.delete("updatedAt");
+    fields.delete("fieldUpdatedAt");
+
+    const merged = {
+      fieldUpdatedAt: {},
+      updatedAt: maxDate(localTask.updatedAt, remoteTask.updatedAt) || localTask.updatedAt || remoteTask.updatedAt || ""
+    };
+
+    fields.forEach((field) => {
+      const localTime = localTask.fieldUpdatedAt?.[field] || localTask.updatedAt || localDayTime || "";
+      const remoteTime = remoteTask.fieldUpdatedAt?.[field] || remoteTask.updatedAt || remoteDayTime || "";
+      const useRemote = laterThan(remoteTime, localTime);
+      merged[field] = useRemote ? remoteTask[field] : localTask[field];
+      merged.fieldUpdatedAt[field] = useRemote ? remoteTime : localTime;
+    });
+
+    return merged;
+  }
+
+  function laterThan(a, b) {
+    if (!a) return false;
+    if (!b) return true;
+    return new Date(a).getTime() > new Date(b).getTime();
+  }
+
+  function maxDate(a, b) {
+    if (!a) return b;
+    if (!b) return a;
+    return laterThan(a, b) ? a : b;
+  }
+
+  function minDate(a, b) {
+    if (!a) return b;
+    if (!b) return a;
+    return laterThan(a, b) ? b : a;
+  }
+
+  function clone(value) {
+    return value == null ? value : JSON.parse(JSON.stringify(value));
+  }
+
+  function encodeBase64(text) {
+    const bytes = new TextEncoder().encode(text);
+    let binary = "";
+    bytes.forEach((byte) => {
+      binary += String.fromCharCode(byte);
+    });
+    return btoa(binary);
+  }
+
+  function decodeBase64(base64) {
+    const binary = atob(base64);
+    const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0));
+    return new TextDecoder().decode(bytes);
+  }
+
+  function formatClock() {
+    return new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  }
+
+  function loadAvatar() {
+    const saved = window.localStorage.getItem(AVATAR_KEY);
+    if (saved) {
+      elements.jamieAvatar.src = saved;
+    }
+  }
+
+  function storeLocalAvatar(event) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const image = new Image();
+      image.onload = () => {
+        const maxSide = 900;
+        const scale = Math.min(1, maxSide / Math.max(image.width, image.height));
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.round(image.width * scale);
+        canvas.height = Math.round(image.height * scale);
+        const context = canvas.getContext("2d");
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.84);
+        try {
+          window.localStorage.setItem(AVATAR_KEY, dataUrl);
+          elements.jamieAvatar.src = dataUrl;
+          setSaveState("Avatar saved locally / 头像已本机保存");
+        } catch (error) {
+          window.alert("Photo is too large for this browser. / 照片太大，浏览器无法保存。");
+        }
+      };
+      image.src = String(reader.result);
+    };
+    reader.readAsDataURL(file);
+    event.target.value = "";
+  }
+
+  function resetAvatar() {
+    window.localStorage.removeItem(AVATAR_KEY);
+    elements.jamieAvatar.src = "./assets/jamie-avatar.svg";
+    setSaveState("Avatar reset / 头像已还原");
+  }
+
+  function methodFor(task) {
+    if (task.domain.startsWith("Safety")) {
+      return pair("Method: visual boundary + one consistent cue + immediate reinforcement; practise calmly before real risk settings.", "方法：视觉边界 + 单一一致提示 + 即时强化；先在低风险情境练，再泛化到真实安全场景。");
+    }
+    if (task.domain.startsWith("Regulation")) {
+      return pair("Method: regulate before teaching; use predictable visuals, low language, and a clear return routine.", "方法：先调节再教学；使用可预测视觉、减少语言，并设置清晰返回 routine。");
+    }
+    if (task.domain.startsWith("Communication")) {
+      return pair("Method: NDBI communication temptation; pause, wait, accept any clear attempt, model one step higher, then give the natural result.", "方法：NDBI 沟通机会；暂停等待，接受任何清晰尝试，示范高一阶语言，然后给自然结果。");
+    }
+    if (task.domain.startsWith("Prep")) {
+      return pair("Method: concrete play-based Foundation/Prep learning; model first, support success, then fade prompts.", "方法：具体、游戏化的 Foundation/Prep 学习；先示范，辅助成功，再逐步撤销辅助。");
+    }
+    return pair("Method: task analysis; teach one small step, use least-to-most prompting, reinforce effort, and fade support.", "方法：任务分析；一次教一个小步骤，由少到多辅助，强化尝试，并逐步撤销辅助。");
   }
 
   function exportJson() {

@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'jamie-training-data/**'
   workflow_dispatch:
 
 permissions:
