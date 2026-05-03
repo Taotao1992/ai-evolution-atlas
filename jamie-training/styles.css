@@ -394,6 +394,21 @@ textarea {
   padding: 8px 10px;
 }
 
+.avatar-select-label {
+  display: grid;
+  gap: 5px;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.avatar-select-label select {
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+
 .jamie-profile .small-button {
   width: 100%;
   margin-top: 8px;

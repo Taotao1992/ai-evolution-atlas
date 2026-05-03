@@ -2,11 +2,15 @@
   const STORAGE_KEY = "jamie-training-records-v1";
   const SYNC_KEY = "jamie-training-github-sync-v1";
   const AVATAR_KEY = "jamie-training-avatar-v1";
+  const AVATAR_MODE_KEY = "jamie-training-avatar-mode-v1";
+  const AVATAR_OFFSET_KEY = "jamie-training-avatar-offset-v1";
+  const AVATAR_ROTATION_KEY = "jamie-training-avatar-rotation-v1";
   const START_DATE = "2026-05-04";
   const END_DATE = "2026-05-31";
   const SYNC_DEBOUNCE_MS = 8000;
   const SYNC_POLL_MS = 30000;
-  const AVATAR_ROTATION_MS = 9000;
+  const AVATAR_PREVIEW_MS = 9000;
+  const AVATAR_CLOCK_CHECK_MS = 60000;
   const DEFAULT_SYNC_CONFIG = {
     enabled: false,
     owner: "Taotao1992",
@@ -1636,18 +1640,38 @@
     money: svg(`<rect x="21" y="39" width="78" height="48" rx="8" fill="#e9f8eb" stroke="#173047" stroke-width="5"/><circle cx="60" cy="63" r="14" fill="#f7c95f" stroke="#173047" stroke-width="4"/><path d="M35 53h9M76 73h9" stroke="#173047" stroke-width="5" stroke-linecap="round"/>`)
   };
 
-  const cartoonScenes = [
-    { title: pair("Jamie painting", "Jamie 画画"), bg: "#fff7e6", accent: "#ee8d78", prop: "paint" },
-    { title: pair("Jamie at school", "Jamie 上学"), bg: "#eaf7ff", accent: "#0f6d4d", prop: "bag" },
-    { title: pair("Jamie with bubbles", "Jamie 玩泡泡"), bg: "#e8fbff", accent: "#76aee8", prop: "bubbles" },
-    { title: pair("Jamie reading", "Jamie 看书"), bg: "#fffdf0", accent: "#f7c95f", prop: "book" },
-    { title: pair("Jamie building blocks", "Jamie 搭积木"), bg: "#eef8ef", accent: "#74b88a", prop: "blocks" },
-    { title: pair("Jamie and numbers", "Jamie 数字游戏"), bg: "#f0f4ff", accent: "#9a7cc6", prop: "numbers" },
-    { title: pair("Jamie STOP hero", "Jamie STOP 小英雄"), bg: "#fff0e8", accent: "#ee8d78", prop: "stop" },
-    { title: pair("Jamie music time", "Jamie 音乐时间"), bg: "#f4eeff", accent: "#9a7cc6", prop: "music" },
-    { title: pair("Jamie in the garden", "Jamie 花园探索"), bg: "#eef9ed", accent: "#74b88a", prop: "flower" },
-    { title: pair("Jamie puzzle time", "Jamie 拼图时间"), bg: "#fff4e2", accent: "#8ed6c3", prop: "puzzle" }
+  const photoScenes = [
+    { title: pair("Space moon", "太空月球"), src: "./assets/jamie-scenes/jamie-space-moon.jpg" },
+    { title: pair("Rainforest", "雨林"), src: "./assets/jamie-scenes/jamie-rainforest.jpg" },
+    { title: pair("University lawn", "大学草坪"), src: "./assets/jamie-scenes/jamie-university-lawn.jpg" },
+    { title: pair("Grassland meadow", "草地花田"), src: "./assets/jamie-scenes/jamie-grassland-meadow.jpg" },
+    { title: pair("Desert dunes", "沙漠沙丘"), src: "./assets/jamie-scenes/jamie-desert-dunes.jpg" },
+    { title: pair("Beach tide", "海滩浅潮"), src: "./assets/jamie-scenes/jamie-beach-tide.jpg" },
+    { title: pair("Library corner", "图书馆角落"), src: "./assets/jamie-scenes/jamie-library-corner.jpg" },
+    { title: pair("Science lab", "科学实验室"), src: "./assets/jamie-scenes/jamie-science-lab.jpg" },
+    { title: pair("Botanical garden", "植物园"), src: "./assets/jamie-scenes/jamie-botanical-garden.jpg" },
+    { title: pair("Snowy mountain", "雪山"), src: "./assets/jamie-scenes/jamie-snowy-mountain.jpg" },
+    { title: pair("Dinosaur museum", "恐龙博物馆"), src: "./assets/jamie-scenes/jamie-dinosaur-museum.jpg" },
+    { title: pair("Observatory", "天文台"), src: "./assets/jamie-scenes/jamie-observatory.jpg" },
+    { title: pair("Pool deck", "泳池学习区"), src: "./assets/jamie-scenes/jamie-pool-deck.jpg" },
+    { title: pair("Art gallery", "艺术馆"), src: "./assets/jamie-scenes/jamie-art-gallery.jpg" },
+    { title: pair("Playground art", "操场画画"), src: "./assets/jamie-scenes/jamie-playground-art.jpg" },
+    { title: pair("University studio", "大学画室"), src: "./assets/jamie-scenes/jamie-university-studio.jpg" },
+    { title: pair("Forest art camp", "森林画画营"), src: "./assets/jamie-scenes/jamie-forest-art-camp.jpg" },
+    { title: pair("Space classroom", "太空教室"), src: "./assets/jamie-scenes/jamie-space-classroom.jpg" },
+    { title: pair("School garden", "学校花园"), src: "./assets/jamie-scenes/jamie-school-garden.jpg" },
+    { title: pair("Music room", "音乐教室"), src: "./assets/jamie-scenes/jamie-music-room.jpg" },
+    { title: pair("Aquarium gallery", "水族馆"), src: "./assets/jamie-scenes/jamie-aquarium-gallery.jpg" },
+    { title: pair("Train station", "火车站"), src: "./assets/jamie-scenes/jamie-train-station.jpg" },
+    { title: pair("Desert art tent", "沙漠画画帐篷"), src: "./assets/jamie-scenes/jamie-desert-art-tent.jpg" },
+    { title: pair("Mountain meadow art", "山地草甸画画"), src: "./assets/jamie-scenes/jamie-mountain-meadow-art.jpg" }
   ];
+
+  const avatarRotationModes = {
+    daily: pair("Daily", "每天"),
+    "half-hour": pair("Every 30 min", "每30分钟"),
+    preview: pair("Fast preview", "快速预览")
+  };
 
   const elements = {
     datePicker: document.querySelector("#datePicker"),
@@ -1684,6 +1708,7 @@
     pullNow: document.querySelector("#pullNow"),
     jamieAvatar: document.querySelector("#jamieAvatar"),
     avatarCaption: document.querySelector("#avatarCaption"),
+    avatarFrequency: document.querySelector("#avatarFrequency"),
     avatarUpload: document.querySelector("#avatarUpload"),
     avatarNext: document.querySelector("#avatarNext"),
     avatarReset: document.querySelector("#avatarReset")
@@ -1817,11 +1842,18 @@
 
     elements.syncNow.addEventListener("click", () => syncPushNow());
     elements.pullNow.addEventListener("click", () => syncPullNow());
+    elements.avatarFrequency.addEventListener("change", () => {
+      window.localStorage.setItem(AVATAR_ROTATION_KEY, elements.avatarFrequency.value);
+      window.localStorage.removeItem(AVATAR_MODE_KEY);
+      renderPhotoScene();
+      startAvatarRotation();
+      setSaveState("Photo rotation updated / 照片轮换已更新");
+    });
     elements.avatarUpload.addEventListener("change", storeLocalAvatar);
     elements.avatarNext.addEventListener("click", () => {
-      window.localStorage.removeItem(AVATAR_KEY);
-      stopAvatarRotation();
-      renderNextCartoonAvatar();
+      window.localStorage.removeItem(AVATAR_MODE_KEY);
+      bumpAvatarOffset();
+      renderPhotoScene();
       startAvatarRotation();
     });
     elements.avatarReset.addEventListener("click", resetAvatar);
@@ -2378,15 +2410,15 @@
   }
 
   function loadAvatar() {
+    elements.avatarFrequency.value = getAvatarRotationMode();
     const saved = window.localStorage.getItem(AVATAR_KEY);
-    if (saved) {
+    if (saved && window.localStorage.getItem(AVATAR_MODE_KEY) === "local") {
       stopAvatarRotation();
       elements.jamieAvatar.src = saved;
       elements.avatarCaption.textContent = "Local photo / 本机照片";
       return;
     }
-    avatarIndex = new Date().getDate() % cartoonScenes.length;
-    renderCartoonAvatar();
+    renderPhotoScene();
     startAvatarRotation();
   }
 
@@ -2407,6 +2439,7 @@
         const dataUrl = canvas.toDataURL("image/jpeg", 0.84);
         try {
           window.localStorage.setItem(AVATAR_KEY, dataUrl);
+          window.localStorage.setItem(AVATAR_MODE_KEY, "local");
           stopAvatarRotation();
           elements.jamieAvatar.src = dataUrl;
           elements.avatarCaption.textContent = "Local photo / 本机照片";
@@ -2423,14 +2456,19 @@
 
   function resetAvatar() {
     window.localStorage.removeItem(AVATAR_KEY);
-    renderNextCartoonAvatar();
+    window.localStorage.removeItem(AVATAR_MODE_KEY);
+    window.localStorage.removeItem(AVATAR_OFFSET_KEY);
+    renderPhotoScene();
     startAvatarRotation();
-    setSaveState("Cartoon rotation reset / 卡通轮换已还原");
+    setSaveState("Photo gallery reset / 照片图库已还原");
   }
 
   function startAvatarRotation() {
     stopAvatarRotation();
-    avatarTimer = window.setInterval(renderNextCartoonAvatar, AVATAR_ROTATION_MS);
+    avatarTimer = window.setInterval(
+      renderPhotoScene,
+      getAvatarRotationMode() === "preview" ? AVATAR_PREVIEW_MS : AVATAR_CLOCK_CHECK_MS
+    );
   }
 
   function stopAvatarRotation() {
@@ -2438,15 +2476,56 @@
     avatarTimer = null;
   }
 
-  function renderNextCartoonAvatar() {
-    avatarIndex = (avatarIndex + 1) % cartoonScenes.length;
-    renderCartoonAvatar();
+  function bumpAvatarOffset() {
+    const nextOffset = getAvatarOffset() + 1;
+    window.localStorage.setItem(AVATAR_OFFSET_KEY, String(nextOffset));
   }
 
-  function renderCartoonAvatar() {
-    const scene = cartoonScenes[avatarIndex % cartoonScenes.length];
-    elements.jamieAvatar.src = svgToDataUri(cartoonAvatarSvg(scene));
-    elements.avatarCaption.textContent = scene.title.text;
+  function renderPhotoScene() {
+    avatarIndex = getAvatarSceneIndex();
+    const scene = photoScenes[avatarIndex];
+    const mode = avatarRotationModes[getAvatarRotationMode()] || avatarRotationModes.daily;
+    elements.jamieAvatar.src = scene.src;
+    elements.jamieAvatar.alt = `Jamie - ${scene.title.text}`;
+    elements.avatarCaption.textContent = `${scene.title.text} · ${mode.text}`;
+    preloadPhotoScenes(avatarIndex);
+  }
+
+  function preloadPhotoScenes(currentIndex) {
+    [1, 2].forEach((step) => {
+      const scene = photoScenes[modulo(currentIndex + step, photoScenes.length)];
+      const image = new Image();
+      image.src = scene.src;
+    });
+  }
+
+  function getAvatarSceneIndex() {
+    const mode = getAvatarRotationMode();
+    const now = Date.now();
+    const base = mode === "half-hour"
+      ? Math.floor(now / (30 * 60 * 1000))
+      : mode === "preview"
+        ? Math.floor(now / AVATAR_PREVIEW_MS)
+        : getLocalDayIndex();
+    return modulo(base + getAvatarOffset(), photoScenes.length);
+  }
+
+  function getLocalDayIndex() {
+    const now = new Date();
+    return Math.floor(new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime() / (24 * 60 * 60 * 1000));
+  }
+
+  function getAvatarRotationMode() {
+    const saved = window.localStorage.getItem(AVATAR_ROTATION_KEY);
+    return Object.prototype.hasOwnProperty.call(avatarRotationModes, saved) ? saved : "daily";
+  }
+
+  function getAvatarOffset() {
+    return Number.parseInt(window.localStorage.getItem(AVATAR_OFFSET_KEY) || "0", 10) || 0;
+  }
+
+  function modulo(value, divisor) {
+    return ((value % divisor) + divisor) % divisor;
   }
 
   function svgToDataUri(markup) {

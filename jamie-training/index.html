@@ -93,13 +93,21 @@
       <section class="main-panel">
         <section class="hero-card">
           <div class="jamie-profile">
-            <img id="jamieAvatar" src="./assets/jamie-avatar.svg" alt="Jamie learning avatar">
+            <img id="jamieAvatar" src="./assets/jamie-scenes/jamie-space-moon.jpg" alt="Jamie themed learning photo">
             <div>
               <p class="eyebrow">Jamie / Jamie</p>
-              <p id="avatarCaption" class="helper-text">Cartoon rotation / 卡通轮换</p>
+              <p id="avatarCaption" class="helper-text">Real photo rotation / 真实照片轮换</p>
+              <label class="avatar-select-label" for="avatarFrequency">
+                Rotate / 轮换
+                <select id="avatarFrequency">
+                  <option value="daily">Daily / 每天</option>
+                  <option value="half-hour">Every 30 min / 每30分钟</option>
+                  <option value="preview">Fast preview / 快速预览</option>
+                </select>
+              </label>
               <label class="avatar-upload">Use Photo / 使用照片<input id="avatarUpload" type="file" accept="image/*"></label>
-              <button id="avatarNext" class="ghost-button small-button" type="button">Next Cartoon / 下一张</button>
-              <button id="avatarReset" class="ghost-button small-button" type="button">Reset / 还原</button>
+              <button id="avatarNext" class="ghost-button small-button" type="button">Next Scene / 下一张</button>
+              <button id="avatarReset" class="ghost-button small-button" type="button">Use Gallery / 使用图库</button>
             </div>
           </div>
           <div class="hero-copy">
