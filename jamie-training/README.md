@@ -31,11 +31,13 @@ Recommended setup / 推荐设置：
 2. Create a fine-grained GitHub token with **Contents: Read and write** permission for that private repo only.
 3. On each adult's device, open the site and fill in **Owner / Repo / Branch / Path / Token**, then turn on **Auto sync**.
 4. Use the same repo/path on every device. The app pulls remote updates every 30 seconds and merges fields by latest timestamp.
+5. The token box needs the real token value, usually starting with `github_pat_`; the placeholder text is not a token.
 
 1. 建议新建一个私有 GitHub 仓库，例如 `jamie-training-data`，专门保存 Jamie 记录。
 2. 创建 fine-grained GitHub token，只给这个私有仓库 **Contents: Read and write** 权限。
 3. 爸爸、妈妈、老师每台设备打开网站后填写 **Owner / Repo / Branch / Path / Token**，开启 **Auto sync / 自动同步**。
 4. 所有设备使用同一个 repo/path。网站每 30 秒拉取远端更新，并按字段更新时间合并，减少互相覆盖。
+5. Token 输入框必须粘贴真实 token，通常以 `github_pat_` 开头；输入框里的灰色提示文字不是 token。
 
 Privacy / 隐私：
 
@@ -45,9 +47,9 @@ If you sync to this public website repo, the record file will be public. Use a p
 
 ## Jamie Image / Jamie 形象
 
-The default image is a privacy-safe Jamie-inspired illustration. A local photo can be uploaded on each device, but it is stored only in that browser and is not committed to GitHub.
+The default image is an auto-rotating set of 10 Jamie-inspired cartoon scenes: painting, school, bubbles, reading, blocks, numbers, STOP, music, garden, and puzzle. A local photo can still be uploaded on each device, but it is stored only in that browser and is not committed to GitHub.
 
-默认头像是隐私友好的 Jamie 风格插画。每台设备可以本机上传真实照片，但照片只保存在该浏览器，不会提交到 GitHub。
+默认头像是 10 张 Jamie 风格卡通场景自动轮换：画画、上学、泡泡、读书、积木、数字、STOP、音乐、花园和拼图。每台设备仍然可以本机上传真实照片，但照片只保存在该浏览器，不会提交到 GitHub。
 
 ## Evidence Base / 科学依据
 

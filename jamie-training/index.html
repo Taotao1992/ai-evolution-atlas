@@ -56,14 +56,15 @@
           </div>
           <p class="helper-text">Records can auto-sync through GitHub with a token stored only in this browser. / 记录可用 GitHub 自动同步，token 只保存在本机浏览器。</p>
           <div class="sync-grid">
-            <label>Owner / 用户<input id="githubOwner" type="text" autocomplete="off"></label>
-            <label>Repo / 仓库<input id="githubRepo" type="text" autocomplete="off"></label>
-            <label>Branch / 分支<input id="githubBranch" type="text" autocomplete="off"></label>
-            <label>Path / 路径<input id="githubPath" type="text" autocomplete="off"></label>
+            <label>Owner / 用户<input id="githubOwner" type="text" autocomplete="off" placeholder="Taotao1992"></label>
+            <label>Repo / 仓库<input id="githubRepo" type="text" autocomplete="off" placeholder="ai-evolution-atlas"></label>
+            <label>Branch / 分支<input id="githubBranch" type="text" autocomplete="off" placeholder="main"></label>
+            <label>Path / 路径<input id="githubPath" type="text" autocomplete="off" placeholder="jamie-training-data/records.json"></label>
           </div>
-          <label class="secret-field">Token / 访问令牌<input id="githubToken" type="password" autocomplete="off" placeholder="Fine-grained token with Contents read/write"></label>
+          <label class="secret-field">Token / 访问令牌<input id="githubToken" type="password" autocomplete="off" placeholder="Paste actual token, usually starts with github_pat_"></label>
           <label class="toggle-row"><input id="syncEnabled" type="checkbox"> Auto sync / 自动同步</label>
           <div class="sync-actions">
+            <button id="useCurrentRepo" class="ghost-button" type="button">Use This Repo / 使用当前仓库</button>
             <button id="saveSyncSettings" type="button">Save Sync / 保存同步</button>
             <button id="syncNow" type="button">Push Now / 立即上传</button>
             <button id="pullNow" class="ghost-button" type="button">Pull Now / 立即拉取</button>
@@ -95,8 +96,9 @@
             <img id="jamieAvatar" src="./assets/jamie-avatar.svg" alt="Jamie learning avatar">
             <div>
               <p class="eyebrow">Jamie / Jamie</p>
-              <p class="helper-text">Local photo optional / 可本机替换照片</p>
+              <p id="avatarCaption" class="helper-text">Cartoon rotation / 卡通轮换</p>
               <label class="avatar-upload">Use Photo / 使用照片<input id="avatarUpload" type="file" accept="image/*"></label>
+              <button id="avatarNext" class="ghost-button small-button" type="button">Next Cartoon / 下一张</button>
               <button id="avatarReset" class="ghost-button small-button" type="button">Reset / 还原</button>
             </div>
           </div>

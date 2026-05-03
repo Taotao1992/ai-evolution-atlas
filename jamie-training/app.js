@@ -6,6 +6,15 @@
   const END_DATE = "2026-05-31";
   const SYNC_DEBOUNCE_MS = 8000;
   const SYNC_POLL_MS = 30000;
+  const AVATAR_ROTATION_MS = 9000;
+  const DEFAULT_SYNC_CONFIG = {
+    enabled: false,
+    owner: "Taotao1992",
+    repo: "ai-evolution-atlas",
+    branch: "main",
+    path: "jamie-training-data/records.json",
+    token: ""
+  };
 
   const bilingual = (en, zh) => `${en} / ${zh}`;
   const pair = (en, zh) => ({ en, zh, text: bilingual(en, zh) });
@@ -1627,6 +1636,19 @@
     money: svg(`<rect x="21" y="39" width="78" height="48" rx="8" fill="#e9f8eb" stroke="#173047" stroke-width="5"/><circle cx="60" cy="63" r="14" fill="#f7c95f" stroke="#173047" stroke-width="4"/><path d="M35 53h9M76 73h9" stroke="#173047" stroke-width="5" stroke-linecap="round"/>`)
   };
 
+  const cartoonScenes = [
+    { title: pair("Jamie painting", "Jamie 画画"), bg: "#fff7e6", accent: "#ee8d78", prop: "paint" },
+    { title: pair("Jamie at school", "Jamie 上学"), bg: "#eaf7ff", accent: "#0f6d4d", prop: "bag" },
+    { title: pair("Jamie with bubbles", "Jamie 玩泡泡"), bg: "#e8fbff", accent: "#76aee8", prop: "bubbles" },
+    { title: pair("Jamie reading", "Jamie 看书"), bg: "#fffdf0", accent: "#f7c95f", prop: "book" },
+    { title: pair("Jamie building blocks", "Jamie 搭积木"), bg: "#eef8ef", accent: "#74b88a", prop: "blocks" },
+    { title: pair("Jamie and numbers", "Jamie 数字游戏"), bg: "#f0f4ff", accent: "#9a7cc6", prop: "numbers" },
+    { title: pair("Jamie STOP hero", "Jamie STOP 小英雄"), bg: "#fff0e8", accent: "#ee8d78", prop: "stop" },
+    { title: pair("Jamie music time", "Jamie 音乐时间"), bg: "#f4eeff", accent: "#9a7cc6", prop: "music" },
+    { title: pair("Jamie in the garden", "Jamie 花园探索"), bg: "#eef9ed", accent: "#74b88a", prop: "flower" },
+    { title: pair("Jamie puzzle time", "Jamie 拼图时间"), bg: "#fff4e2", accent: "#8ed6c3", prop: "puzzle" }
+  ];
+
   const elements = {
     datePicker: document.querySelector("#datePicker"),
     todayButton: document.querySelector("#todayButton"),
@@ -1656,11 +1678,14 @@
     githubBranch: document.querySelector("#githubBranch"),
     githubPath: document.querySelector("#githubPath"),
     githubToken: document.querySelector("#githubToken"),
+    useCurrentRepo: document.querySelector("#useCurrentRepo"),
     saveSyncSettings: document.querySelector("#saveSyncSettings"),
     syncNow: document.querySelector("#syncNow"),
     pullNow: document.querySelector("#pullNow"),
     jamieAvatar: document.querySelector("#jamieAvatar"),
+    avatarCaption: document.querySelector("#avatarCaption"),
     avatarUpload: document.querySelector("#avatarUpload"),
+    avatarNext: document.querySelector("#avatarNext"),
     avatarReset: document.querySelector("#avatarReset")
   };
 
@@ -1670,6 +1695,8 @@
   let selectedDate = getInitialDate();
   let syncTimer = null;
   let pollTimer = null;
+  let avatarTimer = null;
+  let avatarIndex = 0;
   let applyingRemote = false;
 
   initialise();
@@ -1764,9 +1791,22 @@
     elements.exportCsv.addEventListener("click", exportCsv);
     elements.importJson.addEventListener("change", importJson);
 
+    elements.useCurrentRepo.addEventListener("click", () => {
+      syncConfig = {
+        ...syncConfig,
+        owner: DEFAULT_SYNC_CONFIG.owner,
+        repo: DEFAULT_SYNC_CONFIG.repo,
+        branch: DEFAULT_SYNC_CONFIG.branch,
+        path: DEFAULT_SYNC_CONFIG.path
+      };
+      fillSyncInputs();
+      setSyncState("Current website repo filled. Paste a real token next. / 已填入当前网站仓库；下一步粘贴真实 token。");
+    });
+
     elements.saveSyncSettings.addEventListener("click", () => {
       syncConfig = readSyncInputs();
       saveSyncConfig(syncConfig);
+      fillSyncInputs();
       updateSyncBadge();
       startSyncPolling();
       setSyncState(syncConfig.enabled ? "Sync settings saved / 同步设置已保存" : "Sync saved but off / 设置已保存，同步未开启");
@@ -1778,6 +1818,12 @@
     elements.syncNow.addEventListener("click", () => syncPushNow());
     elements.pullNow.addEventListener("click", () => syncPullNow());
     elements.avatarUpload.addEventListener("change", storeLocalAvatar);
+    elements.avatarNext.addEventListener("click", () => {
+      window.localStorage.removeItem(AVATAR_KEY);
+      stopAvatarRotation();
+      renderNextCartoonAvatar();
+      startAvatarRotation();
+    });
     elements.avatarReset.addEventListener("click", resetAvatar);
 
     window.addEventListener("focus", () => {
@@ -1980,22 +2026,30 @@
   }
 
   function loadSyncConfig() {
-    const fallback = {
-      enabled: false,
-      owner: "Taotao1992",
-      repo: "ai-evolution-atlas",
-      branch: "main",
-      path: "jamie-training-data/records.json",
-      token: ""
-    };
     try {
       const raw = window.localStorage.getItem(SYNC_KEY);
-      if (!raw) return fallback;
-      return { ...fallback, ...JSON.parse(raw) };
+      if (!raw) return { ...DEFAULT_SYNC_CONFIG };
+      return normaliseSyncConfig(JSON.parse(raw));
     } catch (error) {
       console.warn("Could not load sync settings", error);
-      return fallback;
+      return { ...DEFAULT_SYNC_CONFIG };
     }
+  }
+
+  function normaliseSyncConfig(config = {}) {
+    return {
+      enabled: Boolean(config.enabled),
+      owner: nonEmpty(config.owner, DEFAULT_SYNC_CONFIG.owner),
+      repo: nonEmpty(config.repo, DEFAULT_SYNC_CONFIG.repo),
+      branch: nonEmpty(config.branch, DEFAULT_SYNC_CONFIG.branch),
+      path: nonEmpty(config.path, DEFAULT_SYNC_CONFIG.path),
+      token: String(config.token || "").trim()
+    };
+  }
+
+  function nonEmpty(value, fallback) {
+    const text = String(value || "").trim();
+    return text || fallback;
   }
 
   function saveSyncConfig(config) {
@@ -2012,14 +2066,14 @@
   }
 
   function readSyncInputs() {
-    return {
+    return normaliseSyncConfig({
       enabled: elements.syncEnabled.checked,
       owner: elements.githubOwner.value.trim(),
       repo: elements.githubRepo.value.trim(),
       branch: elements.githubBranch.value.trim() || "main",
       path: elements.githubPath.value.trim() || "jamie-training-data/records.json",
       token: elements.githubToken.value.trim()
-    };
+    });
   }
 
   function updateSyncBadge() {
@@ -2027,7 +2081,7 @@
       elements.syncBadge.textContent = "Off / 未开启";
       return;
     }
-    if (!syncConfig.token) {
+    if (!hasUsableToken(syncConfig.token)) {
       elements.syncBadge.textContent = "Needs token / 需 token";
       return;
     }
@@ -2039,7 +2093,7 @@
   }
 
   function scheduleSync() {
-    if (!syncConfig.enabled || !syncConfig.token) return;
+    if (!syncConfig.enabled || !hasUsableToken(syncConfig.token)) return;
     window.clearTimeout(syncTimer);
     setSyncState("Waiting to sync / 等待同步...");
     syncTimer = window.setTimeout(() => syncPushNow({ silent: true }), SYNC_DEBOUNCE_MS);
@@ -2047,7 +2101,7 @@
 
   function startSyncPolling() {
     window.clearInterval(pollTimer);
-    if (!syncConfig.enabled || !syncConfig.token) return;
+    if (!syncConfig.enabled || !hasUsableToken(syncConfig.token)) return;
     pollTimer = window.setInterval(() => {
       if (!document.hidden) {
         syncPullNow({ silent: true });
@@ -2106,16 +2160,32 @@
 
   function hasSyncConfig() {
     syncConfig = readSyncInputs();
+    fillSyncInputs();
     saveSyncConfig(syncConfig);
     updateSyncBadge();
     if (!syncConfig.enabled) {
       setSyncState("Auto sync is off / 自动同步未开启");
       return false;
     }
-    if (!syncConfig.owner || !syncConfig.repo || !syncConfig.branch || !syncConfig.path || !syncConfig.token) {
-      setSyncState("Complete sync settings first / 请先填完整同步设置");
+    const missing = [];
+    if (!syncConfig.owner) missing.push("owner / 用户");
+    if (!syncConfig.repo) missing.push("repo / 仓库");
+    if (!syncConfig.branch) missing.push("branch / 分支");
+    if (!syncConfig.path) missing.push("path / 路径");
+    if (!hasUsableToken(syncConfig.token)) missing.push("real token / 真实 token");
+    if (missing.length) {
+      setSyncState(`Missing: ${missing.join(", ")}. Token should start like github_pat_... / 缺少：${missing.join("，")}。token 通常以 github_pat_ 开头。`);
       return false;
     }
+    return true;
+  }
+
+  function hasUsableToken(token) {
+    const value = String(token || "").trim();
+    if (value.length < 20) return false;
+    if (/fine-grained token/i.test(value)) return false;
+    if (/contents read\/write/i.test(value)) return false;
+    if (/paste actual token/i.test(value)) return false;
     return true;
   }
 
@@ -2310,8 +2380,14 @@
   function loadAvatar() {
     const saved = window.localStorage.getItem(AVATAR_KEY);
     if (saved) {
+      stopAvatarRotation();
       elements.jamieAvatar.src = saved;
+      elements.avatarCaption.textContent = "Local photo / 本机照片";
+      return;
     }
+    avatarIndex = new Date().getDate() % cartoonScenes.length;
+    renderCartoonAvatar();
+    startAvatarRotation();
   }
 
   function storeLocalAvatar(event) {
@@ -2331,7 +2407,9 @@
         const dataUrl = canvas.toDataURL("image/jpeg", 0.84);
         try {
           window.localStorage.setItem(AVATAR_KEY, dataUrl);
+          stopAvatarRotation();
           elements.jamieAvatar.src = dataUrl;
+          elements.avatarCaption.textContent = "Local photo / 本机照片";
           setSaveState("Avatar saved locally / 头像已本机保存");
         } catch (error) {
           window.alert("Photo is too large for this browser. / 照片太大，浏览器无法保存。");
@@ -2345,8 +2423,84 @@
 
   function resetAvatar() {
     window.localStorage.removeItem(AVATAR_KEY);
-    elements.jamieAvatar.src = "./assets/jamie-avatar.svg";
-    setSaveState("Avatar reset / 头像已还原");
+    renderNextCartoonAvatar();
+    startAvatarRotation();
+    setSaveState("Cartoon rotation reset / 卡通轮换已还原");
+  }
+
+  function startAvatarRotation() {
+    stopAvatarRotation();
+    avatarTimer = window.setInterval(renderNextCartoonAvatar, AVATAR_ROTATION_MS);
+  }
+
+  function stopAvatarRotation() {
+    window.clearInterval(avatarTimer);
+    avatarTimer = null;
+  }
+
+  function renderNextCartoonAvatar() {
+    avatarIndex = (avatarIndex + 1) % cartoonScenes.length;
+    renderCartoonAvatar();
+  }
+
+  function renderCartoonAvatar() {
+    const scene = cartoonScenes[avatarIndex % cartoonScenes.length];
+    elements.jamieAvatar.src = svgToDataUri(cartoonAvatarSvg(scene));
+    elements.avatarCaption.textContent = scene.title.text;
+  }
+
+  function svgToDataUri(markup) {
+    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(markup)}`;
+  }
+
+  function cartoonAvatarSvg(scene) {
+    return `<svg width="720" height="720" viewBox="0 0 720 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="720" height="720" rx="72" fill="${scene.bg}"/>
+      <circle cx="118" cy="118" r="38" fill="#fff" opacity=".75"/>
+      <circle cx="615" cy="142" r="54" fill="#fff" opacity=".6"/>
+      <path d="M84 594C139 496 251 438 360 438C469 438 581 496 636 594V650H84V594Z" fill="#ddefe5" stroke="#173047" stroke-width="10"/>
+      <path d="M276 628C282 547 315 492 360 492C405 492 438 547 444 628H276Z" fill="#0f6d4d" stroke="#173047" stroke-width="12" stroke-linejoin="round"/>
+      <path d="M296 548C330 569 390 569 424 548" stroke="#fff" stroke-width="15" stroke-linecap="round"/>
+      <path d="M299 628C306 586 325 558 348 542M421 628C414 586 395 558 372 542" stroke="#fff" stroke-width="10" stroke-linecap="round"/>
+      <path d="M342 457C334 480 325 498 310 509C329 526 391 526 410 509C395 498 386 480 378 457H342Z" fill="#f2be9d" stroke="#173047" stroke-width="10" stroke-linejoin="round"/>
+      <circle cx="360" cy="326" r="112" fill="#f2be9d" stroke="#173047" stroke-width="12"/>
+      <path d="M255 304C260 222 300 170 365 170C430 170 470 222 474 304C445 269 405 257 360 263C315 269 284 279 255 304Z" fill="#17202a" stroke="#173047" stroke-width="12" stroke-linejoin="round"/>
+      <path d="M295 246C316 213 348 195 395 195" stroke="#343b45" stroke-width="14" stroke-linecap="round"/>
+      <circle cx="320" cy="332" r="9" fill="#173047"/>
+      <circle cx="400" cy="332" r="9" fill="#173047"/>
+      <path d="M337 379C352 390 370 390 385 379" stroke="#173047" stroke-width="9" stroke-linecap="round"/>
+      <path d="M322 419C346 438 374 438 398 419" stroke="#173047" stroke-width="10" stroke-linecap="round"/>
+      <path d="M278 557C238 538 222 501 238 472C250 451 277 457 304 485" fill="#f2be9d"/>
+      <path d="M442 557C482 538 498 501 482 472C470 451 443 457 416 485" fill="#f2be9d"/>
+      <path d="M278 557C238 538 222 501 238 472C250 451 277 457 304 485M442 557C482 538 498 501 482 472C470 451 443 457 416 485" stroke="#173047" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+      ${cartoonPropSvg(scene.prop, scene.accent)}
+      <path d="M132 641H588" stroke="#173047" stroke-width="12" stroke-linecap="round"/>
+    </svg>`;
+  }
+
+  function cartoonPropSvg(prop, accent) {
+    const palette = {
+      accent,
+      ink: "#173047",
+      sun: "#f7c95f",
+      sky: "#76aee8",
+      leaf: "#74b88a",
+      coral: "#ee8d78",
+      white: "#fff"
+    };
+    const props = {
+      paint: `<rect x="85" y="166" width="164" height="280" rx="18" fill="${palette.white}" stroke="${palette.ink}" stroke-width="10"/><path d="M112 240C146 214 170 251 201 226" stroke="${palette.leaf}" stroke-width="18" stroke-linecap="round"/><circle cx="138" cy="309" r="24" fill="${palette.sky}" stroke="${palette.ink}" stroke-width="7"/><circle cx="194" cy="344" r="20" fill="${palette.coral}" stroke="${palette.ink}" stroke-width="7"/><path d="M467 494L548 386" stroke="#815f3c" stroke-width="13" stroke-linecap="round"/><circle cx="556" cy="376" r="18" fill="${accent}" stroke="${palette.ink}" stroke-width="7"/>`,
+      bag: `<path d="M500 182h94l18 158H482z" fill="${accent}" stroke="${palette.ink}" stroke-width="10" stroke-linejoin="round"/><path d="M520 182c0-42 54-42 54 0" stroke="${palette.ink}" stroke-width="10" stroke-linecap="round"/><path d="M515 245h66" stroke="${palette.white}" stroke-width="11" stroke-linecap="round"/><path d="M470 496L546 376" stroke="${palette.ink}" stroke-width="10" stroke-linecap="round"/>`,
+      bubbles: `<circle cx="520" cy="215" r="42" fill="#d9f7ff" stroke="${palette.ink}" stroke-width="8"/><circle cx="604" cy="286" r="34" fill="#effcff" stroke="${palette.ink}" stroke-width="8"/><circle cx="512" cy="350" r="28" fill="${palette.white}" stroke="${palette.ink}" stroke-width="8"/><path d="M462 492L524 374" stroke="${palette.ink}" stroke-width="10" stroke-linecap="round"/>`,
+      book: `<path d="M86 452h182c22 0 36 14 36 36v100H122c-22 0-36-14-36-36z" fill="${palette.white}" stroke="${palette.ink}" stroke-width="10"/><path d="M304 488c0-22 14-36 36-36h182v100c0 22-14 36-36 36H304z" fill="#eaf7ff" stroke="${palette.ink}" stroke-width="10"/><path d="M144 500h90M372 500h90M144 540h74M372 540h74" stroke="${palette.ink}" stroke-width="8" stroke-linecap="round"/>`,
+      blocks: `<rect x="88" y="470" width="72" height="72" rx="10" fill="${palette.sun}" stroke="${palette.ink}" stroke-width="9"/><rect x="170" y="430" width="72" height="112" rx="10" fill="${accent}" stroke="${palette.ink}" stroke-width="9"/><rect x="252" y="498" width="72" height="44" rx="10" fill="${palette.sky}" stroke="${palette.ink}" stroke-width="9"/><path d="M454 500L518 458L582 500V560H454z" fill="${palette.white}" stroke="${palette.ink}" stroke-width="9" stroke-linejoin="round"/>`,
+      numbers: `<rect x="86" y="170" width="96" height="128" rx="16" fill="${palette.white}" stroke="${palette.ink}" stroke-width="10"/><rect x="536" y="182" width="96" height="128" rx="16" fill="${palette.white}" stroke="${palette.ink}" stroke-width="10"/><text x="134" y="254" text-anchor="middle" font-family="Arial, sans-serif" font-size="72" font-weight="900" fill="${palette.ink}">3</text><text x="584" y="266" text-anchor="middle" font-family="Arial, sans-serif" font-size="72" font-weight="900" fill="${palette.ink}">8</text><path d="M472 492C508 466 538 444 568 404" stroke="${accent}" stroke-width="14" stroke-linecap="round"/>`,
+      stop: `<circle cx="548" cy="246" r="86" fill="${palette.sun}" stroke="${palette.ink}" stroke-width="10"/><path d="M506 247h84" stroke="${palette.ink}" stroke-width="15" stroke-linecap="round"/><path d="M451 482C488 438 514 403 536 340" stroke="${palette.ink}" stroke-width="10" stroke-linecap="round"/><path d="M210 188h-62l-31 54 31 54h62l31-54z" fill="${accent}" stroke="${palette.ink}" stroke-width="9"/><path d="M146 242h64" stroke="${palette.white}" stroke-width="12" stroke-linecap="round"/>`,
+      music: `<path d="M555 170v138a40 40 0 1 1-24-36v-74l-96 22v112a40 40 0 1 1-24-36V204z" fill="${accent}" stroke="${palette.ink}" stroke-width="10" stroke-linejoin="round"/><path d="M452 492C486 456 512 410 526 352" stroke="${palette.ink}" stroke-width="10" stroke-linecap="round"/>`,
+      flower: `<circle cx="536" cy="218" r="20" fill="${palette.sun}" stroke="${palette.ink}" stroke-width="7"/><circle cx="536" cy="176" r="27" fill="${accent}" stroke="${palette.ink}" stroke-width="7"/><circle cx="536" cy="260" r="27" fill="${palette.sky}" stroke="${palette.ink}" stroke-width="7"/><circle cx="494" cy="218" r="27" fill="${palette.leaf}" stroke="${palette.ink}" stroke-width="7"/><circle cx="578" cy="218" r="27" fill="${palette.coral}" stroke="${palette.ink}" stroke-width="7"/><path d="M532 290C518 374 494 438 454 500" stroke="${palette.leaf}" stroke-width="13" stroke-linecap="round"/>`,
+      puzzle: `<path d="M478 174h58a28 28 0 1 1 40 0h58v64a28 28 0 1 0 0 40v64h-64a28 28 0 1 1-40 0h-52z" fill="${accent}" stroke="${palette.ink}" stroke-width="10" stroke-linejoin="round"/><path d="M450 496L523 367" stroke="${palette.ink}" stroke-width="10" stroke-linecap="round"/>`
+    };
+    return props[prop] || props.paint;
   }
 
   function methodFor(task) {
