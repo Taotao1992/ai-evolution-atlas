@@ -47,9 +47,9 @@ If you sync to this public website repo, the record file will be public. Use a p
 
 ## Jamie Image / Jamie 形象
 
-The default image is an auto-rotating set of 24 real-photo Jamie themed scenes generated from the provided Jamie photos: space, rainforest, university, grassland, desert, beach, library, science, gardens, snow, museum, observatory, pool deck, art, playground, music, aquarium, train station, and mountain meadow. Adults can choose **Daily**, **Every 30 min**, or **Fast preview** rotation. A local photo can still be uploaded on each device, but it is stored only in that browser and is not committed to GitHub.
+The default image is an auto-rotating set of 50 real-photo Jamie themed scenes generated from the provided Jamie photos: space, rainforest, university, grassland, desert, beach, library, science, gardens, snow, museum, observatory, pool deck, art, playground, music, aquarium, train station, campus storybook, cafe, fruit market, computer learning, sports field, kitchen helper, travel, and calm reading spaces. Adults can choose **Daily**, **Every 30 min**, or **Fast preview** rotation. A local photo can still be uploaded on each device, but it is stored only in that browser and is not committed to GitHub.
 
-默认头像是 24 张基于 Jamie 真实照片生成的主题场景自动轮换：太空、雨林、大学、草地、沙漠、海滩、图书馆、科学、花园、雪山、博物馆、天文台、泳池学习区、艺术、操场、音乐、水族馆、火车站和山地草甸等。成人可以选择 **Daily / 每天**、**Every 30 min / 每30分钟** 或 **Fast preview / 快速预览**。每台设备仍然可以本机上传真实照片，但照片只保存在该浏览器，不会提交到 GitHub。
+默认头像是 50 张基于 Jamie 真实照片生成的主题场景自动轮换：太空、雨林、大学、草地、沙漠、海滩、图书馆、科学、花园、雪山、博物馆、天文台、泳池学习区、艺术、操场、音乐、水族馆、火车站、校园故事、咖啡馆、水果市场、电脑学习、运动场、厨房帮忙、交通出行和安静阅读空间等。成人可以选择 **Daily / 每天**、**Every 30 min / 每30分钟** 或 **Fast preview / 快速预览**。每台设备仍然可以本机上传真实照片，但照片只保存在该浏览器，不会提交到 GitHub。
 
 ## Evidence Base / 科学依据
 
