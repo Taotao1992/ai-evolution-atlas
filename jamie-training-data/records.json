@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updatedAt": "2026-05-03T01:40:35.425Z",
+  "updatedAt": "2026-05-03T01:44:36.323Z",
   "app": "Jamie Daily Practice",
   "mergePolicy": "field-level latest-updatedAt wins",
   "records": {
@@ -10,23 +10,32 @@
       "tasks": {
         "2026-05-04-doorStop": {
           "fieldUpdatedAt": {
-            "status": "2026-05-02T15:56:40.247Z",
+            "status": "2026-05-03T01:44:28.316Z",
             "support": "2026-05-02T15:56:42.318Z",
             "notes": "2026-05-03T01:37:25.451Z"
           },
-          "updatedAt": "2026-05-03T01:37:25.451Z",
-          "status": "done",
+          "updatedAt": "2026-05-03T01:44:28.316Z",
+          "status": "hard",
           "support": "independent",
           "notes": "test: hello jamie. test successful"
         }
       },
       "createdAt": "2026-05-02T15:56:00.987Z",
-      "updatedAt": "2026-05-03T01:37:25.451Z"
+      "updatedAt": "2026-05-03T01:44:28.316Z"
     },
     "2026-05-05": {
       "daily": {},
       "dailyUpdatedAt": {},
       "tasks": {
+        "2026-05-05-cleanupBox": {
+          "fieldUpdatedAt": {
+            "status": "2026-05-02T16:05:53.304Z",
+            "minutesDone": "2026-05-02T16:05:53.304Z"
+          },
+          "updatedAt": "2026-05-02T16:05:53.304Z",
+          "status": "done",
+          "minutesDone": "5"
+        },
         "2026-05-05-helpOpenBox": {
           "fieldUpdatedAt": {
             "notes": "2026-05-02T16:05:06.882Z",
@@ -64,15 +73,6 @@
           "updatedAt": "2026-05-02T16:05:53.304Z",
           "status": "done",
           "minutesDone": "8"
-        },
-        "2026-05-05-cleanupBox": {
-          "fieldUpdatedAt": {
-            "status": "2026-05-02T16:05:53.304Z",
-            "minutesDone": "2026-05-02T16:05:53.304Z"
-          },
-          "updatedAt": "2026-05-02T16:05:53.304Z",
-          "status": "done",
-          "minutesDone": "5"
         }
       },
       "createdAt": "2026-05-02T16:01:00.709Z",
