@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updatedAt": "2026-05-03T01:31:32.226Z",
+  "updatedAt": "2026-05-03T01:32:07.809Z",
   "app": "Jamie Daily Practice",
   "mergePolicy": "field-level latest-updatedAt wins",
   "records": {
@@ -9,68 +9,70 @@
       "dailyUpdatedAt": {},
       "tasks": {
         "2026-05-04-doorStop": {
-          "status": "done",
           "fieldUpdatedAt": {
             "status": "2026-05-02T15:56:40.247Z",
-            "support": "2026-05-02T15:56:42.318Z"
+            "support": "2026-05-02T15:56:42.318Z",
+            "notes": "2026-05-03T01:31:59.799Z"
           },
-          "updatedAt": "2026-05-02T15:56:42.318Z",
-          "support": "independent"
+          "updatedAt": "2026-05-03T01:31:59.799Z",
+          "status": "done",
+          "support": "independent",
+          "notes": "test: hello jamie."
         }
       },
       "createdAt": "2026-05-02T15:56:00.987Z",
-      "updatedAt": "2026-05-02T15:56:42.318Z"
+      "updatedAt": "2026-05-03T01:31:59.799Z"
     },
     "2026-05-05": {
       "daily": {},
       "dailyUpdatedAt": {},
       "tasks": {
         "2026-05-05-helpOpenBox": {
-          "notes": "Test: Hello Jamie.",
           "fieldUpdatedAt": {
             "notes": "2026-05-02T16:05:06.882Z",
             "status": "2026-05-02T16:05:53.304Z",
             "minutesDone": "2026-05-02T16:05:53.304Z"
           },
           "updatedAt": "2026-05-02T16:05:53.304Z",
+          "notes": "Test: Hello Jamie.",
           "status": "done",
           "minutesDone": "7"
         },
         "2026-05-05-redLineStop": {
-          "status": "done",
-          "minutesDone": "5",
           "fieldUpdatedAt": {
             "status": "2026-05-02T16:05:53.304Z",
             "minutesDone": "2026-05-02T16:05:53.304Z"
           },
-          "updatedAt": "2026-05-02T16:05:53.304Z"
+          "updatedAt": "2026-05-02T16:05:53.304Z",
+          "status": "done",
+          "minutesDone": "5"
         },
         "2026-05-05-satMatch": {
-          "status": "done",
-          "minutesDone": "8",
           "fieldUpdatedAt": {
             "status": "2026-05-02T16:05:53.304Z",
             "minutesDone": "2026-05-02T16:05:53.304Z"
           },
-          "updatedAt": "2026-05-02T16:05:53.304Z"
+          "updatedAt": "2026-05-02T16:05:53.304Z",
+          "status": "done",
+          "minutesDone": "8"
         },
         "2026-05-05-tongsPomPoms": {
-          "status": "done",
-          "minutesDone": "8",
           "fieldUpdatedAt": {
             "status": "2026-05-02T16:05:53.304Z",
             "minutesDone": "2026-05-02T16:05:53.304Z"
           },
-          "updatedAt": "2026-05-02T16:05:53.304Z"
+          "updatedAt": "2026-05-02T16:05:53.304Z",
+          "status": "done",
+          "minutesDone": "8"
         },
         "2026-05-05-cleanupBox": {
-          "status": "done",
-          "minutesDone": "5",
           "fieldUpdatedAt": {
             "status": "2026-05-02T16:05:53.304Z",
             "minutesDone": "2026-05-02T16:05:53.304Z"
           },
-          "updatedAt": "2026-05-02T16:05:53.304Z"
+          "updatedAt": "2026-05-02T16:05:53.304Z",
+          "status": "done",
+          "minutesDone": "5"
         }
       },
       "createdAt": "2026-05-02T16:04:47.977Z",
