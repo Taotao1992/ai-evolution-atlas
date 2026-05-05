@@ -1714,6 +1714,10 @@
     template: document.querySelector("#taskTemplate"),
     toggleSheet: document.querySelector("#toggleSheet"),
     visualSheet: document.querySelector("#visualSheet"),
+    toggleTabletRoutine: document.querySelector("#toggleTabletRoutine"),
+    tabletRoutine: document.querySelector("#tabletRoutine"),
+    toggleStoryCards: document.querySelector("#toggleStoryCards"),
+    storyCards: document.querySelector("#storyCards"),
     markAllDone: document.querySelector("#markAllDone"),
     exportJson: document.querySelector("#exportJson"),
     exportCsv: document.querySelector("#exportCsv"),
@@ -1795,8 +1799,15 @@
     });
 
     elements.toggleSheet.addEventListener("click", () => {
-      elements.visualSheet.hidden = !elements.visualSheet.hidden;
-      elements.toggleSheet.textContent = elements.visualSheet.hidden ? "Show / 显示" : "Hide / 隐藏";
+      toggleDisclosure(elements.visualSheet, elements.toggleSheet);
+    });
+
+    elements.toggleTabletRoutine.addEventListener("click", () => {
+      toggleDisclosure(elements.tabletRoutine, elements.toggleTabletRoutine);
+    });
+
+    elements.toggleStoryCards.addEventListener("click", () => {
+      toggleDisclosure(elements.storyCards, elements.toggleStoryCards);
     });
 
     elements.markAllDone.addEventListener("click", () => {
@@ -1982,6 +1993,11 @@
       li.textContent = item.text;
       listElement.append(li);
     });
+  }
+
+  function toggleDisclosure(panel, button) {
+    panel.hidden = !panel.hidden;
+    button.textContent = panel.hidden ? "Show / 显示" : "Hide / 隐藏";
   }
 
   function fillDailyInputs() {

@@ -17,6 +17,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 html {
   min-height: 100%;
   background:
@@ -521,6 +525,17 @@ textarea {
   font-weight: 750;
 }
 
+.practice-summary p {
+  margin-top: 8px;
+}
+
+.summary-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
 .story-note {
   background:
     linear-gradient(90deg, rgba(238, 141, 120, .16), rgba(118, 174, 232, .14)),
@@ -546,8 +561,8 @@ textarea {
 }
 
 .routine-block {
-  min-height: 190px;
-  padding: 15px;
+  min-height: 150px;
+  padding: 14px;
 }
 
 .routine-block span {
@@ -577,7 +592,7 @@ textarea {
 
 .routine-block h3,
 .story-copy h3 {
-  font-size: 20px;
+  font-size: 19px;
   line-height: 1.15;
 }
 
