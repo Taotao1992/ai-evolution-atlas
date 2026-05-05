@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updatedAt": "2026-05-03T10:28:28.283Z",
+  "updatedAt": "2026-05-05T03:18:37.659Z",
   "app": "Jamie Daily Practice",
   "mergePolicy": "field-level latest-updatedAt wins",
   "records": {
@@ -40,11 +40,11 @@
         },
         "2026-05-05-redLineStop": {
           "fieldUpdatedAt": {
-            "status": "2026-05-02T16:05:53.304Z",
+            "status": "2026-05-05T03:18:29.640Z",
             "minutesDone": "2026-05-02T16:05:53.304Z"
           },
-          "updatedAt": "2026-05-02T16:05:53.304Z",
-          "status": "done",
+          "updatedAt": "2026-05-05T03:18:29.640Z",
+          "status": "not-started",
           "minutesDone": "5"
         },
         "2026-05-05-satMatch": {
@@ -76,7 +76,7 @@
         }
       },
       "createdAt": "2026-05-02T16:01:00.709Z",
-      "updatedAt": "2026-05-02T16:05:53.304Z"
+      "updatedAt": "2026-05-05T03:18:29.640Z"
     },
     "2026-05-07": {
       "daily": {},
