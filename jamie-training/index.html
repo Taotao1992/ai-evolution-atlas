@@ -49,6 +49,50 @@
           <label class="note-field">Risk or notes / 风险或备注<textarea data-daily="riskNotes" rows="4"></textarea></label>
         </section>
 
+        <section class="panel tablet-log-panel">
+          <div class="panel-heading">
+            <h2>alsoin ABA Hour / alsoin ABA 一小时</h2>
+            <span class="badge">15 x 4</span>
+          </div>
+          <p class="helper-text">Daily structured tablet practice in four short blocks. / 每天使用 alsoin ABA 平板做四段短训练。</p>
+          <div class="tablet-log-grid">
+            <label>Block 1 / 第1段
+              <select data-daily="alsoinBlock1">
+                <option value="">Choose / 选择</option>
+                <option value="done">Done / 完成</option>
+                <option value="hard">Hard / 困难</option>
+                <option value="skipped">Skipped / 跳过</option>
+              </select>
+            </label>
+            <label>Block 2 / 第2段
+              <select data-daily="alsoinBlock2">
+                <option value="">Choose / 选择</option>
+                <option value="done">Done / 完成</option>
+                <option value="hard">Hard / 困难</option>
+                <option value="skipped">Skipped / 跳过</option>
+              </select>
+            </label>
+            <label>Block 3 / 第3段
+              <select data-daily="alsoinBlock3">
+                <option value="">Choose / 选择</option>
+                <option value="done">Done / 完成</option>
+                <option value="hard">Hard / 困难</option>
+                <option value="skipped">Skipped / 跳过</option>
+              </select>
+            </label>
+            <label>Block 4 / 第4段
+              <select data-daily="alsoinBlock4">
+                <option value="">Choose / 选择</option>
+                <option value="done">Done / 完成</option>
+                <option value="hard">Hard / 困难</option>
+                <option value="skipped">Skipped / 跳过</option>
+              </select>
+            </label>
+            <label>Total min / 总分钟<input data-daily="alsoinMinutes" type="number" min="0" max="60" inputmode="numeric" placeholder="60"></label>
+          </div>
+          <label class="note-field">alsoin notes / alsoin 备注<textarea data-daily="alsoinNotes" rows="3"></textarea></label>
+        </section>
+
         <section class="panel sync-panel">
           <div class="panel-heading">
             <h2>GitHub Sync / GitHub 同步</h2>
@@ -129,6 +173,89 @@
           <button id="toggleSheet" class="ghost-button" type="button">Show / 显示</button>
         </section>
         <img id="visualSheet" class="visual-sheet" src="./assets/aac-visual-card-sheet.png" alt="Wordless AAC visual card sheet" hidden>
+
+        <section class="practice-overview" aria-labelledby="tabletTrainingTitle">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Daily ABA Tablet / 每日 ABA 平板训练</p>
+              <h2 id="tabletTrainingTitle">alsoin one-hour training routine / alsoin 一小时训练 routine</h2>
+            </div>
+            <a class="resource-link" href="https://www.alsolife.com/dh-publicity-web/" target="_blank" rel="noopener">alsoin intro / 介绍</a>
+          </div>
+          <div class="practice-summary">
+            <strong>Plan / 计划：</strong>
+            Jamie now has 60 minutes of daily alsoin ABA tablet training, split into four 15-minute blocks. The alsoin page describes the product as an AI individual-training robot with clinical evidence support from Peking University Sixth Hospital Child Mental Health Center.
+            / Jamie 现在每天使用 alsoin ABA 平板训练 60 分钟，分为 4 个 15 分钟小块。alsoin 页面介绍其为 AI 个训机器人，并提到由北京大学第六医院儿童心理卫生中心实证支持。
+          </div>
+          <div class="tablet-routine-grid">
+            <article class="routine-block">
+              <span>01</span>
+              <h3>Settle + assess / 安静进入 + 评估</h3>
+              <p>15 minutes to settle body, check readiness, and begin with easy wins. / 15 分钟先稳定身体、确认准备度，从容易成功的任务开始。</p>
+            </article>
+            <article class="routine-block">
+              <span>02</span>
+              <h3>Matching + cognition / 配对 + 认知</h3>
+              <p>15 minutes for visual matching, attention, imitation, and early learning targets. / 15 分钟做视觉配对、注意、模仿和早期学习目标。</p>
+            </article>
+            <article class="routine-block">
+              <span>03</span>
+              <h3>Language + communication / 语言 + 沟通</h3>
+              <p>15 minutes to practise responding, requesting, and short functional words. / 15 分钟练回应、请求和短功能词。</p>
+            </article>
+            <article class="routine-block">
+              <span>04</span>
+              <h3>Review + reinforce / 复习 + 强化</h3>
+              <p>15 minutes to repeat successful items, end positively, and record what worked. / 15 分钟复习成功项目、积极结束，并记录有效强化物。</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="story-card-section" aria-labelledby="storyCardsTitle">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Home Visual Stories / 家庭视觉故事</p>
+              <h2 id="storyCardsTitle">Safety cards made for Jamie / 给 Jamie 制作的安全图卡</h2>
+            </div>
+          </div>
+          <div class="practice-summary story-note">
+            We practise these when Jamie is calm, use the same short phrases, rehearse the safe replacement behaviour, and reinforce immediately when he responds safely.
+            / 我们会在 Jamie 平静时看图，用一致短句练习安全替代行为，并在安全回应后立即强化。
+          </div>
+          <div class="story-grid">
+            <article class="story-panel">
+              <img src="./assets/visual-stories/railings-safety-story.png" alt="Railings safety visual story for Jamie">
+              <div class="story-copy">
+                <h3>Railings safety / 栏杆安全</h3>
+                <p>Replacement behaviour / 替代行为：walk on the ground and climb at the playground. / 在地面行走，需要爬时去 playground。</p>
+                <div class="phrase-cloud" aria-label="Railings safety phrases">
+                  <span>Stop</span>
+                  <span>Feet down</span>
+                  <span>Railings are not available</span>
+                  <span>Walk on the ground</span>
+                  <span>I need movement</span>
+                  <span>Climb at playground</span>
+                </div>
+              </div>
+            </article>
+            <article class="story-panel">
+              <img src="./assets/visual-stories/water-bottle-safety-story.png" alt="Water bottle safety visual story for Jamie">
+              <div class="story-copy">
+                <h3>Water bottle safety / 水瓶安全</h3>
+                <p>Replacement behaviour / 替代行为：use Jamie's bottle, ask for water, or give a bottle to teacher. / 使用自己的水瓶、请求喝水，或把水瓶交给老师。</p>
+                <div class="phrase-cloud" aria-label="Water bottle safety phrases">
+                  <span>This is my bottle</span>
+                  <span>Friends' bottles stay</span>
+                  <span>Stop</span>
+                  <span>Hands down</span>
+                  <span>Ask for water</span>
+                  <span>Drink my bottle</span>
+                  <span>Give it to teacher</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
 
         <section>
           <div class="section-heading">

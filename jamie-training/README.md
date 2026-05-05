@@ -12,6 +12,10 @@ This static GitHub Pages site gives Jamie a bilingual daily home-training plan f
 - 每项包含图示、目标、步骤、材料、成人话术、完成状态、辅助程度、分钟数、成功次数、机会次数和备注。
 - Daily metrics for STOP, initiations, core-word modelling, table time, drink/toilet routines, reinforcers, and risk notes.
 - 每日指标记录 STOP、主动沟通、核心词建模、桌面时长、喝水/如厕、强化物和风险备注。
+- A daily alsoin ABA tablet hour split into four 15-minute blocks, with per-block status, total minutes, and notes.
+- 每天 alsoin ABA 平板一小时，分为四个 15 分钟小块，可记录每段状态、总分钟和备注。
+- Jamie-specific visual stories for railings safety and water bottle safety, with consistent school-home practice phrases.
+- Jamie 专属栏杆安全与水瓶安全视觉故事，并配套家校一致使用的短句。
 
 ## Record Storage / 记录保存
 
@@ -60,6 +64,7 @@ The daily plan is designed around:
 - Autism CRC National Guideline principles: individualised goals, child/family partnership, safe and desirable supports, monitoring progress, and reducing family burden.
 - Evidence-based autism practices: visual supports, prompting and prompt fading, reinforcement, naturalistic intervention, functional communication, AAC modelling, and parent-mediated routines.
 - Jamie-specific school/therapy notes: STOP safety, AAC/core words, low-sensory regulation, transitions, toileting/drinking routines, movement input, fine-motor participation, and Daily Talk.
+- alsoin/Alsolife AI individual-training robot information page for the current daily tablet-training routine.
 
 每日计划主要依据：
 
@@ -68,6 +73,7 @@ The daily plan is designed around:
 - Autism CRC 澳大利亚国家指南：个别化目标、儿童与家庭合作、安全且可接受的支持、进展监测、减少家庭负担。
 - ASD 实证做法：视觉支持、辅助与辅助撤销、强化、自然情境教学、功能沟通、AAC 建模、家长介入 routine。
 - Jamie 个别材料：STOP 安全、AAC/核心词、低刺激调节、转换、如厕/喝水、运动输入、精细动作参与和 Daily Talk。
+- alsoin/Alsolife AI 个训机器人介绍页，用于当前每日平板训练 routine。
 
 Key references / 主要参考：
 
@@ -77,6 +83,7 @@ Key references / 主要参考：
 - Raising Children Network: Visual schedules and supports - https://raisingchildren.net.au/autism/therapies-guide/visual-supports
 - Hanen: More Than Words guidebook - https://www.hanen.org/shop/more-than-words-guidebook
 - Australian Curriculum Foundation parent information - https://v9.australiancurriculum.edu.au/downloads/parent-information
+- alsoin/Alsolife: AI individual-training robot - https://www.alsolife.com/dh-publicity-web/
 
 ## Hosting / 上线
 

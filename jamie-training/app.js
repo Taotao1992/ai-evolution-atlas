@@ -1780,7 +1780,7 @@
     });
 
     dailyInputs.forEach((input) => {
-      input.addEventListener("input", () => {
+      const updateDailyField = () => {
         const record = ensureDayRecord(selectedDate);
         activateRecord(record);
         const field = input.dataset.daily;
@@ -1790,7 +1790,8 @@
         touchAndSave(record);
         renderProgress();
         renderDayRail();
-      });
+      };
+      input.addEventListener(input.tagName === "SELECT" ? "change" : "input", updateDailyField);
     });
 
     elements.toggleSheet.addEventListener("click", () => {
@@ -2656,6 +2657,12 @@
       "longest_table_minutes",
       "drink_times",
       "toilet_routines",
+      "alsoin_block_1",
+      "alsoin_block_2",
+      "alsoin_block_3",
+      "alsoin_block_4",
+      "alsoin_total_minutes",
+      "alsoin_notes",
       "best_reinforcer",
       "risk_notes",
       "updated_at"
@@ -2689,6 +2696,12 @@
           record.daily?.tableMinutes || "",
           record.daily?.drinkTimes || "",
           record.daily?.toiletTimes || "",
+          record.daily?.alsoinBlock1 || "",
+          record.daily?.alsoinBlock2 || "",
+          record.daily?.alsoinBlock3 || "",
+          record.daily?.alsoinBlock4 || "",
+          record.daily?.alsoinMinutes || "",
+          record.daily?.alsoinNotes || "",
           record.daily?.reinforcer || "",
           record.daily?.riskNotes || "",
           taskRecord.updatedAt || record.updatedAt || ""
