@@ -16,6 +16,10 @@ This static GitHub Pages site gives Jamie a bilingual daily home-training plan f
 - 每天 alsoin ABA 平板一小时，分为四个 15 分钟小块，可记录每段状态、总分钟和备注。
 - Jamie-specific visual stories for railings safety and water bottle safety, with consistent school-home practice phrases.
 - Jamie 专属栏杆安全与水瓶安全视觉故事，并配套家校一致使用的短句。
+- A school-safety follow-up panel for railings, water bottles, movement breaks, change tolerance, ISSP steps, specialist follow-up, and ABC observation notes.
+- 学校安全跟进面板，可记录栏杆、水瓶、运动休息、变化接受度、ISSP 跟进、专科跟进和 ABC 观察。
+- A bilingual parent poster summarising Jamie's current situation, daily training routine, school questions, and adult scripts.
+- 一张中英文家长海报，概括 Jamie 当前状况、每日训练、学校沟通问题和成人短句。
 
 ## Record Storage / 记录保存
 
@@ -48,6 +52,31 @@ Privacy / 隐私：
 If you sync to this public website repo, the record file will be public. Use a private repo for real notes about Jamie.
 
 如果同步到当前公开网站仓库，记录文件也会公开。Jamie 的真实训练备注建议放在私有仓库。
+
+## Current Safety Follow-up / 当前安全跟进
+
+The added safety panel is designed for the May 2026 school-meeting follow-up. It does not label Jamie as naughty; it helps adults record what the behaviour may be communicating and which support worked.
+
+新增安全面板用于 2026 年 5 月学校会议后的跟进。它不是给 Jamie 贴“调皮”标签，而是帮助成人记录行为可能在表达什么需求，以及哪些支持有效。
+
+Daily records now include / 每日记录现在包括：
+
+- Railings and water-bottle visual-story practice status, opportunities, and safe responses.
+- 栏杆与水瓶视觉故事练习状态、练习机会和安全回应次数。
+- Movement breaks and change-tolerance practice.
+- 运动休息和接受变化练习。
+- ISSP/containment and specialist follow-up status.
+- ISSP/containment 与专科跟进状态。
+- ABC notes: antecedent, behaviour, consequence, and likely need.
+- ABC 记录：前因、行为、后果和可能需求。
+
+The poster image is saved at:
+
+`jamie-training/assets/posters/jamie-current-support-plan-2026-05-06.png`
+
+海报图片保存在：
+
+`jamie-training/assets/posters/jamie-current-support-plan-2026-05-06.png`
 
 ## Jamie Image / Jamie 形象
 

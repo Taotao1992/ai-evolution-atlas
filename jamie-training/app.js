@@ -1718,6 +1718,8 @@
     tabletRoutine: document.querySelector("#tabletRoutine"),
     toggleStoryCards: document.querySelector("#toggleStoryCards"),
     storyCards: document.querySelector("#storyCards"),
+    toggleSafetyPlan: document.querySelector("#toggleSafetyPlan"),
+    safetyPlan: document.querySelector("#safetyPlan"),
     markAllDone: document.querySelector("#markAllDone"),
     exportJson: document.querySelector("#exportJson"),
     exportCsv: document.querySelector("#exportCsv"),
@@ -1808,6 +1810,10 @@
 
     elements.toggleStoryCards.addEventListener("click", () => {
       toggleDisclosure(elements.storyCards, elements.toggleStoryCards);
+    });
+
+    elements.toggleSafetyPlan.addEventListener("click", () => {
+      toggleDisclosure(elements.safetyPlan, elements.toggleSafetyPlan);
     });
 
     elements.markAllDone.addEventListener("click", () => {
@@ -2679,6 +2685,21 @@
       "alsoin_block_4",
       "alsoin_total_minutes",
       "alsoin_notes",
+      "railings_story_status",
+      "railings_practice_chances",
+      "railings_safe_responses",
+      "bottle_story_status",
+      "bottle_practice_chances",
+      "bottle_safe_responses",
+      "movement_breaks",
+      "change_practice_status",
+      "issp_plan_status",
+      "specialist_step",
+      "abc_trigger",
+      "abc_behaviour",
+      "abc_response",
+      "abc_need",
+      "school_contact",
       "best_reinforcer",
       "risk_notes",
       "updated_at"
@@ -2718,6 +2739,21 @@
           record.daily?.alsoinBlock4 || "",
           record.daily?.alsoinMinutes || "",
           record.daily?.alsoinNotes || "",
+          record.daily?.railingsStoryStatus || "",
+          record.daily?.railingsPracticeChances || "",
+          record.daily?.railingsSafeResponses || "",
+          record.daily?.bottleStoryStatus || "",
+          record.daily?.bottlePracticeChances || "",
+          record.daily?.bottleSafeResponses || "",
+          record.daily?.safeMovementBreaks || "",
+          record.daily?.changePracticeStatus || "",
+          record.daily?.isspPlanStatus || "",
+          record.daily?.specialistStep || "",
+          record.daily?.abcTrigger || "",
+          record.daily?.abcBehaviour || "",
+          record.daily?.abcResponse || "",
+          record.daily?.abcNeed || "",
+          record.daily?.schoolContact || "",
           record.daily?.reinforcer || "",
           record.daily?.riskNotes || "",
           taskRecord.updatedAt || record.updatedAt || ""

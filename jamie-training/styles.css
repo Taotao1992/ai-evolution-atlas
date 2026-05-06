@@ -158,6 +158,8 @@ h4 {
 .date-field,
 .metric-grid label,
 .tablet-log-grid label,
+.safety-log-grid label,
+.abc-grid label,
 .task-controls label,
 .sync-grid label,
 .secret-field,
@@ -273,6 +275,25 @@ textarea {
   grid-template-columns: 1fr 1fr;
   gap: 10px;
   margin-top: 12px;
+}
+
+.safety-log-panel {
+  border-color: #7d3c32;
+  background:
+    linear-gradient(135deg, rgba(238, 141, 120, .14), rgba(255, 253, 248, 0) 58%),
+    #fff;
+}
+
+.safety-log-grid,
+.abc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.abc-grid {
+  grid-template-columns: 1fr;
 }
 
 .tablet-log-panel {
@@ -493,7 +514,8 @@ textarea {
 }
 
 .practice-overview,
-.story-card-section {
+.story-card-section,
+.safety-plan-section {
   display: grid;
   gap: 12px;
 }
@@ -542,8 +564,16 @@ textarea {
     #fff;
 }
 
+.safety-summary {
+  background:
+    linear-gradient(90deg, rgba(238, 141, 120, .18), rgba(247, 201, 95, .18), rgba(142, 214, 195, .16)),
+    #fffdf8;
+}
+
 .tablet-routine-grid,
-.story-grid {
+.story-grid,
+.action-grid,
+.checklist-grid {
   display: grid;
   gap: 14px;
 }
@@ -605,6 +635,113 @@ textarea {
 
 .story-grid {
   grid-template-columns: 1fr;
+}
+
+.action-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.checklist-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.action-card,
+.checklist-card {
+  border: 2px solid #18334a;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.action-card {
+  min-height: 170px;
+  padding: 14px;
+}
+
+.action-card span {
+  display: inline-grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  margin-bottom: 12px;
+  border: 2px solid #18334a;
+  border-radius: 50%;
+  background: var(--coral);
+  color: #173047;
+  font-weight: 950;
+}
+
+.action-card:nth-child(2) span {
+  background: var(--mint);
+}
+
+.action-card:nth-child(3) span {
+  background: var(--sun);
+}
+
+.action-card:nth-child(4) span {
+  background: var(--sky);
+}
+
+.urgent-card {
+  background:
+    linear-gradient(135deg, rgba(238, 141, 120, .18), rgba(255, 255, 255, 0) 52%),
+    #fff;
+}
+
+.action-card h3,
+.checklist-card h3 {
+  font-size: 19px;
+  line-height: 1.15;
+}
+
+.action-card p,
+.checklist-card p,
+.checklist-card li {
+  margin-top: 9px;
+  color: #3f5a71;
+  font-weight: 750;
+}
+
+.checklist-card {
+  padding: 16px;
+}
+
+.checklist-card ul {
+  margin: 10px 0 0;
+  padding-left: 20px;
+}
+
+.phrase-card {
+  grid-column: 1 / -1;
+  background:
+    linear-gradient(90deg, rgba(118, 174, 232, .13), rgba(116, 184, 138, .14)),
+    #fff;
+}
+
+.source-note {
+  border-left: 5px solid var(--sky);
+  border-radius: 0 8px 8px 0;
+  background: #eef7ff;
+  padding: 10px 12px;
+  color: #3f5a71;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.source-note a {
+  color: #17466b;
+  font-weight: 950;
+}
+
+.poster-preview {
+  display: block;
+  width: min(100%, 760px);
+  justify-self: center;
+  border: 2px solid #18334a;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: var(--shadow);
 }
 
 .story-panel {
@@ -772,7 +909,9 @@ textarea {
   .task-card,
   .task-columns,
   .tablet-routine-grid,
-  .story-panel {
+  .story-panel,
+  .action-grid,
+  .checklist-grid {
     grid-template-columns: 1fr;
   }
 
@@ -811,6 +950,8 @@ textarea {
 
   .metric-grid,
   .tablet-log-grid,
+  .safety-log-grid,
+  .abc-grid,
   .task-controls,
   .sync-grid {
     grid-template-columns: 1fr;

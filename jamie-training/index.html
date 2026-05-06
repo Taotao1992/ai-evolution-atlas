@@ -49,6 +49,72 @@
           <label class="note-field">Risk or notes / 风险或备注<textarea data-daily="riskNotes" rows="4"></textarea></label>
         </section>
 
+        <section class="panel safety-log-panel">
+          <div class="panel-heading">
+            <h2>School Safety + ABC / 学校安全 + ABC</h2>
+            <span class="badge">Daily / 每日</span>
+          </div>
+          <p class="helper-text">Use this for railings, bottles, elopement, change distress, and ISSP follow-up. / 用于记录栏杆、水瓶、离开教室、变化崩溃和 ISSP 跟进。</p>
+          <div class="safety-log-grid">
+            <label>Railings story / 栏杆故事
+              <select data-daily="railingsStoryStatus">
+                <option value="">Choose / 选择</option>
+                <option value="done-calm">Done calm / 平静时完成</option>
+                <option value="done-hard">Done but hard / 完成但困难</option>
+                <option value="not-today">Not today / 今天未做</option>
+              </select>
+            </label>
+            <label>Bottle story / 水瓶故事
+              <select data-daily="bottleStoryStatus">
+                <option value="">Choose / 选择</option>
+                <option value="done-calm">Done calm / 平静时完成</option>
+                <option value="done-hard">Done but hard / 完成但困难</option>
+                <option value="not-today">Not today / 今天未做</option>
+              </select>
+            </label>
+            <label>Railings chances / 栏杆机会<input data-daily="railingsPracticeChances" type="number" min="0" inputmode="numeric"></label>
+            <label>Railings safe / 栏杆安全回应<input data-daily="railingsSafeResponses" type="number" min="0" inputmode="numeric"></label>
+            <label>Bottle chances / 水瓶机会<input data-daily="bottlePracticeChances" type="number" min="0" inputmode="numeric"></label>
+            <label>Bottle safe / 水瓶安全回应<input data-daily="bottleSafeResponses" type="number" min="0" inputmode="numeric"></label>
+            <label>Movement breaks / 运动休息<input data-daily="safeMovementBreaks" type="number" min="0" inputmode="numeric"></label>
+            <label>Change practice / 变化练习
+              <select data-daily="changePracticeStatus">
+                <option value="">Choose / 选择</option>
+                <option value="tolerated">Tolerated / 可接受</option>
+                <option value="needed-support">Needed support / 需要支持</option>
+                <option value="meltdown">Meltdown / 崩溃</option>
+                <option value="not-today">Not today / 今天未做</option>
+              </select>
+            </label>
+            <label>ISSP step / ISSP 跟进
+              <select data-daily="isspPlanStatus">
+                <option value="">Choose / 选择</option>
+                <option value="requested">Requested plan / 已要求方案</option>
+                <option value="reviewed">Reviewed draft / 已看草案</option>
+                <option value="questions-sent">Questions sent / 已发问题</option>
+                <option value="signed">Signed after review / 复核后签署</option>
+                <option value="none">No update / 无更新</option>
+              </select>
+            </label>
+            <label>Specialist step / 专科跟进
+              <select data-daily="specialistStep">
+                <option value="">Choose / 选择</option>
+                <option value="gp-referral">GP referral / GP 转诊</option>
+                <option value="appointment-booked">Booked / 已预约</option>
+                <option value="report-shared">Report shared / 已分享报告</option>
+                <option value="none">No update / 无更新</option>
+              </select>
+            </label>
+          </div>
+          <div class="abc-grid">
+            <label>A: before / 前因<textarea data-daily="abcTrigger" rows="2" placeholder="Demand, noise, transition, denied item... / 要求、噪音、转换、被拒绝..."></textarea></label>
+            <label>B: behaviour / 行为<textarea data-daily="abcBehaviour" rows="2" placeholder="Climb, run, cry, bottle... / 爬、跑、哭、水瓶..."></textarea></label>
+            <label>C: after / 后果<textarea data-daily="abcResponse" rows="2" placeholder="Adult response, break, return... / 成人回应、休息、回到任务..."></textarea></label>
+            <label>Need guessed / 可能需求<textarea data-daily="abcNeed" rows="2" placeholder="Movement, escape, help, water, predictability... / 运动、逃避、求助、喝水、可预测..."></textarea></label>
+          </div>
+          <label class="note-field">School contact notes / 学校沟通备注<textarea data-daily="schoolContact" rows="3"></textarea></label>
+        </section>
+
         <section class="panel tablet-log-panel">
           <div class="panel-heading">
             <h2>alsoin ABA Hour / alsoin ABA 一小时</h2>
@@ -259,6 +325,84 @@
             </article>
           </div>
         </section>
+
+        <section class="visual-strip">
+          <div>
+            <h2>Current Safety Plan / 当前安全行动</h2>
+            <p>Meeting follow-up, ISSP questions, and home-school consistency. / 会议后跟进、ISSP 问题和家校一致。</p>
+          </div>
+          <button id="toggleSafetyPlan" class="ghost-button" type="button">Show / 显示</button>
+        </section>
+        <section id="safetyPlan" class="safety-plan-section" aria-labelledby="safetyPlanTitle" hidden>
+          <div class="practice-summary safety-summary">
+            <div class="summary-topline">
+              <strong id="safetyPlanTitle">Aim / 目标</strong>
+              <span class="badge">KSSS + Home / 学校 + 家庭</span>
+            </div>
+            <p>Keep Jamie safe, regulated, and included at school while the family, school, therapists, and specialist use data to refine supports. / 在家庭、学校、治疗师和专科医生用数据优化支持时，尽最大可能让 Jamie 安全、稳定并继续参与学校生活。</p>
+          </div>
+          <div class="action-grid">
+            <article class="action-card urgent-card">
+              <span>01</span>
+              <h3>Safety before learning / 先安全后学习</h3>
+              <p>Practise STOP, feet down, walk on ground, hands down, and give to teacher before high-risk moments. / 在高风险情境前练 STOP、脚下来、地面走、手放下、交给老师。</p>
+            </article>
+            <article class="action-card">
+              <span>02</span>
+              <h3>Regulation first / 先调节</h3>
+              <p>Use heavy work, quiet corner, first-then, and movement choices before table tasks or transitions. / 桌面任务或转换前先用本体觉活动、安静角、first-then 和运动选择。</p>
+            </article>
+            <article class="action-card">
+              <span>03</span>
+              <h3>Replacement behaviour / 教替代行为</h3>
+              <p>Climb at playground, ask water, drink my bottle, ask help/open, break, more, go, finished. / 去 playground 爬、请求喝水、喝自己的水、请求帮忙/打开、休息、还要、开始、完成。</p>
+            </article>
+            <article class="action-card">
+              <span>04</span>
+              <h3>Data, not blame / 用数据，不贴标签</h3>
+              <p>Record ABC: what happened before, what Jamie did, what happened after, and what need it may show. / 记录 ABC：前面发生什么、Jamie 做了什么、之后发生什么、可能表达什么需求。</p>
+            </article>
+          </div>
+          <div class="checklist-grid">
+            <article class="checklist-card">
+              <h3>ISSP / containment questions</h3>
+              <p>ISSP / containment 要问清楚：</p>
+              <ul>
+                <li>Trigger and purpose / 触发条件和目的</li>
+                <li>Who stays with Jamie / 谁在旁边看护</li>
+                <li>Maximum time and exit rule / 最长时间和退出标准</li>
+                <li>How every use is recorded / 每次如何记录</li>
+                <li>Parent notification and review date / 家长通知和复盘日期</li>
+                <li>Reduction or stop plan / 减少或停止使用的计划</li>
+              </ul>
+            </article>
+            <article class="checklist-card">
+              <h3>Parent next steps / 爸妈下一步</h3>
+              <ul>
+                <li>Book GP/specialist follow-up / 预约 GP 与专科</li>
+                <li>Ask school for risk assessment, ISSP draft, FBA/IBSP data / 向学校要风险评估、ISSP 草案、FBA/IBSP 数据</li>
+                <li>Run daily railings and bottle stories / 每天练栏杆与水瓶故事</li>
+                <li>Track three days of ABC data / 连续三天记录 ABC</li>
+                <li>Review weekly with school and therapists / 每周与学校和治疗师复盘</li>
+              </ul>
+            </article>
+            <article class="checklist-card phrase-card">
+              <h3>Short adult language / 成人短句</h3>
+              <p><strong>Railings / 栏杆：</strong> Stop. Feet down. Railings are not available. Walk on the ground. I need movement. Climb at playground.</p>
+              <p><strong>Bottles / 水瓶：</strong> This is my bottle. Friends' bottles stay. Hands down. Ask for water. Drink my bottle. Give it to teacher.</p>
+            </article>
+          </div>
+          <p class="source-note">Policy links for parents / 家长参考：<a href="https://ppr.qed.qld.gov.au/pp/restrictive-practices-procedure" target="_blank" rel="noopener">Restrictive practices</a>, <a href="https://ppr.qed.qld.gov.au/pp/student-discipline-procedure" target="_blank" rel="noopener">Student discipline</a>, <a href="https://education.qld.gov.au/students/students-with-disability/supports-for-students-with-disability/general-information" target="_blank" rel="noopener">Students with disability</a>.</p>
+        </section>
+
+        <section class="visual-strip">
+          <div>
+            <h2>Poster for Mum / 给妈妈的海报</h2>
+            <p>One-page bilingual summary of the current plan. / 当前方案的一页中英文总结。</p>
+          </div>
+          <a class="resource-link" href="./assets/posters/jamie-current-support-plan-2026-05-06.png" target="_blank" rel="noopener">Open Poster / 打开海报</a>
+        </section>
+        <img class="poster-preview" src="./assets/posters/jamie-current-support-plan-2026-05-06.png" alt="Jamie current support plan bilingual poster">
 
         <section>
           <div class="section-heading">
