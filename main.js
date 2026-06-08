@@ -208,6 +208,35 @@ const timelineItems = [
     ],
   },
   {
+    id: "self-improving-ai",
+    era: "2026",
+    buttonTitle: "Self-improving AI",
+    buttonSubtitle: "Recursive, Sakana, and AI improving AI",
+    title: "A new lab wave is betting that AI should improve AI, not just consume more compute.",
+    summary:
+      "By mid-2026, the frontier story broadened again. Recursive emerged arguing that the fastest path to superintelligence is open-ended self-improvement, while Sakana formalized an RSI Lab around sample-efficient recursive improvement, AI scientists, and self-rewriting agents.",
+    shift:
+      "The frontier ambition moved from training a single bigger model toward building systems that can discover better training strategies, better evaluations, better code, and eventually better research processes.",
+    why:
+      "This is the clearest current signal that frontier AI is splitting into competing bets: scale, agents, interaction, embodiment, and now recursive improvement loops over AI itself.",
+    chips: ["recursive self-improvement", "AI for AI", "new labs"],
+    image: "./assets/agent-loop.svg",
+    links: [
+      {
+        label: "Recursive official site",
+        url: "https://www.recursive.com/",
+      },
+      {
+        label: "GV: Why self-improving AI is the next frontier",
+        url: "https://www.gv.com/news/recursive-superintelligence-self-improving-ai",
+      },
+      {
+        label: "Sakana AI RSI Lab",
+        url: "https://sakana.ai/rsi-lab/",
+      },
+    ],
+  },
+  {
     id: "world-models",
     era: "Next",
     buttonTitle: "World models",
@@ -261,6 +290,35 @@ const frontierItems = [
       {
         label: "OpenClaw creator interview",
         url: "https://www.youtube.com/watch?v=4uzGDAoNOZc",
+      },
+    ],
+  },
+  {
+    id: "recursive",
+    kicker: "Recursive self-improvement",
+    tabTitle: "Recursive",
+    tabSubtitle: "AI improving AI through open-ended search",
+    title: "Recursive is the clearest new company betting that AI should improve AI.",
+    summary:
+      "Recursive says the fastest path to superintelligence is open-ended self-improvement: systems that identify their own weaknesses, generate better benchmarks, and improve parts of their own codebase or research stack over time.",
+    interpretation:
+      "Treat this as a frontier-direction signal more than a consumer product signal. The claim is that one more giant model run is not the only path; continuous improvement loops over AI itself may become an orthogonal capability curve.",
+    why:
+      "If recursive improvement works even partially, progress could become more compounding and less linear, which is why this theme now sits at the center of both capability excitement and safety debate.",
+    chips: ["self-improvement", "open-ended algorithms", "AI for AI"],
+    image: "./assets/agent-loop.svg",
+    links: [
+      {
+        label: "Recursive official site",
+        url: "https://www.recursive.com/",
+      },
+      {
+        label: "GV: Recursive Superintelligence",
+        url: "https://www.gv.com/news/recursive-superintelligence-self-improving-ai",
+      },
+      {
+        label: "Darwin Gödel Machine paper",
+        url: "https://arxiv.org/abs/2505.22954",
       },
     ],
   },
@@ -369,6 +427,245 @@ const frontierItems = [
       {
         label: "Yann LeCun on world models and JEPA",
         url: "https://www.youtube.com/watch?v=yUmDRxV0krg",
+      },
+    ],
+  },
+];
+
+const labItems = [
+  {
+    id: "recursive-lab",
+    track: "self-improvement",
+    trackLabel: "self-improving AI",
+    poster: "Recursive",
+    kicker: "Self-improving AI",
+    title: "Recursive Superintelligence",
+    summary:
+      "Recursive positions itself around one thesis: AI should improve AI. Its official site frames this as open-ended, recursively self-improving superintelligence aimed first at automating the science of AI itself.",
+    bet:
+      "Build open-ended systems that can identify limitations, generate better benchmarks, and improve the code and research process that powers later models.",
+    why:
+      "This is the clearest pure-play company bet on recursive self-improvement, so it is one of the best places to watch if you want to see whether 'AI for AI' becomes a real frontier track.",
+    accent: "#5dd9ff",
+    image: "./assets/agent-loop.svg",
+    chips: ["recursive self-improvement", "open-ended algorithms", "AI science"],
+    links: [
+      {
+        label: "Recursive official site",
+        url: "https://www.recursive.com/",
+      },
+      {
+        label: "GV thesis on Recursive",
+        url: "https://www.gv.com/news/recursive-superintelligence-self-improving-ai",
+      },
+    ],
+  },
+  {
+    id: "sakana-rsi-lab",
+    track: "self-improvement",
+    trackLabel: "self-improving AI",
+    poster: "Sakana",
+    kicker: "Sample-efficient RSI",
+    title: "Sakana AI RSI Lab",
+    summary:
+      "Sakana's RSI Lab argues for recursive self-improvement on modest, sample-efficient compute budgets. It ties together the Darwin Gödel Machine, The AI Scientist, and a broader vision of agent-native models improving themselves.",
+    bet:
+      "Use evolutionary search, self-rewriting agents, and automated research loops to redesign AI development with AI, rather than relying only on hyperscale brute force.",
+    why:
+      "Among the new lab bets, Sakana currently has one of the strongest published lineages from concept to concrete artifacts, which makes it especially useful for teaching.",
+    accent: "#87ffc1",
+    image: "./assets/dl-stack.svg",
+    chips: ["Darwin Gödel Machine", "AI Scientist", "sample efficiency"],
+    links: [
+      {
+        label: "Sakana AI RSI Lab",
+        url: "https://sakana.ai/rsi-lab/",
+      },
+      {
+        label: "The AI Scientist in Nature",
+        url: "https://sakana.ai/ai-scientist-nature/",
+      },
+      {
+        label: "Darwin Gödel Machine",
+        url: "https://arxiv.org/abs/2505.22954",
+      },
+    ],
+  },
+  {
+    id: "thinking-machines",
+    track: "collaboration",
+    trackLabel: "collaboration",
+    poster: "TML",
+    kicker: "Human-AI collaboration",
+    title: "Thinking Machines Lab",
+    summary:
+      "Thinking Machines says the next frontier is not autonomy alone, but AI that is understandable, customizable, multimodal, and collaborative. Its interaction-model work treats interactivity itself as a research target.",
+    bet:
+      "Build frontier-capable models and infrastructure while making collaboration, customization, and multimodal interaction first-class instead of afterthoughts.",
+    why:
+      "This is an important counterpoint to the 'fully autonomous agent' story. It says the real bottleneck may be the quality of collaboration loops between people and models.",
+    accent: "#ffb67b",
+    image: "./assets/harness-studio.svg",
+    chips: ["interaction models", "customization", "multimodal collaboration"],
+    links: [
+      {
+        label: "Thinking Machines home",
+        url: "https://thinkingmachines.ai/",
+      },
+      {
+        label: "Interaction models",
+        url: "https://thinkingmachines.ai/blog/interaction-models/",
+      },
+      {
+        label: "Tinker",
+        url: "https://thinkingmachines.ai/news/announcing-tinker/",
+      },
+    ],
+  },
+  {
+    id: "reflection-ai",
+    track: "coding",
+    trackLabel: "coding agents",
+    poster: "Reflection",
+    kicker: "Autonomous coding",
+    title: "Reflection AI",
+    summary:
+      "Reflection argues that autonomous coding is the root-node problem for superintelligence. Its thesis is that once software can be planned, written, refined, and improved automatically, much broader computer-based work will follow.",
+    bet:
+      "Push reinforcement learning and language models toward stronger autonomy on computers, with coding as the most practical proving ground.",
+    why:
+      "Coding is one of the shortest loops where AI can directly improve the software stack around itself, so this lab sits close to the recursive-improvement conversation even when framed as product work.",
+    accent: "#ff8f7a",
+    image: "./assets/llm-attention.svg",
+    chips: ["autonomous coding", "RL + LLMs", "enterprise agents"],
+    links: [
+      {
+        label: "Reflection: A Path to Superintelligence",
+        url: "https://reflection.ai/blog/reflection-a-path-to-superintelligence/",
+      },
+      {
+        label: "Reflection research",
+        url: "https://reflection.ai/research",
+      },
+      {
+        label: "Asimov docs",
+        url: "https://docs.reflection.ai/docs/about-asimov",
+      },
+    ],
+  },
+  {
+    id: "world-labs",
+    track: "world-models",
+    trackLabel: "world models",
+    poster: "World",
+    kicker: "Spatial intelligence",
+    title: "World Labs",
+    summary:
+      "World Labs is one of the clearest company-level bets that world models will become a major new stack. Its framing centers on spatial intelligence: systems that can perceive, generate, reason, and interact with the 3D world.",
+    bet:
+      "Build foundational world models that collapse rendering, simulation, and planning into one increasingly unified representation of spatial reality.",
+    why:
+      "This is useful for students because it translates the vague phrase 'world models' into a concrete research and product agenda.",
+    accent: "#5dd9ff",
+    image: "./assets/world-observatory.svg",
+    chips: ["spatial intelligence", "Marble", "renderers/simulators/planners"],
+    links: [
+      {
+        label: "World Labs about",
+        url: "https://www.worldlabs.ai/about",
+      },
+      {
+        label: "World-model taxonomy",
+        url: "https://www.worldlabs.ai/blog/taxonomy-of-world-models",
+      },
+      {
+        label: "Marble",
+        url: "https://www.worldlabs.ai/blog/marble-world-model",
+      },
+    ],
+  },
+  {
+    id: "futurehouse",
+    track: "science",
+    trackLabel: "AI scientists",
+    poster: "Science",
+    kicker: "Scientific discovery",
+    title: "FutureHouse",
+    summary:
+      "FutureHouse is building AI scientists for biology and human health. It frames the bottleneck not as missing ideas but as too few trained minds able to read, synthesize, hypothesize, and design experiments at scale.",
+    bet:
+      "Pair advanced agents with scientists and gradually automate more of literature search, synthesis, hypothesis generation, and experimental planning.",
+    why:
+      "It shows how agentic AI can become a focused vertical system long before we settle the broader AGI debate.",
+    accent: "#87ffc1",
+    image: "./assets/harness-studio.svg",
+    chips: ["AI scientist", "biology", "scientific agents"],
+    links: [
+      {
+        label: "FutureHouse about",
+        url: "https://www.futurehouse.org/about",
+      },
+      {
+        label: "FutureHouse platform",
+        url: "https://www.futurehouse.org/news/launching-futurehouse-platform-ai-agents",
+      },
+      {
+        label: "Aviary paper",
+        url: "https://arxiv.org/abs/2412.21154",
+      },
+    ],
+  },
+  {
+    id: "physical-intelligence",
+    track: "embodiment",
+    trackLabel: "embodiment",
+    poster: "PI",
+    kicker: "General-purpose robotics",
+    title: "Physical Intelligence",
+    summary:
+      "Physical Intelligence says general-purpose AI should enter the physical world. Its line of work centers on foundation policies and world-grounded control systems that can steer many robots across many tasks.",
+    bet:
+      "Build generalist robot policies and embodied foundation models that learn from real-world experience, memory, and action consequences rather than text alone.",
+    why:
+      "Embodiment is one of the hardest tests of whether AI actually understands state, causality, and long-horizon consequences instead of merely describing them.",
+    accent: "#ffb67b",
+    image: "./assets/world-shell.svg",
+    chips: ["robot foundation models", "openpi", "vision-language-action"],
+    links: [
+      {
+        label: "Physical Intelligence",
+        url: "https://www.pi.website/",
+      },
+      {
+        label: "Open Sourcing pi0",
+        url: "https://www.pi.website/blog/openpi",
+      },
+      {
+        label: "OpenPI on GitHub",
+        url: "https://github.com/Physical-Intelligence/openpi",
+      },
+    ],
+  },
+  {
+    id: "ssi",
+    track: "safety",
+    trackLabel: "safety",
+    poster: "SSI",
+    kicker: "Straight-shot safety",
+    title: "Safe Superintelligence Inc.",
+    summary:
+      "SSI is a pure frontier-lab signal: one goal, one product, and no consumer-product detours. Its public stance is that safety and capability should be advanced in tandem as one technical program.",
+    bet:
+      "Pursue a straight-shot path to safe superintelligence, with safety, security, and progress explicitly aligned in the same roadmap.",
+    why:
+      "This matters because it shows that not every well-funded lab is optimizing for near-term product surfaces; some are still organized around a singular safety-and-capability thesis.",
+    accent: "#ff8f7a",
+    image: "./assets/media-surface.svg",
+    chips: ["straight-shot lab", "safety + capability", "frontier focus"],
+    links: [
+      {
+        label: "SSI official site",
+        url: "https://ssi.inc/",
       },
     ],
   },
@@ -754,6 +1051,300 @@ const libraryItems = [
     url: "https://www.youtube.com/watch?v=am_oeAoUhew",
   },
   {
+    id: "recursive-site",
+    type: "project",
+    topic: "Self-improving AI",
+    poster: "Recursive",
+    title: "Recursive official site",
+    summary:
+      "Recursive's own statement of the thesis that AI should recursively improve AI through open-ended algorithms.",
+    bestFor: "Seeing the self-improvement bet from the lab itself, not from commentary around it.",
+    why: "It is the cleanest primary source for why Recursive exists and what it thinks the frontier bottleneck is.",
+    chips: ["official", "self-improvement", "2026"],
+    accent: "#5dd9ff",
+    url: "https://www.recursive.com/",
+  },
+  {
+    id: "recursive-gv",
+    type: "blog",
+    topic: "Self-improving AI",
+    poster: "RSI",
+    title: "GV: Recursive Superintelligence and self-improving AI",
+    summary:
+      "A current, detailed explanation of Recursive's thesis and why serious capital is flowing into recursive self-improvement.",
+    bestFor: "Understanding why this direction is being treated as more than a speculative thought experiment.",
+    why: "It combines the research bet, the founder set, and the funding signal in one highly legible source.",
+    chips: ["investor thesis", "2026", "recursive improvement"],
+    accent: "#87ffc1",
+    url: "https://www.gv.com/news/recursive-superintelligence-self-improving-ai",
+  },
+  {
+    id: "sakana-rsi-lab",
+    type: "blog",
+    topic: "Self-improving AI",
+    poster: "Sakana",
+    title: "Introducing Sakana AI's RSI Lab",
+    summary:
+      "Sakana's official roadmap for recursive self-improvement, including DGM, The AI Scientist, and sample-efficient self-improvement.",
+    bestFor: "Seeing a concrete RSI program laid out as a research lineage rather than a slogan.",
+    why: "It is one of the best current primary sources for what self-improving AI means in practice.",
+    chips: ["official", "RSI Lab", "sample efficiency"],
+    accent: "#ffb67b",
+    url: "https://sakana.ai/rsi-lab/",
+  },
+  {
+    id: "dgm-paper",
+    type: "paper",
+    topic: "Self-improving AI",
+    poster: "DGM",
+    title: "Darwin Godel Machine: Open-Ended Evolution of Self-Improving Agents",
+    summary:
+      "A technical case study in self-improving agents that rewrite and evaluate their own code over time.",
+    bestFor: "Going beyond RSI rhetoric into an actual research artifact.",
+    why: "This is one of the strongest current papers for students who want to see what 'AI improving AI' looks like technically.",
+    chips: ["paper", "self-rewriting", "agents"],
+    accent: "#ff8f7a",
+    url: "https://arxiv.org/abs/2505.22954",
+  },
+  {
+    id: "ai-scientist-paper",
+    type: "paper",
+    topic: "AI scientists",
+    poster: "Scientist",
+    title: "The AI Scientist: Towards Fully Automated Open-Ended Scientific Discovery",
+    summary:
+      "A landmark paper on end-to-end automated research loops: idea generation, code, experiments, papers, and review.",
+    bestFor: "Understanding why AI-for-science is becoming a serious frontier vertical.",
+    why: "It turns the 'AI scientist' idea into a concrete workflow architecture rather than a vague aspiration.",
+    chips: ["paper", "science", "automation"],
+    accent: "#5dd9ff",
+    url: "https://arxiv.org/abs/2408.06292",
+  },
+  {
+    id: "thinking-machines-home",
+    type: "project",
+    topic: "Collaboration",
+    poster: "TML",
+    title: "Thinking Machines Lab",
+    summary:
+      "The official home page for a lab arguing that AI should be more widely understood, customizable, and collaborative.",
+    bestFor: "Comparing frontier lab theses side by side.",
+    why: "It shows that a major branch of the frontier is optimizing for collaboration loops, not autonomy alone.",
+    chips: ["official", "collaboration", "multimodal"],
+    accent: "#87ffc1",
+    url: "https://thinkingmachines.ai/",
+  },
+  {
+    id: "interaction-models",
+    type: "blog",
+    topic: "Collaboration",
+    poster: "Interact",
+    title: "Interaction Models: A Scalable Approach to Human-AI Collaboration",
+    summary:
+      "Thinking Machines' research preview arguing that interactivity should scale alongside intelligence.",
+    bestFor: "Students who want a sharper picture of what post-chat AI interfaces may look like.",
+    why: "It reframes interaction quality as a frontier research problem, not just a UX layer.",
+    chips: ["blog", "interaction", "multimodal"],
+    accent: "#ffb67b",
+    url: "https://thinkingmachines.ai/blog/interaction-models/",
+  },
+  {
+    id: "tinker-announcement",
+    type: "blog",
+    topic: "Collaboration",
+    poster: "Tinker",
+    title: "Announcing Tinker",
+    summary:
+      "Thinking Machines' product preview for a collaborative multimodal workspace built around memory, artifacts, and ongoing interaction.",
+    bestFor: "Seeing how the interaction-model thesis turns into a concrete product surface.",
+    why: "It makes the collaboration bet feel like a real interface direction instead of a vague research slogan.",
+    chips: ["product preview", "collaboration", "multimodal"],
+    accent: "#ff8f7a",
+    url: "https://thinkingmachines.ai/news/announcing-tinker/",
+  },
+  {
+    id: "reflection-path",
+    type: "blog",
+    topic: "Coding agents",
+    poster: "Code",
+    title: "Reflection: A Path to Superintelligence",
+    summary:
+      "Reflection's official thesis that autonomous coding is the practical route into broader superintelligence.",
+    bestFor: "Understanding why coding is becoming a key proving ground for autonomy and self-improvement.",
+    why: "It links RL, LLMs, and autonomous software work into one coherent frontier narrative.",
+    chips: ["blog", "autonomous coding", "superintelligence"],
+    accent: "#ff8f7a",
+    url: "https://reflection.ai/blog/reflection-a-path-to-superintelligence/",
+  },
+  {
+    id: "asimov-docs",
+    type: "project",
+    topic: "Coding agents",
+    poster: "Asimov",
+    title: "About Asimov",
+    summary:
+      "Reflection's docs for a code research agent focused on codebase comprehension, persistent context, and enterprise deployment.",
+    bestFor: "Seeing how a frontier-lab thesis becomes an actual product surface.",
+    why: "It makes the coding-agent story less abstract by grounding it in a real system architecture.",
+    chips: ["docs", "enterprise", "persistent context"],
+    accent: "#5dd9ff",
+    url: "https://docs.reflection.ai/docs/about-asimov",
+  },
+  {
+    id: "cursor-docs",
+    type: "project",
+    topic: "Coding agents",
+    poster: "Cursor",
+    title: "Cursor Docs: Agent, Rules, MCP, Skills & CLI",
+    summary:
+      "Official Cursor documentation showing how agent mode, rules, MCP servers, and background tooling turn an editor into a coding-agent workspace.",
+    bestFor: "Seeing how frontier coding agents are being productized for day-to-day software work.",
+    why: "Cursor is one of the clearest signs that coding agents are becoming a default development interface, not a niche demo.",
+    chips: ["official", "IDE agents", "workflow"],
+    accent: "#87ffc1",
+    url: "https://cursor.com/docs",
+  },
+  {
+    id: "codex-workflows",
+    type: "blog",
+    topic: "Coding agents",
+    poster: "Codex",
+    title: "OpenAI: Codex for every role, tool, and workflow",
+    summary:
+      "A current official update on how Codex is expanding from software tasks into broader parallel work, tool use, and interactive app creation.",
+    bestFor: "Understanding how coding-agent systems are broadening into a general work surface in 2026.",
+    why: "It captures the current Codex direction from a primary source instead of second-hand commentary.",
+    chips: ["official", "2026", "parallel work"],
+    accent: "#ffb67b",
+    url: "https://openai.com/index/codex-for-every-role-tool-workflow/",
+  },
+  {
+    id: "claude-code-overview",
+    type: "project",
+    topic: "Coding agents",
+    poster: "Claude",
+    title: "Claude Code overview",
+    summary:
+      "Anthropic's official overview of Claude Code as an agentic coding tool across terminal, IDE, desktop, and browser.",
+    bestFor: "Comparing how another frontier coding system frames autonomy, tool use, and workflow integration.",
+    why: "Students now encounter coding agents in practice, so this belongs alongside the more research-heavy sources.",
+    chips: ["official", "agentic coding", "workflow"],
+    accent: "#5dd9ff",
+    url: "https://code.claude.com/docs/en/overview",
+  },
+  {
+    id: "world-labs-about",
+    type: "project",
+    topic: "World models",
+    poster: "Spatial",
+    title: "World Labs about",
+    summary:
+      "World Labs' official framing of spatial intelligence and frontier world models for the 3D world.",
+    bestFor: "Getting the company-level picture for why world models matter now.",
+    why: "It is one of the most readable primary sources on the spatial-intelligence thesis.",
+    chips: ["official", "spatial intelligence", "3D"],
+    accent: "#87ffc1",
+    url: "https://www.worldlabs.ai/about",
+  },
+  {
+    id: "world-labs-taxonomy",
+    type: "blog",
+    topic: "World models",
+    poster: "Taxonomy",
+    title: "A Functional Taxonomy of World Models",
+    summary:
+      "A strong conceptual essay separating renderers, simulators, and planners inside the overloaded phrase 'world model.'",
+    bestFor: "Students who want more precision than generic futurist talk about world models.",
+    why: "It is one of the best recent explanations of what different world-model systems are actually trying to do.",
+    chips: ["blog", "simulation", "planning"],
+    accent: "#ffb67b",
+    url: "https://www.worldlabs.ai/blog/taxonomy-of-world-models",
+  },
+  {
+    id: "world-labs-marble",
+    type: "blog",
+    topic: "World models",
+    poster: "Marble",
+    title: "Marble: a controllable world model for image generation",
+    summary:
+      "A World Labs research post on a controllable world model that links visual generation to underlying spatial structure.",
+    bestFor: "Seeing how a world-model company cashes out the idea in a concrete artifact.",
+    why: "It grounds the future section in an actual current system rather than a vague long-term concept.",
+    chips: ["world model", "spatial", "generation"],
+    accent: "#ff8f7a",
+    url: "https://www.worldlabs.ai/blog/marble-world-model",
+  },
+  {
+    id: "futurehouse-about",
+    type: "project",
+    topic: "AI scientists",
+    poster: "FH",
+    title: "FutureHouse about",
+    summary:
+      "FutureHouse's official mission page for building AI scientists to accelerate scientific discovery.",
+    bestFor: "Understanding the AI-scientist thesis as a lab mission, not just a single tool demo.",
+    why: "It shows how agentic AI is turning into a serious vertical program in science.",
+    chips: ["official", "biology", "AI scientist"],
+    accent: "#ff8f7a",
+    url: "https://www.futurehouse.org/about",
+  },
+  {
+    id: "futurehouse-platform",
+    type: "blog",
+    topic: "AI scientists",
+    poster: "Platform",
+    title: "FutureHouse Platform: Superintelligent AI Agents for Scientific Discovery",
+    summary:
+      "A concrete release of scientific agents for literature search, synthesis, and chemistry planning.",
+    bestFor: "Seeing how AI-scientist ideas become actual user-facing research agents.",
+    why: "This bridges the gap between lab mission statements and deployable scientific workflows.",
+    chips: ["blog", "agents", "science workflows"],
+    accent: "#5dd9ff",
+    url: "https://www.futurehouse.org/news/launching-futurehouse-platform-ai-agents",
+  },
+  {
+    id: "aviary-paper",
+    type: "paper",
+    topic: "AI scientists",
+    poster: "Aviary",
+    title: "Aviary: training language agents on challenging scientific tasks",
+    summary:
+      "A benchmark and training setup for language agents working on high-difficulty scientific problems.",
+    bestFor: "Connecting the AI-scientist vision to concrete evaluation and training work.",
+    why: "It adds a stronger technical paper beside the FutureHouse mission and platform pages.",
+    chips: ["paper", "science agents", "benchmark"],
+    accent: "#87ffc1",
+    url: "https://arxiv.org/abs/2412.21154",
+  },
+  {
+    id: "openpi-project",
+    type: "project",
+    topic: "Embodiment",
+    poster: "openpi",
+    title: "Open Sourcing pi0",
+    summary:
+      "Physical Intelligence's release of code and weights for a general-purpose robotic foundation model.",
+    bestFor: "Understanding how embodiment changes the AI problem from language generation to action under physical constraints.",
+    why: "It gives students a practical, code-level entry point into the embodied frontier.",
+    chips: ["robotics", "open source", "VLA"],
+    accent: "#87ffc1",
+    url: "https://www.pi.website/blog/openpi",
+  },
+  {
+    id: "ssi-official",
+    type: "project",
+    topic: "Safety",
+    poster: "SSI",
+    title: "Safe Superintelligence Inc.",
+    summary:
+      "The official site for SSI's singular, straight-shot thesis: build safe superintelligence and nothing else.",
+    bestFor: "Understanding the safety-first frontier-lab position in its own words.",
+    why: "It is a sharp contrast with labs optimizing for products, open tools, or recursive improvement.",
+    chips: ["official", "safety", "frontier lab"],
+    accent: "#ffb67b",
+    url: "https://ssi.inc/",
+  },
+  {
     id: "world-models-paper",
     type: "paper",
     topic: "World models",
@@ -885,6 +1476,8 @@ const watchItems = [
 const state = {
   timelineId: timelineItems[0].id,
   frontierId: frontierItems[0].id,
+  labFilter: "all",
+  labId: labItems[0].id,
   libraryFilter: "all",
   libraryId: libraryItems[0].id,
 };
@@ -909,7 +1502,19 @@ const frontierWhy = document.querySelector("#frontier-why");
 const frontierChips = document.querySelector("#frontier-chips");
 const frontierLinks = document.querySelector("#frontier-links");
 
-const filterPills = [...document.querySelectorAll(".filter-pill")];
+const labFilterPills = [...document.querySelectorAll("[data-lab-filter]")];
+const labsCount = document.querySelector("#labs-count");
+const labsGrid = document.querySelector("#labs-grid");
+const labsImage = document.querySelector("#labs-image");
+const labsKicker = document.querySelector("#labs-kicker");
+const labsTitle = document.querySelector("#labs-title");
+const labsSummary = document.querySelector("#labs-summary");
+const labsBet = document.querySelector("#labs-bet");
+const labsWhy = document.querySelector("#labs-why");
+const labsChips = document.querySelector("#labs-chips");
+const labsLinks = document.querySelector("#labs-links");
+
+const filterPills = [...document.querySelectorAll("[data-filter]")];
 const libraryCount = document.querySelector("#library-count");
 const libraryGrid = document.querySelector("#library-grid");
 const libraryTitle = document.querySelector("#library-title");
@@ -1025,6 +1630,84 @@ function renderFrontierPanel() {
 
   clearNode(frontierLinks);
   item.links.forEach((link) => frontierLinks.appendChild(makeLink(link)));
+}
+
+function getFilteredLabItems() {
+  if (state.labFilter === "all") {
+    return labItems;
+  }
+
+  return labItems.filter((item) => item.track === state.labFilter);
+}
+
+function renderLabFilterState() {
+  labFilterPills.forEach((pill) => {
+    const active = pill.dataset.labFilter === state.labFilter;
+    pill.classList.toggle("is-active", active);
+    pill.setAttribute("aria-pressed", String(active));
+  });
+}
+
+function renderLabDetail() {
+  const item = labItems.find((entry) => entry.id === state.labId);
+
+  setImage(labsImage, item.image, item.title);
+  labsKicker.textContent = item.kicker;
+  labsTitle.textContent = item.title;
+  labsSummary.textContent = item.summary;
+  labsBet.textContent = item.bet;
+  labsWhy.textContent = item.why;
+
+  clearNode(labsChips);
+  item.chips.forEach((chip) => labsChips.appendChild(makeChip(chip)));
+
+  clearNode(labsLinks);
+  item.links.forEach((link) => labsLinks.appendChild(makeLink(link)));
+}
+
+function renderLabGrid() {
+  const filteredItems = getFilteredLabItems();
+
+  if (!filteredItems.some((item) => item.id === state.labId)) {
+    state.labId = filteredItems[0]?.id ?? "";
+  }
+
+  labsCount.textContent = String(filteredItems.length);
+  clearNode(labsGrid);
+
+  filteredItems.forEach((item) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "lab-card";
+    button.classList.toggle("is-selected", item.id === state.labId);
+    button.setAttribute("aria-pressed", String(item.id === state.labId));
+
+    const poster = document.createElement("div");
+    poster.className = "lab-poster";
+    poster.style.setProperty("--accent", item.accent);
+    poster.innerHTML = `<small>${item.trackLabel}</small><strong>${item.poster}</strong>`;
+
+    const title = document.createElement("h3");
+    title.textContent = item.title;
+
+    const summary = document.createElement("p");
+    summary.textContent = item.summary;
+
+    const meta = document.createElement("div");
+    meta.className = "resource-meta";
+    meta.innerHTML = `<span>${item.trackLabel}</span><span>${item.chips[0]}</span>`;
+
+    button.append(poster, title, summary, meta);
+    button.addEventListener("click", () => {
+      state.labId = item.id;
+      renderLabGrid();
+      renderLabDetail();
+    });
+
+    labsGrid.appendChild(button);
+  });
+
+  renderLabDetail();
 }
 
 function getFilteredLibraryItems() {
@@ -1209,6 +1892,16 @@ function bindFilters() {
   });
 }
 
+function bindLabFilters() {
+  labFilterPills.forEach((pill) => {
+    pill.addEventListener("click", () => {
+      state.labFilter = pill.dataset.labFilter;
+      renderLabFilterState();
+      renderLabGrid();
+    });
+  });
+}
+
 function bindPointerGlow() {
   if (window.matchMedia("(pointer: coarse)").matches) {
     return;
@@ -1225,9 +1918,12 @@ function init() {
   renderTimelineDetail();
   renderFrontierTabs();
   renderFrontierPanel();
+  renderLabFilterState();
+  renderLabGrid();
   renderFilterState();
   renderLibraryGrid();
   renderWatchGrid();
+  bindLabFilters();
   bindFilters();
   animateCounts();
   bindPointerGlow();

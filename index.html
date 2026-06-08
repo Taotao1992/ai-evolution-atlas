@@ -6,7 +6,7 @@
     <title>CSC2220 Artificial Intelligence | History, Agents, and World Models</title>
     <meta
       name="description"
-      content="A redesigned interactive website about AI history, from machine learning and deep learning to LLMs, agents, OpenClaw, Seedance, Happy Oyster, harness engineering, and world models."
+      content="An interactive course website about AI history, from machine learning and deep learning to LLMs, agents, coding systems like Cursor, Codex, and Claude Code, plus Recursive self-improvement, Sakana AI, Thinking Machines, Reflection, World Labs, FutureHouse, Physical Intelligence, OpenClaw, and world models."
     />
     <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -36,6 +36,7 @@
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="#history">History</a>
         <a href="#frontier">Frontier</a>
+        <a href="#labs">Labs</a>
         <a href="#library">Library</a>
         <a href="#watch">Watch</a>
         <a href="#future">Future</a>
@@ -50,7 +51,9 @@
           <p class="hero-lead">
             This version is built as a richer sci-tech editorial site: tighter typography, original
             illustrations, interactive history modules, stronger source links, and new frontier chapters on
-            Seedance, Happy Oyster, OpenClaw, harness engineering, and the world model bet.
+            Recursive self-improvement, Sakana AI, Thinking Machines, Reflection, FutureHouse, World Labs,
+            Physical Intelligence, OpenClaw, Cursor, Codex, Claude Code, harness engineering, and the
+            world model bet.
           </p>
 
           <div class="hero-actions">
@@ -60,16 +63,16 @@
 
           <div class="hero-metrics">
             <article class="metric-card">
-              <strong data-count="9">0</strong>
+              <strong data-count="10">0</strong>
               <span>major eras on the interactive timeline</span>
             </article>
             <article class="metric-card">
-              <strong data-count="32">0</strong>
+              <strong data-count="53">0</strong>
               <span>curated papers, blogs, projects, and videos</span>
             </article>
             <article class="metric-card">
-              <strong data-count="9">0</strong>
-              <span>original SVG visuals generated for the site</span>
+              <strong data-count="8">0</strong>
+              <span>new labs and frontier programs mapped</span>
             </article>
           </div>
         </div>
@@ -105,6 +108,7 @@
           <span>2020 GPT-3</span>
           <span>2024 Agent wave</span>
           <span>2025-2026 Seedance / OpenClaw / Harness / Happy Oyster</span>
+          <span>2026 Recursive / Sakana RSI / Thinking Machines / World Labs</span>
           <span>Next: world models</span>
         </div>
       </section>
@@ -151,11 +155,11 @@
       <section id="frontier" class="section frontier-section" data-section="frontier">
         <div class="section-heading">
           <p class="eyebrow">Frontier systems</p>
-          <h2>Where the website gets current: OpenClaw, Seedance, Happy Oyster, harnesses, and world models</h2>
+          <h2>Where the site gets current: OpenClaw, Recursive, Seedance, Happy Oyster, harnesses, and world models</h2>
           <p>
             These are not all the same thing. Some are products. Some are infrastructure ideas. Some are
             research bets. But together they show how AI is moving from chat interfaces toward richer media,
-            longer-running systems, and more world-like interaction.
+            longer-running systems, recursive improvement loops, and more world-like interaction.
           </p>
         </div>
 
@@ -184,6 +188,61 @@
               <div class="link-list" id="frontier-links"></div>
             </div>
           </article>
+        </div>
+      </section>
+
+      <section id="labs" class="section labs-section" data-section="labs">
+        <div class="section-heading">
+          <p class="eyebrow">New labs</p>
+          <h2>The new-lab wave is splitting on what the next AI bottleneck really is</h2>
+          <p>
+            Recursive and Sakana are betting on AI improving AI. Thinking Machines is betting on
+            interactivity and collaboration. Reflection is betting on autonomous coding. World Labs is
+            betting on spatial intelligence and world models. FutureHouse is betting on AI scientists.
+            Physical Intelligence is betting on embodiment. SSI is betting on a straight shot to safe
+            superintelligence. Alongside them, Cursor, Codex, and Claude Code show how quickly the
+            coding-agent surface is becoming a real product category.
+          </p>
+        </div>
+
+        <div class="labs-toolbar" role="toolbar" aria-label="Lab filters">
+          <button class="filter-pill is-active" type="button" data-lab-filter="all">All bets</button>
+          <button class="filter-pill" type="button" data-lab-filter="self-improvement">Self-improving AI</button>
+          <button class="filter-pill" type="button" data-lab-filter="collaboration">Collaboration</button>
+          <button class="filter-pill" type="button" data-lab-filter="coding">Coding agents</button>
+          <button class="filter-pill" type="button" data-lab-filter="world-models">World models</button>
+          <button class="filter-pill" type="button" data-lab-filter="science">AI scientists</button>
+          <button class="filter-pill" type="button" data-lab-filter="embodiment">Embodiment</button>
+          <button class="filter-pill" type="button" data-lab-filter="safety">Safety</button>
+        </div>
+
+        <div class="labs-meta">
+          <p>Showing <span id="labs-count">0</span> labs and frontier programs</p>
+        </div>
+
+        <div class="labs-layout">
+          <div class="labs-grid" id="labs-grid"></div>
+
+          <aside class="labs-detail" id="labs-detail">
+            <div class="labs-detail-media">
+              <img id="labs-image" src="./assets/world-observatory.svg" alt="" />
+            </div>
+            <p class="detail-kicker" id="labs-kicker">Track</p>
+            <h3 id="labs-title">Loading lab</h3>
+            <p class="timeline-summary" id="labs-summary"></p>
+            <div class="detail-grid">
+              <div>
+                <p class="detail-label">What they are betting on</p>
+                <p id="labs-bet"></p>
+              </div>
+              <div>
+                <p class="detail-label">What students should notice</p>
+                <p id="labs-why"></p>
+              </div>
+            </div>
+            <div class="chip-row" id="labs-chips"></div>
+            <div class="link-list" id="labs-links"></div>
+          </aside>
         </div>
       </section>
 
@@ -250,30 +309,50 @@
       <section id="future" class="section future-section" data-section="future">
         <div class="section-heading">
           <p class="eyebrow">Future</p>
-          <h2>What happens if the next interface is not text, but simulation?</h2>
+          <h2>What happens if the next intelligence stack is part simulator, part scientist, and part robot?</h2>
           <p>
-            The strongest future branch in this story is world modeling: AI systems that learn latent
-            structure, preview consequences, and reason over possible futures before acting in the real one.
+            The strongest future branch in this story is no longer just “bigger LLMs.” It is the convergence
+            of world models, AI scientists, and embodied systems that can reason over consequences before
+            acting in text, software, labs, or the physical world.
           </p>
         </div>
 
         <div class="future-grid">
           <article class="future-card">
-            <img src="./assets/world-shell.svg" alt="Abstract world model illustration" />
-            <h3>World models could shift AI from reactive generation to internal planning.</h3>
+            <img src="./assets/world-observatory.svg" alt="Abstract world model observatory" />
+            <h3>World Labs argues that renderers, simulators, and planners are collapsing into one stack.</h3>
             <p>
-              This is why the bridge from generative AI to embodied and agentic AI may run through simulation.
+              This is one of the clearest product-level cases for why world models may become the bridge from
+              generative media to genuine spatial reasoning and simulation.
             </p>
+            <div class="link-list">
+              <a href="https://www.worldlabs.ai/blog/taxonomy-of-world-models" target="_blank" rel="noreferrer">World Labs taxonomy</a>
+              <a href="https://www.worldlabs.ai/blog/marble-world-model" target="_blank" rel="noreferrer">Marble world model</a>
+            </div>
           </article>
           <article class="future-card">
             <img src="./assets/agent-loop.svg" alt="Abstract agent orchestration illustration" />
-            <h3>Harnesses, evaluations, and recovery systems will become default product architecture.</h3>
-            <p>Control surfaces will matter just as much as model intelligence.</p>
+            <h3>FutureHouse suggests AI scientists may become a practical vertical before general AGI arrives.</h3>
+            <p>
+              Scientific agents already combine literature search, synthesis, tools, and experimental
+              planning into workflow systems that look more like junior research teams than chatbots.
+            </p>
+            <div class="link-list">
+              <a href="https://www.futurehouse.org/about" target="_blank" rel="noreferrer">FutureHouse mission</a>
+              <a href="https://www.futurehouse.org/news/launching-futurehouse-platform-ai-agents" target="_blank" rel="noreferrer">FutureHouse platform</a>
+            </div>
           </article>
           <article class="future-card">
             <img src="./assets/media-surface.svg" alt="Abstract multimodal media illustration" />
-            <h3>Interfaces are becoming audiovisual, spatial, and world-like.</h3>
-            <p>Seedance and Happy Oyster fit here as signs of interface expansion, not just model scaling.</p>
+            <h3>Physical Intelligence shows what changes when AI must act in the physical world, not just describe it.</h3>
+            <p>
+              Embodied systems force models to handle state, memory, causality, and consequences under real
+              action pressure. That is why robotics may be one of the hardest and most revealing world-model tests.
+            </p>
+            <div class="link-list">
+              <a href="https://www.pi.website/" target="_blank" rel="noreferrer">Physical Intelligence</a>
+              <a href="https://www.pi.website/blog/openpi" target="_blank" rel="noreferrer">OpenPI release</a>
+            </div>
           </article>
         </div>
       </section>
