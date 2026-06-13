@@ -1465,7 +1465,7 @@ const watchItems = [
       "A sharp explanation of the outer system layer around model intelligence.",
     url: "https://www.youtube.com/watch?v=am_oeAoUhew",
     youtubeId: "am_oeAoUhew",
-    thumbnail: "./assets/harness-studio.svg",
+    thumbnail: "./assets/watch/harness.jpg",
   },
   {
     id: "watch-world-models",
@@ -1475,7 +1475,7 @@ const watchItems = [
       "A current research lens on where AI may go after the current language-centric wave.",
     url: "https://www.youtube.com/watch?v=yUmDRxV0krg",
     youtubeId: "yUmDRxV0krg",
-    thumbnail: "./assets/world-observatory.svg",
+    thumbnail: "./assets/watch/world-models.jpg",
   },
 ];
 
