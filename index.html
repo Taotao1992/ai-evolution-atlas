@@ -44,53 +44,39 @@
     </header>
 
     <main>
-      <section id="top" class="section hero" data-section="top">
-        <div class="hero-copy">
-          <p class="eyebrow">A redesigned map of AI, beyond hype cycles</p>
-          <h1>How AI learned to predict, perceive, generate, act, and maybe simulate worlds.</h1>
+      <section id="top" class="section hero" data-section="top" aria-labelledby="hero-title">
+        <img
+          class="hero-backdrop"
+          src="./assets/hero-stage.png"
+          alt="A visual course map showing AI history, frontier labs, harness engineering, and world models"
+        />
+        <div class="hero-vignette" aria-hidden="true"></div>
+
+        <div class="hero-content">
+          <p class="eyebrow">CSC2220 Artificial Intelligence</p>
+          <h1 id="hero-title">AI history as a living field map.</h1>
           <p class="hero-lead">
-            A course website redesigned as a cleaner editorial map of the field: stronger historical
-            milestones, sharper frontier coverage, better visual rhythm, and a more useful guide to the
-            labs, tools, papers, and videos shaping what comes after chat.
+            Move from ML and deep learning to LLMs, agents, harness engineering, recursive
+            self-improvement, and world models through papers, labs, projects, and video explainers.
           </p>
 
           <div class="hero-actions">
-            <a class="button button-primary" href="#history">Open the history map</a>
-            <a class="button button-secondary" href="#frontier">Jump to frontier systems</a>
+            <a class="button button-primary" href="#history">Open the timeline</a>
+            <a class="button button-secondary" href="#watch">Watch the field</a>
           </div>
 
-          <div class="hero-metrics">
+          <div class="hero-metrics" aria-label="Course map summary">
             <article class="metric-card">
               <strong data-count="10">0</strong>
-              <span>major eras on the interactive timeline</span>
+              <span>timeline eras</span>
             </article>
             <article class="metric-card">
               <strong data-count="53">0</strong>
-              <span>curated papers, blogs, projects, and videos</span>
+              <span>curated resources</span>
             </article>
             <article class="metric-card">
               <strong data-count="8">0</strong>
-              <span>new labs and frontier programs mapped</span>
-            </article>
-          </div>
-        </div>
-
-        <div class="hero-visual">
-          <img src="./assets/hero-cosmos.svg" alt="Abstract AI evolution visualization" />
-
-          <div class="hero-sidecards">
-            <article class="sidecard">
-              <p class="sidecard-label">Core transition</p>
-              <h2>Model quality is no longer the whole story.</h2>
-              <p>The outer system layer now decides whether AI feels toy-like or product-grade.</p>
-            </article>
-            <article class="sidecard">
-              <p class="sidecard-label">New layer</p>
-              <h2>Interfaces are becoming worlds.</h2>
-              <p>
-                Seedance and Happy Oyster both point to a future where AI is not only text, but dynamic
-                media and interactive space.
-              </p>
+              <span>frontier labs</span>
             </article>
           </div>
         </div>

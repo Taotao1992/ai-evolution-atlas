@@ -16,10 +16,10 @@
   --shadow-lg: 0 28px 80px rgba(0, 0, 0, 0.34);
   --shadow-md: 0 18px 48px rgba(0, 0, 0, 0.24);
   --shadow-sm: 0 10px 28px rgba(0, 0, 0, 0.16);
-  --radius-xl: 32px;
-  --radius-lg: 24px;
-  --radius-md: 16px;
-  --max-width: 1280px;
+  --radius-xl: 18px;
+  --radius-lg: 12px;
+  --radius-md: 8px;
+  --max-width: 1340px;
 }
 
 html {
@@ -202,12 +202,12 @@ main {
 
 .section {
   padding: 92px 0;
+  scroll-margin-top: 118px;
 }
 
 .eyebrow,
 .detail-label,
 .detail-kicker,
-.sidecard-label,
 .chip,
 .signal-ribbon span {
   font-family: "IBM Plex Mono", monospace;
@@ -230,33 +230,61 @@ h3 {
 }
 
 .hero {
-  display: grid;
-  grid-template-columns: minmax(0, 0.84fr) minmax(420px, 1.16fr);
-  gap: 54px;
-  align-items: start;
-  min-height: auto;
-  padding-top: 28px;
+  position: relative;
+  min-height: 730px;
+  margin-top: 22px;
+  padding: 0;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-xl);
+  background: #07121b;
+  box-shadow: var(--shadow-lg);
 }
 
-.hero-copy {
-  display: grid;
-  gap: 0;
-  padding-top: 34px;
+.hero-backdrop,
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-backdrop {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.98;
+}
+
+.hero-vignette {
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(5, 17, 26, 0.97) 0%, rgba(5, 17, 26, 0.86) 31%, rgba(5, 17, 26, 0.18) 52%, transparent 72%),
+    linear-gradient(180deg, rgba(5, 17, 26, 0.26), transparent 30%, rgba(5, 17, 26, 0.16));
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 560px;
+  padding: 78px 0 64px 58px;
 }
 
 h1 {
-  max-width: 11ch;
-  font-size: clamp(3.15rem, 5vw, 5rem);
+  max-width: 10ch;
+  font-size: 4.9rem;
   line-height: 0.94;
-  letter-spacing: -0.045em;
+  letter-spacing: 0;
 }
 
 .hero-lead {
-  max-width: 56ch;
+  max-width: 48ch;
   margin: 20px 0 0;
   color: var(--text-soft);
-  line-height: 1.82;
-  font-size: 1.04rem;
+  line-height: 1.75;
+  font-size: 1rem;
 }
 
 .hero-actions {
@@ -287,9 +315,9 @@ h1 {
 }
 
 .button-primary {
-  background: linear-gradient(135deg, #173752, #0f2335);
-  color: var(--text);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.24);
+  background: linear-gradient(135deg, #c8ff5d, #5dd9ff);
+  color: #06111a;
+  box-shadow: 0 16px 36px rgba(93, 217, 255, 0.2);
 }
 
 .button-secondary {
@@ -301,13 +329,12 @@ h1 {
 .hero-metrics {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-  max-width: 660px;
-  margin-top: 32px;
+  gap: 10px;
+  width: min(100%, 510px);
+  margin-top: 34px;
 }
 
 .metric-card,
-.sidecard,
 .timeline-detail,
 .frontier-panel,
 .library-card,
@@ -323,74 +350,25 @@ h1 {
 }
 
 .metric-card {
-  padding: 17px 18px 18px;
+  padding: 14px;
   border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(7, 18, 27, 0.68);
   box-shadow: var(--shadow-sm);
 }
 
 .metric-card strong {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   color: var(--cyan);
   font-family: "Space Grotesk", sans-serif;
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 700;
 }
 
 .metric-card span {
   color: var(--text-soft);
   line-height: 1.65;
-  font-size: 0.92rem;
-}
-
-.hero-visual {
-  display: grid;
-  gap: 18px;
-  align-self: stretch;
-}
-
-.hero-visual > img {
-  width: 100%;
-  padding: 18px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-xl);
-  background:
-    radial-gradient(circle at 12% 12%, rgba(93, 217, 255, 0.09), transparent 18%),
-    linear-gradient(180deg, rgba(14, 26, 39, 0.98), rgba(11, 22, 33, 0.96));
-  box-shadow: var(--shadow-lg);
-}
-
-.hero-sidecards {
-  display: grid;
-  grid-template-columns: 1.08fr 0.92fr;
-  gap: 16px;
-}
-
-.sidecard {
-  min-height: 180px;
-  padding: 22px;
-  border-radius: var(--radius-lg);
-  background:
-    linear-gradient(180deg, rgba(18, 32, 45, 0.92), rgba(13, 24, 35, 0.92)),
-    rgba(255, 255, 255, 0.03);
-}
-
-.sidecard-label {
-  margin: 0 0 8px;
-  color: var(--mint);
-  font-size: 0.74rem;
-}
-
-.sidecard h2 {
-  font-size: 1.34rem;
-  line-height: 1.1;
-}
-
-.sidecard p {
-  margin: 12px 0 0;
-  color: var(--text-soft);
-  line-height: 1.7;
+  font-size: 0.84rem;
 }
 
 .ribbon-section {
@@ -436,9 +414,9 @@ h1 {
 }
 
 .section-heading h2 {
-  font-size: clamp(2.2rem, 3.6vw, 3.35rem);
+  font-size: 3.35rem;
   line-height: 0.94;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
 }
 
 .section-heading p {
@@ -472,7 +450,7 @@ h1 {
   align-items: start;
   padding: 28px;
   border: 1px solid var(--line);
-  border-radius: 34px;
+  border-radius: var(--radius-xl);
   overflow: hidden;
   background:
     radial-gradient(circle at 88% 12%, rgba(93, 217, 255, 0.08), transparent 16%),
@@ -491,7 +469,7 @@ h1 {
   text-align: left;
   padding: 16px 18px;
   border: 1px solid var(--line);
-  border-radius: 20px;
+  border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.025);
   color: var(--text);
   cursor: pointer;
@@ -530,7 +508,7 @@ h1 {
   grid-template-columns: 320px minmax(0, 1fr);
   gap: 24px;
   padding: 28px;
-  border-radius: 30px;
+  border-radius: var(--radius-lg);
   background:
     radial-gradient(circle at top right, rgba(93, 217, 255, 0.08), transparent 18%),
     linear-gradient(180deg, rgba(14, 25, 37, 0.95), rgba(11, 22, 33, 0.92));
@@ -539,7 +517,7 @@ h1 {
 .timeline-art img,
 .frontier-media img {
   width: 100%;
-  border-radius: 22px;
+  border-radius: var(--radius-md);
 }
 
 .detail-kicker {
@@ -641,7 +619,7 @@ h1 {
   gap: 18px;
   padding: 28px;
   border: 1px solid var(--line);
-  border-radius: 34px;
+  border-radius: var(--radius-xl);
   overflow: hidden;
   background:
     radial-gradient(circle at 86% 14%, rgba(255, 182, 123, 0.08), transparent 16%),
@@ -655,14 +633,10 @@ h1 {
 }
 
 .labs-section {
-  padding-left: 28px;
-  padding-right: 28px;
-  border: 1px solid var(--line);
-  border-radius: 38px;
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 84% 14%, rgba(93, 217, 255, 0.08), transparent 18%),
-    linear-gradient(180deg, rgba(10, 19, 29, 0.88), rgba(8, 17, 26, 0.84));
+  padding-left: 0;
+  padding-right: 0;
+  overflow: visible;
+  background: none;
 }
 
 .labs-toolbar {
@@ -698,7 +672,7 @@ h1 {
   gap: 12px;
   min-height: 250px;
   padding: 16px;
-  border-radius: 24px;
+  border-radius: var(--radius-md);
   text-align: left;
   background:
     radial-gradient(circle at top right, rgba(255, 255, 255, 0.08), transparent 20%),
@@ -723,7 +697,7 @@ h1 {
 .lab-poster {
   min-height: 92px;
   padding: 14px;
-  border-radius: 18px;
+  border-radius: var(--radius-md);
   border: 1px solid var(--line);
   background:
     radial-gradient(circle at 82% 20%, var(--accent), transparent 26%),
@@ -770,7 +744,7 @@ h1 {
   top: 108px;
   align-self: start;
   padding: 26px;
-  border-radius: 30px;
+  border-radius: var(--radius-lg);
   background:
     radial-gradient(circle at top right, rgba(93, 217, 255, 0.12), transparent 20%),
     linear-gradient(180deg, rgba(16, 29, 42, 0.98), rgba(11, 21, 31, 0.96));
@@ -782,18 +756,16 @@ h1 {
 
 .labs-detail-media img {
   width: 100%;
-  border-radius: 20px;
+  border-radius: var(--radius-md);
 }
 
 .library-section {
-  border: 1px solid var(--line);
-  border-radius: 38px;
   padding-left: 28px;
   padding-right: 28px;
-  overflow: hidden;
+  overflow: visible;
   background:
-    radial-gradient(circle at 82% 14%, rgba(93, 217, 255, 0.08), transparent 18%),
-    linear-gradient(180deg, rgba(11, 21, 31, 0.95), rgba(8, 17, 26, 0.88));
+    radial-gradient(circle at 82% 14%, rgba(93, 217, 255, 0.06), transparent 20%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 52%);
 }
 
 .library-toolbar {
@@ -843,6 +815,10 @@ h1 {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
+  max-height: 980px;
+  overflow: auto;
+  padding-right: 6px;
+  scrollbar-color: rgba(93, 217, 255, 0.34) transparent;
 }
 
 .library-card {
@@ -855,8 +831,9 @@ h1 {
   gap: 12px 16px;
   min-height: 196px;
   padding: 16px;
-  border-radius: 24px;
+  border-radius: var(--radius-md);
   text-align: left;
+  color: var(--text);
   background:
     radial-gradient(circle at top right, rgba(255, 255, 255, 0.08), transparent 20%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
@@ -880,7 +857,7 @@ h1 {
   grid-area: poster;
   min-height: 100%;
   padding: 14px;
-  border-radius: 18px;
+  border-radius: var(--radius-md);
   border: 1px solid var(--line);
   background:
     radial-gradient(circle at 82% 20%, var(--accent), transparent 26%),
@@ -943,32 +920,24 @@ h1 {
   top: 108px;
   align-self: start;
   padding: 28px;
-  border-radius: 30px;
+  border-radius: var(--radius-lg);
   background:
     radial-gradient(circle at top right, rgba(93, 217, 255, 0.12), transparent 20%),
     linear-gradient(180deg, rgba(16, 29, 42, 0.98), rgba(11, 21, 31, 0.96));
 }
 
 .watch-section {
-  padding-left: 28px;
-  padding-right: 28px;
-  border: 1px solid var(--line);
-  border-radius: 38px;
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 84% 18%, rgba(255, 182, 123, 0.08), transparent 18%),
-    linear-gradient(180deg, rgba(11, 21, 31, 0.92), rgba(8, 17, 26, 0.84));
+  padding-left: 0;
+  padding-right: 0;
+  overflow: visible;
+  background: none;
 }
 
 .future-section {
-  padding-left: 28px;
-  padding-right: 28px;
-  border: 1px solid var(--line);
-  border-radius: 38px;
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 14% 14%, rgba(135, 255, 193, 0.07), transparent 18%),
-    linear-gradient(180deg, rgba(11, 21, 31, 0.92), rgba(8, 17, 26, 0.84));
+  padding-left: 0;
+  padding-right: 0;
+  overflow: visible;
+  background: none;
 }
 
 .watch-grid {
@@ -979,7 +948,7 @@ h1 {
 
 .watch-card {
   overflow: hidden;
-  border-radius: 24px;
+  border-radius: var(--radius-lg);
   transition:
     transform 180ms ease,
     border-color 180ms ease;
@@ -1086,7 +1055,7 @@ h1 {
   display: grid;
   gap: 18px;
   padding: 22px;
-  border-radius: 28px;
+  border-radius: var(--radius-lg);
   background:
     radial-gradient(circle at top right, rgba(255, 255, 255, 0.08), transparent 20%),
     linear-gradient(180deg, rgba(16, 29, 42, 0.96), rgba(12, 22, 33, 0.92));
@@ -1106,7 +1075,7 @@ h1 {
 
 .future-card img {
   width: 100%;
-  border-radius: 20px;
+  border-radius: var(--radius-md);
 }
 
 .future-card h3 {
@@ -1156,7 +1125,7 @@ h1 {
 
 @media (max-width: 1150px) {
   .hero {
-    grid-template-columns: 1fr;
+    min-height: 680px;
   }
 
   .history-shell,
@@ -1205,7 +1174,6 @@ h1 {
   }
 
   .hero-metrics,
-  .hero-sidecards,
   .detail-grid {
     grid-template-columns: 1fr;
   }
@@ -1221,6 +1189,12 @@ h1 {
   .library-grid,
   .labs-grid {
     grid-template-columns: 1fr;
+  }
+
+  .library-grid {
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
   }
 
   .library-card {
@@ -1263,20 +1237,72 @@ h1 {
     max-width: 260px;
   }
 
-  .hero-copy {
-    padding-top: 16px;
+  .hero {
+    min-height: 690px;
+    margin-top: 14px;
+    border-radius: 14px;
+  }
+
+  .hero-backdrop {
+    object-position: 40% center;
+    opacity: 0.82;
+  }
+
+  .hero-vignette {
+    background:
+      linear-gradient(180deg, rgba(5, 17, 26, 0.97) 0%, rgba(5, 17, 26, 0.84) 52%, rgba(5, 17, 26, 0.44) 100%),
+      linear-gradient(90deg, rgba(5, 17, 26, 0.92), rgba(5, 17, 26, 0.46));
+  }
+
+  .hero-content {
+    max-width: none;
+    padding: 42px 22px 30px;
   }
 
   h1 {
-    max-width: none;
-    font-size: clamp(2.5rem, 11vw, 3.8rem);
+    max-width: 9ch;
+    font-size: 2.72rem;
+  }
+
+  .hero-lead {
+    line-height: 1.58;
+    font-size: 0.98rem;
+  }
+
+  .hero-actions {
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .hero-actions .button {
+    min-height: 48px;
+    padding: 0 18px;
+  }
+
+  .hero-metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .metric-card {
+    padding: 11px 10px;
+  }
+
+  .metric-card strong {
+    font-size: 1.32rem;
+  }
+
+  .metric-card span {
+    font-size: 0.72rem;
+    line-height: 1.45;
   }
 
   .section-heading h2,
   .timeline-copy h3,
   .frontier-copy h3,
   .library-detail h3 {
-    font-size: clamp(1.9rem, 9vw, 3rem);
+    font-size: 2.25rem;
   }
 
   .library-section {
