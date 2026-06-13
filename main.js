@@ -1695,7 +1695,7 @@ function renderLabGrid() {
     const poster = document.createElement("div");
     poster.className = "lab-poster";
     poster.style.setProperty("--accent", item.accent);
-    poster.innerHTML = `<img src="${coverPath("labs", item.id)}" alt="" loading="lazy" />`;
+    poster.innerHTML = `<img src="${coverPath("labs", item.id)}" alt="" />`;
 
     const title = document.createElement("h3");
     title.textContent = item.title;
@@ -1762,7 +1762,7 @@ function renderLibraryGrid() {
     const poster = document.createElement("div");
     poster.className = "library-poster";
     poster.style.setProperty("--accent", item.accent);
-    poster.innerHTML = `<img src="${coverPath("library", item.id)}" alt="" loading="lazy" />`;
+    poster.innerHTML = `<img src="${coverPath("library", item.id)}" alt="" />`;
 
     const title = document.createElement("h3");
     title.textContent = item.title;
