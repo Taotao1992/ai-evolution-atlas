@@ -1564,6 +1564,10 @@ function setImage(img, src, alt) {
   img.alt = alt;
 }
 
+function coverPath(collection, id) {
+  return `./assets/covers/${collection}/${id}.jpg`;
+}
+
 function renderTimelineNav() {
   clearNode(timelineNav);
 
@@ -1587,7 +1591,7 @@ function renderTimelineNav() {
 function renderTimelineDetail() {
   const item = timelineItems.find((entry) => entry.id === state.timelineId);
 
-  setImage(timelineImage, item.image, item.title);
+  setImage(timelineImage, coverPath("timeline", item.id), item.title);
   timelineEra.textContent = item.era;
   timelineTitle.textContent = item.title;
   timelineSummary.textContent = item.summary;
@@ -1624,7 +1628,7 @@ function renderFrontierTabs() {
 function renderFrontierPanel() {
   const item = frontierItems.find((entry) => entry.id === state.frontierId);
 
-  setImage(frontierImage, item.image, item.title);
+  setImage(frontierImage, coverPath("frontier", item.id), item.title);
   frontierKicker.textContent = item.kicker;
   frontierTitle.textContent = item.title;
   frontierSummary.textContent = item.summary;
@@ -1657,7 +1661,7 @@ function renderLabFilterState() {
 function renderLabDetail() {
   const item = labItems.find((entry) => entry.id === state.labId);
 
-  setImage(labsImage, item.image, item.title);
+  setImage(labsImage, coverPath("labs", item.id), item.title);
   labsKicker.textContent = item.kicker;
   labsTitle.textContent = item.title;
   labsSummary.textContent = item.summary;
@@ -1691,7 +1695,7 @@ function renderLabGrid() {
     const poster = document.createElement("div");
     poster.className = "lab-poster";
     poster.style.setProperty("--accent", item.accent);
-    poster.innerHTML = `<small>${item.trackLabel}</small><strong>${item.poster}</strong>`;
+    poster.innerHTML = `<img src="${coverPath("labs", item.id)}" alt="" loading="lazy" />`;
 
     const title = document.createElement("h3");
     title.textContent = item.title;
@@ -1758,7 +1762,7 @@ function renderLibraryGrid() {
     const poster = document.createElement("div");
     poster.className = "library-poster";
     poster.style.setProperty("--accent", item.accent);
-    poster.innerHTML = `<small>${item.type} / ${item.topic}</small><strong>${item.poster}</strong>`;
+    poster.innerHTML = `<img src="${coverPath("library", item.id)}" alt="" loading="lazy" />`;
 
     const title = document.createElement("h3");
     title.textContent = item.title;
