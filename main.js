@@ -1425,6 +1425,7 @@ const watchItems = [
       "The cleanest visual entry point into why learned representations changed the field.",
     url: "https://www.youtube.com/watch?v=aircAruvnKk",
     youtubeId: "aircAruvnKk",
+    thumbnail: "./assets/watch/neural-network.jpg",
   },
   {
     id: "watch-attention",
@@ -1434,6 +1435,7 @@ const watchItems = [
       "A visual unpacking of the architecture behind the LLM wave.",
     url: "https://www.youtube.com/watch?v=eMlx5fFNoYc",
     youtubeId: "eMlx5fFNoYc",
+    thumbnail: "./assets/watch/transformers.jpg",
   },
   {
     id: "watch-llm",
@@ -1443,6 +1445,7 @@ const watchItems = [
       "A dense but accessible map of what the modern LLM stack is actually doing.",
     url: "https://www.youtube.com/watch?v=zjkBMFhNj_g",
     youtubeId: "zjkBMFhNj_g",
+    thumbnail: "./assets/watch/llm.jpg",
   },
   {
     id: "watch-openclaw",
@@ -1452,6 +1455,7 @@ const watchItems = [
       "A good bridge from abstract agent talk to a more opinionated product direction.",
     url: "https://www.youtube.com/watch?v=4uzGDAoNOZc",
     youtubeId: "4uzGDAoNOZc",
+    thumbnail: "./assets/watch/openclaw.jpg",
   },
   {
     id: "watch-harness",
@@ -1461,6 +1465,7 @@ const watchItems = [
       "A sharp explanation of the outer system layer around model intelligence.",
     url: "https://www.youtube.com/watch?v=am_oeAoUhew",
     youtubeId: "am_oeAoUhew",
+    thumbnail: "./assets/harness-studio.svg",
   },
   {
     id: "watch-world-models",
@@ -1470,6 +1475,7 @@ const watchItems = [
       "A current research lens on where AI may go after the current language-centric wave.",
     url: "https://www.youtube.com/watch?v=yUmDRxV0krg",
     youtubeId: "yUmDRxV0krg",
+    thumbnail: "./assets/world-observatory.svg",
   },
 ];
 
@@ -1789,9 +1795,12 @@ function renderFilterState() {
 function renderWatchGrid() {
   clearNode(watchGrid);
 
-  watchItems.forEach((item) => {
+  watchItems.forEach((item, index) => {
     const card = document.createElement("article");
     card.className = "watch-card";
+    if (index === 0) {
+      card.classList.add("is-featured");
+    }
 
     const mediaLink = document.createElement("a");
     mediaLink.href = item.url;
@@ -1802,7 +1811,7 @@ function renderWatchGrid() {
     media.className = "watch-media";
 
     const image = document.createElement("img");
-    image.src = `https://i.ytimg.com/vi/${item.youtubeId}/hqdefault.jpg`;
+    image.src = item.thumbnail;
     image.alt = item.title;
     image.loading = "lazy";
 
