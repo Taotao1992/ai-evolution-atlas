@@ -1536,6 +1536,7 @@ const header = document.querySelector(".site-header");
 const navLinks = [...document.querySelectorAll(".site-nav a")];
 const sections = [...document.querySelectorAll("[data-section]")];
 const countNodes = [...document.querySelectorAll("[data-count]")];
+let revealObserver;
 
 function makeChip(text) {
   const chip = document.createElement("span");
@@ -1564,6 +1565,15 @@ function setImage(img, src, alt) {
   img.alt = alt;
 }
 
+function addMotionSurface(node, index = 0) {
+  node.classList.add("reveal-card");
+  node.style.setProperty("--stagger", `${Math.min(index % 10, 9) * 42}ms`);
+
+  if (revealObserver) {
+    revealObserver.observe(node);
+  }
+}
+
 function coverPath(collection, id) {
   return `./assets/covers/${collection}/${id}.jpg`;
 }
@@ -1571,7 +1581,7 @@ function coverPath(collection, id) {
 function renderTimelineNav() {
   clearNode(timelineNav);
 
-  timelineItems.forEach((item) => {
+  timelineItems.forEach((item, index) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "timeline-button";
@@ -1584,6 +1594,7 @@ function renderTimelineNav() {
       renderTimelineNav();
       renderTimelineDetail();
     });
+    addMotionSurface(button, index);
     timelineNav.appendChild(button);
   });
 }
@@ -1608,7 +1619,7 @@ function renderTimelineDetail() {
 function renderFrontierTabs() {
   clearNode(frontierTabs);
 
-  frontierItems.forEach((item) => {
+  frontierItems.forEach((item, index) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "frontier-tab";
@@ -1621,6 +1632,7 @@ function renderFrontierTabs() {
       renderFrontierTabs();
       renderFrontierPanel();
     });
+    addMotionSurface(button, index);
     frontierTabs.appendChild(button);
   });
 }
@@ -1685,7 +1697,7 @@ function renderLabGrid() {
   labsCount.textContent = String(filteredItems.length);
   clearNode(labsGrid);
 
-  filteredItems.forEach((item) => {
+  filteredItems.forEach((item, index) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "lab-card";
@@ -1714,6 +1726,7 @@ function renderLabGrid() {
       renderLabDetail();
     });
 
+    addMotionSurface(button, index);
     labsGrid.appendChild(button);
   });
 
@@ -1752,7 +1765,7 @@ function renderLibraryGrid() {
   libraryCount.textContent = String(filteredItems.length);
   clearNode(libraryGrid);
 
-  filteredItems.forEach((item) => {
+  filteredItems.forEach((item, index) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "library-card";
@@ -1782,6 +1795,7 @@ function renderLibraryGrid() {
       renderLibraryDetail();
     });
 
+    addMotionSurface(button, index);
     libraryGrid.appendChild(button);
   });
 
@@ -1833,8 +1847,41 @@ function renderWatchGrid() {
     mediaLink.appendChild(media);
     copy.appendChild(cta);
     card.append(mediaLink, copy);
+    addMotionSurface(card, index);
     watchGrid.appendChild(card);
   });
+}
+
+function initRevealMotion() {
+  const shouldReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const staticSurfaces = [
+    ...document.querySelectorAll(
+      ".section-heading, .guide-panel, .source-lock, .history-shell, .frontier-shell, .labs-detail, .library-detail, .future-card",
+    ),
+  ];
+
+  staticSurfaces.forEach((node, index) => addMotionSurface(node, index));
+
+  if (shouldReduceMotion || !("IntersectionObserver" in window)) {
+    document.querySelectorAll(".reveal-card").forEach((node) => node.classList.add("is-visible"));
+    return;
+  }
+
+  revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      });
+    },
+    { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
+  );
+
+  document.querySelectorAll(".reveal-card").forEach((node) => revealObserver.observe(node));
 }
 
 function animateCounts() {
@@ -1936,6 +1983,7 @@ function init() {
   renderFilterState();
   renderLibraryGrid();
   renderWatchGrid();
+  initRevealMotion();
   bindLabFilters();
   bindFilters();
   animateCounts();
