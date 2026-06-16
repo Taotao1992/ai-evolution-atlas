@@ -37,6 +37,7 @@
 
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="#history">History</a>
+        <a href="#garden">Garden</a>
         <a href="#frontier">Frontier</a>
         <a href="#labs">Labs</a>
         <a href="#library">Library</a>
@@ -65,7 +66,7 @@
 
           <div class="hero-actions">
             <a class="button button-primary" href="#history">Open the timeline</a>
-            <a class="button button-secondary" href="#library">Browse all resources</a>
+            <a class="button button-secondary" href="#garden">Explore the garden</a>
           </div>
 
           <div class="hero-metrics" aria-label="Course map summary">
@@ -74,7 +75,7 @@
               <span>timeline eras</span>
             </article>
             <article class="metric-card">
-              <strong data-count="53">0</strong>
+              <strong data-count="54">0</strong>
               <span>curated resources</span>
             </article>
             <article class="metric-card">
@@ -86,6 +87,53 @@
               <span>core videos</span>
             </article>
           </div>
+        </div>
+      </section>
+
+      <section id="garden" class="section garden-section" data-section="garden" aria-labelledby="garden-title">
+        <div class="section-heading">
+          <p class="eyebrow">AI Garden</p>
+          <h2 id="garden-title">A more tactile way to understand the field</h2>
+          <p>
+            Inspired by the Garden Skills idea of reusable capability modules, this map turns the course
+            into branches students can touch: prediction, representation, language, agents, harnesses,
+            recursive improvement, media, and world models.
+          </p>
+        </div>
+
+        <div class="garden-shell">
+          <div class="garden-canvas" aria-label="Interactive AI capability garden">
+            <img
+              class="garden-tree"
+              src="./assets/ai-field-tree.png"
+              alt="AI field tree showing how machine learning, deep learning, transformers, LLMs, and agents connect"
+            />
+            <div class="garden-nodes" id="garden-nodes"></div>
+          </div>
+
+          <aside class="garden-panel" id="garden-panel" aria-live="polite">
+            <p class="detail-kicker" id="garden-kicker">Capability branch</p>
+            <h3 id="garden-panel-title">Loading branch</h3>
+            <p class="timeline-summary" id="garden-summary"></p>
+            <div class="garden-meter" aria-hidden="true">
+              <span id="garden-meter-fill"></span>
+            </div>
+            <div class="detail-grid">
+              <div>
+                <p class="detail-label">What students should learn</p>
+                <p id="garden-learn"></p>
+              </div>
+              <div>
+                <p class="detail-label">Where to click next</p>
+                <p id="garden-next"></p>
+              </div>
+            </div>
+            <div class="chip-row" id="garden-chips"></div>
+            <div class="garden-controls">
+              <button class="button button-secondary" type="button" id="garden-prev">Previous branch</button>
+              <button class="button button-primary" type="button" id="garden-next-button">Next branch</button>
+            </div>
+          </aside>
         </div>
       </section>
 
@@ -150,7 +198,7 @@
               <span>timeline eras</span>
             </article>
             <article>
-              <strong>53</strong>
+              <strong>54</strong>
               <span>library sources</span>
             </article>
             <article>
@@ -328,6 +376,11 @@
           <button class="filter-pill" type="button" data-filter="project">Projects</button>
           <button class="filter-pill" type="button" data-filter="video">Videos</button>
         </div>
+
+        <label class="library-search">
+          <span>Search resources</span>
+          <input id="library-search" type="search" placeholder="Try: world models, harness, Cursor, RSI..." />
+        </label>
 
         <div class="library-meta">
           <p>Showing <span id="library-count">0</span> curated items</p>
