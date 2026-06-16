@@ -1023,21 +1023,6 @@ const libraryItems = [
     url: "https://www.happyoyster.cn/",
   },
   {
-    id: "garden-skills",
-    type: "project",
-    topic: "Harness engineering",
-    poster: "Skills",
-    title: "ConardLi/garden-skills",
-    summary:
-      "A practical skills repository showing how reusable prompts, design systems, image workflows, and review checklists can turn AI work into repeatable capability modules.",
-    bestFor: "Seeing harness engineering as an authoring practice, not just an abstract system diagram.",
-    why: "It gives students a concrete example of skills as reusable outer-layer infrastructure around frontier models.",
-    chips: ["skills", "workflow", "design systems"],
-    accent: "#9ca7ff",
-    image: "./assets/harness-studio.svg",
-    url: "https://github.com/ConardLi/garden-skills",
-  },
-  {
     id: "harness-academy",
     type: "blog",
     topic: "Harness engineering",
@@ -1494,145 +1479,12 @@ const watchItems = [
   },
 ];
 
-const gardenItems = [
-  {
-    id: "ml",
-    kicker: "01 / Prediction",
-    title: "Machine Learning",
-    summary:
-      "The root capability is reliable prediction from data: features, labels, evaluation, and the discipline of improving a model against reality rather than opinion.",
-    learn:
-      "Students should understand train/test splits, features, overfitting, supervised learning, and why evaluation culture made AI useful before the current generative wave.",
-    next:
-      "Open the Dartmouth, Statistical ML, scikit-learn, and 'A Few Useful Things' resources.",
-    chips: ["features", "evaluation", "industrial ML"],
-    accent: "#ffb67b",
-    x: "31%",
-    y: "56%",
-    progress: 12,
-  },
-  {
-    id: "dl",
-    kicker: "02 / Representation",
-    title: "Deep Learning",
-    summary:
-      "Deep learning changes the story by learning internal representations, so the system discovers useful features instead of relying only on human-designed ones.",
-    learn:
-      "The essential shift is from hand-crafted features to learned layers, trained by backprop and scaled by data, GPUs, and benchmark pressure.",
-    next:
-      "Watch the neural-network videos, then open Backprop and AlexNet in the timeline.",
-    chips: ["backprop", "representations", "CNNs"],
-    accent: "#87ffc1",
-    x: "47%",
-    y: "51%",
-    progress: 25,
-  },
-  {
-    id: "llm",
-    kicker: "03 / Language Interface",
-    title: "Transformers and LLMs",
-    summary:
-      "Transformers made attention scalable, and LLMs turned language into an interface for intent, reasoning traces, code, and tool orchestration.",
-    learn:
-      "Students should connect attention, pretraining, prompting, instruction tuning, RLHF, and in-context learning as one interface stack.",
-    next:
-      "Open Attention Is All You Need, GPT-3, InstructGPT, Chain-of-Thought, and Karpathy's LLM talk.",
-    chips: ["attention", "prompting", "instruction following"],
-    accent: "#5dd9ff",
-    x: "68%",
-    y: "41%",
-    progress: 42,
-  },
-  {
-    id: "agents",
-    kicker: "04 / Acting Systems",
-    title: "Agents",
-    summary:
-      "Agents move AI from one response to a loop: observe, reason, retrieve, call tools, act, check outcomes, and recover from failure.",
-    learn:
-      "The important concept is not a magical autonomous being. It is a system pattern for multi-step work under constraints.",
-    next:
-      "Open ReAct, Anthropic's agent article, OpenAI Agents SDK, OpenClaw, Cursor, Codex, and Claude Code.",
-    chips: ["tools", "memory", "loops"],
-    accent: "#c8ff5d",
-    x: "77%",
-    y: "61%",
-    progress: 58,
-  },
-  {
-    id: "harness",
-    kicker: "05 / Outer Control Layer",
-    title: "Harness Engineering and Skills",
-    summary:
-      "Harness engineering is the operating layer around models: skills, instructions, evals, permissions, recovery paths, observability, and workflow design.",
-    learn:
-      "Students should see why the wrapper around the model often determines whether an AI system is dependable enough for real work.",
-    next:
-      "Open Harness Engineering Academy, Ryan Lopopolo's talk, Anthropic's agent guide, and the Garden Skills project.",
-    chips: ["skills", "evals", "guardrails"],
-    accent: "#9ca7ff",
-    x: "16%",
-    y: "31%",
-    progress: 68,
-  },
-  {
-    id: "media",
-    kicker: "06 / Multimodal Surface",
-    title: "Media and World-like Interfaces",
-    summary:
-      "Seedance and Happy Oyster point to AI interfaces that feel more like directing media or entering a scene than typing into a text box.",
-    learn:
-      "The frontier is not only smarter text. It is richer control across image, video, audio, spatial UI, and exploratory environments.",
-    next:
-      "Open Seedance, Happy Oyster, CLIP, and the multimodal resources in the library.",
-    chips: ["video", "spatial UI", "multimodal"],
-    accent: "#ff8f7a",
-    x: "86%",
-    y: "27%",
-    progress: 74,
-  },
-  {
-    id: "rsi",
-    kicker: "07 / AI Improving AI",
-    title: "Recursive Self-Improvement",
-    summary:
-      "Recursive, Sakana's RSI Lab, and Darwin Godel Machine make the newest frontier bet explicit: use AI to improve AI itself.",
-    learn:
-      "The key question is whether improvement can compound through better benchmarks, self-rewriting code, automated research loops, and AI-generated training signals.",
-    next:
-      "Open Recursive, GV's thesis, Sakana RSI Lab, Darwin Godel Machine, and The AI Scientist.",
-    chips: ["RSI", "AI for AI", "self-rewriting agents"],
-    accent: "#5dd9ff",
-    x: "58%",
-    y: "25%",
-    progress: 86,
-  },
-  {
-    id: "worlds",
-    kicker: "08 / Simulation",
-    title: "World Models",
-    summary:
-      "World models are the strongest candidate for the next conceptual jump: systems that compress structure, predict consequences, and plan over imagined futures.",
-    learn:
-      "Students should distinguish renderers, simulators, planners, predictive latent models, embodied policies, and scientific agents.",
-    next:
-      "Open World Models, DreamerV3, I-JEPA, World Labs, Marble, Physical Intelligence, and LeCun's world-model talk.",
-    chips: ["simulation", "planning", "embodiment"],
-    accent: "#87ffc1",
-    x: "91%",
-    y: "73%",
-    progress: 100,
-  },
-];
-
 const state = {
   timelineId: timelineItems[0].id,
-  gardenId: gardenItems[0].id,
   frontierId: frontierItems[0].id,
   labFilter: "all",
   labId: labItems[0].id,
   libraryFilter: "all",
-  libraryQuery: "",
   libraryId: libraryItems[0].id,
 };
 
@@ -1645,17 +1497,6 @@ const timelineShift = document.querySelector("#timeline-shift");
 const timelineWhy = document.querySelector("#timeline-why");
 const timelineChips = document.querySelector("#timeline-chips");
 const timelineLinks = document.querySelector("#timeline-links");
-
-const gardenNodes = document.querySelector("#garden-nodes");
-const gardenPanel = document.querySelector("#garden-panel");
-const gardenKicker = document.querySelector("#garden-kicker");
-const gardenPanelTitle = document.querySelector("#garden-panel-title");
-const gardenSummary = document.querySelector("#garden-summary");
-const gardenLearn = document.querySelector("#garden-learn");
-const gardenNext = document.querySelector("#garden-next");
-const gardenChips = document.querySelector("#garden-chips");
-const gardenPrev = document.querySelector("#garden-prev");
-const gardenNextButton = document.querySelector("#garden-next-button");
 
 const frontierTabs = document.querySelector("#frontier-tabs");
 const frontierImage = document.querySelector("#frontier-image");
@@ -1682,7 +1523,6 @@ const labsLinks = document.querySelector("#labs-links");
 const filterPills = [...document.querySelectorAll("[data-filter]")];
 const libraryCount = document.querySelector("#library-count");
 const libraryGrid = document.querySelector("#library-grid");
-const librarySearch = document.querySelector("#library-search");
 const libraryTitle = document.querySelector("#library-title");
 const librarySummary = document.querySelector("#library-summary");
 const libraryBest = document.querySelector("#library-best");
@@ -1697,7 +1537,6 @@ const navLinks = [...document.querySelectorAll(".site-nav a")];
 const sections = [...document.querySelectorAll("[data-section]")];
 const countNodes = [...document.querySelectorAll("[data-count]")];
 let revealObserver;
-const fallbackImage = "./assets/generated/ai-atlas-motif.jpg";
 
 function makeChip(text) {
   const chip = document.createElement("span");
@@ -1722,25 +1561,8 @@ function clearNode(node) {
 }
 
 function setImage(img, src, alt) {
-  img.onerror = () => {
-    img.onerror = null;
-    img.src = fallbackImage;
-  };
   img.src = src;
   img.alt = alt;
-}
-
-function createCoverImage(src, alt = "") {
-  const image = document.createElement("img");
-  image.src = src;
-  image.alt = alt;
-  image.loading = "lazy";
-  image.onerror = () => {
-    image.onerror = null;
-    image.src = fallbackImage;
-    image.classList.add("is-fallback-cover");
-  };
-  return image;
 }
 
 function addMotionSurface(node, index = 0) {
@@ -1749,73 +1571,11 @@ function addMotionSurface(node, index = 0) {
 
   if (revealObserver) {
     revealObserver.observe(node);
-    requestAnimationFrame(revealVisibleCards);
   }
-}
-
-function revealVisibleCards() {
-  document.querySelectorAll(".reveal-card:not(.is-visible)").forEach((node) => {
-    const rect = node.getBoundingClientRect();
-    const isNearViewport = rect.top < window.innerHeight * 1.08 && rect.bottom > -80;
-
-    if (!isNearViewport) {
-      return;
-    }
-
-    node.classList.add("is-visible");
-
-    if (revealObserver) {
-      revealObserver.unobserve(node);
-    }
-  });
 }
 
 function coverPath(collection, id) {
   return `./assets/covers/${collection}/${id}.jpg`;
-}
-
-function renderGardenNodes() {
-  clearNode(gardenNodes);
-
-  gardenItems.forEach((item, index) => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "garden-node";
-    button.classList.toggle("is-active", item.id === state.gardenId);
-    button.setAttribute("aria-pressed", String(item.id === state.gardenId));
-    button.style.setProperty("--node-x", item.x);
-    button.style.setProperty("--node-y", item.y);
-    button.style.setProperty("--node-accent", item.accent);
-    button.innerHTML = `<span><strong>${item.title}</strong><small>${item.kicker}</small></span>`;
-    button.addEventListener("click", () => {
-      state.gardenId = item.id;
-      renderGardenNodes();
-      renderGardenPanel();
-    });
-    gardenNodes.appendChild(button);
-  });
-}
-
-function renderGardenPanel() {
-  const item = gardenItems.find((entry) => entry.id === state.gardenId);
-
-  gardenPanel.style.setProperty("--garden-progress", `${item.progress}%`);
-  gardenKicker.textContent = item.kicker;
-  gardenPanelTitle.textContent = item.title;
-  gardenSummary.textContent = item.summary;
-  gardenLearn.textContent = item.learn;
-  gardenNext.textContent = item.next;
-
-  clearNode(gardenChips);
-  item.chips.forEach((chip) => gardenChips.appendChild(makeChip(chip)));
-}
-
-function stepGarden(direction) {
-  const currentIndex = gardenItems.findIndex((item) => item.id === state.gardenId);
-  const nextIndex = (currentIndex + direction + gardenItems.length) % gardenItems.length;
-  state.gardenId = gardenItems[nextIndex].id;
-  renderGardenNodes();
-  renderGardenPanel();
 }
 
 function renderTimelineNav() {
@@ -1947,7 +1707,7 @@ function renderLabGrid() {
     const poster = document.createElement("div");
     poster.className = "lab-poster";
     poster.style.setProperty("--accent", item.accent);
-    poster.appendChild(createCoverImage(coverPath("labs", item.id), `${item.title} cover`));
+    poster.innerHTML = `<img src="${coverPath("labs", item.id)}" alt="" />`;
 
     const title = document.createElement("h3");
     title.textContent = item.title;
@@ -1974,48 +1734,15 @@ function renderLabGrid() {
 }
 
 function getFilteredLibraryItems() {
-  const query = state.libraryQuery.trim().toLowerCase();
+  if (state.libraryFilter === "all") {
+    return libraryItems;
+  }
 
-  return libraryItems.filter((item) => {
-    const matchesType = state.libraryFilter === "all" || item.type === state.libraryFilter;
-
-    if (!matchesType) {
-      return false;
-    }
-
-    if (!query) {
-      return true;
-    }
-
-    const searchable = [
-      item.title,
-      item.summary,
-      item.bestFor,
-      item.why,
-      item.topic,
-      item.type,
-      item.poster,
-      ...item.chips,
-    ]
-      .join(" ")
-      .toLowerCase();
-
-    return searchable.includes(query);
-  });
+  return libraryItems.filter((item) => item.type === state.libraryFilter);
 }
 
 function renderLibraryDetail() {
   const item = libraryItems.find((entry) => entry.id === state.libraryId);
-
-  if (!item) {
-    libraryTitle.textContent = "No matching resource";
-    librarySummary.textContent = "Try another keyword or switch the filter back to All.";
-    libraryBest.textContent = "Search across paper titles, projects, topics, and tags.";
-    libraryWhy.textContent = "The full source library is still preserved; the current filter just has no match.";
-    libraryLink.hidden = true;
-    clearNode(libraryChips);
-    return;
-  }
 
   libraryTitle.textContent = item.title;
   librarySummary.textContent = item.summary;
@@ -2023,7 +1750,6 @@ function renderLibraryDetail() {
   libraryWhy.textContent = item.why;
   libraryLink.href = item.url;
   libraryLink.textContent = `Open ${item.type}`;
-  libraryLink.hidden = false;
 
   clearNode(libraryChips);
   item.chips.forEach((chip) => libraryChips.appendChild(makeChip(chip)));
@@ -2039,27 +1765,17 @@ function renderLibraryGrid() {
   libraryCount.textContent = String(filteredItems.length);
   clearNode(libraryGrid);
 
-  if (!filteredItems.length) {
-    const empty = document.createElement("div");
-    empty.className = "empty-state";
-    empty.textContent = "No resources match this filter yet. Clear the search or choose another type.";
-    libraryGrid.appendChild(empty);
-    renderLibraryDetail();
-    return;
-  }
-
   filteredItems.forEach((item, index) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "library-card";
-    button.classList.toggle("is-featured-resource", index === 0);
     button.classList.toggle("is-selected", item.id === state.libraryId);
     button.setAttribute("aria-pressed", String(item.id === state.libraryId));
 
     const poster = document.createElement("div");
     poster.className = "library-poster";
     poster.style.setProperty("--accent", item.accent);
-    poster.appendChild(createCoverImage(item.image ?? coverPath("library", item.id), `${item.title} cover`));
+    poster.innerHTML = `<img src="${coverPath("library", item.id)}" alt="" />`;
 
     const title = document.createElement("h3");
     title.textContent = item.title;
@@ -2116,10 +1832,6 @@ function renderWatchGrid() {
     image.src = item.thumbnail;
     image.alt = item.title;
     image.loading = "lazy";
-    image.onerror = () => {
-      image.onerror = null;
-      image.src = fallbackImage;
-    };
 
     const copy = document.createElement("div");
     copy.className = "watch-copy";
@@ -2144,7 +1856,7 @@ function initRevealMotion() {
   const shouldReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const staticSurfaces = [
     ...document.querySelectorAll(
-      ".guide-panel, .source-lock, .history-shell, .frontier-shell, .future-card",
+      ".section-heading, .guide-panel, .source-lock, .history-shell, .frontier-shell, .labs-detail, .library-detail, .future-card",
     ),
   ];
 
@@ -2170,7 +1882,6 @@ function initRevealMotion() {
   );
 
   document.querySelectorAll(".reveal-card").forEach((node) => revealObserver.observe(node));
-  revealVisibleCards();
 }
 
 function animateCounts() {
@@ -2229,8 +1940,6 @@ function updateScrollUI() {
     const isActive = link.getAttribute("href") === `#${activeId}`;
     link.classList.toggle("is-active", isActive);
   });
-
-  revealVisibleCards();
 }
 
 function bindFilters() {
@@ -2240,11 +1949,6 @@ function bindFilters() {
       renderFilterState();
       renderLibraryGrid();
     });
-  });
-
-  librarySearch.addEventListener("input", () => {
-    state.libraryQuery = librarySearch.value;
-    renderLibraryGrid();
   });
 }
 
@@ -2256,11 +1960,6 @@ function bindLabFilters() {
       renderLabGrid();
     });
   });
-}
-
-function bindGardenControls() {
-  gardenPrev.addEventListener("click", () => stepGarden(-1));
-  gardenNextButton.addEventListener("click", () => stepGarden(1));
 }
 
 function bindPointerGlow() {
@@ -2277,8 +1976,6 @@ function bindPointerGlow() {
 function init() {
   renderTimelineNav();
   renderTimelineDetail();
-  renderGardenNodes();
-  renderGardenPanel();
   renderFrontierTabs();
   renderFrontierPanel();
   renderLabFilterState();
@@ -2287,7 +1984,6 @@ function init() {
   renderLibraryGrid();
   renderWatchGrid();
   initRevealMotion();
-  bindGardenControls();
   bindLabFilters();
   bindFilters();
   animateCounts();
