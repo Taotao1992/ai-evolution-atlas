@@ -6,7 +6,7 @@
     <title>CSC2220 Artificial Intelligence | History, Agents, and World Models</title>
     <meta
       name="description"
-      content="An interactive course website about AI history, from machine learning and deep learning to LLMs, agents, coding systems like Cursor, Codex, and Claude Code, plus Recursive self-improvement, Sakana AI, Thinking Machines, Reflection, World Labs, FutureHouse, Physical Intelligence, OpenClaw, and world models."
+      content="An interactive course website about AI history, from machine learning and deep learning to LLMs, the training-to-inference infrastructure stack, agents, coding systems like Cursor, Codex, and Claude Code, plus Recursive self-improvement, Sakana AI, Thinking Machines, Reflection, World Labs, FutureHouse, Physical Intelligence, OpenClaw, and world models."
     />
     <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -38,6 +38,7 @@
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="#history">History</a>
         <a href="#frontier">Frontier</a>
+        <a href="#llm-stack">Stack</a>
         <a href="#labs">Labs</a>
         <a href="#library">Library</a>
         <a href="#watch">Watch</a>
@@ -58,7 +59,7 @@
           <p class="eyebrow">CSC2220 Artificial Intelligence</p>
           <h1 id="hero-title">A field guide to artificial intelligence.</h1>
           <p class="hero-lead">
-            A high-signal course map from ML and deep learning to LLMs, agents, harness engineering,
+            A high-signal course map from ML and deep learning to LLM training, inference, agents, harness engineering,
             RL environments, recursive self-improvement, and world models, with the original papers, projects, and videos
             kept in one navigable atlas.
           </p>
@@ -74,7 +75,7 @@
               <span>timeline eras</span>
             </article>
             <article class="metric-card">
-              <strong data-count="61">0</strong>
+              <strong data-count="70">0</strong>
               <span>curated resources</span>
             </article>
             <article class="metric-card">
@@ -150,7 +151,7 @@
               <span>timeline eras</span>
             </article>
             <article>
-              <strong>61</strong>
+              <strong>70</strong>
               <span>library sources</span>
             </article>
             <article>
@@ -255,6 +256,93 @@
               <div class="link-list" id="frontier-links"></div>
             </div>
           </article>
+        </div>
+      </section>
+
+      <section id="llm-stack" class="section llm-stack-section" data-section="llm-stack">
+        <div class="section-heading">
+          <p class="eyebrow">LLM lifecycle</p>
+          <h2>From pre-training to post-training to inference, the model is also an infrastructure product.</h2>
+          <p>
+            A modern LLM is not just one training run. It moves through a factory: internet-scale data and
+            distributed compute create a base model, post-training turns it into a usable assistant, and
+            inference infrastructure makes every token fast, cheap, observable, and reliable enough for real users.
+          </p>
+        </div>
+
+        <div class="llm-stack-shell">
+          <div class="stack-flow" role="tablist" aria-label="LLM lifecycle stages">
+            <button class="stack-stage is-active" type="button" data-stack-stage="pretrain">
+              <span>01</span>
+              <strong>Pre-training</strong>
+              <small>data + distributed compute</small>
+            </button>
+            <button class="stack-stage" type="button" data-stack-stage="posttrain">
+              <span>02</span>
+              <strong>Post-training</strong>
+              <small>SFT, preference learning, RL</small>
+            </button>
+            <button class="stack-stage" type="button" data-stack-stage="inference">
+              <span>03</span>
+              <strong>Inference</strong>
+              <small>serving, batching, KV cache</small>
+            </button>
+          </div>
+
+          <article class="stack-panel">
+            <div class="stack-panel-copy">
+              <p class="detail-kicker" id="stack-kicker">Stage</p>
+              <h3 id="stack-title">Loading LLM lifecycle stage</h3>
+              <p class="timeline-summary" id="stack-summary"></p>
+              <div class="detail-grid">
+                <div>
+                  <p class="detail-label">Infra does the hard part</p>
+                  <p id="stack-infra"></p>
+                </div>
+                <div>
+                  <p class="detail-label">If this layer is weak</p>
+                  <p id="stack-risk"></p>
+                </div>
+              </div>
+              <div class="chip-row" id="stack-chips"></div>
+              <div class="link-list" id="stack-links"></div>
+            </div>
+
+            <div class="stack-visual" aria-hidden="true">
+              <div class="stack-orbit stack-orbit-one"></div>
+              <div class="stack-orbit stack-orbit-two"></div>
+              <div class="stack-core">
+                <span id="stack-core-label">LLM</span>
+              </div>
+              <div class="stack-node stack-node-a">data</div>
+              <div class="stack-node stack-node-b">RL</div>
+              <div class="stack-node stack-node-c">serve</div>
+              <div class="stack-node stack-node-d">evals</div>
+            </div>
+          </article>
+
+          <div class="infra-grid" aria-label="Infrastructure themes">
+            <article>
+              <span>compute</span>
+              <strong>Utilization is capability</strong>
+              <p>GPU memory, networking, parallelism, checkpointing, and fault recovery decide how quickly experiments become models.</p>
+            </article>
+            <article>
+              <span>feedback</span>
+              <strong>Post-training needs a loop</strong>
+              <p>Labels, reward models, verifiers, RL rollouts, safety evals, and agent environments turn raw models into behavior.</p>
+            </article>
+            <article>
+              <span>serving</span>
+              <strong>Inference is the product surface</strong>
+              <p>Schedulers, batching, KV cache reuse, quantization, and observability determine latency, cost, and reliability.</p>
+            </article>
+            <article>
+              <span>open stack</span>
+              <strong>SGLang makes serving programmable</strong>
+              <p>SGLang and RadixArk show that inference infrastructure is now a startup and open-source frontier, not a hidden backend detail.</p>
+            </article>
+          </div>
         </div>
       </section>
 
