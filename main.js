@@ -554,6 +554,41 @@ const labItems = [
     ],
   },
   {
+    id: "rl-environments",
+    track: "environments",
+    trackLabel: "RL environments",
+    poster: "Envs",
+    kicker: "Agent environment layer",
+    title: "RL and Agent Environments",
+    summary:
+      "The new agent stack needs places where models can safely act: code sandboxes, cloud browsers, terminals, filesystems, reward loops, and evaluation harnesses. E2B, Browserbase, Daytona, Modal, Blaxel, CoreWeave, and Gymnasium make that environment layer concrete.",
+    bet:
+      "Make environments programmable, disposable, observable, and safe enough for RL-style rollouts, tool-use practice, code execution, browser automation, and long-running agent evaluation.",
+    why:
+      "Students should notice that better models are not enough. Agents improve when they can practice inside reliable environments, receive feedback, recover from failure, and be measured against reproducible tasks.",
+    accent: "#9ca7ff",
+    image: "./assets/harness-studio.svg",
+    chips: ["RL environments", "sandboxes", "agent evals"],
+    links: [
+      {
+        label: "E2B sandboxes",
+        url: "https://e2b.dev/docs",
+      },
+      {
+        label: "Browserbase cloud browsers",
+        url: "https://www.browserbase.com/",
+      },
+      {
+        label: "CoreWeave RL agent sandboxes",
+        url: "https://www.coreweave.com/resources/videos/how-reinforcement-learning-improves-ai-agent-reliability-in-production",
+      },
+      {
+        label: "Gymnasium RL environments",
+        url: "https://gymnasium.farama.org/",
+      },
+    ],
+  },
+  {
     id: "world-labs",
     track: "world-models",
     trackLabel: "world models",
@@ -951,6 +986,126 @@ const libraryItems = [
     chips: ["sdk", "agents", "tooling"],
     accent: "#ffb67b",
     url: "https://openai.github.io/openai-agents-js/",
+  },
+  {
+    id: "openai-sandbox-agents",
+    type: "project",
+    topic: "RL environments",
+    poster: "Sandbox",
+    title: "OpenAI Agents SDK: Sandbox Agents",
+    summary:
+      "OpenAI's TypeScript Agents SDK docs explain sandbox agents as agents paired with isolated filesystem workspaces, shell commands, file editing, snapshots, and session state.",
+    bestFor: "Understanding sandboxes as a general agent primitive rather than a single vendor product.",
+    why: "It gives students a clean abstraction for the environment layer around an agent: isolate execution, observe behavior, and connect tools without handing the model the whole machine.",
+    chips: ["official", "sandboxes", "agent runtime"],
+    accent: "#9ca7ff",
+    image: "./assets/harness-studio.svg",
+    url: "https://openai.github.io/openai-agents-js/guides/sandbox-agents",
+  },
+  {
+    id: "e2b-sandboxes",
+    type: "project",
+    topic: "RL environments",
+    poster: "E2B",
+    title: "E2B Sandboxes",
+    summary:
+      "E2B provides cloud sandboxes for AI agents, with process execution, filesystem access, and computer-use examples for isolated agent work.",
+    bestFor: "Seeing the execution environment that sits between an LLM agent and real code.",
+    why: "E2B makes the invisible infrastructure layer visible: agents need a place to run, inspect outputs, and safely try actions.",
+    chips: ["official", "code execution", "agent sandbox"],
+    accent: "#5dd9ff",
+    image: "./assets/agent-loop.svg",
+    url: "https://e2b.dev/docs",
+  },
+  {
+    id: "browserbase-cloud-browsers",
+    type: "project",
+    topic: "RL environments",
+    poster: "Browser",
+    title: "Browserbase Cloud Browsers",
+    summary:
+      "Browserbase turns the web browser into managed infrastructure for agents, automation, and web interaction.",
+    bestFor: "Understanding browser-based environments for agents that need to search, click, verify, and operate on live web apps.",
+    why: "Many real agent tasks happen through browser state, not clean APIs. Browserbase shows why web environments are a core part of modern agent training and evaluation.",
+    chips: ["official", "cloud browser", "web agents"],
+    accent: "#87ffc1",
+    image: "./assets/media-surface.svg",
+    url: "https://www.browserbase.com/",
+  },
+  {
+    id: "coreweave-rl-agents",
+    type: "video",
+    topic: "RL environments",
+    poster: "RL loops",
+    title: "CoreWeave: How Reinforcement Learning Improves AI Agent Reliability",
+    summary:
+      "A current official demo connecting RL rollouts, agent harnesses, model evaluation, and sandboxed infrastructure for more reliable production agents.",
+    bestFor: "Students who want to see why RL environments are back in the conversation for agents.",
+    why: "It makes the shift from prompt-only agents to environment-trained, measured agents easier to grasp.",
+    chips: ["official video", "RL rollouts", "agent harness"],
+    accent: "#ffb67b",
+    image: "./assets/harness-studio.svg",
+    url: "https://www.coreweave.com/resources/videos/how-reinforcement-learning-improves-ai-agent-reliability-in-production",
+  },
+  {
+    id: "daytona-sandboxes",
+    type: "project",
+    topic: "RL environments",
+    poster: "Daytona",
+    title: "Daytona Secure Infrastructure for AI-Generated Code",
+    summary:
+      "Daytona focuses on secure, fast infrastructure for running AI-generated code in isolated environments.",
+    bestFor: "Seeing how agent code execution becomes a cloud runtime problem.",
+    why: "It is a useful comparison point for E2B: both treat safe execution as the missing substrate for code-writing agents.",
+    chips: ["official", "AI code", "secure runtime"],
+    accent: "#ff8f7a",
+    image: "./assets/llm-attention.svg",
+    url: "https://www.daytona.io/",
+  },
+  {
+    id: "modal-sandboxes",
+    type: "project",
+    topic: "RL environments",
+    poster: "Modal",
+    title: "Modal Sandboxes",
+    summary:
+      "Modal's sandbox docs describe secure containers for executing untrusted user or agent code.",
+    bestFor: "Understanding how serverless compute and agent sandboxes converge.",
+    why: "It gives students another strong example of the execution substrate that makes tool-using agents safer and more scalable.",
+    chips: ["official", "serverless", "untrusted code"],
+    accent: "#5dd9ff",
+    image: "./assets/world-shell.svg",
+    url: "https://modal.com/docs/guide/sandboxes",
+  },
+  {
+    id: "blaxel-sandboxes",
+    type: "project",
+    topic: "RL environments",
+    poster: "Blaxel",
+    title: "Blaxel Sandboxes",
+    summary:
+      "Blaxel positions sandboxes as infrastructure for AI agents that need isolated runtimes, tool calls, and persistent execution contexts.",
+    bestFor: "Comparing newer agent-infrastructure platforms with the better-known E2B and Browserbase examples.",
+    why: "It shows that sandboxes are becoming a category, not a one-company feature.",
+    chips: ["official", "agent infrastructure", "runtime"],
+    accent: "#87ffc1",
+    image: "./assets/dl-stack.svg",
+    url: "https://docs.blaxel.ai/Sandboxes/Overview",
+  },
+  {
+    id: "gymnasium-rl-envs",
+    type: "project",
+    topic: "RL environments",
+    poster: "Gym",
+    title: "Gymnasium",
+    summary:
+      "The Farama Foundation's Gymnasium library is the standard environment API lineage for reinforcement learning tasks and benchmarks.",
+    bestFor: "Connecting today's agent sandboxes back to the classic RL idea of an environment loop.",
+    why: "It gives students the vocabulary for observations, actions, rewards, resets, and reproducibility before they look at LLM agent environments.",
+    chips: ["official", "RL", "environment API"],
+    accent: "#ffb67b",
+    image: "./assets/ml-matrix.svg",
+    url: "https://gymnasium.farama.org/",
   },
   {
     id: "openclaw-repo",
@@ -1561,6 +1716,10 @@ function clearNode(node) {
 }
 
 function setImage(img, src, alt) {
+  img.onerror = () => {
+    img.onerror = null;
+    img.src = fallbackImagePath;
+  };
   img.src = src;
   img.alt = alt;
 }
@@ -1576,6 +1735,24 @@ function addMotionSurface(node, index = 0) {
 
 function coverPath(collection, id) {
   return `./assets/covers/${collection}/${id}.jpg`;
+}
+
+const fallbackImagePath = "./assets/generated/ai-atlas-motif.jpg";
+
+function imagePath(collection, item) {
+  return item.image ?? coverPath(collection, item.id);
+}
+
+function makePosterImage(src, alt = "") {
+  const image = document.createElement("img");
+  image.src = src;
+  image.alt = alt;
+  image.loading = "lazy";
+  image.onerror = () => {
+    image.onerror = null;
+    image.src = fallbackImagePath;
+  };
+  return image;
 }
 
 function renderTimelineNav() {
@@ -1673,7 +1850,7 @@ function renderLabFilterState() {
 function renderLabDetail() {
   const item = labItems.find((entry) => entry.id === state.labId);
 
-  setImage(labsImage, coverPath("labs", item.id), item.title);
+  setImage(labsImage, imagePath("labs", item), item.title);
   labsKicker.textContent = item.kicker;
   labsTitle.textContent = item.title;
   labsSummary.textContent = item.summary;
@@ -1707,7 +1884,7 @@ function renderLabGrid() {
     const poster = document.createElement("div");
     poster.className = "lab-poster";
     poster.style.setProperty("--accent", item.accent);
-    poster.innerHTML = `<img src="${coverPath("labs", item.id)}" alt="" />`;
+    poster.appendChild(makePosterImage(imagePath("labs", item)));
 
     const title = document.createElement("h3");
     title.textContent = item.title;
@@ -1775,7 +1952,7 @@ function renderLibraryGrid() {
     const poster = document.createElement("div");
     poster.className = "library-poster";
     poster.style.setProperty("--accent", item.accent);
-    poster.innerHTML = `<img src="${coverPath("library", item.id)}" alt="" />`;
+    poster.appendChild(makePosterImage(imagePath("library", item)));
 
     const title = document.createElement("h3");
     title.textContent = item.title;
