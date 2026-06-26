@@ -494,19 +494,19 @@ const labItems = [
   {
     id: "thinking-machines",
     track: "collaboration",
-    trackLabel: "collaboration",
+    trackLabel: "Thinking Machines / collaboration",
     poster: "TML",
     kicker: "Human-AI collaboration",
     title: "Thinking Machines Lab",
     summary:
-      "Thinking Machines says the next frontier is not autonomy alone, but AI that is understandable, customizable, multimodal, and collaborative. Its interaction-model work treats interactivity itself as a research target.",
+      "Thinking Machines Lab is a neo lab focused on AI systems that are more understandable, customizable, multimodal, and collaborative. Its interaction-model work treats interactivity itself as a research target.",
     bet:
-      "Build frontier-capable models and infrastructure while making collaboration, customization, and multimodal interaction first-class instead of afterthoughts.",
+      "Build frontier-capable models and infrastructure while making human-AI collaboration, customization, and multimodal interaction first-class instead of afterthoughts.",
     why:
       "This is an important counterpoint to the 'fully autonomous agent' story. It says the real bottleneck may be the quality of collaboration loops between people and models.",
     accent: "#ffb67b",
     image: "./assets/harness-studio.svg",
-    chips: ["interaction models", "customization", "multimodal collaboration"],
+    chips: ["neo lab", "interaction models", "multimodal collaboration"],
     links: [
       {
         label: "Thinking Machines home",
