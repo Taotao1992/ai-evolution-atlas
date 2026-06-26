@@ -432,6 +432,86 @@ const frontierItems = [
   },
 ];
 
+const lifecycleStages = [
+  {
+    id: "pretrain",
+    kicker: "01 / Pre-training",
+    title: "Pre-training turns raw data and compute into a base model.",
+    summary:
+      "This is the massive next-token prediction phase. Teams curate datasets, tokenize text and multimodal streams, run distributed training across GPU clusters, checkpoint constantly, and evaluate whether the base model is actually learning useful representations.",
+    infra:
+      "Data pipelines, parallel training frameworks, GPU scheduling, networking, storage, mixed precision, checkpointing, and experiment tracking are the real production system.",
+    risk:
+      "Weak infrastructure means wasted GPU months, unstable runs, duplicated bad data, silent regressions, and models that are expensive without being better.",
+    coreLabel: "PRE",
+    chips: ["data curation", "distributed training", "Megatron-LM", "checkpoints"],
+    links: [
+      {
+        label: "NVIDIA Megatron-LM",
+        url: "https://github.com/NVIDIA/Megatron-LM",
+      },
+      {
+        label: "Attention Is All You Need",
+        url: "https://arxiv.org/abs/1706.03762",
+      },
+    ],
+  },
+  {
+    id: "posttrain",
+    kicker: "02 / Post-training",
+    title: "Post-training turns a base model into a useful assistant.",
+    summary:
+      "After pre-training, the model still needs behavior shaping: supervised fine-tuning, instruction tuning, preference optimization, RLHF/RLAIF, tool-use traces, safety training, and evaluation against real tasks.",
+    infra:
+      "The system now needs labeling flows, reward models, verifiers, rollout workers, agent environments, safety evals, dataset versioning, and rapid iteration loops.",
+    risk:
+      "Without strong post-training infra, a model can be fluent but unreliable: it may fail tool use, overfit benchmarks, drift in safety, or improve on leaderboards while becoming worse for users.",
+    coreLabel: "RL",
+    chips: ["SFT", "RLHF", "TRL", "Miles", "eval harnesses"],
+    links: [
+      {
+        label: "Hugging Face TRL",
+        url: "https://huggingface.co/docs/trl/index",
+      },
+      {
+        label: "DeepSpeed-Chat",
+        url: "https://github.com/deepspeedai/DeepSpeedExamples/tree/master/applications/DeepSpeed-Chat",
+      },
+      {
+        label: "RadixArk Miles",
+        url: "https://github.com/radixark/miles",
+      },
+    ],
+  },
+  {
+    id: "inference",
+    kicker: "03 / Inference",
+    title: "Inference is where the model becomes a product.",
+    summary:
+      "Serving a model is not just calling it. Systems manage prefill and decode, batching, routing, KV cache reuse, speculative decoding, quantization, structured generation, streaming, monitoring, and cost controls.",
+    infra:
+      "The infrastructure goal is to keep tokens fast and cheap while preserving correctness, observability, uptime, and a programmable interface for agents and applications.",
+    risk:
+      "Bad inference infra turns a capable model into a slow, expensive, unreliable product. Latency spikes, GPU under-utilization, memory fragmentation, and weak scheduling can dominate user experience.",
+    coreLabel: "TOK",
+    chips: ["SGLang", "RadixAttention", "vLLM", "KV cache", "serving"],
+    links: [
+      {
+        label: "SGLang docs",
+        url: "https://docs.sglang.io/",
+      },
+      {
+        label: "RadixArk",
+        url: "https://www.radixark.com/blog/radixark-launches-100m-seed",
+      },
+      {
+        label: "vLLM docs",
+        url: "https://docs.vllm.ai/en/latest/",
+      },
+    ],
+  },
+];
+
 const labItems = [
   {
     id: "recursive-lab",
@@ -958,6 +1038,141 @@ const libraryItems = [
     chips: ["video", "LLM", "overview"],
     accent: "#5dd9ff",
     url: "https://www.youtube.com/watch?v=zjkBMFhNj_g",
+  },
+  {
+    id: "megatron-lm",
+    type: "project",
+    topic: "LLM infrastructure",
+    poster: "Train",
+    title: "NVIDIA Megatron-LM",
+    summary:
+      "A major open-source framework for large-scale transformer training, model parallelism, and distributed LLM pre-training.",
+    bestFor: "Seeing what pre-training infrastructure looks like below the paper level.",
+    why: "Students often hear about 'training a model' as one step. Megatron-LM makes the parallelism, checkpointing, and cluster orchestration problem visible.",
+    chips: ["pre-training", "distributed training", "GPU clusters"],
+    accent: "#87ffc1",
+    image: "./assets/dl-stack.svg",
+    url: "https://github.com/NVIDIA/Megatron-LM",
+  },
+  {
+    id: "deepspeed-chat",
+    type: "project",
+    topic: "LLM post-training",
+    poster: "RLHF",
+    title: "DeepSpeed-Chat",
+    summary:
+      "Microsoft's open-source RLHF training examples for turning base models into chat-style assistants.",
+    bestFor: "Understanding the engineering pipeline behind supervised fine-tuning, reward modeling, and RLHF.",
+    why: "It grounds post-training in concrete code and data flow rather than describing alignment as a black box.",
+    chips: ["post-training", "RLHF", "alignment"],
+    accent: "#ffb67b",
+    image: "./assets/harness-studio.svg",
+    url: "https://github.com/deepspeedai/DeepSpeedExamples/tree/master/applications/DeepSpeed-Chat",
+  },
+  {
+    id: "huggingface-trl",
+    type: "project",
+    topic: "LLM post-training",
+    poster: "TRL",
+    title: "Hugging Face TRL",
+    summary:
+      "A practical library for supervised fine-tuning, reward modeling, preference optimization, and reinforcement learning for language models.",
+    bestFor: "Connecting post-training concepts like SFT, DPO, PPO, and reward models to working tooling.",
+    why: "TRL is one of the clearest open-source ways to teach the behavioral layer added after base pre-training.",
+    chips: ["SFT", "DPO", "RLHF"],
+    accent: "#5dd9ff",
+    image: "./assets/agent-loop.svg",
+    url: "https://huggingface.co/docs/trl/index",
+  },
+  {
+    id: "sglang-docs",
+    type: "project",
+    topic: "LLM inference",
+    poster: "SGLang",
+    title: "SGLang Docs",
+    summary:
+      "SGLang is an open-source serving framework for fast LLM and vision-language model execution, structured generation, and agentic workflows.",
+    bestFor: "Understanding why inference is becoming programmable infrastructure rather than a single API call.",
+    why: "It introduces students to RadixAttention, batching, scheduling, and the serving layer that determines real-world latency and cost.",
+    chips: ["serving", "SGLang", "structured generation"],
+    accent: "#87ffc1",
+    image: "./assets/llm-attention.svg",
+    url: "https://docs.sglang.io/",
+  },
+  {
+    id: "sglang-paper",
+    type: "paper",
+    topic: "LLM inference",
+    poster: "Runtime",
+    title: "SGLang: Efficient Execution of Structured Language Model Programs",
+    summary:
+      "The SGLang paper behind the idea that LLM programs can be represented and executed efficiently with a runtime designed for structured generation.",
+    bestFor: "Students who want the research argument behind the SGLang serving stack.",
+    why: "It shows that inference is now a research problem in its own right: scheduling and execution strategy shape what agent systems can do.",
+    chips: ["paper", "serving runtime", "RadixAttention"],
+    accent: "#ff8f7a",
+    image: "./assets/media-surface.svg",
+    url: "https://arxiv.org/abs/2312.07104",
+  },
+  {
+    id: "lmsys-sglang-blog",
+    type: "blog",
+    topic: "LLM inference",
+    poster: "Guide",
+    title: "LMSYS: Introducing SGLang",
+    summary:
+      "The original LMSYS announcement explaining SGLang as a language and runtime for efficient structured LLM programs.",
+    bestFor: "A more readable bridge before diving into the full paper or docs.",
+    why: "It helps students see why SGLang exists: complex LLM apps need both an interface language and a runtime optimized for reuse.",
+    chips: ["blog", "runtime", "structured LLM programs"],
+    accent: "#ffb67b",
+    image: "./assets/world-shell.svg",
+    url: "https://www.lmsys.org/blog/2024-01-17-sglang/",
+  },
+  {
+    id: "vllm-docs",
+    type: "project",
+    topic: "LLM inference",
+    poster: "vLLM",
+    title: "vLLM Docs",
+    summary:
+      "A high-throughput open-source LLM serving engine centered on efficient batching, memory management, and production inference.",
+    bestFor: "Comparing SGLang with another influential inference-serving stack.",
+    why: "vLLM makes the product-side economics of LLMs visible: throughput, memory, latency, and serving architecture matter as much as model quality.",
+    chips: ["serving", "PagedAttention", "throughput"],
+    accent: "#5dd9ff",
+    image: "./assets/ml-matrix.svg",
+    url: "https://docs.vllm.ai/en/latest/",
+  },
+  {
+    id: "radixark-launch",
+    type: "blog",
+    topic: "LLM infrastructure",
+    poster: "RadixArk",
+    title: "RadixArk launches to grow SGLang",
+    summary:
+      "RadixArk's launch announcement frames SGLang as frontier AI infrastructure and explains the company building around it.",
+    bestFor: "Seeing how an open-source serving project becomes a company-level infrastructure bet.",
+    why: "It shows students the startup layer around AI systems: not every important AI company trains a new foundation model.",
+    chips: ["startup", "SGLang", "inference infra"],
+    accent: "#9ca7ff",
+    image: "./assets/harness-studio.svg",
+    url: "https://www.radixark.com/blog/radixark-launches-100m-seed",
+  },
+  {
+    id: "radixark-miles",
+    type: "project",
+    topic: "LLM post-training",
+    poster: "Miles",
+    title: "RadixArk Miles",
+    summary:
+      "Miles is RadixArk's open-source distributed system for scalable reinforcement learning on language models.",
+    bestFor: "Connecting post-training and inference infrastructure into one modern systems story.",
+    why: "It is a useful sign that the frontier is moving toward full-stack systems for RL, serving, and model improvement loops.",
+    chips: ["RL", "post-training", "distributed systems"],
+    accent: "#87ffc1",
+    image: "./assets/agent-loop.svg",
+    url: "https://github.com/radixark/miles",
   },
   {
     id: "anthropic-agents",
@@ -1637,6 +1852,7 @@ const watchItems = [
 const state = {
   timelineId: timelineItems[0].id,
   frontierId: frontierItems[0].id,
+  stackStageId: lifecycleStages[0].id,
   labFilter: "all",
   labId: labItems[0].id,
   libraryFilter: "all",
@@ -1662,6 +1878,16 @@ const frontierInterpretation = document.querySelector("#frontier-interpretation"
 const frontierWhy = document.querySelector("#frontier-why");
 const frontierChips = document.querySelector("#frontier-chips");
 const frontierLinks = document.querySelector("#frontier-links");
+
+const stackStageButtons = [...document.querySelectorAll("[data-stack-stage]")];
+const stackKicker = document.querySelector("#stack-kicker");
+const stackTitle = document.querySelector("#stack-title");
+const stackSummary = document.querySelector("#stack-summary");
+const stackInfra = document.querySelector("#stack-infra");
+const stackRisk = document.querySelector("#stack-risk");
+const stackChips = document.querySelector("#stack-chips");
+const stackLinks = document.querySelector("#stack-links");
+const stackCoreLabel = document.querySelector("#stack-core-label");
 
 const labFilterPills = [...document.querySelectorAll("[data-lab-filter]")];
 const labsCount = document.querySelector("#labs-count");
@@ -1829,6 +2055,31 @@ function renderFrontierPanel() {
 
   clearNode(frontierLinks);
   item.links.forEach((link) => frontierLinks.appendChild(makeLink(link)));
+}
+
+function renderStackStageState() {
+  stackStageButtons.forEach((button) => {
+    const active = button.dataset.stackStage === state.stackStageId;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-selected", String(active));
+  });
+}
+
+function renderStackDetail() {
+  const item = lifecycleStages.find((entry) => entry.id === state.stackStageId);
+
+  stackKicker.textContent = item.kicker;
+  stackTitle.textContent = item.title;
+  stackSummary.textContent = item.summary;
+  stackInfra.textContent = item.infra;
+  stackRisk.textContent = item.risk;
+  stackCoreLabel.textContent = item.coreLabel;
+
+  clearNode(stackChips);
+  item.chips.forEach((chip) => stackChips.appendChild(makeChip(chip)));
+
+  clearNode(stackLinks);
+  item.links.forEach((link) => stackLinks.appendChild(makeLink(link)));
 }
 
 function getFilteredLabItems() {
@@ -2033,7 +2284,7 @@ function initRevealMotion() {
   const shouldReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const staticSurfaces = [
     ...document.querySelectorAll(
-      ".section-heading, .guide-panel, .source-lock, .history-shell, .frontier-shell, .labs-detail, .library-detail, .future-card",
+      ".section-heading, .guide-panel, .source-lock, .history-shell, .frontier-shell, .llm-stack-shell, .labs-detail, .library-detail, .future-card",
     ),
   ];
 
@@ -2139,6 +2390,16 @@ function bindLabFilters() {
   });
 }
 
+function bindStackStages() {
+  stackStageButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      state.stackStageId = button.dataset.stackStage;
+      renderStackStageState();
+      renderStackDetail();
+    });
+  });
+}
+
 function bindPointerGlow() {
   if (window.matchMedia("(pointer: coarse)").matches) {
     return;
@@ -2155,12 +2416,15 @@ function init() {
   renderTimelineDetail();
   renderFrontierTabs();
   renderFrontierPanel();
+  renderStackStageState();
+  renderStackDetail();
   renderLabFilterState();
   renderLabGrid();
   renderFilterState();
   renderLibraryGrid();
   renderWatchGrid();
   initRevealMotion();
+  bindStackStages();
   bindLabFilters();
   bindFilters();
   animateCounts();
