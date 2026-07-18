@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - '***REMOVED***/**'
   workflow_dispatch:
 
 permissions:
@@ -36,7 +34,6 @@ jobs:
           mkdir -p dist
           cp index.html styles.css main.js dist/
           cp -R assets dist/
-          cp -R ***REMOVED*** dist/
           touch dist/.nojekyll
 
       - name: Upload artifact

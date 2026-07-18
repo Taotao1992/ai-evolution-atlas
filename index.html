@@ -9,6 +9,33 @@
       content="An interactive course website about AI history, from machine learning and deep learning to LLMs, the training-to-inference infrastructure stack, agents, coding systems like Cursor, Codex, and Claude Code, plus Recursive self-improvement, Sakana AI, Thinking Machines, Reflection, World Labs, FutureHouse, Physical Intelligence, OpenClaw, and world models."
     />
     <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
+    <link rel="canonical" href="https://taotao1992.github.io/ai-evolution-atlas/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="CSC2220 Artificial Intelligence | History, Agents, and World Models" />
+    <meta
+      property="og:description"
+      content="An interactive course website about AI history, from machine learning and deep learning to LLMs, the training-to-inference infrastructure stack, agents, coding systems like Cursor, Codex, and Claude Code, plus Recursive self-improvement, Sakana AI, Thinking Machines, Reflection, World Labs, FutureHouse, Physical Intelligence, OpenClaw, and world models."
+    />
+    <meta property="og:url" content="https://taotao1992.github.io/ai-evolution-atlas/" />
+    <meta property="og:image" content="https://taotao1992.github.io/ai-evolution-atlas/assets/hero-stage.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        "name": "CSC2220 Artificial Intelligence",
+        "description": "An interactive course website about AI history, from machine learning and deep learning to LLMs, the training-to-inference infrastructure stack, agents, coding systems like Cursor, Codex, and Claude Code, plus Recursive self-improvement, Sakana AI, Thinking Machines, Reflection, World Labs, FutureHouse, Physical Intelligence, OpenClaw, and world models.",
+        "url": "https://taotao1992.github.io/ai-evolution-atlas/",
+        "provider": {
+          "@type": "CollegeOrUniversity",
+          "name": "University of Southern Queensland (UniSQ)"
+        },
+        "instructor": {
+          "@type": "Person",
+          "name": "Taotao Cai"
+        }
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -19,6 +46,7 @@
     <script type="module" src="./main.js" defer></script>
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <div class="page-glow" aria-hidden="true"></div>
     <div class="top-progress" aria-hidden="true">
       <span id="scroll-progress"></span>
@@ -46,11 +74,11 @@
       </nav>
     </header>
 
-    <main>
+    <main id="main">
       <section id="top" class="section hero" data-section="top" aria-labelledby="hero-title">
         <img
           class="hero-backdrop"
-          src="./assets/ai-field-tree.png"
+          src="./assets/ai-field-tree.jpg"
           alt="Illustrated AI tree connecting machine learning, deep learning, transformers, agents, and LLMs"
         />
         <div class="hero-vignette" aria-hidden="true"></div>
@@ -71,19 +99,19 @@
 
           <div class="hero-metrics" aria-label="Course map summary">
             <article class="metric-card">
-              <strong data-count="10">0</strong>
+              <strong data-count="10" data-metric="timeline">0</strong>
               <span>timeline eras</span>
             </article>
             <article class="metric-card">
-              <strong data-count="70">0</strong>
+              <strong data-count="70" data-metric="library">0</strong>
               <span>curated resources</span>
             </article>
             <article class="metric-card">
-              <strong data-count="9">0</strong>
+              <strong data-count="9" data-metric="labs">0</strong>
               <span>frontier lab bets</span>
             </article>
             <article class="metric-card">
-              <strong data-count="6">0</strong>
+              <strong data-count="6" data-metric="watch">0</strong>
               <span>core videos</span>
             </article>
           </div>
@@ -99,9 +127,8 @@
             <p class="eyebrow">The course guide</p>
             <h2>Follow the capability shift, not just the buzzword.</h2>
             <p>
-              The site now behaves more like a portfolio map: each chapter keeps the original source
-              material, but gives students a clearer visual path through what changed, why it mattered,
-              and what to open next.
+              Each chapter keeps the original source material and gives you a clear path through what changed,
+              why it mattered, and what to open next. The timeline is the spine; start anywhere.
             </p>
           </div>
           <div class="guide-steps" aria-label="Capability layers">
@@ -137,29 +164,28 @@
       <section class="section source-section" aria-label="Preserved course sources">
         <div class="source-lock">
           <div class="source-lock-copy">
-            <p class="eyebrow">Source lock</p>
-            <h2>The materials stay intact. The presentation gets sharper.</h2>
+            <p class="eyebrow">What's inside</p>
+            <h2>One atlas, every primary source in reach.</h2>
             <p>
-              This refresh is a visual upgrade on top of the existing atlas: the original videos, papers,
-              projects, lab links, and future-facing readings are still present, but the page now gives them
-              a more navigable, portfolio-grade surface.
+              Every claim on this page links out to the original paper, official documentation, talk, or
+              product page. Use the counts below as a map of the territory.
             </p>
           </div>
           <div class="source-lock-grid" aria-label="Preserved content counts">
             <article>
-              <strong>10</strong>
+              <strong data-source-count="timeline">10</strong>
               <span>timeline eras</span>
             </article>
             <article>
-              <strong>70</strong>
+              <strong data-source-count="library">70</strong>
               <span>library sources</span>
             </article>
             <article>
-              <strong>9</strong>
+              <strong data-source-count="labs">9</strong>
               <span>lab bets</span>
             </article>
             <article>
-              <strong>6</strong>
+              <strong data-source-count="watch">6</strong>
               <span>video cards</span>
             </article>
           </div>
@@ -174,7 +200,8 @@
           <span>2012 AlexNet</span>
           <span>2017 Transformer</span>
           <span>2020 GPT-3</span>
-          <span>2024 Agent wave</span>
+          <span>2023-2024 Agent wave</span>
+          <span>2024-2025 Reasoning (o1 / R1)</span>
           <span>2025-2026 Seedance / OpenClaw / Harness / Happy Oyster</span>
           <span>2026 Recursive / Sakana RSI / Thinking Machines / World Labs</span>
           <span>Next: world models</span>
@@ -516,8 +543,27 @@
     </main>
 
     <footer class="site-footer">
-      <p>CSC2220 Artificial Intelligence</p>
-      <p>Created by Taotao Cai using Codex for CSC2220 at UniSQ.</p>
+      <div class="footer-grid">
+        <div class="footer-block footer-course">
+          <p class="footer-title">CSC2220 Artificial Intelligence</p>
+          <p class="footer-note">Created by Taotao Cai for CSC2220 at UniSQ. Built with Codex; maintained as a living atlas.</p>
+        </div>
+        <nav class="footer-block footer-nav" aria-label="Footer navigation">
+          <p class="footer-title">Explore</p>
+          <a href="#history">History</a>
+          <a href="#frontier">Frontier</a>
+          <a href="#llm-stack">Stack</a>
+          <a href="#labs">Labs</a>
+          <a href="#library">Library</a>
+          <a href="#watch">Watch</a>
+          <a href="#future">Future</a>
+        </nav>
+        <div class="footer-block footer-source">
+          <p class="footer-title">Source</p>
+          <a href="https://github.com/Taotao1992/ai-evolution-atlas" target="_blank" rel="noreferrer">GitHub repository</a>
+          <p class="footer-note">Last updated July 2026</p>
+        </div>
+      </div>
     </footer>
   </body>
 </html>

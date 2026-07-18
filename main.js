@@ -179,13 +179,38 @@ const timelineItems = [
     ],
   },
   {
+    id: "reasoning",
+    era: "2024-2025",
+    buttonTitle: "Reasoning",
+    buttonSubtitle: "Test-time compute and RL",
+    title: "Reasoning models made thinking time a new scaling axis.",
+    summary:
+      "OpenAI's o1 and open models like DeepSeek-R1 showed that spending more compute at inference time — longer chains of thought trained with reinforcement learning — could unlock step-change gains on math, code, and science problems.",
+    shift:
+      "The field added a second scaling curve: not just bigger pre-training, but more deliberate computation during the answer itself.",
+    why:
+      "Reasoning models changed what 'using AI' means for hard problems and set up the agent wave: systems that think longer can act more reliably.",
+    chips: ["test-time compute", "RL", "o1 / R1"],
+    image: "./assets/llm-attention.svg",
+    links: [
+      {
+        label: "DeepSeek-R1 (arXiv)",
+        url: "https://arxiv.org/abs/2501.12948",
+      },
+      {
+        label: "OpenAI: Learning to Reason with LLMs",
+        url: "https://openai.com/index/learning-to-reason-with-llms/",
+      },
+    ],
+  },
+  {
     id: "multimodal-frontier",
     era: "2025-2026",
     buttonTitle: "Beyond chat",
     buttonSubtitle: "OpenClaw, Seedance, Happy Oyster, harnesses",
     title: "The frontier is splitting into agent systems, cinematic media, and world-like interfaces.",
     summary:
-      "Current frontier products do not point in just one direction. OpenClaw emphasizes personal agent systems, Seedance pushes multimodal audio-video generation, Happy Oyster hints at spatial or world-like interfaces, and harness engineering formalizes the outer control layer.",
+      "Current frontier products do not point in just one direction. OpenClaw emphasizes personal agent systems, Seedance pushes multimodal audio-video generation, Alibaba's Happy Oyster turns world models into explorable spaces, and harness engineering formalizes the outer control layer.",
     shift:
       "The question is no longer only how smart the model is. It is also what medium it inhabits, what control surfaces surround it, and whether it can stay coherent over time.",
     why:
@@ -342,24 +367,24 @@ const frontierItems = [
         url: "https://dreamina.capcut.com/tools/seedance-2-0",
       },
       {
-        label: "Seedance 2.0 model card on arXiv",
+        label: "Seedance 2.0 technical report on arXiv",
         url: "https://arxiv.org/abs/2604.14148",
       },
     ],
   },
   {
     id: "happy-oyster",
-    kicker: "World-like interface experiments",
+    kicker: "World-model product",
     tabTitle: "Happy Oyster",
-    tabSubtitle: "immersive, spatial, exploratory",
-    title: "Happy Oyster hints at a more world-like, explorable interface layer.",
+    tabSubtitle: "Alibaba's explorable world model",
+    title: "Happy Oyster turns world-model output into a place you can enter.",
     summary:
-      "The official Happy Oyster experience leans away from plain chat and toward an immersive audiovisual surface. Even if the exact product category is still evolving, the interface direction is notable.",
+      "Happy Oyster is Alibaba's interactive world-model product (limited early access, April 2026). Instead of answering in chat, it opens a navigable generated world: you define an atmosphere, choose Directing or Wandering, and move through the scene.",
     interpretation:
-      "The most interesting read is not the branding itself but the interface signal: AI may increasingly appear as a navigable environment or media space rather than a single text input box.",
+      "The interesting signal is the interface: world-model output presented as a place you enter, not an asset you download. It sits in the same conceptual family as World Labs' Marble, but from a Chinese tech giant.",
     why:
       "If products like this gain traction, we may remember chat as a transitional form. The next-generation experience could feel more like entering a scene than opening a conversation.",
-    chips: ["immersive UI", "interactive media", "spatial metaphor"],
+    chips: ["world model", "Alibaba", "immersive UI"],
     image: "./assets/oyster-world.svg",
     links: [
       {
@@ -521,7 +546,7 @@ const labItems = [
     kicker: "Self-improving AI",
     title: "Recursive Superintelligence",
     summary:
-      "Recursive positions itself around one thesis: AI should improve AI. Its official site frames this as open-ended, recursively self-improving superintelligence aimed first at automating the science of AI itself.",
+      "Recursive Superintelligence exited stealth in May 2026 with $650M led by GV and Greycroft. Founded by Richard Socher, Tim Rocktäschel, and researchers from DeepMind, OpenAI, Meta, and Salesforce, it frames one thesis: AI should improve AI through open-ended, recursively self-improving systems.",
     bet:
       "Build open-ended systems that can identify limitations, generate better benchmarks, and improve the code and research process that powers later models.",
     why:
@@ -1369,9 +1394,9 @@ const libraryItems = [
     type: "paper",
     topic: "Seedance",
     poster: "2.0",
-    title: "Seedance 2.0: Advancing Video Generation for World Complexity",
+    title: "Seedance 2.0 technical report",
     summary:
-      "The 2026 Seedance 2.0 model card on arXiv, describing the multimodal audio-video generation stack.",
+      "The official Seedance 2.0 report from the ByteDance Seed team (arXiv, April 2026), covering the unified architecture for native multi-modal audio-video generation.",
     bestFor: "Understanding the technical jump from cool demos to integrated multimodal generation.",
     why: "It adds substance to the product story and makes the recent frontier less hand-wavy.",
     chips: ["paper", "2026", "audio-video"],
@@ -1381,14 +1406,14 @@ const libraryItems = [
   {
     id: "happy-oyster",
     type: "project",
-    topic: "Happy Oyster",
+    topic: "World models",
     poster: "World",
     title: "Happy Oyster",
     summary:
-      "An interface experiment that feels closer to an immersive environment than a plain chatbot page.",
-    bestFor: "Tracking the possibility that AI UX becomes more spatial and exploratory.",
-    why: "Even without a standard category label yet, it points to a meaningful interface direction.",
-    chips: ["immersive", "UI", "experimental"],
+      "Alibaba's interactive world-model product: define an atmosphere, choose Directing or Wandering, and move through a generated world.",
+    bestFor: "Tracking the possibility that AI UX becomes spatial and exploratory.",
+    why: "It is a concrete big-tech product bet that AI interfaces become places, not just conversations.",
+    chips: ["world model", "Alibaba", "experimental"],
     accent: "#87ffc1",
     url: "https://www.happyoyster.cn/",
   },
@@ -1521,14 +1546,14 @@ const libraryItems = [
   {
     id: "tinker-announcement",
     type: "blog",
-    topic: "Collaboration",
+    topic: "LLM post-training",
     poster: "Tinker",
     title: "Announcing Tinker",
     summary:
-      "Thinking Machines' product preview for a collaborative multimodal workspace built around memory, artifacts, and ongoing interaction.",
-    bestFor: "Seeing how the interaction-model thesis turns into a concrete product surface.",
-    why: "It makes the collaboration bet feel like a real interface direction instead of a vague research slogan.",
-    chips: ["product preview", "collaboration", "multimodal"],
+      "Thinking Machines' first product is a managed API for fine-tuning open-weight models: you write training loops in Python with low-level primitives like forward_backward and optim_step, and TML runs them on its clusters using LoRA.",
+    bestFor: "Understanding how frontier post-training is being productized as a managed service.",
+    why: "It connects the post-training chapter to a real, usable product, with the open-source Tinker Cookbook as a teaching artifact.",
+    chips: ["fine-tuning API", "LoRA", "post-training"],
     accent: "#ff8f7a",
     url: "https://thinkingmachines.ai/news/announcing-tinker/",
   },
@@ -1783,6 +1808,34 @@ const libraryItems = [
     chips: ["scaling", "essay", "history"],
     accent: "#ff8f7a",
     url: "http://www.incompleteideas.net/IncIdeas/BitterLesson.html",
+  },
+  {
+    id: "deepseek-r1",
+    type: "paper",
+    topic: "Reasoning",
+    poster: "R1",
+    title: "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning",
+    summary:
+      "The open reasoning model that showed RL-trained long chains of thought could reach frontier-level math and code performance — with open weights and an open recipe.",
+    bestFor: "Understanding the test-time-compute shift through a fully open artifact.",
+    why: "It anchors the reasoning era in a paper students can actually read, and it changed the economics conversation around frontier models.",
+    chips: ["paper", "2025", "RL reasoning"],
+    accent: "#5dd9ff",
+    url: "https://arxiv.org/abs/2501.12948",
+  },
+  {
+    id: "karpathy-deep-dive",
+    type: "video",
+    topic: "LLMs",
+    poster: "Deep dive",
+    title: "Karpathy: Deep Dive into LLMs like ChatGPT",
+    summary:
+      "A long-form tour of the full LLM pipeline: pre-training, post-training, reasoning, tools, and where the stack is heading.",
+    bestFor: "Students who want one video that connects the whole course map end to end.",
+    why: "It reinforces the training-to-inference story this atlas teaches, straight from one of the field's best teachers.",
+    chips: ["video", "LLM pipeline", "overview"],
+    accent: "#87ffc1",
+    url: "https://www.youtube.com/watch?v=7xTGNNLPyMI",
   },
 ];
 
@@ -2427,6 +2480,28 @@ function init() {
   bindStackStages();
   bindLabFilters();
   bindFilters();
+
+  const metricCounts = {
+    timeline: timelineItems.length,
+    library: libraryItems.length,
+    labs: labItems.length,
+    watch: watchItems.length,
+  };
+
+  document.querySelectorAll("[data-metric]").forEach((node) => {
+    const value = metricCounts[node.dataset.metric];
+    if (value !== undefined) {
+      node.dataset.count = String(value);
+    }
+  });
+
+  document.querySelectorAll("[data-source-count]").forEach((node) => {
+    const value = metricCounts[node.dataset.sourceCount];
+    if (value !== undefined) {
+      node.textContent = String(value);
+    }
+  });
+
   animateCounts();
   bindPointerGlow();
   updateScrollUI();
