@@ -18,10 +18,6 @@ const timelineItems = [
         label: "Dartmouth: Artificial Intelligence Coined at Dartmouth",
         url: "https://home.dartmouth.edu/about/artificial-intelligence-ai-coined-dartmouth",
       },
-      {
-        label: "The original Dartmouth workshop proposal",
-        url: "http://jmc.stanford.edu/articles/dartmouth/dartmouth.pdf",
-      },
     ],
   },
   {
@@ -104,6 +100,27 @@ const timelineItems = [
     ],
   },
   {
+    id: "alphago",
+    era: "2016",
+    buttonTitle: "AlphaGo",
+    buttonSubtitle: "Learned representations meet search",
+    title: "AlphaGo made the combination of deep learning and planning visible to the world.",
+    summary:
+      "AlphaGo combined deep neural networks with Monte Carlo tree search to master Go. Its 2016 Nature paper documented a system that learned both from human games and self-play rather than relying on exhaustive search alone.",
+    shift:
+      "The milestone connected representation learning, evaluation, reinforcement learning, and search inside one decision-making system.",
+    why:
+      "It offers a concrete bridge from pattern recognition to sequential decision-making—and a useful precursor to later agents that must evaluate possible actions.",
+    chips: ["search", "reinforcement learning", "self-play"],
+    image: "./assets/dl-stack.svg",
+    links: [
+      {
+        label: "Nature: Mastering the game of Go",
+        url: "https://www.nature.com/articles/nature16961",
+      },
+    ],
+  },
+  {
     id: "transformer",
     era: "2017",
     buttonTitle: "Transformers",
@@ -154,6 +171,31 @@ const timelineItems = [
     ],
   },
   {
+    id: "generative-ai",
+    era: "2022",
+    buttonTitle: "Generative assistants",
+    buttonSubtitle: "Instruction tuning meets a public interface",
+    title: "Alignment and generative assistants changed who could direct an AI system.",
+    summary:
+      "InstructGPT showed how instruction tuning with human feedback could make a language model better follow user intent. ChatGPT then turned conversational interaction into a mass-market interface for generation, explanation, and drafting.",
+    shift:
+      "The teaching focus expands from model scale to post-training: demonstrations, preference feedback, evaluation, and the gap between a fluent answer and a reliable one.",
+    why:
+      "This milestone makes clear that useful assistants are shaped through both training and interface design—not by next-token prediction alone.",
+    chips: ["instruction tuning", "RLHF", "generative AI"],
+    image: "./assets/llm-attention.svg",
+    links: [
+      {
+        label: "Training language models to follow instructions with human feedback",
+        url: "https://arxiv.org/abs/2203.02155",
+      },
+      {
+        label: "OpenAI: Introducing ChatGPT",
+        url: "https://openai.com/index/chatgpt/",
+      },
+    ],
+  },
+  {
     id: "agents",
     era: "2023-2024",
     buttonTitle: "Agents",
@@ -164,7 +206,7 @@ const timelineItems = [
     shift:
       "Single-response chat gave way to multi-step workflows that can inspect state, call APIs, recover from failure, and coordinate subtasks.",
     why:
-      "This is the layer where AI products start to feel dependable enough for real work instead of one-shot demos.",
+      "This is where capability becomes a systems question: tools, permissions, feedback, and evaluation can matter as much as the base model.",
     chips: ["retrieval", "tool use", "orchestration"],
     image: "./assets/agent-loop.svg",
     links: [
@@ -185,12 +227,12 @@ const timelineItems = [
     buttonSubtitle: "Test-time compute and RL",
     title: "Reasoning models made thinking time a new scaling axis.",
     summary:
-      "OpenAI's o1 and open models like DeepSeek-R1 showed that spending more compute at inference time — longer chains of thought trained with reinforcement learning — could unlock step-change gains on math, code, and science problems.",
+      "OpenAI's o1 and open-weight models such as DeepSeek-R1 showed that additional inference-time computation, trained with reinforcement learning, could improve performance on many math, code, and science tasks.",
     shift:
-      "The field added a second scaling curve: not just bigger pre-training, but more deliberate computation during the answer itself.",
+      "The field added another scaling dimension: not only larger pre-training runs, but more deliberate computation while producing an answer.",
     why:
-      "Reasoning models changed what 'using AI' means for hard problems and set up the agent wave: systems that think longer can act more reliably.",
-    chips: ["test-time compute", "RL", "o1 / R1"],
+      "This shift makes cost, latency, verification, and task difficulty central to model choice. More thinking is useful on some tasks, not a universal guarantee of reliability.",
+    chips: ["test-time compute", "RL", "verification"],
     image: "./assets/llm-attention.svg",
     links: [
       {
@@ -206,16 +248,16 @@ const timelineItems = [
   {
     id: "multimodal-frontier",
     era: "2025-2026",
-    buttonTitle: "Beyond chat",
-    buttonSubtitle: "OpenClaw, Seedance, Happy Oyster, harnesses",
-    title: "The frontier is splitting into agent systems, cinematic media, and world-like interfaces.",
+    buttonTitle: "Systems & simulations",
+    buttonSubtitle: "Agents, open weights, media, environments",
+    title: "The current map expands from standalone models to systems and simulations.",
     summary:
-      "Current frontier products do not point in just one direction. OpenClaw emphasizes personal agent systems, Seedance pushes multimodal audio-video generation, Alibaba's Happy Oyster turns world models into explorable spaces, and harness engineering formalizes the outer control layer.",
+      "OpenClaw explores persistent personal agents, Beam adds an Apache 2.0 open-weight deployment option, Seedance develops unified audio-video generation, and Genie turns generation into an interactive-environment problem.",
     shift:
-      "The question is no longer only how smart the model is. It is also what medium it inhabits, what control surfaces surround it, and whether it can stay coherent over time.",
+      "Evaluation now has to cover the model, its tools and permissions, its harness, and the environment in which outputs become actions.",
     why:
-      "This is the first phase where the future of AI starts to look plural: more than one dominant interface may emerge.",
-    chips: ["multimodal", "agent products", "interface expansion"],
+      "These parallel directions are best compared as design choices with different evidence and limitations—not compressed into one leaderboard or a single inevitable future.",
+    chips: ["agent systems", "open weights", "interactive environments"],
     image: "./assets/media-surface.svg",
     links: [
       {
@@ -223,66 +265,16 @@ const timelineItems = [
         url: "https://docs.openclaw.ai/",
       },
       {
+        label: "Reflection: Beam release and model details",
+        url: "https://reflection.ai/blog/beam-is-available",
+      },
+      {
+        label: "Google DeepMind: Genie",
+        url: "https://deepmind.google/models/genie/",
+      },
+      {
         label: "Dreamina Seedance 2.0",
         url: "https://dreamina.capcut.com/tools/seedance-2-0",
-      },
-      {
-        label: "Happy Oyster",
-        url: "https://www.happyoyster.cn/",
-      },
-    ],
-  },
-  {
-    id: "self-improving-ai",
-    era: "2026",
-    buttonTitle: "Self-improving AI",
-    buttonSubtitle: "Recursive, Sakana, and AI improving AI",
-    title: "A new lab wave is betting that AI should improve AI, not just consume more compute.",
-    summary:
-      "By mid-2026, the frontier story broadened again. Recursive emerged arguing that the fastest path to superintelligence is open-ended self-improvement, while Sakana formalized an RSI Lab around sample-efficient recursive improvement, AI scientists, and self-rewriting agents.",
-    shift:
-      "The frontier ambition moved from training a single bigger model toward building systems that can discover better training strategies, better evaluations, better code, and eventually better research processes.",
-    why:
-      "This is the clearest current signal that frontier AI is splitting into competing bets: scale, agents, interaction, embodiment, and now recursive improvement loops over AI itself.",
-    chips: ["recursive self-improvement", "AI for AI", "new labs"],
-    image: "./assets/agent-loop.svg",
-    links: [
-      {
-        label: "Recursive official site",
-        url: "https://www.recursive.com/",
-      },
-      {
-        label: "GV: Why self-improving AI is the next frontier",
-        url: "https://www.gv.com/news/recursive-superintelligence-self-improving-ai",
-      },
-      {
-        label: "Sakana AI RSI Lab",
-        url: "https://sakana.ai/rsi-lab/",
-      },
-    ],
-  },
-  {
-    id: "world-models",
-    era: "Next",
-    buttonTitle: "World models",
-    buttonSubtitle: "Planning over latent futures",
-    title: "World models are the strongest candidate for the next conceptual jump.",
-    summary:
-      "A world model does more than continue text. It compresses structure, predicts consequences, and supports planning over possible futures before an action is taken.",
-    shift:
-      "The emphasis moves from responsive generation toward internal simulation, latent reasoning, and action grounded in imagined trajectories.",
-    why:
-      "If this branch matures, the real interface change could be from conversation to simulation: AI systems that reason by running candidate futures internally.",
-    chips: ["simulation", "planning", "latent structure"],
-    image: "./assets/world-shell.svg",
-    links: [
-      {
-        label: "World Models",
-        url: "https://arxiv.org/abs/1803.10122",
-      },
-      {
-        label: "DreamerV3",
-        url: "https://danijar.com/project/dreamerv3/",
       },
     ],
   },
@@ -293,15 +285,15 @@ const frontierItems = [
     id: "openclaw",
     kicker: "Personal agent systems",
     tabTitle: "OpenClaw",
-    tabSubtitle: "local, always-on, personal computing",
-    title: "OpenClaw represents the personal-agent branch of the frontier.",
+    tabSubtitle: "persistent agents, local context, tools",
+    title: "OpenClaw is a case study in AI as a personal operating layer.",
     summary:
-      "OpenClaw matters because it frames the agent not as a one-off prompt responder, but as a more persistent local system that can work with context, tools, and continuity over time.",
+      "OpenClaw frames the agent as a persistent system working with local context, tools, and continuity rather than a one-off prompt responder.",
     interpretation:
-      "My read is that OpenClaw belongs to the 'AI as personal operating layer' category: less like a chatbot, more like a continuously available software companion with agency hooks.",
+      "Read it as an architecture and workflow choice, not an automatic privacy or reliability win. Local control still needs careful review of permissions, network calls, stored context, and failure recovery.",
     why:
-      "This direction becomes more attractive as users want privacy, local control, memory, and a system that feels native to their own machine rather than rented for one chat turn at a time.",
-    chips: ["local-first", "personal agents", "always-on systems"],
+      "The teaching value lies in the boundary between model and machine: what can the agent access, what can it change, and how does a user inspect or interrupt its work?",
+    chips: ["local-first", "personal agents", "permissions"],
     image: "./assets/agent-loop.svg",
     links: [
       {
@@ -322,15 +314,15 @@ const frontierItems = [
     id: "recursive",
     kicker: "Recursive self-improvement",
     tabTitle: "Recursive",
-    tabSubtitle: "AI improving AI through open-ended search",
-    title: "Recursive is the clearest new company betting that AI should improve AI.",
+    tabSubtitle: "automated improvement as a research bet",
+    title: "Recursive frames AI-assisted improvement of AI as an explicit research program.",
     summary:
-      "Recursive says the fastest path to superintelligence is open-ended self-improvement: systems that identify their own weaknesses, generate better benchmarks, and improve parts of their own codebase or research stack over time.",
+      "Recursive describes an agenda in which systems identify weaknesses, generate evaluations, and improve parts of an AI codebase or research process. Its long-term claims should be separated from what current artifacts demonstrate.",
     interpretation:
-      "Treat this as a frontier-direction signal more than a consumer product signal. The claim is that one more giant model run is not the only path; continuous improvement loops over AI itself may become an orthogonal capability curve.",
+      "Treat this as a hypothesis about research automation, not evidence of unbounded self-improvement. The Darwin Gödel Machine offers a more concrete system to inspect, including its tasks, evaluation, and constraints.",
     why:
-      "If recursive improvement works even partially, progress could become more compounding and less linear, which is why this theme now sits at the center of both capability excitement and safety debate.",
-    chips: ["self-improvement", "open-ended algorithms", "AI for AI"],
+      "Students can ask a falsifiable question: which parts of the research loop actually improve, under what evaluation, and where do human design and oversight remain essential?",
+    chips: ["self-improvement", "open-ended search", "evaluation"],
     image: "./assets/agent-loop.svg",
     links: [
       {
@@ -338,7 +330,7 @@ const frontierItems = [
         url: "https://www.recursive.com/",
       },
       {
-        label: "GV: Recursive Superintelligence",
+        label: "GV: Recursive Superintelligence thesis",
         url: "https://www.gv.com/news/recursive-superintelligence-self-improving-ai",
       },
       {
@@ -351,15 +343,15 @@ const frontierItems = [
     id: "seedance",
     kicker: "Multimodal media generation",
     tabTitle: "Seedance",
-    tabSubtitle: "audio + video + image + text in one surface",
-    title: "Seedance shows how quickly video generation is becoming a first-class interface.",
+    tabSubtitle: "audio + video + image + text",
+    title: "Seedance is one current example of generation becoming a directing interface.",
     summary:
-      "Dreamina's Seedance 2.0 positions multimodal audio-video generation as a native creative surface, not a novelty add-on. It is part of the shift from text-only AI toward cinematic, controllable media systems.",
+      "Dreamina's Seedance 2.0 combines multimodal inputs with audio-video generation. It belongs to a broader shift from text-only prompting toward directing, editing, and composing across media.",
     interpretation:
-      "Seedance is important less because 'video is cool' and more because it expands what an AI interface can be. Prompting becomes directing, editing, and composing across several modalities at once.",
+      "Move beyond the showcase clip: compare temporal coherence, reference fidelity, editing controls, provenance, and how much manual work a workflow still requires.",
     why:
-      "As image, video, and audio models mature, product differentiation shifts toward coherence, editing controls, reference fidelity, and low-friction creative flow.",
-    chips: ["multimodal", "video generation", "creative tooling"],
+      "Generative media makes interface design and evaluation multimodal too. A visually impressive output does not by itself demonstrate controllability or consistent performance.",
+    chips: ["multimodal", "video generation", "evaluation"],
     image: "./assets/seedance-wave.svg",
     links: [
       {
@@ -373,52 +365,52 @@ const frontierItems = [
     ],
   },
   {
-    id: "happy-oyster",
-    kicker: "World-model product",
-    tabTitle: "Happy Oyster",
-    tabSubtitle: "Alibaba's explorable world model",
-    title: "Happy Oyster turns world-model output into a place you can enter.",
+    id: "open-models",
+    kicker: "Open-weight systems",
+    tabTitle: "Open models",
+    tabSubtitle: "deployment, adaptation, licensing",
+    title: "Beam makes open-weight deployment a concrete frontier case study.",
     summary:
-      "Happy Oyster is Alibaba's interactive world-model product (limited early access, April 2026). Instead of answering in chat, it opens a navigable generated world: you define an atmosphere, choose Directing or Wandering, and move through the scene.",
+      "Reflection released Beam in October 2026 under Apache 2.0: a 501B-parameter mixture-of-experts model with 23B active parameters, positioned for coding, reasoning, and agentic tasks.",
     interpretation:
-      "The interesting signal is the interface: world-model output presented as a place you enter, not an asset you download. It sits in the same conceptual family as World Labs' Marble, but from a Chinese tech giant.",
+      "Open weights enable inspection, self-hosting, and adaptation under a license, but they do not imply open training data or inexpensive deployment. Use the model card to examine architecture, evaluations, and limitations.",
     why:
-      "If products like this gain traction, we may remember chat as a transitional form. The next-generation experience could feel more like entering a scene than opening a conversation.",
-    chips: ["world model", "Alibaba", "immersive UI"],
-    image: "./assets/oyster-world.svg",
+      "The useful comparison is not simply open versus closed. It is the trade-off among control, hardware requirements, operational responsibility, capability, cost, and safeguards.",
+    chips: ["Apache 2.0", "open weights", "self-hosting"],
+    image: "./assets/llm-attention.svg",
     links: [
       {
-        label: "Happy Oyster official site",
-        url: "https://www.happyoyster.cn/",
+        label: "Beam release notes",
+        url: "https://reflection.ai/blog/beam-is-available",
       },
       {
-        label: "World Models paper for conceptual context",
-        url: "https://arxiv.org/abs/1803.10122",
+        label: "Beam model card",
+        url: "https://reflection.ai/beam-model-card",
       },
     ],
   },
   {
     id: "harness",
-    kicker: "System architecture",
+    kicker: "System architecture & evaluation",
     tabTitle: "Harness engineering",
-    tabSubtitle: "evaluation, guardrails, recovery, control",
-    title: "Harness engineering is the missing product layer many agent demos gloss over.",
+    tabSubtitle: "evaluation, permissions, recovery, safeguards",
+    title: "A benchmark result belongs to a system, not just a model.",
     summary:
-      "Harness engineering focuses on the control structure around the model: evaluations, checkpoints, fallbacks, permissions, recovery paths, and the broader operational design that makes agentic systems trustworthy.",
+      "Harness engineering covers evaluations, checkpoints, tools, permissions, fallbacks, recovery paths, and operational monitoring around a model. Deployment-safety reports make parts of that setup visible.",
     interpretation:
-      "This is one of the clearest signs that AI product design is maturing. The value is no longer only the model's raw capability, but the surrounding system that turns capability into dependable behavior.",
+      "When reading a capability or safety result, ask which harness, tools, prompts, protections, and retry policies produced it. A different system configuration can change the result.",
     why:
-      "As models get cheaper and stronger, the differentiator often shifts outward to orchestration quality, observability, testing, and control.",
-    chips: ["ops layer", "evals", "guardrails"],
+      "This is the bridge between a promising demo and evidence about real-world behavior. Reproducible tasks and transparent evaluation settings matter more than a polished trajectory.",
+    chips: ["system evals", "guardrails", "observability"],
     image: "./assets/media-surface.svg",
     links: [
       {
-        label: "Harness Engineering Academy",
-        url: "https://harnessengineering.academy/",
+        label: "OpenAI deployment safety evaluations",
+        url: "https://deploymentsafety.openai.com/",
       },
       {
-        label: "Ryan Lopopolo on harness engineering",
-        url: "https://www.youtube.com/watch?v=am_oeAoUhew",
+        label: "Claude Sonnet 5.5 system card",
+        url: "https://www.anthropic.com/claude-sonnet-5-5-system-card",
       },
       {
         label: "Anthropic: Building Effective AI Agents",
@@ -428,30 +420,30 @@ const frontierItems = [
   },
   {
     id: "world-models",
-    kicker: "Research bet",
+    kicker: "Exploratory research",
     tabTitle: "World models",
-    tabSubtitle: "simulation, imagination, planning",
-    title: "World models remain the most ambitious bridge from generation to reasoning-through-simulation.",
+    tabSubtitle: "interaction, prediction, planning",
+    title: "World models ask whether generation can support predictions about action and consequence.",
     summary:
-      "World-model research asks whether agents can build compact internal models of environments, roll out possible futures, and choose actions from imagined trajectories rather than immediate pattern completion alone.",
+      "Research in this area explores compact environment representations, possible-future rollouts, and interactive generation. Genie provides a current example of worlds users can prompt and explore.",
     interpretation:
-      "This is the branch that could eventually unify multimodal perception, planning, and embodied action into a more coherent intelligence stack.",
+      "Keep the categories distinct: a video generator, an interactive environment, and a reliable planning model are not interchangeable. Genie's stated limits on action spaces, multi-agent interaction, and real-world accuracy are part of the lesson.",
     why:
-      "If the current wave is about agents with tools, the next wave may be agents with imagination: systems that can test futures before they act.",
-    chips: ["latent planning", "embodied AI", "simulation"],
+      "The open question is whether internal or generated simulations improve decisions beyond the training distribution. That requires controllability, consistency, and task-level evidence—not just visual coherence.",
+    chips: ["simulation", "planning", "known limitations"],
     image: "./assets/world-shell.svg",
     links: [
       {
-        label: "World Models",
+        label: "Google DeepMind: Genie research",
+        url: "https://deepmind.google/models/genie/",
+      },
+      {
+        label: "Project Genie and current limitations",
+        url: "https://deepmind.google/blog/project-genie-experimenting-with-infinite-interactive-worlds/",
+      },
+      {
+        label: "World Models (2018)",
         url: "https://arxiv.org/abs/1803.10122",
-      },
-      {
-        label: "DreamerV3",
-        url: "https://danijar.com/project/dreamerv3/",
-      },
-      {
-        label: "Yann LeCun on world models and JEPA",
-        url: "https://www.youtube.com/watch?v=yUmDRxV0krg",
       },
     ],
   },
@@ -629,32 +621,32 @@ const labItems = [
   },
   {
     id: "reflection-ai",
-    track: "coding",
-    trackLabel: "coding agents",
-    poster: "Reflection",
-    kicker: "Autonomous coding",
-    title: "Reflection AI",
+    track: "open-models",
+    trackLabel: "open-weight models",
+    poster: "Beam",
+    kicker: "Open-weight frontier systems",
+    title: "Reflection AI · Beam",
     summary:
-      "Reflection argues that autonomous coding is the root-node problem for superintelligence. Its thesis is that once software can be planned, written, refined, and improved automatically, much broader computer-based work will follow.",
+      "Reflection's October 2026 Beam release provides Apache 2.0 weights for a 501B-parameter MoE with 23B active parameters, aimed at coding, reasoning, and agentic work.",
     bet:
-      "Push reinforcement learning and language models toward stronger autonomy on computers, with coding as the most practical proving ground.",
+      "Make a capable model available for inspection, self-hosting, and adaptation while publishing a model card for its architecture, evaluation, and use considerations.",
     why:
-      "Coding is one of the shortest loops where AI can directly improve the software stack around itself, so this lab sits close to the recursive-improvement conversation even when framed as product work.",
+      "What hardware and operating expertise would deployment require? Which evaluations are independently reproducible? What does Apache 2.0 permit—and why are open weights not the same as open data?",
     accent: "#ff8f7a",
     image: "./assets/llm-attention.svg",
-    chips: ["autonomous coding", "RL + LLMs", "enterprise agents"],
+    chips: ["Apache 2.0", "open weights", "deployment trade-offs"],
     links: [
       {
-        label: "Reflection: A Path to Superintelligence",
-        url: "https://reflection.ai/blog/reflection-a-path-to-superintelligence/",
+        label: "Beam release notes",
+        url: "https://reflection.ai/blog/beam-is-available",
       },
       {
-        label: "Reflection research",
-        url: "https://reflection.ai/research",
+        label: "Beam model card",
+        url: "https://reflection.ai/beam-model-card",
       },
       {
-        label: "Asimov docs",
-        url: "https://docs.reflection.ai/docs/about-asimov",
+        label: "Reflection AI home",
+        url: "https://reflection.ai/",
       },
     ],
   },
@@ -1404,18 +1396,18 @@ const libraryItems = [
     url: "https://arxiv.org/abs/2604.14148",
   },
   {
-    id: "happy-oyster",
+    id: "project-genie",
     type: "project",
     topic: "World models",
-    poster: "World",
-    title: "Happy Oyster",
+    poster: "Genie",
+    title: "Project Genie: experimenting with interactive worlds",
     summary:
-      "Alibaba's interactive world-model product: define an atmosphere, choose Directing or Wandering, and move through a generated world.",
-    bestFor: "Tracking the possibility that AI UX becomes spatial and exploratory.",
-    why: "It is a concrete big-tech product bet that AI interfaces become places, not just conversations.",
-    chips: ["world model", "Alibaba", "experimental"],
+      "Google DeepMind's Project Genie lets users prompt, explore, and remix interactive environments built on Genie 3.",
+    bestFor: "Examining the difference between generated video and an environment that responds to interaction.",
+    why: "Its documented limits—restricted action spaces, imperfect real-world accuracy, and multi-agent interaction challenges—make the research questions concrete.",
+    chips: ["world model", "interactive environments", "limitations"],
     accent: "#87ffc1",
-    url: "https://www.happyoyster.cn/",
+    url: "https://deepmind.google/blog/project-genie-experimenting-with-infinite-interactive-worlds/",
   },
   {
     id: "harness-academy",
@@ -1558,32 +1550,60 @@ const libraryItems = [
     url: "https://thinkingmachines.ai/news/announcing-tinker/",
   },
   {
-    id: "reflection-path",
+    id: "beam-release",
     type: "blog",
-    topic: "Coding agents",
-    poster: "Code",
-    title: "Reflection: A Path to Superintelligence",
+    topic: "Open-weight models",
+    poster: "Beam",
+    title: "Beam is available: Apache 2.0 open weights",
     summary:
-      "Reflection's official thesis that autonomous coding is the practical route into broader superintelligence.",
-    bestFor: "Understanding why coding is becoming a key proving ground for autonomy and self-improvement.",
-    why: "It links RL, LLMs, and autonomous software work into one coherent frontier narrative.",
-    chips: ["blog", "autonomous coding", "superintelligence"],
+      "Reflection's October 2026 release introduces a 501B-parameter MoE with 23B active parameters for coding, reasoning, and agentic work.",
+    bestFor: "Comparing deployment control, hardware demands, licensing, and model capability.",
+    why: "It turns the open-model discussion into concrete engineering questions without conflating open weights with open training data.",
+    chips: ["Apache 2.0", "2026", "open weights"],
     accent: "#ff8f7a",
-    url: "https://reflection.ai/blog/reflection-a-path-to-superintelligence/",
+    url: "https://reflection.ai/blog/beam-is-available",
   },
   {
-    id: "asimov-docs",
+    id: "beam-model-card",
     type: "project",
-    topic: "Coding agents",
-    poster: "Asimov",
-    title: "About Asimov",
+    topic: "Open-weight models",
+    poster: "Beam card",
+    title: "Beam model card",
     summary:
-      "Reflection's docs for a code research agent focused on codebase comprehension, persistent context, and enterprise deployment.",
-    bestFor: "Seeing how a frontier-lab thesis becomes an actual product surface.",
-    why: "It makes the coding-agent story less abstract by grounding it in a real system architecture.",
-    chips: ["docs", "enterprise", "persistent context"],
+      "The official technical companion for inspecting Beam's architecture, intended uses, evaluations, and limitations.",
+    bestFor: "Practising model-card reading before drawing conclusions from a release headline.",
+    why: "Students can separate vendor-reported results from independent evidence and identify what still needs testing.",
+    chips: ["model card", "evaluation", "limitations"],
     accent: "#5dd9ff",
-    url: "https://docs.reflection.ai/docs/about-asimov",
+    url: "https://reflection.ai/beam-model-card",
+  },
+  {
+    id: "gemini-4-argon",
+    type: "project",
+    topic: "Frontier models",
+    poster: "Argon",
+    title: "Gemini 4 Argon model card",
+    summary:
+      "Google DeepMind's model card for its October 2026 multimodal, multi-step system, including evaluations and safety information.",
+    bestFor: "Comparing capability, cost, safeguards, and limitations across frontier model documentation.",
+    why: "It supports a more rigorous discussion than declaring a universal best model from selected benchmarks.",
+    chips: ["model card", "multimodal", "safety"],
+    accent: "#9ca7ff",
+    url: "https://deepmind.google/models/model-cards/gemini-4-argon/",
+  },
+  {
+    id: "claude-haiku-5-5",
+    type: "blog",
+    topic: "Efficient agents",
+    poster: "Haiku",
+    title: "Claude Haiku 5.5: efficient agents and delegation",
+    summary:
+      "Anthropic's October 2026 release provides a case study in smaller-model cost, latency, and sub-agent division of labor.",
+    bestFor: "Thinking about model routing and when a smaller model is sufficient for part of an agent workflow.",
+    why: "It shifts the systems question from maximum capability per call to useful work per dollar and per second.",
+    chips: ["efficiency", "sub-agents", "cost and latency"],
+    accent: "#ffb67b",
+    url: "https://www.anthropic.com/claude-haiku-5-5",
   },
   {
     id: "cursor-docs",
@@ -1816,12 +1836,40 @@ const libraryItems = [
     poster: "R1",
     title: "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning",
     summary:
-      "The open reasoning model that showed RL-trained long chains of thought could reach frontier-level math and code performance — with open weights and an open recipe.",
-    bestFor: "Understanding the test-time-compute shift through a fully open artifact.",
-    why: "It anchors the reasoning era in a paper students can actually read, and it changed the economics conversation around frontier models.",
+      "A detailed technical report on RL-trained reasoning, accompanied by open model weights and reported math and code evaluations.",
+    bestFor: "Understanding the test-time-compute shift through an open-weight model with a detailed technical report.",
+    why: "It lets students inspect the training account and reported results while keeping openness, evaluation, and deployment claims distinct.",
     chips: ["paper", "2025", "RL reasoning"],
     accent: "#5dd9ff",
     url: "https://arxiv.org/abs/2501.12948",
+  },
+  {
+    id: "navier-stokes",
+    type: "paper",
+    topic: "AI for science",
+    poster: "Proof",
+    title: "Navier–Stokes: analytical proof and Lean formalization",
+    summary:
+      "OpenAI's research account reports an analytical proof and Lean formalization for statements C and D of the official problem formulation, without claiming the Millennium Prize.",
+    bestFor: "Studying how multi-agent research, expert review, and machine-checked evidence can complement one another.",
+    why: "It moves the AI-for-science discussion from fluent hypothesis generation to the standard of verifiable mathematical evidence.",
+    chips: ["formal verification", "Lean", "research agents"],
+    accent: "#87ffc1",
+    url: "https://openai.com/index/navier-stokes-solution/",
+  },
+  {
+    id: "openai-evals-hub",
+    type: "project",
+    topic: "Safety",
+    poster: "Evals",
+    title: "OpenAI deployment safety evaluations",
+    summary:
+      "A hub for deployment-safety reports covering capability, safeguards, and evaluation methodology across system configurations.",
+    bestFor: "Learning to read an evaluation as a result of the model, harness, tools, permissions, and protections together.",
+    why: "It gives students concrete material for asking what an evaluation setup includes—and what a headline number leaves out.",
+    chips: ["safety", "system evaluation", "methodology"],
+    accent: "#ffb67b",
+    url: "https://deploymentsafety.openai.com/",
   },
   {
     id: "karpathy-deep-dive",
@@ -1909,7 +1957,21 @@ const state = {
   labFilter: "all",
   labId: labItems[0].id,
   libraryFilter: "all",
+  libraryTopic: "all",
+  libraryQuery: "",
+  libraryLimit: 12,
   libraryId: libraryItems[0].id,
+};
+
+const libraryTopicGroups = {
+  foundations: ["AI prehistory", "Neural learning", "Statistical ML", "Deep learning", "Search + learning", "Scaling"],
+  language: ["Transformers", "Language models", "LLMs", "Alignment", "Reasoning"],
+  generative: ["Generative AI", "Multimodal AI", "Seedance"],
+  agents: ["Agents", "Coding agents", "OpenClaw", "Harness engineering", "Collaboration", "Efficient agents"],
+  infrastructure: ["LLM infrastructure", "LLM post-training", "LLM inference"],
+  environments: ["RL environments", "Embodiment"],
+  frontiers: ["Self-improving AI", "AI scientists", "AI for science", "World models", "Predictive world models", "Frontier models"],
+  "open-safety": ["Safety", "Open-weight models"],
 };
 
 const timelineNav = document.querySelector("#timeline-nav");
@@ -1956,13 +2018,22 @@ const labsLinks = document.querySelector("#labs-links");
 
 const filterPills = [...document.querySelectorAll("[data-filter]")];
 const libraryCount = document.querySelector("#library-count");
+const libraryVisible = document.querySelector("#library-visible");
+const libraryTotal = document.querySelector("#library-total");
 const libraryGrid = document.querySelector("#library-grid");
+const libraryLayout = document.querySelector("#library-layout");
+const libraryDetail = document.querySelector("#library-detail");
 const libraryTitle = document.querySelector("#library-title");
 const librarySummary = document.querySelector("#library-summary");
 const libraryBest = document.querySelector("#library-best");
 const libraryWhy = document.querySelector("#library-why");
 const libraryChips = document.querySelector("#library-chips");
 const libraryLink = document.querySelector("#library-link");
+const librarySearch = document.querySelector("#library-search");
+const libraryTopic = document.querySelector("#library-topic");
+const libraryMore = document.querySelector("#library-more");
+const libraryEmpty = document.querySelector("#library-empty");
+const libraryReset = document.querySelector("#library-reset");
 
 const watchGrid = document.querySelector("#watch-grid");
 const scrollProgress = document.querySelector("#scroll-progress");
@@ -1983,7 +2054,7 @@ function makeLink(link) {
   const anchor = document.createElement("a");
   anchor.href = link.url;
   anchor.target = "_blank";
-  anchor.rel = "noreferrer";
+  anchor.rel = "noopener noreferrer";
   anchor.textContent = link.label;
   return anchor;
 }
@@ -2034,16 +2105,25 @@ function makePosterImage(src, alt = "") {
   return image;
 }
 
+function setTabAttributes(button, id, active, panelId) {
+  button.id = id;
+  button.dataset.tabId = id;
+  button.setAttribute("role", "tab");
+  button.setAttribute("aria-selected", String(active));
+  button.setAttribute("aria-controls", panelId);
+  button.tabIndex = active ? 0 : -1;
+}
+
 function renderTimelineNav() {
   clearNode(timelineNav);
 
   timelineItems.forEach((item, index) => {
+    const active = item.id === state.timelineId;
     const button = document.createElement("button");
     button.type = "button";
     button.className = "timeline-button";
-    button.setAttribute("role", "tab");
-    button.setAttribute("aria-selected", String(item.id === state.timelineId));
-    button.classList.toggle("is-active", item.id === state.timelineId);
+    setTabAttributes(button, `timeline-tab-${item.id}`, active, "timeline-detail");
+    button.classList.toggle("is-active", active);
     button.innerHTML = `<strong>${item.era} - ${item.buttonTitle}</strong><span>${item.buttonSubtitle}</span>`;
     button.addEventListener("click", () => {
       state.timelineId = item.id;
@@ -2058,6 +2138,7 @@ function renderTimelineNav() {
 function renderTimelineDetail() {
   const item = timelineItems.find((entry) => entry.id === state.timelineId);
 
+  document.querySelector("#timeline-detail").setAttribute("aria-labelledby", `timeline-tab-${item.id}`);
   setImage(timelineImage, coverPath("timeline", item.id), item.title);
   timelineEra.textContent = item.era;
   timelineTitle.textContent = item.title;
@@ -2076,12 +2157,12 @@ function renderFrontierTabs() {
   clearNode(frontierTabs);
 
   frontierItems.forEach((item, index) => {
+    const active = item.id === state.frontierId;
     const button = document.createElement("button");
     button.type = "button";
     button.className = "frontier-tab";
-    button.setAttribute("role", "tab");
-    button.setAttribute("aria-selected", String(item.id === state.frontierId));
-    button.classList.toggle("is-active", item.id === state.frontierId);
+    setTabAttributes(button, `frontier-tab-${item.id}`, active, "frontier-panel");
+    button.classList.toggle("is-active", active);
     button.innerHTML = `<strong>${item.tabTitle}</strong><span>${item.tabSubtitle}</span>`;
     button.addEventListener("click", () => {
       state.frontierId = item.id;
@@ -2096,6 +2177,7 @@ function renderFrontierTabs() {
 function renderFrontierPanel() {
   const item = frontierItems.find((entry) => entry.id === state.frontierId);
 
+  document.querySelector("#frontier-panel").setAttribute("aria-labelledby", `frontier-tab-${item.id}`);
   setImage(frontierImage, coverPath("frontier", item.id), item.title);
   frontierKicker.textContent = item.kicker;
   frontierTitle.textContent = item.title;
@@ -2111,10 +2193,17 @@ function renderFrontierPanel() {
 }
 
 function renderStackStageState() {
+  const stackPanel = document.querySelector(".stack-panel");
+  stackPanel.id = "stack-panel";
+  stackPanel.setAttribute("role", "tabpanel");
+
   stackStageButtons.forEach((button) => {
     const active = button.dataset.stackStage === state.stackStageId;
     button.classList.toggle("is-active", active);
-    button.setAttribute("aria-selected", String(active));
+    setTabAttributes(button, `stack-tab-${button.dataset.stackStage}`, active, "stack-panel");
+    if (active) {
+      stackPanel.setAttribute("aria-labelledby", button.id);
+    }
   });
 }
 
@@ -2215,15 +2304,23 @@ function renderLabGrid() {
 }
 
 function getFilteredLibraryItems() {
-  if (state.libraryFilter === "all") {
-    return libraryItems;
-  }
+  const terms = state.libraryQuery.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  const allowedTopics = libraryTopicGroups[state.libraryTopic];
 
-  return libraryItems.filter((item) => item.type === state.libraryFilter);
+  return libraryItems.filter((item) => {
+    const matchesType = state.libraryFilter === "all" || item.type === state.libraryFilter;
+    const matchesTopic = state.libraryTopic === "all" || allowedTopics?.includes(item.topic);
+    const searchText = [item.title, item.summary, item.topic, ...item.chips].join(" ").toLowerCase();
+    const matchesQuery = terms.every((term) => searchText.includes(term));
+    return matchesType && matchesTopic && matchesQuery;
+  });
 }
 
 function renderLibraryDetail() {
   const item = libraryItems.find((entry) => entry.id === state.libraryId);
+  if (!item) {
+    return;
+  }
 
   libraryTitle.textContent = item.title;
   librarySummary.textContent = item.summary;
@@ -2238,20 +2335,32 @@ function renderLibraryDetail() {
 
 function renderLibraryGrid() {
   const filteredItems = getFilteredLibraryItems();
+  const visibleItems = filteredItems.slice(0, state.libraryLimit);
+  const hasResults = filteredItems.length > 0;
 
   if (!filteredItems.some((item) => item.id === state.libraryId)) {
     state.libraryId = filteredItems[0]?.id ?? "";
   }
 
   libraryCount.textContent = String(filteredItems.length);
+  libraryVisible.textContent = String(visibleItems.length);
+  libraryTotal.textContent = `${libraryItems.length} curated resources`;
+  libraryLayout.hidden = !hasResults;
+  libraryEmpty.hidden = hasResults;
+  libraryMore.hidden = !hasResults || visibleItems.length >= filteredItems.length;
+  libraryMore.textContent = `Show ${Math.min(12, filteredItems.length - visibleItems.length)} more`;
   clearNode(libraryGrid);
 
-  filteredItems.forEach((item, index) => {
+  visibleItems.forEach((item, index) => {
+    const selected = item.id === state.libraryId;
     const button = document.createElement("button");
     button.type = "button";
     button.className = "library-card";
-    button.classList.toggle("is-selected", item.id === state.libraryId);
-    button.setAttribute("aria-pressed", String(item.id === state.libraryId));
+    button.dataset.libraryId = item.id;
+    button.classList.toggle("is-selected", selected);
+    button.setAttribute("aria-pressed", String(selected));
+    button.setAttribute("aria-controls", "library-detail");
+    button.setAttribute("aria-label", `Inspect resource: ${item.title}`);
 
     const poster = document.createElement("div");
     poster.className = "library-poster";
@@ -2266,21 +2375,35 @@ function renderLibraryGrid() {
 
     const meta = document.createElement("div");
     meta.className = "resource-meta";
-    meta.innerHTML = `<span>${item.topic}</span><span>${item.type.toUpperCase()}</span>`;
+    const topic = document.createElement("span");
+    topic.textContent = item.topic;
+    const type = document.createElement("span");
+    type.textContent = item.type.toUpperCase();
+    meta.append(topic, type);
 
     button.append(poster, title, summary, meta);
-
     button.addEventListener("click", () => {
       state.libraryId = item.id;
-      renderLibraryGrid();
+      libraryGrid.querySelectorAll(".library-card").forEach((card) => {
+        const active = card.dataset.libraryId === item.id;
+        card.classList.toggle("is-selected", active);
+        card.setAttribute("aria-pressed", String(active));
+      });
       renderLibraryDetail();
+
+      if (window.matchMedia("(max-width: 1024px)").matches) {
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        libraryDetail.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+      }
     });
 
     addMotionSurface(button, index);
     libraryGrid.appendChild(button);
   });
 
-  renderLibraryDetail();
+  if (hasResults) {
+    renderLibraryDetail();
+  }
 }
 
 function renderFilterState() {
@@ -2304,7 +2427,7 @@ function renderWatchGrid() {
     const mediaLink = document.createElement("a");
     mediaLink.href = item.url;
     mediaLink.target = "_blank";
-    mediaLink.rel = "noreferrer";
+    mediaLink.rel = "noopener noreferrer";
 
     const media = document.createElement("div");
     media.className = "watch-media";
@@ -2321,7 +2444,7 @@ function renderWatchGrid() {
     const cta = document.createElement("a");
     cta.href = item.url;
     cta.target = "_blank";
-    cta.rel = "noreferrer";
+    cta.rel = "noopener noreferrer";
     cta.textContent = "Watch on YouTube";
 
     media.appendChild(image);
@@ -2366,38 +2489,9 @@ function initRevealMotion() {
 }
 
 function animateCounts() {
-  const observer = new IntersectionObserver(
-    (entries, target) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) {
-          return;
-        }
-
-        const node = entry.target;
-        const finalValue = Number(node.dataset.count);
-        const duration = 1200;
-        const start = performance.now();
-
-        function tick(now) {
-          const progress = Math.min((now - start) / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          node.textContent = String(Math.round(finalValue * eased));
-
-          if (progress < 1) {
-            requestAnimationFrame(tick);
-          } else {
-            node.textContent = String(finalValue);
-          }
-        }
-
-        requestAnimationFrame(tick);
-        target.unobserve(node);
-      });
-    },
-    { threshold: 0.7 },
-  );
-
-  countNodes.forEach((node) => observer.observe(node));
+  countNodes.forEach((node) => {
+    node.textContent = String(Number(node.dataset.count));
+  });
 }
 
 function updateScrollUI() {
@@ -2424,11 +2518,69 @@ function updateScrollUI() {
 }
 
 function bindFilters() {
+  const applyFilters = () => {
+    state.libraryLimit = 12;
+    renderLibraryGrid();
+  };
+
   filterPills.forEach((pill) => {
     pill.addEventListener("click", () => {
       state.libraryFilter = pill.dataset.filter;
       renderFilterState();
-      renderLibraryGrid();
+      applyFilters();
+    });
+  });
+
+  librarySearch.addEventListener("input", (event) => {
+    state.libraryQuery = event.target.value;
+    applyFilters();
+  });
+
+  libraryTopic.addEventListener("change", (event) => {
+    state.libraryTopic = event.target.value;
+    applyFilters();
+  });
+
+  libraryMore.addEventListener("click", () => {
+    state.libraryLimit += 12;
+    renderLibraryGrid();
+  });
+
+  libraryReset.addEventListener("click", () => {
+    state.libraryFilter = "all";
+    state.libraryTopic = "all";
+    state.libraryQuery = "";
+    state.libraryLimit = 12;
+    librarySearch.value = "";
+    libraryTopic.value = "all";
+    renderFilterState();
+    renderLibraryGrid();
+    librarySearch.focus();
+  });
+}
+
+function bindTabKeyboard() {
+  [timelineNav, frontierTabs, document.querySelector(".stack-flow")].forEach((container) => {
+    container.addEventListener("keydown", (event) => {
+      const navigationKeys = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"];
+      if (!navigationKeys.includes(event.key)) {
+        return;
+      }
+
+      const tabs = [...container.querySelectorAll('[role="tab"]')];
+      const currentIndex = Math.max(0, tabs.indexOf(document.activeElement));
+      let nextIndex = currentIndex;
+
+      if (event.key === "Home") nextIndex = 0;
+      if (event.key === "End") nextIndex = tabs.length - 1;
+      if (["ArrowRight", "ArrowDown"].includes(event.key)) nextIndex = (currentIndex + 1) % tabs.length;
+      if (["ArrowLeft", "ArrowUp"].includes(event.key)) nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+
+      event.preventDefault();
+      tabs[nextIndex].click();
+      const refreshedTabs = [...container.querySelectorAll('[role="tab"]')];
+      refreshedTabs[nextIndex]?.focus();
+      refreshedTabs[nextIndex]?.scrollIntoView({ block: "nearest", inline: "nearest" });
     });
   });
 }
@@ -2480,6 +2632,7 @@ function init() {
   bindStackStages();
   bindLabFilters();
   bindFilters();
+  bindTabKeyboard();
 
   const metricCounts = {
     timeline: timelineItems.length,

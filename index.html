@@ -3,29 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CSC2220 Artificial Intelligence | History, Agents, and World Models</title>
+    <title>CSC2220 AI Evolution Atlas | Course, Research & Primary Sources</title>
     <meta
       name="description"
-      content="An interactive course website about AI history, from machine learning and deep learning to LLMs, the training-to-inference infrastructure stack, agents, coding systems like Cursor, Codex, and Claude Code, plus Recursive self-improvement, Sakana AI, Thinking Machines, Reflection, World Labs, FutureHouse, Physical Intelligence, OpenClaw, and world models."
+      content="A curated CSC2220 course atlas connecting classic AI and machine learning to reasoning models, agents, open-weight systems, evaluation, and world models through primary sources."
     />
     <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
     <link rel="canonical" href="https://taotao1992.github.io/ai-evolution-atlas/" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="CSC2220 Artificial Intelligence | History, Agents, and World Models" />
+    <meta property="og:title" content="CSC2220 AI Evolution Atlas | Course, Research & Primary Sources" />
     <meta
       property="og:description"
-      content="An interactive course website about AI history, from machine learning and deep learning to LLMs, the training-to-inference infrastructure stack, agents, coding systems like Cursor, Codex, and Claude Code, plus Recursive self-improvement, Sakana AI, Thinking Machines, Reflection, World Labs, FutureHouse, Physical Intelligence, OpenClaw, and world models."
+      content="Explore the ideas that changed AI, the systems defining 2026, and a carefully sourced learning path through papers, projects, and videos."
     />
     <meta property="og:url" content="https://taotao1992.github.io/ai-evolution-atlas/" />
-    <meta property="og:image" content="https://taotao1992.github.io/ai-evolution-atlas/assets/hero-stage.png" />
+    <meta property="og:image" content="https://taotao1992.github.io/ai-evolution-atlas/assets/generated/ai-atlas-motif.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Course",
         "name": "CSC2220 Artificial Intelligence",
-        "description": "An interactive course website about AI history, from machine learning and deep learning to LLMs, the training-to-inference infrastructure stack, agents, coding systems like Cursor, Codex, and Claude Code, plus Recursive self-improvement, Sakana AI, Thinking Machines, Reflection, World Labs, FutureHouse, Physical Intelligence, OpenClaw, and world models.",
+        "description": "A curated course atlas connecting classic AI and machine learning to reasoning models, agents, open-weight systems, evaluation, and world models through primary sources.",
         "url": "https://taotao1992.github.io/ai-evolution-atlas/",
+        "dateModified": "2026-10-26",
         "provider": {
           "@type": "CollegeOrUniversity",
           "name": "University of Southern Queensland (UniSQ)"
@@ -41,7 +42,15 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
     <link rel="stylesheet" href="./styles.css" />
     <script type="module" src="./main.js" defer></script>
   </head>
@@ -53,68 +62,74 @@
     </div>
 
     <header class="site-header">
-      <a class="brand" href="#top" aria-label="CSC2220 Artificial Intelligence">
-        <span class="brand-mark">
-          <img src="./assets/taotao-avatar.jpg" alt="Taotao Cai" />
+      <a class="brand" href="#top" aria-label="CSC2220 AI Evolution Atlas — back to top">
+        <span class="brand-mark" aria-hidden="true">
+          <img src="./assets/favicon.svg" alt="" />
         </span>
         <span class="brand-copy">
-          <strong>CSC2220 Artificial Intelligence</strong>
-          <small>Created by Taotao Cai using Codex for CSC2220 at UniSQ</small>
+          <strong>CSC2220 · AI Atlas</strong>
+          <small>UNISQ · COURSE FIELD GUIDE · 2026</small>
         </span>
       </a>
 
       <nav class="site-nav" aria-label="Primary navigation">
+        <a href="#now">Now</a>
         <a href="#history">History</a>
         <a href="#frontier">Frontier</a>
         <a href="#llm-stack">Stack</a>
         <a href="#labs">Labs</a>
         <a href="#library">Library</a>
         <a href="#watch">Watch</a>
-        <a href="#future">Future</a>
+        <a href="#future">Horizons</a>
       </nav>
     </header>
 
     <main id="main">
       <section id="top" class="section hero" data-section="top" aria-labelledby="hero-title">
-        <img
-          class="hero-backdrop"
-          src="./assets/ai-field-tree.jpg"
-          alt="Illustrated AI tree connecting machine learning, deep learning, transformers, agents, and LLMs"
-        />
         <div class="hero-vignette" aria-hidden="true"></div>
 
         <div class="hero-content">
-          <p class="eyebrow">CSC2220 Artificial Intelligence</p>
-          <h1 id="hero-title">A field guide to artificial intelligence.</h1>
+          <p class="eyebrow">CSC2220 · Artificial Intelligence</p>
+          <h1 id="hero-title">A living map of machine intelligence.</h1>
           <p class="hero-lead">
-            A high-signal course map from ML and deep learning to LLM training, inference, agents, harness engineering,
-            RL environments, recursive self-improvement, and world models, with the original papers, projects, and videos
-            kept in one navigable atlas.
+            A curated course atlas connecting classic ML and deep learning to reasoning models, agents,
+            open-weight systems, evaluation, and world models—always with a primary source and a next step.
           </p>
 
           <div class="hero-actions">
-            <a class="button button-primary" href="#history">Open the timeline</a>
-            <a class="button button-secondary" href="#library">Browse all resources</a>
+            <a class="button button-primary" href="#history">Explore the timeline</a>
+            <a class="button button-secondary" href="#library">Find a resource</a>
+          </div>
+
+          <div class="hero-review" aria-label="Edition information">
+            <span class="review-dot" aria-hidden="true"></span>
+            <span>Reviewed <time datetime="2026-10-26">26 Oct 2026</time></span>
+            <span aria-hidden="true">·</span>
+            <span>Primary sources first</span>
           </div>
 
           <div class="hero-metrics" aria-label="Course map summary">
             <article class="metric-card">
-              <strong data-count="10" data-metric="timeline">0</strong>
+              <strong data-count="11" data-metric="timeline">11</strong>
               <span>timeline eras</span>
             </article>
             <article class="metric-card">
-              <strong data-count="70" data-metric="library">0</strong>
+              <strong data-count="76" data-metric="library">76</strong>
               <span>curated resources</span>
             </article>
             <article class="metric-card">
-              <strong data-count="9" data-metric="labs">0</strong>
-              <span>frontier lab bets</span>
+              <strong data-count="9" data-metric="labs">9</strong>
+              <span>lab & project profiles</span>
             </article>
             <article class="metric-card">
-              <strong data-count="6" data-metric="watch">0</strong>
-              <span>core videos</span>
+              <strong data-count="6" data-metric="watch">6</strong>
+              <span>video explainers</span>
             </article>
           </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <img src="./assets/atlas-hero.svg" alt="" width="760" height="760" fetchpriority="high" />
         </div>
       </section>
 
@@ -125,17 +140,18 @@
           </div>
           <div class="guide-copy">
             <p class="eyebrow">The course guide</p>
-            <h2>Follow the capability shift, not just the buzzword.</h2>
+            <h2>Learn the capability shifts. Question the claims.</h2>
             <p>
-              Each chapter keeps the original source material and gives you a clear path through what changed,
-              why it mattered, and what to open next. The timeline is the spine; start anywhere.
+              Use the timeline for orientation, the lifecycle for engineering depth, and the library for
+              primary sources. Historical milestones, current products, and research horizons are deliberately
+              separated so a promising demo never gets mistaken for a settled result.
             </p>
           </div>
-          <div class="guide-steps" aria-label="Capability layers">
+          <div class="guide-steps" aria-label="Six capability layers">
             <article>
               <span>01</span>
               <strong>Predict</strong>
-              <p>Classic ML turns data into reliable decisions.</p>
+              <p>Classic ML turns data into evaluated decisions.</p>
             </article>
             <article>
               <span>02</span>
@@ -145,84 +161,143 @@
             <article>
               <span>03</span>
               <strong>Generate</strong>
-              <p>LLMs and multimodal models make language and media into interfaces.</p>
+              <p>Language and media become general-purpose interfaces.</p>
             </article>
             <article>
               <span>04</span>
-              <strong>Act</strong>
-              <p>Agents, tools, skills, and harnesses turn one-shot output into workflows.</p>
+              <strong>Reason</strong>
+              <p>Test-time compute makes problem-solving effort adjustable.</p>
             </article>
             <article>
               <span>05</span>
+              <strong>Act</strong>
+              <p>Agents combine models with tools, memory, and permissions.</p>
+            </article>
+            <article>
+              <span>06</span>
               <strong>Simulate</strong>
-              <p>World models point toward planning over imagined futures.</p>
+              <p>World models explore prediction, interaction, and planning.</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section source-section" aria-label="Preserved course sources">
-        <div class="source-lock">
-          <div class="source-lock-copy">
-            <p class="eyebrow">What's inside</p>
-            <h2>One atlas, every primary source in reach.</h2>
+      <section id="now" class="section now-section" data-section="now" aria-labelledby="now-title">
+        <div class="section-heading">
+          <p class="eyebrow">Current briefing · October 2026</p>
+          <h2 id="now-title">What changed since the last edition</h2>
+          <p>
+            Four developments worth adding to the map. Dates refer to the linked sources; inclusion is for
+            study, not endorsement. Vendor claims are starting points for comparison, not settled truth.
+          </p>
+        </div>
+
+        <div class="update-grid">
+          <article class="update-card">
+            <div class="update-card-top">
+              <span class="update-index">01</span>
+              <p class="update-date">16 Oct 2026 · Open models</p>
+            </div>
+            <h3>Beam makes open-weight deployment part of the frontier conversation.</h3>
             <p>
-              Every claim on this page links out to the original paper, official documentation, talk, or
-              product page. Use the counts below as a map of the territory.
+              Reflection released Beam’s weights under Apache 2.0: a 501B-parameter MoE with 23B active
+              parameters, built for coding, reasoning, and agentic work. The teaching opportunity is to examine
+              self-hosting, fine-tuning, licensing, and evaluation—and to remember that open weights are not the
+              same as open data.
             </p>
-          </div>
-          <div class="source-lock-grid" aria-label="Preserved content counts">
-            <article>
-              <strong data-source-count="timeline">10</strong>
-              <span>timeline eras</span>
-            </article>
-            <article>
-              <strong data-source-count="library">70</strong>
-              <span>library sources</span>
-            </article>
-            <article>
-              <strong data-source-count="labs">9</strong>
-              <span>lab bets</span>
-            </article>
-            <article>
-              <strong data-source-count="watch">6</strong>
-              <span>video cards</span>
-            </article>
-          </div>
+            <div class="update-links">
+              <a href="https://reflection.ai/blog/beam-is-available" target="_blank" rel="noopener noreferrer">Release notes</a>
+              <a href="https://reflection.ai/beam-model-card" target="_blank" rel="noopener noreferrer">Model card</a>
+            </div>
+          </article>
+
+          <article class="update-card">
+            <div class="update-card-top">
+              <span class="update-index">02</span>
+              <p class="update-date">13 Oct 2026 · Frontier systems</p>
+            </div>
+            <h3>Gemini 4 Argon ties deep reasoning to multimodal, multi-step work.</h3>
+            <p>
+              Google’s release spans coding, document analysis, science, and cyber defense. Use it as a case
+              study in comparing capability, cost, safeguards, and limitations across model cards—not as a
+              shortcut to declaring one universal “best model.”
+            </p>
+            <div class="update-links">
+              <a href="https://deepmind.google/blog/introducing-gemini-4-argon/" target="_blank" rel="noopener noreferrer">Release overview</a>
+              <a href="https://deepmind.google/models/model-cards/gemini-4-argon/" target="_blank" rel="noopener noreferrer">Model card</a>
+            </div>
+          </article>
+
+          <article class="update-card">
+            <div class="update-card-top">
+              <span class="update-index">03</span>
+              <p class="update-date">08 Sep 2026 · AI for science</p>
+            </div>
+            <h3>A Navier–Stokes result puts formal verification in the loop.</h3>
+            <p>
+              OpenAI reports an analytical proof and Lean formalization for statements C and D of the official
+              problem formulation, while explicitly not claiming the Millennium Prize. Beyond the headline, this
+              is a useful lesson in multi-agent research, expert scrutiny, and machine-checked evidence.
+            </p>
+            <div class="update-links">
+              <a href="https://openai.com/index/navier-stokes-solution/" target="_blank" rel="noopener noreferrer">Read the research account</a>
+            </div>
+          </article>
+
+          <article class="update-card">
+            <div class="update-card-top">
+              <span class="update-index">04</span>
+              <p class="update-date">Sep–Oct 2026 · Evaluation & safety</p>
+            </div>
+            <h3>The model is only one part of the system being evaluated.</h3>
+            <p>
+              Recent system cards examine cyber capability, autonomy, prompt injection, safeguards, and agent
+              behavior. The lesson: compare the task, harness, tools, and protections behind a result. A benchmark
+              number without its evaluation setup is not a conclusion.
+            </p>
+            <div class="update-links">
+              <a href="https://deploymentsafety.openai.com/" target="_blank" rel="noopener noreferrer">OpenAI safety hub</a>
+              <a href="https://www.anthropic.com/claude-sonnet-5-5-system-card" target="_blank" rel="noopener noreferrer">Claude system card</a>
+            </div>
+          </article>
         </div>
+
+        <p class="edition-note">
+          <strong>Reading rule:</strong> dated milestones ≠ current products ≠ research horizons. Follow the
+          sources, inspect the evidence, and keep the uncertainty visible.
+        </p>
       </section>
 
-      <section class="section ribbon-section">
+      <section class="section ribbon-section" aria-label="AI milestones at a glance">
         <div class="signal-ribbon">
           <span>1956 Dartmouth</span>
-          <span>1958 Perceptron</span>
           <span>1986 Backprop</span>
           <span>2012 AlexNet</span>
+          <span>2016 AlphaGo</span>
           <span>2017 Transformer</span>
           <span>2020 GPT-3</span>
-          <span>2023-2024 Agent wave</span>
-          <span>2024-2025 Reasoning (o1 / R1)</span>
-          <span>2025-2026 Seedance / OpenClaw / Harness / Happy Oyster</span>
-          <span>2026 Recursive / Sakana RSI / Thinking Machines / World Labs</span>
-          <span>Next: world models</span>
+          <span>2022 Generative assistants</span>
+          <span>2024–2025 Reasoning</span>
+          <span>2025–2026 Agents + open models</span>
+          <span>2026 Evaluation + interactive worlds</span>
         </div>
       </section>
 
       <section id="history" class="section history-section" data-section="history">
         <div class="section-heading">
-          <p class="eyebrow">AI history</p>
-          <h2>A better timeline, with stronger sources and less hand-wavy storytelling</h2>
+          <p class="eyebrow">AI history · 1956—2026</p>
+          <h2>Milestones that changed what machines could learn—and do.</h2>
           <p>
-            Instead of one giant paragraph, the history is split into milestone states. Click across the
-            timeline to see the capability shift, why it mattered, and which papers, official pages, or
-            talks best represent the moment.
+            Eleven carefully spaced turning points, not a claim that progress was inevitable or linear.
+            Move across the timeline to inspect each capability shift, its historical significance, and
+            the primary sources worth reading next.
           </p>
         </div>
 
         <div class="history-shell">
           <div class="timeline-nav" id="timeline-nav" role="tablist" aria-label="AI history timeline"></div>
 
-          <article class="timeline-detail" id="timeline-detail">
+          <article class="timeline-detail" id="timeline-detail" role="tabpanel" aria-live="polite">
             <div class="timeline-art">
               <img id="timeline-image" src="./assets/ml-matrix.svg" alt="" />
             </div>
@@ -249,19 +324,19 @@
 
       <section id="frontier" class="section frontier-section" data-section="frontier">
         <div class="section-heading">
-          <p class="eyebrow">Frontier systems</p>
-          <h2>Where the site gets current: OpenClaw, Recursive, Seedance, Happy Oyster, harnesses, and world models</h2>
+          <p class="eyebrow">Frontier systems · current landscape</p>
+          <h2>Six lenses on the systems around the model.</h2>
           <p>
-            These are not one category. Some are products, some are operating layers, and some are research
-            bets. Together they show the shift from plain chat toward richer media, longer-running systems,
-            recursive improvement loops, and more world-like interaction.
+            Products, infrastructure, open weights, and research bets belong on different layers of the map.
+            These six lenses connect personal agents and generative media to evaluation harnesses and
+            interactive environments—without treating a compelling demo as proof of a general capability.
           </p>
         </div>
 
         <div class="frontier-shell">
           <div class="frontier-tabs" id="frontier-tabs" role="tablist" aria-label="Frontier topics"></div>
 
-          <article class="frontier-panel" id="frontier-panel">
+          <article class="frontier-panel" id="frontier-panel" role="tabpanel" aria-live="polite">
             <div class="frontier-media">
               <img id="frontier-image" src="./assets/media-surface.svg" alt="" />
             </div>
@@ -271,11 +346,11 @@
               <p class="timeline-summary" id="frontier-summary"></p>
               <div class="detail-grid">
                 <div>
-                  <p class="detail-label">Interpretation</p>
+                  <p class="detail-label">How to read it</p>
                   <p id="frontier-interpretation"></p>
                 </div>
                 <div>
-                  <p class="detail-label">Why now</p>
+                  <p class="detail-label">Why it matters now</p>
                   <p id="frontier-why"></p>
                 </div>
               </div>
@@ -375,24 +450,21 @@
 
       <section id="labs" class="section labs-section" data-section="labs">
         <div class="section-heading">
-          <p class="eyebrow">Neo labs</p>
-          <h2>The neo-lab wave is splitting on what the next AI bottleneck really is</h2>
+          <p class="eyebrow">Research atlas · nine profiles</p>
+          <h2>Compare research bets by bottleneck, not brand.</h2>
           <p>
-            Recursive and Sakana are betting on AI improving AI. Thinking Machines Lab is betting on
-            understandable, customizable, collaborative AI systems. Reflection, Cursor, Codex, and Claude Code
-            push on coding agents. E2B, Browserbase, Daytona, Modal, Blaxel, and CoreWeave show that the
-            next bottleneck is also the environment layer: safe sandboxes, browsers, filesystems, RL rollouts,
-            and evaluation harnesses where agents can act, fail, recover, and be measured. World Labs leans
-            into spatial intelligence, FutureHouse into AI scientists, Physical Intelligence into embodiment,
-            and SSI into a safety-first path.
+            These labs and programs offer different answers to a shared question: what limits useful AI now?
+            Compare automated research, human–AI collaboration, open-weight deployment, agent environments,
+            spatial intelligence, scientific discovery, embodiment, and safety. Profiles are teaching cases,
+            not rankings or endorsements; treat each linked claim as a position to investigate.
           </p>
         </div>
 
         <div class="labs-toolbar" role="toolbar" aria-label="Lab filters">
-          <button class="filter-pill is-active" type="button" data-lab-filter="all">All bets</button>
+          <button class="filter-pill is-active" type="button" data-lab-filter="all">All perspectives</button>
           <button class="filter-pill" type="button" data-lab-filter="self-improvement">Self-improving AI</button>
-          <button class="filter-pill" type="button" data-lab-filter="collaboration">Thinking Machines / collaboration</button>
-          <button class="filter-pill" type="button" data-lab-filter="coding">Coding agents</button>
+          <button class="filter-pill" type="button" data-lab-filter="collaboration">Collaboration</button>
+          <button class="filter-pill" type="button" data-lab-filter="open-models">Open-weight models</button>
           <button class="filter-pill" type="button" data-lab-filter="environments">RL environments</button>
           <button class="filter-pill" type="button" data-lab-filter="world-models">World models</button>
           <button class="filter-pill" type="button" data-lab-filter="science">AI scientists</button>
@@ -401,7 +473,7 @@
         </div>
 
         <div class="labs-meta">
-          <p>Showing <span id="labs-count">0</span> labs and frontier programs</p>
+          <p>Showing <span id="labs-count">0</span> research profiles</p>
         </div>
 
         <div class="labs-layout">
@@ -416,11 +488,11 @@
             <p class="timeline-summary" id="labs-summary"></p>
             <div class="detail-grid">
               <div>
-                <p class="detail-label">What they are betting on</p>
+                <p class="detail-label">Working hypothesis</p>
                 <p id="labs-bet"></p>
               </div>
               <div>
-                <p class="detail-label">What students should notice</p>
+                <p class="detail-label">Questions for students</p>
                 <p id="labs-why"></p>
               </div>
             </div>
@@ -432,27 +504,55 @@
 
       <section id="library" class="section library-section" data-section="library">
         <div class="section-heading section-heading-inverse">
-          <p class="eyebrow">Curated library</p>
-          <h2>A living shelf of papers, talks, official docs, and frontier projects</h2>
+          <p class="eyebrow">Curated library · primary sources first</p>
+          <h2>Find the right paper, talk, document, or project.</h2>
           <p>
-            Filter by how you want to learn. The goal is not quantity. It is a tighter, more credible
-            shortlist that students can actually use.
+            Search by idea, combine a capability area with a resource type, then open the source itself.
+            The shelf is deliberately selective: enough range to connect the course, not an endless feed.
           </p>
         </div>
 
-        <div class="library-toolbar" role="toolbar" aria-label="Library filters">
-          <button class="filter-pill is-active" type="button" data-filter="all">All</button>
+        <div class="library-discovery">
+          <label class="library-search-label" for="library-search">
+            <span>Search the shelf</span>
+            <input
+              id="library-search"
+              type="search"
+              placeholder="Try “reasoning”, “agents”, or “evals”…"
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </label>
+          <label class="library-topic-label" for="library-topic">
+            <span>Capability area</span>
+            <select id="library-topic">
+              <option value="all">All areas</option>
+              <option value="foundations">Foundations & deep learning</option>
+              <option value="language">Language, alignment & reasoning</option>
+              <option value="generative">Generative & multimodal AI</option>
+              <option value="agents">Agents & coding systems</option>
+              <option value="infrastructure">Training & inference infrastructure</option>
+              <option value="environments">Environments & embodiment</option>
+              <option value="frontiers">Research frontiers</option>
+              <option value="open-safety">Open weights & safety</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="library-toolbar" role="toolbar" aria-label="Filter library by resource type">
+          <button class="filter-pill is-active" type="button" data-filter="all">All types</button>
           <button class="filter-pill" type="button" data-filter="paper">Papers</button>
           <button class="filter-pill" type="button" data-filter="blog">Blogs</button>
           <button class="filter-pill" type="button" data-filter="project">Projects</button>
           <button class="filter-pill" type="button" data-filter="video">Videos</button>
         </div>
 
-        <div class="library-meta">
-          <p>Showing <span id="library-count">0</span> curated items</p>
+        <div class="library-meta" aria-live="polite">
+          <p><strong id="library-count">0</strong> matches · showing <span id="library-visible">0</span></p>
+          <p id="library-total">76 curated resources</p>
         </div>
 
-        <div class="library-layout">
+        <div class="library-layout" id="library-layout">
           <div class="library-grid" id="library-grid"></div>
 
           <aside class="library-detail" id="library-detail">
@@ -470,10 +570,21 @@
               </div>
             </div>
             <div class="chip-row" id="library-chips"></div>
-            <a id="library-link" class="button button-primary" href="/" target="_blank" rel="noreferrer">
+            <a id="library-link" class="button button-primary" href="/" target="_blank" rel="noopener noreferrer">
               Open resource
             </a>
           </aside>
+        </div>
+
+        <div class="library-pagination">
+          <button id="library-more" class="button button-secondary" type="button">Show 12 more</button>
+        </div>
+
+        <div class="library-empty" id="library-empty" hidden>
+          <p class="eyebrow">No exact match</p>
+          <h3>Try a broader idea or clear the filters.</h3>
+          <p>Search checks titles, summaries, topics, and tags across the full shelf.</p>
+          <button id="library-reset" class="button button-primary" type="button">Reset library</button>
         </div>
       </section>
 
@@ -492,50 +603,59 @@
 
       <section id="future" class="section future-section" data-section="future">
         <div class="section-heading">
-          <p class="eyebrow">Future</p>
-          <h2>The next stack may look less like a chatbot and more like a simulator, scientist, and robot.</h2>
+          <p class="eyebrow">Research horizons · open questions</p>
+          <h2>Research horizons—not predictions.</h2>
           <p>
-            The strongest future branch in this story is no longer just “bigger LLMs.” It is the
-            convergence of world models, AI scientists, and embodied systems that reason over consequences
-            before acting in text, software, labs, or the physical world.
+            World models, AI scientists, and embodied systems are active research programs, not a guaranteed
+            destination. Use these questions to examine the evidence: what transfers beyond a demo, what can
+            be independently verified, and who remains responsible when a system acts?
           </p>
         </div>
 
         <div class="future-grid">
           <article class="future-card">
-            <img src="./assets/covers/frontier/world-models.jpg" alt="World models cover art" />
-            <h3>World Labs argues that renderers, simulators, and planners are collapsing into one stack.</h3>
+            <img src="./assets/covers/frontier/world-models.jpg" alt="Abstract world models cover art" />
+            <span class="horizon-number">01 / Interactive environments</span>
+            <h3>When does a generated world become a useful model of consequences?</h3>
             <p>
-              This is one of the clearest product-level cases for why world models may become the bridge from
-              generative media to genuine spatial reasoning and simulation.
+              Genie makes interactive-world research tangible, but its documented constraints still matter:
+              limited action spaces, imperfect real-world fidelity, and difficult multi-agent interaction.
+              The research test is not visual spectacle alone; it is controllability, consistency, and whether
+              predicted consequences support better decisions.
             </p>
             <div class="link-list">
-              <a href="https://www.worldlabs.ai/blog/taxonomy-of-world-models" target="_blank" rel="noreferrer">World Labs taxonomy</a>
-              <a href="https://www.worldlabs.ai/blog/marble-world-model" target="_blank" rel="noreferrer">Marble world model</a>
+              <a href="https://deepmind.google/models/genie/" target="_blank" rel="noopener noreferrer">Genie research</a>
+              <a href="https://deepmind.google/blog/project-genie-experimenting-with-infinite-interactive-worlds/" target="_blank" rel="noopener noreferrer">Project Genie and its limitations</a>
             </div>
           </article>
           <article class="future-card">
-            <img src="./assets/covers/labs/futurehouse.jpg" alt="FutureHouse cover art" />
-            <h3>FutureHouse suggests AI scientists may become a practical vertical before general AGI arrives.</h3>
+            <img src="./assets/covers/labs/futurehouse.jpg" alt="Abstract AI science cover art" />
+            <span class="horizon-number">02 / Automated research</span>
+            <h3>What evidence should turn an AI-assisted result into a scientific discovery?</h3>
             <p>
-              Scientific agents already combine literature search, synthesis, tools, and experimental
-              planning into workflow systems that look more like junior research teams than chatbots.
+              Research agents can search literature, write code, and propose experiments, but fluent output is
+              not validation. Compare FutureHouse’s workflow approach with a reported Navier–Stokes proof that
+              adds expert scrutiny and Lean formalization. Ask where replication, negative results, and human
+              accountability enter the loop.
             </p>
             <div class="link-list">
-              <a href="https://www.futurehouse.org/about" target="_blank" rel="noreferrer">FutureHouse mission</a>
-              <a href="https://www.futurehouse.org/news/launching-futurehouse-platform-ai-agents" target="_blank" rel="noreferrer">FutureHouse platform</a>
+              <a href="https://www.futurehouse.org/news/launching-futurehouse-platform-ai-agents" target="_blank" rel="noopener noreferrer">FutureHouse platform</a>
+              <a href="https://openai.com/index/navier-stokes-solution/" target="_blank" rel="noopener noreferrer">Proof and formal verification case</a>
             </div>
           </article>
           <article class="future-card">
-            <img src="./assets/covers/labs/physical-intelligence.jpg" alt="Physical Intelligence cover art" />
-            <h3>Physical Intelligence shows what changes when AI must act in the physical world, not just describe it.</h3>
+            <img src="./assets/covers/labs/physical-intelligence.jpg" alt="Abstract embodied AI cover art" />
+            <span class="horizon-number">03 / Embodiment</span>
+            <h3>Which capabilities survive contact with the physical world?</h3>
             <p>
-              Embodied systems force models to handle state, memory, causality, and consequences under real
-              action pressure. That is why robotics may be one of the hardest and most revealing world-model tests.
+              Robots must handle incomplete perception, changing state, safety constraints, and actions that
+              cannot be undone. Open robot policies make part of the stack inspectable, but generalization
+              still needs testing across bodies, tasks, environments, and failure modes—not inferred from a
+              single successful demonstration.
             </p>
             <div class="link-list">
-              <a href="https://www.pi.website/" target="_blank" rel="noreferrer">Physical Intelligence</a>
-              <a href="https://www.pi.website/blog/openpi" target="_blank" rel="noreferrer">OpenPI release</a>
+              <a href="https://www.pi.website/" target="_blank" rel="noopener noreferrer">Physical Intelligence research</a>
+              <a href="https://www.pi.website/blog/openpi" target="_blank" rel="noopener noreferrer">OpenPI release</a>
             </div>
           </article>
         </div>
@@ -546,22 +666,23 @@
       <div class="footer-grid">
         <div class="footer-block footer-course">
           <p class="footer-title">CSC2220 Artificial Intelligence</p>
-          <p class="footer-note">Created by Taotao Cai for CSC2220 at UniSQ. Built with Codex; maintained as a living atlas.</p>
+          <p class="footer-note">Created by Taotao Cai for CSC2220 at UniSQ. Maintained as a living, source-led course atlas.</p>
         </div>
         <nav class="footer-block footer-nav" aria-label="Footer navigation">
           <p class="footer-title">Explore</p>
+          <a href="#now">Now</a>
           <a href="#history">History</a>
           <a href="#frontier">Frontier</a>
           <a href="#llm-stack">Stack</a>
           <a href="#labs">Labs</a>
           <a href="#library">Library</a>
           <a href="#watch">Watch</a>
-          <a href="#future">Future</a>
+          <a href="#future">Horizons</a>
         </nav>
         <div class="footer-block footer-source">
-          <p class="footer-title">Source</p>
-          <a href="https://github.com/Taotao1992/ai-evolution-atlas" target="_blank" rel="noreferrer">GitHub repository</a>
-          <p class="footer-note">Last updated July 2026</p>
+          <p class="footer-title">Source & review</p>
+          <a href="https://github.com/Taotao1992/ai-evolution-atlas" target="_blank" rel="noopener noreferrer">GitHub repository</a>
+          <p class="footer-note">Reviewed <time datetime="2026-10-26">26 October 2026</time><br />Product claims belong to their linked sources.</p>
         </div>
       </div>
     </footer>

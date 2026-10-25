@@ -113,27 +113,17 @@ def make_cover(path, tag, eyebrow, headline, tagline):
 
 
 jobs = [
-    (
-        os.path.join(OUT, "timeline", "reasoning.jpg"),
-        "HISTORY",
-        "2024-2025",
-        "Reasoning models made thinking time a new scaling axis.",
-        "test-time compute",
-    ),
-    (
-        os.path.join(OUT, "library", "deepseek-r1.jpg"),
-        "LIBRARY",
-        "PAPER · 2025",
-        "DeepSeek-R1: reasoning via reinforcement learning",
-        "open weights, open recipe",
-    ),
-    (
-        os.path.join(OUT, "library", "karpathy-deep-dive.jpg"),
-        "LIBRARY",
-        "VIDEO",
-        "Deep Dive into LLMs like ChatGPT",
-        "full pipeline tour",
-    ),
+    (os.path.join(OUT, "timeline", "alphago.jpg"), "HISTORY", "2016", "AlphaGo joined learned representations with search.", "deep learning + planning"),
+    (os.path.join(OUT, "timeline", "generative-ai.jpg"), "HISTORY", "2022", "Alignment and generative assistants changed the interface.", "instruction tuning + feedback"),
+    (os.path.join(OUT, "timeline", "multimodal-frontier.jpg"), "HISTORY", "2025-2026", "AI systems expanded across tools, media, and worlds.", "models + harnesses + environments"),
+    (os.path.join(OUT, "frontier", "open-models.jpg"), "FRONTIER", "OPEN WEIGHTS", "Open deployment changes the questions we can ask.", "inspect + adapt + evaluate"),
+    (os.path.join(OUT, "library", "beam-release.jpg"), "LIBRARY", "RELEASE · 2026", "Beam: open weights for coding, reasoning, and agents", "Apache 2.0 · 501B MoE"),
+    (os.path.join(OUT, "library", "beam-model-card.jpg"), "LIBRARY", "MODEL CARD", "Beam: architecture, evaluation, and limitations", "read beyond the benchmark"),
+    (os.path.join(OUT, "library", "project-genie.jpg"), "LIBRARY", "PROJECT · 2026", "Project Genie: prompt, explore, and remix worlds", "interaction + limitations"),
+    (os.path.join(OUT, "library", "gemini-4-argon.jpg"), "LIBRARY", "MODEL CARD", "Gemini 4 Argon: multimodal, multi-step systems", "compare capability + safeguards"),
+    (os.path.join(OUT, "library", "claude-haiku-5-5.jpg"), "LIBRARY", "RELEASE · 2026", "Claude Haiku 5.5 and the efficient-agent stack", "latency + cost + delegation"),
+    (os.path.join(OUT, "library", "navier-stokes.jpg"), "LIBRARY", "RESEARCH · 2026", "Navier-Stokes: proof, scrutiny, and Lean", "formal verification"),
+    (os.path.join(OUT, "library", "openai-evals-hub.jpg"), "LIBRARY", "SAFETY", "Deployment safety is a system-level evaluation", "model + harness + safeguards"),
 ]
 
 for args in jobs:
