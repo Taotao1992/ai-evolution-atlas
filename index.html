@@ -2,7 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#050a12" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="AI Atlas" />
+    <link rel="manifest" href="./app.webmanifest" />
+    <link rel="apple-touch-icon" href="./assets/app/apple-touch-icon.png" />
     <title>CSC2220 AI Evolution Atlas | Course, Research & Primary Sources</title>
     <meta
       name="description"
@@ -51,8 +58,8 @@
         rel="stylesheet"
       />
     </noscript>
-    <link rel="stylesheet" href="./styles.css?v=20261026-views" />
-    <link rel="stylesheet" href="./assets/atlas.css?v=20261026-views" />
+    <link rel="stylesheet" href="./styles.css?v=20261026-app" />
+    <link rel="stylesheet" href="./assets/atlas.css?v=20261026-app" />
     <script type="importmap">
       {
         "imports": {
@@ -61,7 +68,8 @@
         }
       }
     </script>
-    <script type="module" src="./main.js?v=20261026-views" defer></script>
+    <script src="./app-shell.js?v=20261026-app" defer></script>
+    <script type="module" src="./main.js?v=20261026-app" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>

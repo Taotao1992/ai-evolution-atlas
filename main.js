@@ -2885,7 +2885,7 @@ function initEvolutionAtlas() {
   const start = async () => {
     experience.dataset.atlasState = "loading";
     try {
-      const { mountEvolutionAtlas } = await import("./assets/evolution-3d.js?v=20261026-views");
+      const { mountEvolutionAtlas } = await import("./assets/evolution-3d.js?v=20261026-app");
       evolutionAtlasController = mountEvolutionAtlas({
         container,
         items: timelineItems,
@@ -3150,7 +3150,10 @@ function renderLibraryGrid() {
 
       if (window.matchMedia("(max-width: 1024px)").matches) {
         const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        libraryDetail.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+        const detailTop = libraryDetail.getBoundingClientRect().top;
+        const longJump = Math.abs(detailTop) > window.innerHeight * 0.75;
+        const behavior = reduceMotion || longJump ? "instant" : "smooth";
+        libraryDetail.scrollIntoView({ behavior, block: "start" });
       }
     });
 

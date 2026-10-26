@@ -901,3 +901,57 @@ body[data-route]:not([data-route="top"]) main {
     transition: none !important;
   }
 }
+
+/* Native iOS / TV shells keep the course content but replace web chrome. */
+body.native-shell .site-header,
+body.native-shell .site-footer,
+body.native-shell .skip-link {
+  display: none;
+}
+
+body.native-shell main > section {
+  scroll-margin-top: 24px;
+}
+
+body.native-shell .hero {
+  margin-top: 0;
+}
+
+body.native-shell-tv {
+  --fs-body: 1.125rem;
+  --section-pad: 68px;
+}
+
+body.native-shell-tv main {
+  width: min(calc(100% - 80px), 1440px);
+}
+
+body.native-shell-tv :focus-visible {
+  outline: 4px solid var(--accent) !important;
+  outline-offset: 5px !important;
+  box-shadow: 0 0 0 9px rgba(110, 231, 255, 0.16), 0 14px 38px rgba(0, 0, 0, 0.35) !important;
+}
+
+body.native-shell-tv a,
+body.native-shell-tv button,
+body.native-shell-tv input,
+body.native-shell-tv select {
+  scroll-margin: 36px;
+}
+
+body.native-shell-tv .button,
+body.native-shell-tv button {
+  min-height: 48px;
+}
+
+@media (display-mode: standalone) {
+  body:not(.native-shell) .site-header {
+    padding-top: max(18px, env(safe-area-inset-top));
+    padding-right: max(20px, env(safe-area-inset-right));
+    padding-left: max(20px, env(safe-area-inset-left));
+  }
+
+  body:not(.native-shell) .site-footer {
+    padding-bottom: max(40px, env(safe-area-inset-bottom));
+  }
+}
