@@ -40,19 +40,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
       media="print"
       onload="this.media='all'"
     />
     <noscript>
       <link
-        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap"
         rel="stylesheet"
       />
     </noscript>
-    <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="./assets/atlas.css" />
+    <link rel="stylesheet" href="./styles.css?v=20261026-views" />
+    <link rel="stylesheet" href="./assets/atlas.css?v=20261026-views" />
     <script type="importmap">
       {
         "imports": {
@@ -61,7 +61,7 @@
         }
       }
     </script>
-    <script type="module" src="./main.js" defer></script>
+    <script type="module" src="./main.js?v=20261026-views" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -77,7 +77,7 @@
         </span>
         <span class="brand-copy">
           <strong>CSC2220 · AI Atlas</strong>
-          <small>UNISQ · COURSE FIELD GUIDE · 2026</small>
+          <small>Taotao Cai · COURSE FIELD GUIDE · 2026</small>
         </span>
       </a>
 
@@ -100,7 +100,11 @@
 
         <div class="hero-content">
           <p class="eyebrow">CSC2220 · Artificial Intelligence</p>
-          <h1 id="hero-title">A living map of machine intelligence.</h1>
+          <h1 id="hero-title">
+            <span class="hero-title-line">A <em>living map</em></span>
+            <span class="hero-title-line">of machine</span>
+            <span class="hero-title-line">intelligence.</span>
+          </h1>
           <p class="hero-lead">
             A curated course atlas connecting classic ML and deep learning to reasoning models, agents,
             open-weight systems, evaluation, and world models—always with a primary source and a next step.
@@ -168,8 +172,10 @@
                 <h2 id="atlas-title">Dartmouth</h2>
                 <p id="atlas-subtitle">AI gets a name and a shared ambition</p>
               </div>
-              <button class="atlas-open" id="atlas-open" type="button">
-                Open milestone <span aria-hidden="true">↗</span>
+              <button class="atlas-open" id="atlas-open" type="button" aria-label="Open selected milestone">
+                <span class="atlas-open-label">Open milestone</span>
+                <span class="atlas-open-label-short" aria-hidden="true">Open</span>
+                <span class="atlas-open-arrow" aria-hidden="true">↗</span>
               </button>
             </div>
 
@@ -185,7 +191,7 @@
         </div>
       </section>
 
-      <section class="section guide-section" aria-label="Course field guide">
+      <section class="section guide-section" data-route="top" aria-label="Course field guide">
         <div class="guide-panel">
           <div class="guide-character" aria-hidden="true">
             <span></span>
@@ -426,7 +432,7 @@
         </p>
       </section>
 
-      <section class="section ribbon-section" aria-label="AI milestones at a glance">
+      <section class="section ribbon-section" data-route="history" aria-label="AI milestones at a glance">
         <div class="signal-ribbon">
           <span>1956 Dartmouth</span>
           <span>1986 Backprop</span>

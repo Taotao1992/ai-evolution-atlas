@@ -2429,9 +2429,102 @@ const watchGrid = document.querySelector("#watch-grid");
 const scrollProgress = document.querySelector("#scroll-progress");
 const header = document.querySelector(".site-header");
 const navLinks = [...document.querySelectorAll(".site-nav a")];
-const sections = [...document.querySelectorAll("[data-section]")];
+const routeSections = [...document.querySelectorAll("main > section")];
+const routeLabels = new Map(
+  navLinks.map((link) => [link.getAttribute("href").slice(1), link.textContent.trim()]),
+);
+const defaultDocumentTitle = document.title;
 const countNodes = [...document.querySelectorAll("[data-count]")];
+let currentRoute = "";
+let lastAppliedHash = "";
 let revealObserver;
+
+function routeForSection(section) {
+  return section?.id || section?.dataset.route || "";
+}
+
+function resolveRoute(hash = window.location.hash) {
+  let id = hash.replace(/^#/, "");
+  try {
+    id = decodeURIComponent(id);
+  } catch {
+    // Keep the raw fragment when a malformed URL cannot be decoded.
+  }
+
+  if (id === "main") {
+    return { route: currentRoute || "top", target: document.querySelector("#main") };
+  }
+
+  const target = id ? document.getElementById(id) : document.querySelector("#top");
+  const section = target?.matches("main > section") ? target : target?.closest("main > section");
+
+  return {
+    route: section ? routeForSection(section) : "top",
+    target: target || document.querySelector("#top"),
+  };
+}
+
+function applyRoute(route, { scroll = true, target = null } = {}) {
+  const nextRoute = routeSections.some((section) => routeForSection(section) === route) ? route : "top";
+  const routeChanged = currentRoute !== nextRoute;
+  currentRoute = nextRoute;
+  document.body.dataset.route = nextRoute;
+
+  routeSections.forEach((section) => {
+    section.hidden = routeForSection(section) !== nextRoute;
+  });
+
+  navLinks.forEach((link) => {
+    const isActive = link.getAttribute("href") === `#${nextRoute}`;
+    link.classList.toggle("is-active", isActive);
+    if (isActive) link.setAttribute("aria-current", "page");
+    else link.removeAttribute("aria-current");
+  });
+
+  document.title = nextRoute === "top"
+    ? defaultDocumentTitle
+    : `${routeLabels.get(nextRoute) ?? nextRoute} | CSC2220 AI Evolution Atlas`;
+
+  if (target?.dataset.assignmentId) {
+    openAssignment(target.dataset.assignmentId);
+  }
+
+  if (scroll) {
+    const destination = target || routeSections.find((section) => section.id === nextRoute);
+    if (nextRoute === "top" && (!target || target.id === "top")) {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    } else if (destination) {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const behavior = routeChanged || reduceMotion || destination.id === "main" ? "instant" : "smooth";
+      destination.scrollIntoView({ block: "start", behavior });
+    }
+  }
+
+  updateScrollUI();
+}
+
+function applyRouteFromLocation() {
+  const { route, target } = resolveRoute();
+  lastAppliedHash = window.location.hash;
+  applyRoute(route, { target });
+}
+
+function navigateToRoute(route, { scroll = true } = {}) {
+  const nextHash = `#${route}`;
+  lastAppliedHash = nextHash;
+  if (window.location.hash !== nextHash) {
+    window.location.hash = nextHash;
+  }
+  applyRoute(route, { scroll });
+}
+
+function initRouting() {
+  window.addEventListener("hashchange", () => {
+    if (window.location.hash === lastAppliedHash) return;
+    applyRouteFromLocation();
+  });
+  applyRouteFromLocation();
+}
 
 function makeChip(text) {
   const chip = document.createElement("span");
@@ -2776,6 +2869,7 @@ function setTimelineSelection(id, { syncAtlas = false } = {}) {
 
 function openTimelineFromAtlas(id) {
   setTimelineSelection(id);
+  navigateToRoute("history", { scroll: false });
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   document.querySelector("#history").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
   const tab = document.querySelector(`#timeline-tab-${id}`);
@@ -2791,7 +2885,7 @@ function initEvolutionAtlas() {
   const start = async () => {
     experience.dataset.atlasState = "loading";
     try {
-      const { mountEvolutionAtlas } = await import("./assets/evolution-3d.js");
+      const { mountEvolutionAtlas } = await import("./assets/evolution-3d.js?v=20261026-views");
       evolutionAtlasController = mountEvolutionAtlas({
         container,
         items: timelineItems,
@@ -3160,24 +3254,10 @@ function animateCounts() {
 function updateScrollUI() {
   const scrollTop = window.scrollY;
   const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-  const progress = maxScroll > 0 ? scrollTop / maxScroll : 0;
+  const progress = maxScroll > 0 ? Math.min(1, scrollTop / maxScroll) : 0;
 
   scrollProgress.style.transform = `scaleX(${progress})`;
   header.classList.toggle("is-scrolled", scrollTop > 28);
-
-  let activeId = sections[0]?.id ?? "top";
-
-  sections.forEach((section) => {
-    const rect = section.getBoundingClientRect();
-    if (rect.top <= window.innerHeight * 0.28) {
-      activeId = section.id;
-    }
-  });
-
-  navLinks.forEach((link) => {
-    const isActive = link.getAttribute("href") === `#${activeId}`;
-    link.classList.toggle("is-active", isActive);
-  });
 }
 
 function bindFilters() {
@@ -3326,7 +3406,7 @@ function init() {
 
   animateCounts();
   bindPointerGlow();
-  updateScrollUI();
+  initRouting();
   initEvolutionAtlas();
 
   window.addEventListener("scroll", updateScrollUI, { passive: true });

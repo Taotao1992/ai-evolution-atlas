@@ -134,50 +134,50 @@ function makeYearLabel(item, color) {
 
 function makeIntelligenceCore(glowTexture) {
   const group = new THREE.Group();
-  group.position.set(0, -0.1, -2.7);
+  group.position.set(0, -0.1, -3.4);
   const inner = new THREE.Mesh(
-    new THREE.IcosahedronGeometry(0.62, 2),
+    new THREE.IcosahedronGeometry(0.48, 2),
     new THREE.MeshStandardMaterial({
       name: "Atlas · Intelligence core prism",
       color: 0x123f55,
       emissive: 0x6ee7ff,
-      emissiveIntensity: 0.72,
-      roughness: 0.18,
+      emissiveIntensity: 0.5,
+      roughness: 0.22,
       metalness: 0.58,
       transparent: true,
-      opacity: 0.82,
+      opacity: 0.68,
     }),
   );
   const cage = new THREE.Mesh(
-    new THREE.IcosahedronGeometry(0.98, 1),
+    new THREE.IcosahedronGeometry(0.78, 1),
     new THREE.MeshBasicMaterial({
       name: "Atlas · Intelligence core cage",
       color: 0x6ee7ff,
       wireframe: true,
       transparent: true,
-      opacity: 0.24,
+      opacity: 0.15,
       depthWrite: false,
     }),
   );
   const outer = new THREE.Mesh(
-    new THREE.IcosahedronGeometry(1.32, 0),
+    new THREE.IcosahedronGeometry(1.08, 0),
     new THREE.MeshBasicMaterial({
       name: "Atlas · Intelligence outer lattice",
       color: 0xb8a1ff,
       wireframe: true,
       transparent: true,
-      opacity: 0.12,
+      opacity: 0.07,
       depthWrite: false,
     }),
   );
-  const rings = [1.18, 1.52].map((radius, index) => {
+  const rings = [0.98, 1.28].map((radius, index) => {
     const ring = new THREE.Mesh(
-      new THREE.TorusGeometry(radius, index === 0 ? 0.012 : 0.008, 6, 96),
+      new THREE.TorusGeometry(radius, index === 0 ? 0.01 : 0.007, 6, 96),
       new THREE.MeshBasicMaterial({
         name: "Atlas · Intelligence gyroscope",
         color: index === 0 ? 0x87ffc1 : 0xb8a1ff,
         transparent: true,
-        opacity: index === 0 ? 0.3 : 0.18,
+        opacity: index === 0 ? 0.2 : 0.12,
         depthWrite: false,
         blending: THREE.AdditiveBlending,
       }),
@@ -191,13 +191,13 @@ function makeIntelligenceCore(glowTexture) {
       map: glowTexture,
       color: 0x6ee7ff,
       transparent: true,
-      opacity: 0.17,
+      opacity: 0.11,
       depthWrite: false,
       blending: THREE.AdditiveBlending,
     }),
   );
-  halo.scale.setScalar(3.8);
-  const light = new THREE.PointLight(0x6ee7ff, 5, 8);
+  halo.scale.setScalar(3.1);
+  const light = new THREE.PointLight(0x6ee7ff, 3, 8);
   light.name = "Atlas · Intelligence core light";
   group.add(inner, cage, outer, ...rings, halo, light);
   return { group, inner, cage, outer, rings };
@@ -492,6 +492,7 @@ export function mountEvolutionAtlas({
   let effectTime = 0;
   let holdUntil = 0;
   let pointerStart = null;
+  let cameraTween = null;
 
   function homePosition() {
     const aspect = Math.max(0.45, camera.aspect || 1);
@@ -507,7 +508,43 @@ export function mountEvolutionAtlas({
     experience.dataset.rotation = motionEnabled ? "running" : "paused";
   }
 
-  function select(id, { notify = true, hold = true } = {}) {
+  function beginCameraTransition(position, reset = false) {
+    const toTarget = reset ? HOME_TARGET.clone() : HOME_TARGET.clone().lerp(position, 0.13);
+    const toPosition = homePosition();
+    if (!reset) {
+      toPosition.x += position.x * 0.065;
+      toPosition.y += position.y * 0.04;
+      toPosition.z -= 0.35;
+    }
+    cameraTween = {
+      startedAt: clockTime,
+      duration: reduceMotion ? 0 : 1.05,
+      fromPosition: camera.position.clone(),
+      fromTarget: controls.target.clone(),
+      toPosition,
+      toTarget,
+    };
+  }
+
+  function updateCameraTransition() {
+    if (!cameraTween) return;
+    const progress = reduceMotion || cameraTween.duration === 0
+      ? 1
+      : THREE.MathUtils.clamp((clockTime - cameraTween.startedAt) / cameraTween.duration, 0, 1);
+    const eased = 1 - Math.pow(1 - progress, 4);
+    camera.position.lerpVectors(cameraTween.fromPosition, cameraTween.toPosition, eased);
+    controls.target.lerpVectors(cameraTween.fromTarget, cameraTween.toTarget, eased);
+    if (progress >= 1) cameraTween = null;
+  }
+
+  function animateReadout() {
+    readout.classList.remove("is-changing");
+    if (reduceMotion) return;
+    void readout.offsetWidth;
+    readout.classList.add("is-changing");
+  }
+
+  function select(id, { notify = true, hold = true, focus = true, reset = false } = {}) {
     const index = items.findIndex((item) => item.id === id);
     if (index < 0) return;
     selectedIndex = index;
@@ -521,6 +558,8 @@ export function mountEvolutionAtlas({
     subtitleElement.textContent = item.buttonSubtitle;
     positionElement.textContent = `${String(index + 1).padStart(2, "0")} / ${String(items.length).padStart(2, "0")}`;
     container.dataset.selectedId = id;
+    animateReadout();
+    if (focus) beginCameraTransition(position, reset);
     if (hold) holdUntil = clockTime + 3.5;
     if (notify) onSelect?.(id);
   }
@@ -540,10 +579,7 @@ export function mountEvolutionAtlas({
 
   function resetView() {
     userHasMoved = false;
-    camera.position.copy(homePosition());
-    controls.target.copy(HOME_TARGET);
-    controls.update();
-    select(items[0].id);
+    select(items[0].id, { reset: true });
   }
 
   function resize() {
@@ -551,7 +587,7 @@ export function mountEvolutionAtlas({
     if (width < 2 || height < 2) return;
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
-    if (!userHasMoved) camera.position.copy(homePosition());
+    if (!userHasMoved && !cameraTween) camera.position.copy(homePosition());
     camera.updateProjectionMatrix();
     controls.minDistance = homePosition().z * 0.42;
     controls.maxDistance = homePosition().z * 1.65;
@@ -579,45 +615,64 @@ export function mountEvolutionAtlas({
     clockTime += delta;
     if (!reduceMotion) effectTime += delta;
 
-    controls.autoRotate = motionEnabled && !userInteracting && clockTime >= holdUntil;
+    updateCameraTransition();
+    controls.autoRotate = motionEnabled && !cameraTween && !userInteracting && clockTime >= holdUntil;
     controls.update(delta);
 
+    const dampDelta = delta || 0.016;
     nodes.forEach((node, index) => {
       const selected = index === selectedIndex;
       const hovered = node.id === hoveredId;
-      const targetScale = selected ? 1.28 : hovered ? 1.16 : 1;
-      const scale = THREE.MathUtils.damp(node.group.scale.x, targetScale, 10, delta || 0.016);
+      const targetScale = selected ? 1.6 : hovered ? 1.18 : 1;
+      const scale = THREE.MathUtils.damp(node.group.scale.x, targetScale, 8, dampDelta);
       node.group.scale.setScalar(scale);
-      node.core.rotation.y = effectTime * 0.45 + index * 0.4;
-      node.core.rotation.x = effectTime * 0.18 + index * 0.22;
-      node.shell.rotation.y = -effectTime * 0.25 + index * 0.3;
-      node.shell.rotation.z = effectTime * 0.16;
-      node.halo.material.opacity = selected ? 0.76 : hovered ? 0.66 : 0.5;
+      node.core.rotation.y = effectTime * 0.36 + index * 0.4;
+      node.core.rotation.x = effectTime * 0.14 + index * 0.22;
+      node.shell.rotation.y = -effectTime * 0.2 + index * 0.3;
+      node.shell.rotation.z = effectTime * 0.12;
+      node.core.material.emissiveIntensity = THREE.MathUtils.damp(
+        node.core.material.emissiveIntensity,
+        selected ? 1.55 : hovered ? 1.1 : 0.72,
+        8,
+        dampDelta,
+      );
+      node.shell.material.opacity = THREE.MathUtils.damp(node.shell.material.opacity, selected ? 0.52 : 0.26, 8, dampDelta);
+      node.halo.material.opacity = THREE.MathUtils.damp(
+        node.halo.material.opacity,
+        selected ? 0.84 : hovered ? 0.64 : 0.34,
+        8,
+        dampDelta,
+      );
       node.label.material.color.copy(selected ? AMBER : node.color);
-      node.label.material.opacity = selected ? 0.96 : hovered ? 0.82 : 0.52;
+      node.label.material.opacity = THREE.MathUtils.damp(
+        node.label.material.opacity,
+        selected ? 0.98 : hovered ? 0.82 : 0.42,
+        8,
+        dampDelta,
+      );
     });
 
-    intelligenceCore.inner.rotation.y = effectTime * 0.24;
-    intelligenceCore.inner.rotation.x = effectTime * 0.11;
-    intelligenceCore.cage.rotation.y = -effectTime * 0.18;
-    intelligenceCore.cage.rotation.z = effectTime * 0.09;
-    intelligenceCore.outer.rotation.y = effectTime * 0.08;
-    intelligenceCore.outer.rotation.x = -effectTime * 0.06;
-    intelligenceCore.rings[0].rotation.z = effectTime * 0.22;
-    intelligenceCore.rings[1].rotation.z = 0.5 - effectTime * 0.16;
+    intelligenceCore.inner.rotation.y = effectTime * 0.2;
+    intelligenceCore.inner.rotation.x = effectTime * 0.09;
+    intelligenceCore.cage.rotation.y = -effectTime * 0.15;
+    intelligenceCore.cage.rotation.z = effectTime * 0.07;
+    intelligenceCore.outer.rotation.y = effectTime * 0.06;
+    intelligenceCore.outer.rotation.x = -effectTime * 0.045;
+    intelligenceCore.rings[0].rotation.z = effectTime * 0.17;
+    intelligenceCore.rings[1].rotation.z = 0.5 - effectTime * 0.12;
 
     pulses.forEach((pulse, index) => {
-      const progress = (effectTime * 0.035 + index / pulses.length) % 1;
+      const progress = (effectTime * 0.03 + index / pulses.length) % 1;
       curve.getPointAt(progress, pulsePoint);
       pulse.position.copy(pulsePoint);
-      pulse.material.opacity = 0.55 + Math.sin((progress + effectTime * 0.1) * Math.PI * 2) * 0.22;
+      pulse.material.opacity = 0.52 + Math.sin((progress + effectTime * 0.08) * Math.PI * 2) * 0.18;
     });
 
     selectionRing.quaternion.copy(camera.quaternion);
-    selectionRing.rotateZ(effectTime * 0.32);
+    selectionRing.rotateZ(effectTime * 0.18);
     selectionOrbit.quaternion.copy(camera.quaternion);
-    selectionOrbit.rotateZ(-effectTime * 0.22 + 0.8);
-    const selectionPulse = reduceMotion ? 1 : 1 + Math.sin(effectTime * 2.2) * 0.07;
+    selectionOrbit.rotateZ(-effectTime * 0.14 + 0.8);
+    const selectionPulse = reduceMotion ? 1 : 1 + Math.sin(effectTime * 1.8) * 0.04;
     selectionOrbit.scale.setScalar(selectionPulse);
     stars.rotation.y = effectTime * 0.0035;
     stars.rotation.x = Math.sin(effectTime * 0.025) * 0.012;
@@ -675,6 +730,7 @@ export function mountEvolutionAtlas({
   }, { signal });
 
   controls.addEventListener("start", () => {
+    cameraTween = null;
     userInteracting = true;
     userHasMoved = true;
   });
@@ -739,7 +795,7 @@ export function mountEvolutionAtlas({
   intersectionObserver.observe(container);
 
   updateMotionButton();
-  select(items[selectedIndex].id, { notify: false, hold: false });
+  select(items[selectedIndex].id, { notify: false, hold: false, focus: false });
   resize();
   controls.target.copy(HOME_TARGET);
   controls.update();

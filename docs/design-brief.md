@@ -63,3 +63,25 @@ Turn the existing static hero emblem into a navigable spatial timeline: eleven v
 3. Mobile 390 px: touch stage, readout, controls, and page overflow.
 4. Interaction: node selection, next/previous, pause, reset, and history handoff.
 5. Reduced motion and simulated WebGL failure: static fallback and usable course content.
+
+## Editorial and motion refinement — 26 October 2026
+
+- [ ] Make the spatial timeline the primary hero subject without removing or rewriting course content.
+- [ ] Add editorial typography contrast with Instrument Serif used only for the hero phrase; keep Manrope, Bricolage Grotesque, and IBM Plex Mono for reading and interface text.
+- [ ] Widen the desktop canvas to approximately 1320 px and use a 0.88 / 1.12 copy-to-scene grid above 1150 px; retain the existing tablet and single-column mobile fallbacks.
+- [ ] Establish one visual focal point: selected milestone scale 1.6, brighter amber treatment, quieter unselected labels, and a dimmer central lattice.
+- [ ] Replace abrupt selection changes with a 1.05-second ease-out camera/target transition; cancel it immediately when the user starts orbiting.
+- [ ] Use restrained 500–850 ms entrance and readout transitions with `cubic-bezier(0.16, 1, 0.3, 1)`; disable nonessential motion under reduced-motion preferences.
+- [ ] Keep the rendering budget unchanged: under 100 draw calls and 100,000 triangles, no post-processing, no shadow maps, and no additional per-frame geometry allocation.
+- [ ] Version the CSS and JavaScript URLs so returning visitors do not execute stale deployment assets.
+
+The refinement deliberately avoids more bloom, extra panels, or continuous large-amplitude movement. The intended impression is a quiet editorial interface around a precise, cinematic scientific instrument.
+
+## Independent reading views — 26 October 2026
+
+- Present the brand byline as `Taotao Cai · COURSE FIELD GUIDE · 2026`; retain UniSQ in the course attribution and structured metadata.
+- Turn the primary navigation into focused reading views without changing the existing fragment URLs. Home combines the 3D hero and course guide; History includes the milestone ribbon; every other tab shows only its own section.
+- Resolve nested fragments such as `#assignments` and `#assignment-a3` to their parent view, preserve native back/forward navigation, and keep `#main` as an accessible skip-link target.
+- Update the active tab with `aria-current="page"` and give each view a specific document title.
+- Use a restrained 560 ms opacity/vertical transition between views, disabled by the existing reduced-motion treatment.
+- Apply `hidden` only from JavaScript so the complete long-form document remains available when scripting is unavailable.
