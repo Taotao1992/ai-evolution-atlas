@@ -2791,7 +2791,7 @@ function initEvolutionAtlas() {
   const start = async () => {
     experience.dataset.atlasState = "loading";
     try {
-      const { mountEvolutionAtlas } = await import("./evolution-3d.js");
+      const { mountEvolutionAtlas } = await import("./assets/evolution-3d.js");
       evolutionAtlasController = mountEvolutionAtlas({
         container,
         items: timelineItems,
