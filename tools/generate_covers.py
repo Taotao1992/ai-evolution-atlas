@@ -124,6 +124,8 @@ jobs = [
     (os.path.join(OUT, "library", "claude-haiku-5-5.jpg"), "LIBRARY", "RELEASE · 2026", "Claude Haiku 5.5 and the efficient-agent stack", "latency + cost + delegation"),
     (os.path.join(OUT, "library", "navier-stokes.jpg"), "LIBRARY", "RESEARCH · 2026", "Navier-Stokes: proof, scrutiny, and Lean", "formal verification"),
     (os.path.join(OUT, "library", "openai-evals-hub.jpg"), "LIBRARY", "SAFETY", "Deployment safety is a system-level evaluation", "model + harness + safeguards"),
+    (os.path.join(OUT, "library", "helm-paper.jpg"), "LIBRARY", "EVALUATION", "HELM: measure trade-offs beyond average accuracy", "scenarios + metrics + transparency"),
+    (os.path.join(OUT, "library", "hal-paper.jpg"), "LIBRARY", "AGENT EVALUATION", "HAL: inspect models, scaffolds, and agent logs", "harness + rollouts + evidence"),
 ]
 
 for args in jobs:

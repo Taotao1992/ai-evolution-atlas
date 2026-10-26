@@ -1885,6 +1885,34 @@ const libraryItems = [
     accent: "#87ffc1",
     url: "https://www.youtube.com/watch?v=7xTGNNLPyMI",
   },
+  {
+    id: "helm-paper",
+    type: "paper",
+    topic: "Evaluation",
+    poster: "HELM",
+    title: "Holistic Evaluation of Language Models",
+    summary:
+      "A multi-metric evaluation framework covering scenarios, accuracy, calibration, robustness, fairness, bias, toxicity, and efficiency under standardized conditions.",
+    bestFor: "Designing evaluations that expose trade-offs instead of reducing model quality to one average score.",
+    why: "It gives students a rigorous vocabulary for scenarios, metrics, prompts, completions, and transparent comparison.",
+    chips: ["paper", "2022", "multi-metric evaluation"],
+    accent: "#5dd9ff",
+    url: "https://arxiv.org/abs/2211.09110",
+  },
+  {
+    id: "hal-paper",
+    type: "paper",
+    topic: "Agent evaluation",
+    poster: "HAL",
+    title: "Holistic Agent Leaderboard: The Missing Infrastructure for AI Agent Evaluation",
+    summary:
+      "A 2026 agent-evaluation study built around a standardized harness, analysis across models, scaffolds, and benchmarks, and openly shared agent logs.",
+    bestFor: "Comparing agent results without hiding the harness, benchmark, rollout configuration, or failure behavior.",
+    why: "It moves agent assessment from a polished success trajectory toward reproducible runs and inspectable evidence.",
+    chips: ["paper", "2026", "agent evaluation"],
+    accent: "#87ffc1",
+    url: "https://proceedings.iclr.cc/paper_files/paper/2026/hash/a0928f924a344aaebbb7f6cd8d56e34c-Abstract-Conference.html",
+  },
 ];
 
 const watchItems = [
@@ -1950,7 +1978,349 @@ const watchItems = [
   },
 ];
 
+const courseWeeks = [
+  {
+    id: "week-01",
+    number: 1,
+    phase: "Foundations · weeks 01–03",
+    shortTitle: "Frame the problem",
+    title: "From AI mythology to a well-posed problem.",
+    summary:
+      "Start with the field's ambitions, then make one problem precise: who uses the system, what decision changes, which data exists, and what evidence would count as success.",
+    effort: "6 hours",
+    outcomes: [
+      "Distinguish a task, a model, a system, and a deployment claim.",
+      "Write a measurable objective with a meaningful non-AI baseline.",
+    ],
+    readings: ["dartmouth-official", "bitter-lesson"],
+    activity:
+      "Seminar: rewrite three vague AI claims as falsifiable questions. Lab: inspect a small dataset and document its source, intended use, missing context, and a simple baseline.",
+    deliverable: "A one-page problem brief with task definition, stakeholder, baseline, metric, and foreseeable misuse.",
+    chips: ["problem framing", "claims", "baselines"],
+    assignmentId: "a1",
+  },
+  {
+    id: "week-02",
+    number: 2,
+    phase: "Foundations · weeks 01–03",
+    shortTitle: "Learn representations",
+    title: "Gradient descent turns weights into learned representations.",
+    summary:
+      "Connect loss, gradients, and backpropagation to the behavior of a small neural network. The aim is not to memorize notation, but to explain how training changes what the model represents.",
+    effort: "7 hours",
+    outcomes: [
+      "Trace one forward and backward pass through a small network.",
+      "Diagnose underfitting, overfitting, and an unstable training run.",
+    ],
+    readings: ["backprop-paper", "backprop-video"],
+    activity:
+      "Seminar: derive one gradient by hand and compare it with a numerical check. Lab: train a small network, then vary depth, learning rate, and regularization one factor at a time.",
+    deliverable: "A training notebook with curves, one controlled comparison, and a short explanation of a failed configuration.",
+    chips: ["backpropagation", "optimization", "generalization"],
+    assignmentId: "a1",
+  },
+  {
+    id: "week-03",
+    number: 3,
+    phase: "Foundations · weeks 01–03",
+    shortTitle: "Baseline before hype",
+    title: "Classical ML is still the right control for many modern demos.",
+    summary:
+      "Use a reproducible supervised-learning pipeline to separate problem difficulty from model spectacle. Data splitting, leakage, metrics, and error analysis come before architecture preference.",
+    effort: "7–8 hours",
+    outcomes: [
+      "Build a leakage-aware train, validation, and test workflow.",
+      "Justify metrics and errors in terms of the actual decision context.",
+    ],
+    readings: ["scikit-learn", "few-useful-things"],
+    activity:
+      "Seminar: diagnose four flawed evaluation setups. Lab: compare a simple baseline with two classical models, keep the test set locked, and inspect systematic errors.",
+    deliverable: "Assignment 01: code, configuration, results table, error analysis, and a two-page reflection.",
+    chips: ["classical ML", "data leakage", "evaluation"],
+    assignmentId: "a1",
+  },
+  {
+    id: "week-04",
+    number: 4,
+    phase: "Language & reasoning · weeks 04–07",
+    shortTitle: "Scale deep learning",
+    title: "AlexNet made data, compute, and learned features a joint story.",
+    summary:
+      "Study the deep-learning turn as an interaction among architecture, datasets, GPUs, and evaluation culture. Compare the representation-learning story with the baseline built last week.",
+    effort: "7 hours",
+    outcomes: [
+      "Explain why learned features changed the classical feature-engineering workflow.",
+      "Separate architectural gains from gains due to data and compute.",
+    ],
+    readings: ["alexnet-paper", "nn-video"],
+    activity:
+      "Seminar: reconstruct the AlexNet evidence chain. Lab: train or inspect a small image classifier and compare accuracy with parameter count, training time, and failure examples.",
+    deliverable: "A comparison memo connecting one historical claim to evidence from your own small-scale experiment.",
+    chips: ["deep learning", "CNNs", "compute"],
+  },
+  {
+    id: "week-05",
+    number: 5,
+    phase: "Language & reasoning · weeks 04–07",
+    shortTitle: "Attention & transformers",
+    title: "Attention reorganized sequence modeling around parallel computation.",
+    summary:
+      "Follow queries, keys, values, attention weights, residual paths, and positional information. Then connect the architecture to the language systems that followed.",
+    effort: "7–8 hours",
+    outcomes: [
+      "Track tensor shapes through a single self-attention block.",
+      "Explain what attention makes easier—and what it does not guarantee.",
+    ],
+    readings: ["transformer-paper", "attention-video"],
+    activity:
+      "Seminar: annotate a transformer block without using the word 'magic.' Lab: implement or inspect scaled dot-product attention and visualize how masks change the output.",
+    deliverable: "A shape-annotated diagram, a compact attention notebook, and answers to three misconception checks.",
+    chips: ["attention", "transformers", "sequence models"],
+  },
+  {
+    id: "week-06",
+    number: 6,
+    phase: "Language & reasoning · weeks 04–07",
+    shortTitle: "Pre-train & prompt",
+    title: "Pre-training creates a general interface before instruction tuning begins.",
+    summary:
+      "Compare bidirectional and autoregressive language objectives, then examine in-context learning. Treat prompting as an intervention to evaluate, not a substitute for defining the task.",
+    effort: "7–8 hours",
+    outcomes: [
+      "Contrast masked-language and next-token training objectives.",
+      "Design a controlled prompt comparison with fixed examples and criteria.",
+    ],
+    readings: ["bert-paper", "gpt3-paper", "karpathy-llm"],
+    activity:
+      "Seminar: compare what BERT and GPT-style objectives make visible. Lab: build a small labeled task set and test two prompt strategies on identical inputs.",
+    deliverable: "Assignment 02 proposal and capstone proposal: task, dataset, baseline, evaluation criteria, and risk note.",
+    chips: ["pre-training", "in-context learning", "prompt evaluation"],
+    assignmentId: "a2",
+  },
+  {
+    id: "week-07",
+    number: 7,
+    phase: "Language & reasoning · weeks 04–07",
+    shortTitle: "Post-train & reason",
+    title: "Useful behavior comes from post-training, feedback, and verification.",
+    summary:
+      "Trace instruction tuning, preference feedback, RL, and test-time compute. More deliberation can help on some tasks, but quality still depends on the task and the evaluation setup.",
+    effort: "8 hours",
+    outcomes: [
+      "Distinguish SFT, preference optimization, RL, and inference-time scaling.",
+      "Evaluate when additional reasoning effort is worth its cost and latency.",
+    ],
+    readings: ["instructgpt-paper", "cot-paper", "deepseek-r1"],
+    activity:
+      "Seminar: map the feedback loops behind an assistant. Lab: compare two language workflows on a frozen test set and inspect where longer reasoning helps, fails, or merely costs more.",
+    deliverable: "Assignment 02: workflow, evaluation set, raw outputs, results, failure cases, and limitations.",
+    chips: ["post-training", "reasoning", "test-time compute"],
+    assignmentId: "a2",
+  },
+  {
+    id: "week-08",
+    number: 8,
+    phase: "Agents & evidence · weeks 08–10",
+    shortTitle: "Tools & agent loops",
+    title: "An agent is a model inside a constrained action system.",
+    summary:
+      "Connect reasoning traces to tool calls, observations, state, and recovery. Design the environment and permission boundary before choosing an orchestration framework.",
+    effort: "8 hours",
+    outcomes: [
+      "Specify a bounded observe–act–recover loop with explicit stop conditions.",
+      "Explain how tools and permissions change the capability being evaluated.",
+    ],
+    readings: ["react-paper", "anthropic-agents"],
+    activity:
+      "Seminar: compare a workflow with an open-ended agent. Lab: implement one bounded tool-using agent with a typed tool contract, maximum steps, and a recovery path.",
+    deliverable: "Assignment 03 architecture note: state diagram, tool schema, permission boundary, and task-suite draft.",
+    chips: ["ReAct", "tool use", "permissions"],
+    assignmentId: "a3",
+  },
+  {
+    id: "week-09",
+    number: 9,
+    phase: "Agents & evidence · weeks 08–10",
+    shortTitle: "Serve & operate",
+    title: "Inference and deployment choices are part of system capability.",
+    summary:
+      "Study batching, KV-cache reuse, scheduling, quantization, and open-weight deployment. Compare systems on useful work per dollar and per second, not output quality alone.",
+    effort: "8–9 hours",
+    outcomes: [
+      "Explain how serving decisions affect latency, throughput, memory, and cost.",
+      "Compare API and open-weight deployment without equating open weights with open data.",
+    ],
+    readings: ["sglang-paper", "vllm-docs", "beam-model-card"],
+    activity:
+      "Seminar: read a model card as an operations document. Lab: benchmark two configurations on the same prompts and log quality, latency, resource needs, and failure behavior.",
+    deliverable: "Assignment 03 evaluation harness plus a deployment trade-off table with measurements and unresolved questions.",
+    chips: ["inference", "open weights", "operations"],
+    assignmentId: "a3",
+  },
+  {
+    id: "week-10",
+    number: 10,
+    phase: "Agents & evidence · weeks 08–10",
+    shortTitle: "Evaluate the system",
+    title: "A benchmark result belongs to the model, scaffold, tasks, and harness together.",
+    summary:
+      "Move from single-score comparison to multi-metric and trajectory-level evaluation. Inspect what the agent actually did, including failures that a final success label can hide.",
+    effort: "8–9 hours",
+    outcomes: [
+      "Design a multi-metric evaluation with controlled system configurations.",
+      "Use run logs to build a failure taxonomy and challenge a leaderboard conclusion.",
+    ],
+    readings: ["helm-paper", "hal-paper", "openai-evals-hub"],
+    activity:
+      "Seminar: audit one benchmark claim for missing conditions. Lab: run paired agent configurations, inspect trajectories, and classify successes, partial credit, unsafe actions, and unrecoverable failures.",
+    deliverable: "Assignment 03: bounded agent, task suite, logs, comparison, safety review, and reproducibility instructions.",
+    chips: ["HELM", "agent evaluation", "failure logs"],
+    assignmentId: "a3",
+  },
+  {
+    id: "week-11",
+    number: 11,
+    phase: "Frontiers & defense · weeks 11–12",
+    shortTitle: "Audit frontier claims",
+    title: "Interactive worlds and AI-for-science need different evidence from a good demo.",
+    summary:
+      "Compare generated environments with planning models, and fluent research output with verifiable scientific evidence. Keep current systems, future hypotheses, and open limitations separate.",
+    effort: "8 hours",
+    outcomes: [
+      "Write a falsifiable evaluation question for a current frontier claim.",
+      "Distinguish visual coherence, interactive consistency, and scientific verification.",
+    ],
+    readings: ["world-models-paper", "project-genie", "navier-stokes"],
+    activity:
+      "Seminar: build a claim–evidence–uncertainty map. Lab: run a small replication, structured artifact review, or formal verification exercise and document what remains untested.",
+    deliverable: "Capstone evidence pack draft: precise claim, source map, original evidence, negative results, and limitations.",
+    chips: ["world models", "AI for science", "verification"],
+    assignmentId: "a4",
+  },
+  {
+    id: "week-12",
+    number: 12,
+    phase: "Frontiers & defense · weeks 11–12",
+    shortTitle: "Defend the evidence",
+    title: "Defend the system you built, not the story around it.",
+    summary:
+      "Finish by comparing competing research bets: open-ended self-improvement, human collaboration, and embodied action. A strong final project makes its evidence and boundaries inspectable.",
+    effort: "8–10 hours",
+    outcomes: [
+      "Defend design and evaluation choices under technical questioning.",
+      "State negative results, deployment limits, and remaining uncertainty precisely.",
+    ],
+    readings: ["dgm-paper", "interaction-models", "openpi-project"],
+    activity:
+      "Studio: peer-review reproducibility packs, rehearse an eight-minute demonstration, and respond to a hostile evidence review without overstating what the system can do.",
+    deliverable: "Assignment 04: capstone artifact, source and evidence pack, limitations review, demo, and oral defense.",
+    chips: ["research defense", "reproducibility", "uncertainty"],
+    assignmentId: "a4",
+  },
+];
+
+const assignmentBriefs = [
+  {
+    id: "a1",
+    number: "01",
+    schedule: "Weeks 01–03",
+    title: "Baseline before the hype",
+    format: "Reproducible notebook + two-page reflection",
+    weight: "15%",
+    milestone: "Proposal W01 · baseline W02 · due W03",
+    brief:
+      "Compare two classical learning approaches on a well-defined problem, with a simple baseline and an evaluation design that would survive scrutiny.",
+    requirements: [
+      "Use a small dataset you may legally share, or provide exact access instructions.",
+      "Keep a held-out test set untouched until the final comparison.",
+      "Report a simple baseline, at least two metrics, and a systematic error analysis.",
+      "Submit environment instructions, seeds or configuration, and a two-page reflection.",
+    ],
+    rubric: [
+      ["Problem & data", 20],
+      ["Evaluation design", 30],
+      ["Reproducibility", 25],
+      ["Analysis & writing", 25],
+    ],
+    resources: ["scikit-learn", "few-useful-things"],
+  },
+  {
+    id: "a2",
+    number: "02",
+    schedule: "Weeks 06–07",
+    title: "A prompt is not an evaluation",
+    format: "Language workflow + labeled task set + raw outputs",
+    weight: "20%",
+    milestone: "Task set W06 · due W07",
+    brief:
+      "Turn one narrow language task into a measurable workflow. Compare interventions on a frozen test set and make quality, cost, and failure behavior visible.",
+    requirements: [
+      "Define at least 30 examples with reference answers or explicit grading criteria.",
+      "Compare two prompting or post-training strategies without changing the test set.",
+      "Report quality, cost or latency, and at least five inspected failure cases.",
+      "Include prompts, configuration, raw outputs, and a short risks-and-limits note.",
+    ],
+    rubric: [
+      ["Task & grading criteria", 25],
+      ["Experimental control", 25],
+      ["Evidence & failure analysis", 30],
+      ["Reproducible artifact", 20],
+    ],
+    resources: ["instructgpt-paper", "deepseek-r1", "helm-paper"],
+  },
+  {
+    id: "a3",
+    number: "03",
+    schedule: "Weeks 08–10",
+    title: "Agent under test",
+    format: "Bounded agent + task suite + run logs",
+    weight: "25%",
+    milestone: "Tool contract W08 · harness W09 · due W10",
+    brief:
+      "Build a small agent for a bounded multi-step task with explicit tools and permissions. Evaluate the whole system, not just the model or one successful trajectory.",
+    requirements: [
+      "Provide a tool schema, permission boundary, stop condition, and recovery path.",
+      "Create at least 12 tasks covering success, ambiguity, and expected failure.",
+      "Compare two model, scaffold, or retry configurations on the same task suite.",
+      "Submit logs, cost/latency summary, failure taxonomy, and a safety review.",
+    ],
+    rubric: [
+      ["System design", 25],
+      ["Evaluation harness", 30],
+      ["Reliability & safety", 25],
+      ["Analysis & reproducibility", 20],
+    ],
+    resources: ["react-paper", "anthropic-agents", "hal-paper"],
+  },
+  {
+    id: "a4",
+    number: "04",
+    schedule: "Weeks 06–12",
+    title: "Capstone evidence defense",
+    format: "Prototype, replication, or claim audit + oral defense",
+    weight: "40%",
+    milestone: "Proposal W06 · critique W10 · demo & defense W12",
+    brief:
+      "Extend the agent project or investigate a frontier claim in open deployment, interactive worlds, AI-for-science, or embodied AI. Defend what the evidence does—and does not—show.",
+    requirements: [
+      "Present a precise claim, a source map, and a falsifiable evaluation question.",
+      "Build a prototype, replication, or systematic claim audit with original evidence.",
+      "Include negative results, limitations, reproducibility instructions, and a deployment review.",
+      "Deliver an eight-minute demonstration and answer questions with the evidence pack.",
+    ],
+    rubric: [
+      ["Research question & sources", 20],
+      ["Technical execution", 25],
+      ["Evaluation & limitations", 30],
+      ["Defense & communication", 25],
+    ],
+    resources: ["world-models-paper", "navier-stokes", "hal-paper"],
+  },
+];
+
 const state = {
+  weekId: courseWeeks[0].id,
+  assignmentId: assignmentBriefs[0].id,
   timelineId: timelineItems[0].id,
   frontierId: frontierItems[0].id,
   stackStageId: lifecycleStages[0].id,
@@ -1968,11 +2338,29 @@ const libraryTopicGroups = {
   language: ["Transformers", "Language models", "LLMs", "Alignment", "Reasoning"],
   generative: ["Generative AI", "Multimodal AI", "Seedance"],
   agents: ["Agents", "Coding agents", "OpenClaw", "Harness engineering", "Collaboration", "Efficient agents"],
+  evaluation: ["Evaluation", "Agent evaluation", "Safety", "Harness engineering"],
   infrastructure: ["LLM infrastructure", "LLM post-training", "LLM inference"],
   environments: ["RL environments", "Embodiment"],
   frontiers: ["Self-improving AI", "AI scientists", "AI for science", "World models", "Predictive world models", "Frontier models"],
   "open-safety": ["Safety", "Open-weight models"],
 };
+
+const weekRail = document.querySelector("#week-rail");
+const weekPhase = document.querySelector("#week-phase");
+const weekKicker = document.querySelector("#week-kicker");
+const weekTitle = document.querySelector("#week-title");
+const weekSummary = document.querySelector("#week-summary");
+const weekOutcomes = document.querySelector("#week-outcomes");
+const weekChips = document.querySelector("#week-chips");
+const weekReadings = document.querySelector("#week-readings");
+const weekActivity = document.querySelector("#week-activity");
+const weekDeliverable = document.querySelector("#week-deliverable");
+const weekPosition = document.querySelector("#week-position");
+const weekEffort = document.querySelector("#week-effort");
+const weekAssignmentLink = document.querySelector("#week-assignment-link");
+const weekPrev = document.querySelector("#week-prev");
+const weekNext = document.querySelector("#week-next");
+const assignmentSchedule = document.querySelector("#assignment-schedule");
 
 const timelineNav = document.querySelector("#timeline-nav");
 const timelineImage = document.querySelector("#timeline-image");
@@ -2112,6 +2500,233 @@ function setTabAttributes(button, id, active, panelId) {
   button.setAttribute("aria-selected", String(active));
   button.setAttribute("aria-controls", panelId);
   button.tabIndex = active ? 0 : -1;
+}
+
+function getLibraryItem(id) {
+  const item = libraryItems.find((entry) => entry.id === id);
+  if (!item) {
+    throw new Error(`Unknown library resource: ${id}`);
+  }
+  return item;
+}
+
+function makeReadingLink(id) {
+  const item = getLibraryItem(id);
+  const anchor = document.createElement("a");
+  anchor.className = "week-reading";
+  anchor.href = item.url;
+  anchor.target = "_blank";
+  anchor.rel = "noopener noreferrer";
+
+  const meta = document.createElement("span");
+  meta.className = "week-reading-type";
+  meta.textContent = `${item.type} · ${item.topic}`;
+
+  const title = document.createElement("strong");
+  title.textContent = item.title;
+
+  const arrow = document.createElement("span");
+  arrow.className = "week-reading-arrow";
+  arrow.setAttribute("aria-hidden", "true");
+  arrow.textContent = "↗";
+
+  anchor.append(meta, title, arrow);
+  return anchor;
+}
+
+function selectWeek(id, moveFocus = false) {
+  if (!courseWeeks.some((item) => item.id === id)) {
+    return;
+  }
+
+  state.weekId = id;
+  renderWeekRail();
+  renderWeekPanel();
+
+  if (moveFocus) {
+    const activeTab = document.querySelector(`#week-tab-${id}`);
+    activeTab?.focus();
+    activeTab?.scrollIntoView({ block: "nearest", inline: "nearest" });
+  }
+}
+
+function renderWeekRail() {
+  clearNode(weekRail);
+
+  courseWeeks.forEach((item) => {
+    const active = item.id === state.weekId;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "week-tab";
+    setTabAttributes(button, `week-tab-${item.id}`, active, "week-panel");
+    button.classList.toggle("is-active", active);
+
+    const number = document.createElement("span");
+    number.textContent = `W${String(item.number).padStart(2, "0")}`;
+    const title = document.createElement("strong");
+    title.textContent = item.shortTitle;
+    button.append(number, title);
+
+    button.addEventListener("click", () => selectWeek(item.id));
+    weekRail.appendChild(button);
+  });
+}
+
+function renderWeekPanel() {
+  const item = courseWeeks.find((entry) => entry.id === state.weekId) ?? courseWeeks[0];
+  const itemIndex = courseWeeks.indexOf(item);
+  const number = String(item.number).padStart(2, "0");
+
+  document.querySelector("#week-panel").setAttribute("aria-labelledby", `week-tab-${item.id}`);
+  weekPhase.textContent = item.phase;
+  weekKicker.textContent = `Week ${number} / Studio module`;
+  weekTitle.textContent = item.title;
+  weekSummary.textContent = item.summary;
+  weekActivity.textContent = item.activity;
+  weekDeliverable.textContent = item.deliverable;
+  weekPosition.textContent = `Week ${item.number} of ${courseWeeks.length}`;
+  weekEffort.textContent = `Suggested effort: ${item.effort}`;
+  weekPrev.disabled = itemIndex === 0;
+  weekNext.disabled = itemIndex === courseWeeks.length - 1;
+
+  clearNode(weekOutcomes);
+  item.outcomes.forEach((outcome) => {
+    const li = document.createElement("li");
+    li.textContent = outcome;
+    weekOutcomes.appendChild(li);
+  });
+
+  clearNode(weekChips);
+  item.chips.forEach((chip) => weekChips.appendChild(makeChip(chip)));
+
+  clearNode(weekReadings);
+  item.readings.forEach((id) => weekReadings.appendChild(makeReadingLink(id)));
+
+  weekAssignmentLink.hidden = !item.assignmentId;
+  if (item.assignmentId) {
+    const assignment = assignmentBriefs.find((entry) => entry.id === item.assignmentId);
+    weekAssignmentLink.textContent = `Open Assignment ${assignment.number} brief`;
+    weekAssignmentLink.href = `#assignment-${assignment.id}`;
+    weekAssignmentLink.dataset.assignmentId = assignment.id;
+  } else {
+    delete weekAssignmentLink.dataset.assignmentId;
+  }
+}
+
+function setAssignmentRowState(row, open) {
+  const button = row.querySelector(".assignment-toggle");
+  const detail = row.querySelector(".assignment-detail");
+  row.classList.toggle("is-open", open);
+  button.setAttribute("aria-expanded", String(open));
+  detail.setAttribute("aria-hidden", String(!open));
+  detail.toggleAttribute("inert", !open);
+}
+
+function openAssignment(id, scroll = false) {
+  const target = document.querySelector(`#assignment-${id}`);
+  if (!target) {
+    return;
+  }
+
+  state.assignmentId = id;
+  assignmentSchedule.querySelectorAll(".assignment-row").forEach((row) => {
+    setAssignmentRowState(row, row.dataset.assignmentId === id);
+  });
+
+  if (scroll) {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+    target.querySelector(".assignment-toggle").focus({ preventScroll: true });
+  }
+}
+
+function renderAssignmentSchedule() {
+  clearNode(assignmentSchedule);
+
+  assignmentBriefs.forEach((item) => {
+    const open = state.assignmentId === item.id;
+    const row = document.createElement("article");
+    row.className = "assignment-row";
+    row.id = `assignment-${item.id}`;
+    row.dataset.assignmentId = item.id;
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "assignment-toggle";
+    button.id = `assignment-toggle-${item.id}`;
+    button.setAttribute("aria-controls", `assignment-detail-${item.id}`);
+    button.innerHTML = `
+      <span class="assignment-week">${item.schedule}</span>
+      <span class="assignment-heading">
+        <strong>Assignment ${item.number} · ${item.title}</strong>
+        <small>${item.format}</small>
+      </span>
+      <span class="assignment-weight"><strong>${item.weight}</strong><small>suggested</small></span>
+      <span class="assignment-icon" aria-hidden="true">+</span>
+    `;
+
+    const detail = document.createElement("div");
+    detail.className = "assignment-detail";
+    detail.id = `assignment-detail-${item.id}`;
+    detail.setAttribute("role", "region");
+    detail.setAttribute("aria-labelledby", button.id);
+    detail.innerHTML = `
+      <div class="assignment-detail-inner">
+        <div class="assignment-brief-block">
+          <p class="detail-kicker">Assignment ${item.number} / ${item.weight} suggested weight</p>
+          <p class="assignment-brief">${item.brief}</p>
+          <p class="assignment-milestone">${item.milestone}</p>
+        </div>
+        <div class="assignment-requirements">
+          <p class="detail-label">Submission checklist</p>
+          <ul>${item.requirements.map((requirement) => `<li>${requirement}</li>`).join("")}</ul>
+        </div>
+        <div class="assignment-rubric">
+          <p class="detail-label">100-point rubric</p>
+          <ul>${item.rubric.map(([label, points]) => `<li><span>${label}</span><strong>${points} pts</strong></li>`).join("")}</ul>
+        </div>
+        <div class="assignment-resources">
+          <p class="detail-label">Source shelf</p>
+          <div class="link-list"></div>
+        </div>
+      </div>
+    `;
+
+    const resourceLinks = detail.querySelector(".assignment-resources .link-list");
+    item.resources.forEach((id) => {
+      const resource = getLibraryItem(id);
+      resourceLinks.appendChild(makeLink({ label: resource.title, url: resource.url }));
+    });
+
+    button.addEventListener("click", () => {
+      const nextId = state.assignmentId === item.id ? "" : item.id;
+      state.assignmentId = nextId;
+      assignmentSchedule.querySelectorAll(".assignment-row").forEach((entry) => {
+        setAssignmentRowState(entry, entry.dataset.assignmentId === nextId);
+      });
+    });
+
+    row.append(button, detail);
+    setAssignmentRowState(row, open);
+    assignmentSchedule.appendChild(row);
+  });
+}
+
+function bindCoursePath() {
+  weekPrev.addEventListener("click", () => {
+    const index = courseWeeks.findIndex((item) => item.id === state.weekId);
+    if (index > 0) selectWeek(courseWeeks[index - 1].id, true);
+  });
+
+  weekNext.addEventListener("click", () => {
+    const index = courseWeeks.findIndex((item) => item.id === state.weekId);
+    if (index < courseWeeks.length - 1) selectWeek(courseWeeks[index + 1].id, true);
+  });
+
+  weekAssignmentLink.addEventListener("click", (event) => {
+    event.preventDefault();
+    openAssignment(weekAssignmentLink.dataset.assignmentId, true);
+  });
 }
 
 function renderTimelineNav() {
@@ -2460,7 +3075,7 @@ function initRevealMotion() {
   const shouldReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const staticSurfaces = [
     ...document.querySelectorAll(
-      ".section-heading, .guide-panel, .source-lock, .history-shell, .frontier-shell, .llm-stack-shell, .labs-detail, .library-detail, .future-card",
+      ".section-heading, .guide-panel, .course-ledger, .week-explorer, .source-lock, .history-shell, .frontier-shell, .llm-stack-shell, .labs-detail, .library-detail, .future-card",
     ),
   ];
 
@@ -2560,7 +3175,7 @@ function bindFilters() {
 }
 
 function bindTabKeyboard() {
-  [timelineNav, frontierTabs, document.querySelector(".stack-flow")].forEach((container) => {
+  [weekRail, timelineNav, frontierTabs, document.querySelector(".stack-flow")].forEach((container) => {
     container.addEventListener("keydown", (event) => {
       const navigationKeys = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"];
       if (!navigationKeys.includes(event.key)) {
@@ -2617,6 +3232,9 @@ function bindPointerGlow() {
 }
 
 function init() {
+  renderWeekRail();
+  renderWeekPanel();
+  renderAssignmentSchedule();
   renderTimelineNav();
   renderTimelineDetail();
   renderFrontierTabs();
@@ -2632,9 +3250,12 @@ function init() {
   bindStackStages();
   bindLabFilters();
   bindFilters();
+  bindCoursePath();
   bindTabKeyboard();
 
   const metricCounts = {
+    weeks: courseWeeks.length,
+    assignments: assignmentBriefs.length,
     timeline: timelineItems.length,
     library: libraryItems.length,
     labs: labItems.length,

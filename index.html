@@ -6,7 +6,7 @@
     <title>CSC2220 AI Evolution Atlas | Course, Research & Primary Sources</title>
     <meta
       name="description"
-      content="A curated CSC2220 course atlas connecting classic AI and machine learning to reasoning models, agents, open-weight systems, evaluation, and world models through primary sources."
+      content="A curated CSC2220 course atlas with a 12-week studio path, assignment briefs, and primary sources spanning classic AI, reasoning models, agents, evaluation, and world models."
     />
     <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
     <link rel="canonical" href="https://taotao1992.github.io/ai-evolution-atlas/" />
@@ -73,6 +73,7 @@
       </a>
 
       <nav class="site-nav" aria-label="Primary navigation">
+        <a href="#learn">Learn</a>
         <a href="#now">Now</a>
         <a href="#history">History</a>
         <a href="#frontier">Frontier</a>
@@ -97,7 +98,7 @@
           </p>
 
           <div class="hero-actions">
-            <a class="button button-primary" href="#history">Explore the timeline</a>
+            <a class="button button-primary" href="#learn">Start the 12-week path</a>
             <a class="button button-secondary" href="#library">Find a resource</a>
           </div>
 
@@ -114,7 +115,7 @@
               <span>timeline eras</span>
             </article>
             <article class="metric-card">
-              <strong data-count="76" data-metric="library">76</strong>
+              <strong data-count="78" data-metric="library">78</strong>
               <span>curated resources</span>
             </article>
             <article class="metric-card">
@@ -122,8 +123,8 @@
               <span>lab & project profiles</span>
             </article>
             <article class="metric-card">
-              <strong data-count="6" data-metric="watch">6</strong>
-              <span>video explainers</span>
+              <strong data-count="12" data-metric="weeks">12</strong>
+              <span>weekly modules</span>
             </article>
           </div>
         </div>
@@ -180,6 +181,112 @@
             </article>
           </div>
         </div>
+      </section>
+
+      <section id="learn" class="section learn-section" data-section="learn" aria-labelledby="learn-title">
+        <div class="section-heading">
+          <p class="eyebrow">12-week studio · suggested teaching plan</p>
+          <h2 id="learn-title">From first principles to a defensible AI system.</h2>
+          <p>
+            A complete course path through foundations, language models, agents, evaluation, and current
+            research. Each week combines primary sources, a seminar move, a practical lab, and evidence for
+            the course notebook—not passive reading alone.
+          </p>
+        </div>
+
+        <div class="course-ledger" aria-label="Course phases">
+          <article>
+            <span>Weeks 01–03</span>
+            <strong>Frame & baseline</strong>
+            <p>Problem formulation, learning, classical ML, and honest evaluation.</p>
+          </article>
+          <article>
+            <span>Weeks 04–07</span>
+            <strong>Represent & generate</strong>
+            <p>Deep learning, transformers, pre-training, post-training, and reasoning.</p>
+          </article>
+          <article>
+            <span>Weeks 08–10</span>
+            <strong>Act & verify</strong>
+            <p>Tool use, serving, open deployment, agent benchmarks, and failure logs.</p>
+          </article>
+          <article>
+            <span>Weeks 11–12</span>
+            <strong>Question & defend</strong>
+            <p>Frontier claims, reproducibility, limitations, and a final evidence defense.</p>
+          </article>
+        </div>
+
+        <div class="week-explorer">
+          <div class="week-rail-header">
+            <div>
+              <p class="detail-kicker">Weekly chapter rail</p>
+              <p id="week-phase">Foundations · weeks 01–03</p>
+            </div>
+            <div class="week-controls" aria-label="Week navigation">
+              <button id="week-prev" type="button" aria-label="Go to previous week">←</button>
+              <button id="week-next" type="button" aria-label="Go to next week">→</button>
+            </div>
+          </div>
+
+          <div class="week-rail" id="week-rail" role="tablist" aria-label="Twelve weekly modules"></div>
+
+          <article class="week-panel" id="week-panel" role="tabpanel" aria-live="polite">
+            <div class="week-overview">
+              <p class="detail-kicker" id="week-kicker">Week 01</p>
+              <h3 id="week-title">Loading weekly module</h3>
+              <p class="timeline-summary" id="week-summary"></p>
+              <div class="week-outcomes-block">
+                <p class="detail-label">By the end of the week</p>
+                <ul id="week-outcomes"></ul>
+              </div>
+              <div class="chip-row" id="week-chips"></div>
+              <a id="week-assignment-link" class="button button-secondary" href="#assignments">Open assignment brief</a>
+            </div>
+
+            <div class="week-work">
+              <div class="week-reading-block">
+                <p class="detail-label">Read or watch · primary shelf</p>
+                <div class="week-reading-list" id="week-readings"></div>
+              </div>
+              <div class="week-activity-block">
+                <p class="detail-label">Seminar + lab</p>
+                <p id="week-activity"></p>
+              </div>
+              <div class="week-evidence-block">
+                <p class="detail-label">Evidence to keep</p>
+                <p id="week-deliverable"></p>
+              </div>
+            </div>
+          </article>
+
+          <div class="week-panel-footer">
+            <span id="week-position">Week 1 of 12</span>
+            <span id="week-effort">Suggested effort: 6–8 hours</span>
+          </div>
+        </div>
+
+        <div class="assignment-intro" id="assignments">
+          <p class="eyebrow">Studio assessment · suggested scheme</p>
+          <h3>Four assignments. One accumulating body of evidence.</h3>
+          <p>
+            Every brief asks for a working artifact, an evaluation trail, and a written account of limitations.
+            Expand a row for milestones, submission requirements, and a 100-point rubric.
+          </p>
+        </div>
+
+        <div class="assignment-table-head" aria-hidden="true">
+          <span>Schedule</span>
+          <span>Brief & submission</span>
+          <span>Weight</span>
+          <span></span>
+        </div>
+        <div class="assignment-schedule" id="assignment-schedule"></div>
+        <p class="assessment-note">
+          <strong>Teaching note:</strong> these are ready-to-adapt studio briefs, not a statement of UniSQ’s
+          official assessment policy. Align weights, deadlines, group rules, and academic-integrity requirements
+          with the official course outline before issuing grades.
+        </p>
       </section>
 
       <section id="now" class="section now-section" data-section="now" aria-labelledby="now-title">
@@ -531,6 +638,7 @@
               <option value="language">Language, alignment & reasoning</option>
               <option value="generative">Generative & multimodal AI</option>
               <option value="agents">Agents & coding systems</option>
+              <option value="evaluation">Evaluation & benchmarks</option>
               <option value="infrastructure">Training & inference infrastructure</option>
               <option value="environments">Environments & embodiment</option>
               <option value="frontiers">Research frontiers</option>
@@ -549,7 +657,7 @@
 
         <div class="library-meta" aria-live="polite">
           <p><strong id="library-count">0</strong> matches · showing <span id="library-visible">0</span></p>
-          <p id="library-total">76 curated resources</p>
+          <p id="library-total">78 curated resources</p>
         </div>
 
         <div class="library-layout" id="library-layout">
@@ -670,6 +778,7 @@
         </div>
         <nav class="footer-block footer-nav" aria-label="Footer navigation">
           <p class="footer-title">Explore</p>
+          <a href="#learn">12-week path & assignments</a>
           <a href="#now">Now</a>
           <a href="#history">History</a>
           <a href="#frontier">Frontier</a>

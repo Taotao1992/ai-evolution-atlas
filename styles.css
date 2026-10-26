@@ -2695,8 +2695,759 @@ select:focus-visible {
   }
 }
 
+/* ==========================================================================
+   12-week studio — chapter rail, evidence-led coursework & assignment archive
+   ========================================================================== */
+
+.learn-section {
+  padding-bottom: 0;
+}
+
+#learn .section-heading {
+  max-width: 900px;
+}
+
+.course-ledger {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: clamp(38px, 5vw, 58px);
+  border-top: 1px solid var(--line-strong);
+  border-left: 1px solid var(--line-strong);
+}
+
+.course-ledger article {
+  min-height: 182px;
+  padding: 24px;
+  border-right: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+  background: rgba(8, 16, 25, 0.34);
+}
+
+.course-ledger span {
+  display: block;
+  color: var(--amber);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.course-ledger strong {
+  display: block;
+  margin-top: 18px;
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  line-height: 1.25;
+}
+
+.course-ledger p {
+  margin: 10px 0 0;
+  color: var(--text-soft);
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+
+.week-explorer {
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+  background: linear-gradient(145deg, rgba(13, 25, 40, 0.66), rgba(8, 16, 25, 0.24));
+}
+
+.week-rail-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px 0 18px;
+}
+
+.week-rail-header .detail-kicker {
+  margin-bottom: 5px;
+  color: var(--text-faint);
+}
+
+#week-phase {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.08rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.week-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.week-controls button {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.week-controls button:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.week-controls button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.week-rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(142px, 1fr);
+  overflow-x: auto;
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: inline proximity;
+  scrollbar-color: var(--line-strong) transparent;
+  scrollbar-width: thin;
+}
+
+.week-tab {
+  position: relative;
+  min-height: 104px;
+  padding: 18px 16px;
+  border: 0;
+  border-right: 1px solid var(--line);
+  background: transparent;
+  color: var(--text-soft);
+  text-align: left;
+  cursor: pointer;
+  scroll-snap-align: start;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.week-tab::after {
+  content: "";
+  position: absolute;
+  right: 16px;
+  bottom: 0;
+  left: 16px;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 200ms ease;
+}
+
+.week-tab > span {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+}
+
+.week-tab > strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.94rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.week-tab:hover {
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--text);
+}
+
+.week-tab.is-active {
+  background: var(--accent-dim);
+  color: var(--text);
+}
+
+.week-tab.is-active > span {
+  color: var(--accent);
+}
+
+.week-tab.is-active::after {
+  transform: scaleX(1);
+}
+
+.week-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  min-height: 500px;
+}
+
+.week-overview {
+  padding: clamp(30px, 4vw, 48px);
+  border-right: 1px solid var(--line-strong);
+}
+
+.week-overview h3 {
+  max-width: 20ch;
+  margin-top: 12px;
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.week-outcomes-block {
+  margin: 28px 0 22px;
+}
+
+#week-outcomes,
+.assignment-requirements ul,
+.assignment-rubric ul {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+#week-outcomes {
+  display: grid;
+  gap: 11px;
+}
+
+#week-outcomes li,
+.assignment-requirements li {
+  position: relative;
+  padding-left: 23px;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+#week-outcomes li::before,
+.assignment-requirements li::before {
+  content: "";
+  position: absolute;
+  top: 0.48em;
+  left: 1px;
+  width: 11px;
+  height: 6px;
+  border-bottom: 1.5px solid var(--accent);
+  border-left: 1.5px solid var(--accent);
+  transform: rotate(-45deg);
+}
+
+.week-overview .chip-row {
+  margin-bottom: 26px;
+}
+
+#week-assignment-link {
+  min-height: 44px;
+  margin-top: 6px;
+}
+
+.week-work {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
+}
+
+.week-work > div {
+  padding: clamp(26px, 3vw, 38px);
+}
+
+.week-reading-block {
+  grid-column: 1 / -1;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.week-activity-block {
+  border-right: 1px solid var(--line-strong);
+}
+
+.week-reading-list {
+  display: grid;
+  margin-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.week-reading {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 16px 32px 16px 0;
+  border-bottom: 1px solid var(--line);
+  transition:
+    padding-left 160ms ease,
+    background-color 160ms ease;
+}
+
+.week-reading-type {
+  grid-column: 1;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 0.61rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.week-reading strong {
+  grid-column: 1;
+  margin-top: 5px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.45;
+  transition: color 160ms ease;
+}
+
+.week-reading-arrow {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  color: var(--accent);
+  transform: translateY(-50%);
+}
+
+.week-reading:hover {
+  padding-left: 8px;
+  background: rgba(110, 231, 255, 0.035);
+}
+
+.week-reading:hover strong {
+  color: var(--accent);
+}
+
+#week-activity,
+#week-deliverable {
+  margin: 12px 0 0;
+  color: var(--text-soft);
+  font-size: 0.88rem;
+  line-height: 1.75;
+}
+
+.week-panel-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.assignment-intro {
+  max-width: 850px;
+  margin: clamp(72px, 9vw, 112px) 0 36px;
+  scroll-margin-top: 110px;
+}
+
+.assignment-intro h3 {
+  font-size: var(--fs-h2);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.assignment-intro > p:not(.eyebrow) {
+  max-width: 72ch;
+  margin: 18px 0 0;
+  color: var(--text-soft);
+}
+
+.assignment-table-head,
+.assignment-toggle {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr) 100px 36px;
+  gap: 20px;
+  align-items: center;
+}
+
+.assignment-table-head {
+  padding: 0 20px 10px;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.assignment-schedule {
+  border-top: 1px solid var(--line-strong);
+}
+
+.assignment-row {
+  border-bottom: 1px solid var(--line-strong);
+  scroll-margin-top: 110px;
+}
+
+.assignment-toggle {
+  width: 100%;
+  padding: 24px 20px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 180ms ease;
+}
+
+.assignment-toggle:hover {
+  background: rgba(110, 231, 255, 0.035);
+}
+
+.assignment-week {
+  color: var(--amber);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.assignment-heading > strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.08rem;
+  line-height: 1.3;
+}
+
+.assignment-heading > small {
+  display: block;
+  margin-top: 6px;
+  color: var(--text-faint);
+  font-size: 0.74rem;
+  line-height: 1.5;
+}
+
+.assignment-weight > strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.assignment-weight > small {
+  display: block;
+  margin-top: 7px;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.assignment-icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  font-size: 1.25rem;
+  line-height: 1;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.assignment-row.is-open .assignment-icon {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+  transform: rotate(45deg);
+}
+
+.assignment-detail {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  opacity: 0;
+  background: rgba(8, 16, 25, 0.5);
+  transition:
+    grid-template-rows 240ms ease,
+    opacity 180ms ease,
+    visibility 0s linear 240ms;
+}
+
+.assignment-row.is-open .assignment-detail {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  opacity: 1;
+  transition:
+    grid-template-rows 240ms ease,
+    opacity 200ms ease,
+    visibility 0s linear 0s;
+}
+
+.assignment-detail-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  column-gap: 42px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.assignment-detail-inner > div {
+  padding: 28px 20px;
+  border-top: 1px solid var(--line);
+}
+
+.assignment-brief-block,
+.assignment-resources {
+  grid-column: 1 / -1;
+}
+
+.assignment-brief {
+  max-width: 78ch;
+  margin: 10px 0 0;
+  color: var(--text);
+  font-size: 0.98rem;
+  line-height: 1.75;
+}
+
+.assignment-milestone {
+  margin: 16px 0 0;
+  color: var(--amber);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.assignment-requirements ul {
+  display: grid;
+  gap: 12px;
+}
+
+.assignment-rubric li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--text-soft);
+  font-size: 0.84rem;
+}
+
+.assignment-rubric li:first-child {
+  padding-top: 4px;
+}
+
+.assignment-rubric li > strong {
+  flex: 0 0 auto;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.assignment-resources .link-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.assignment-resources .link-list a {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.assessment-note {
+  margin: 24px 0 0;
+  padding-left: 18px;
+  border-left: 2px solid var(--amber);
+  color: var(--text-soft);
+  font-size: 0.8rem;
+  line-height: 1.75;
+}
+
+.assessment-note strong {
+  color: var(--text);
+}
+
+@media (max-width: 1000px) {
+  .course-ledger {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .week-panel {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .week-overview {
+    border-right: 0;
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .week-overview h3 {
+    max-width: 25ch;
+  }
+
+  .assignment-detail-inner {
+    column-gap: 24px;
+  }
+}
+
+@media (max-width: 800px) {
+  .assignment-table-head,
+  .assignment-toggle {
+    grid-template-columns: 118px minmax(0, 1fr) 76px 32px;
+    gap: 12px;
+  }
+
+  .assignment-detail-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .assignment-brief-block,
+  .assignment-resources {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .week-rail {
+    grid-auto-columns: minmax(126px, 1fr);
+  }
+
+  .week-tab {
+    min-height: 98px;
+    padding: 16px 14px;
+  }
+
+  .week-work {
+    grid-template-columns: 1fr;
+  }
+
+  .week-reading-block {
+    grid-column: 1;
+  }
+
+  .week-activity-block {
+    border-right: 0;
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .week-overview,
+  .week-work > div {
+    padding: 26px 22px;
+  }
+
+  .week-panel-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .assignment-table-head {
+    display: none;
+  }
+
+  .assignment-toggle {
+    grid-template-columns: 74px minmax(0, 1fr) 32px;
+    gap: 8px 12px;
+    padding: 22px 4px;
+  }
+
+  .assignment-week {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .assignment-heading {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .assignment-weight {
+    display: flex;
+    grid-column: 2;
+    grid-row: 2;
+    align-items: baseline;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .assignment-weight > strong {
+    font-size: 1rem;
+  }
+
+  .assignment-weight > small {
+    margin-top: 0;
+  }
+
+  .assignment-icon {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+  }
+
+  .assignment-detail-inner > div {
+    padding: 24px 4px;
+  }
+
+  .assignment-brief {
+    font-size: 0.92rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .course-ledger {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .course-ledger article {
+    min-height: 0;
+    padding: 18px 16px;
+  }
+
+  .course-ledger strong {
+    margin-top: 14px;
+    font-size: 1rem;
+  }
+
+  .course-ledger p {
+    font-size: 0.76rem;
+  }
+
+  .week-rail-header {
+    align-items: center;
+  }
+
+  #week-phase {
+    max-width: 220px;
+    font-size: 0.94rem;
+  }
+
+  .week-controls button {
+    width: 38px;
+    height: 38px;
+  }
+
+  .assignment-intro h3 {
+    font-size: clamp(1.75rem, 8vw, 2.25rem);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .update-card {
+  .update-card,
+  .week-tab,
+  .week-tab::after,
+  .week-controls button,
+  .week-reading,
+  .assignment-toggle,
+  .assignment-icon,
+  .assignment-detail {
     transition: none;
   }
 }
