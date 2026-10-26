@@ -92,7 +92,9 @@
 
   if (!isNativeShell && !params.has("verify") && "serviceWorker" in navigator && window.isSecureContext) {
     window.addEventListener("load", () => {
-      navigator.serviceWorker.register("./service-worker.js", { scope: "./" }).catch((error) => {
+      const workerUrl = new URL("./main.js?service-worker=20261026-app", window.location.href);
+      const scope = new URL("./", window.location.href);
+      navigator.serviceWorker.register(workerUrl, { scope }).catch((error) => {
         console.warn("Offline support could not be enabled.", error);
       });
     }, { once: true });

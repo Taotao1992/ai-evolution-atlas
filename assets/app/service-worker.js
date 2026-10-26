@@ -8,9 +8,10 @@ const APP_SHELL = [
   "./styles.css?v=20261026-app",
   "./assets/atlas.css?v=20261026-app",
   "./main.js?v=20261026-app",
-  "./app-shell.js?v=20261026-app",
-  "./app.webmanifest",
-  "./offline-assets.json",
+  "./assets/app/app-shell.js?v=20261026-app",
+  "./assets/app/course.js?v=20261026-app",
+  "./assets/app/app.webmanifest",
+  "./assets/app/offline-assets.json",
   "./assets/favicon.svg",
   "./assets/atlas-hero.svg",
   "./assets/evolution-3d.js?v=20261026-app",
@@ -24,7 +25,7 @@ const APP_SHELL = [
 
 self.addEventListener("install", (event) => {
   event.waitUntil((async () => {
-    const manifestResponse = await fetch("./offline-assets.json", { cache: "no-cache" });
+    const manifestResponse = await fetch("./assets/app/offline-assets.json", { cache: "no-cache" });
     if (!manifestResponse.ok) throw new Error("Offline asset manifest could not be loaded");
     const assets = await manifestResponse.json();
     const cache = await caches.open(CACHE_NAME);

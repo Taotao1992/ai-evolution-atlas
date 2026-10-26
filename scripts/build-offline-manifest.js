@@ -16,6 +16,6 @@ function walk(directory) {
 }
 
 const assets = walk(assetsRoot).sort();
-const output = path.join(root, "offline-assets.json");
+const output = path.join(assetsRoot, "app", "offline-assets.json");
 fs.writeFileSync(output, `${JSON.stringify(assets, null, 2)}\n`);
 console.log(`Wrote ${assets.length} offline assets to ${path.relative(root, output)}`);

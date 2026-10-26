@@ -1,12 +1,12 @@
 {
-  "id": "./",
+  "id": "../../",
   "name": "CSC2220 AI Evolution Atlas",
   "short_name": "AI Atlas",
   "description": "A living course atlas of artificial intelligence, from foundational ideas to agents and world models.",
   "lang": "en",
   "dir": "ltr",
-  "start_url": "./?source=pwa#top",
-  "scope": "./",
+  "start_url": "../../?source=pwa#top",
+  "scope": "../../",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#050a12",
@@ -14,19 +14,19 @@
   "categories": ["education", "books", "productivity"],
   "icons": [
     {
-      "src": "./assets/app/icon-192.png",
+      "src": "./icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./assets/app/icon-512.png",
+      "src": "./icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./assets/app/icon-512.png",
+      "src": "./icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
