@@ -1,14 +1,14 @@
 "use strict";
 
 const CACHE_PREFIX = "ai-evolution-atlas-";
-const CACHE_NAME = `${CACHE_PREFIX}20261026-app`;
+const CACHE_NAME = `${CACHE_PREFIX}20261026-app2`;
 const APP_SHELL = [
   "./",
   "./index.html",
   "./styles.css?v=20261026-app",
   "./assets/atlas.css?v=20261026-app",
-  "./main.js?v=20261026-app",
-  "./assets/app/app-shell.js?v=20261026-app",
+  "./main.js?v=20261026-app2",
+  "./assets/app/app-shell.js?v=20261026-app2",
   "./assets/app/course.js?v=20261026-app",
   "./assets/app/app.webmanifest",
   "./assets/app/offline-assets.json",

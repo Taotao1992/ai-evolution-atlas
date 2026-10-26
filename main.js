@@ -9,7 +9,7 @@ if (isServiceWorker) {
 } else {
   (async () => {
     try {
-      await import("./assets/app/app-shell.js?v=20261026-app");
+      await import("./assets/app/app-shell.js?v=20261026-app2");
       await import("./assets/app/course.js?v=20261026-app");
     } catch (error) {
       console.error("The AI Evolution Atlas could not be initialized.", error);
