@@ -52,6 +52,15 @@
       />
     </noscript>
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./atlas.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "./assets/vendor/three.module.min.js",
+          "three/addons/": "./assets/vendor/addons/"
+        }
+      }
+    </script>
     <script type="module" src="./main.js" defer></script>
   </head>
   <body>
@@ -129,8 +138,50 @@
           </div>
         </div>
 
-        <div class="hero-visual" aria-hidden="true">
-          <img src="./assets/atlas-hero.svg" alt="" width="760" height="760" fetchpriority="high" />
+        <div class="hero-visual atlas-experience" id="atlas-experience">
+          <div class="atlas-frame" id="atlas-frame">
+            <img
+              class="atlas-fallback"
+              src="./assets/atlas-hero.svg"
+              alt=""
+              width="760"
+              height="760"
+              fetchpriority="high"
+              aria-hidden="true"
+            />
+            <div class="atlas-canvas" id="atlas-canvas" aria-hidden="true"></div>
+
+            <div class="atlas-topline">
+              <span><i aria-hidden="true"></i> 3D evolution atlas</span>
+              <span>1956 → 2026</span>
+            </div>
+            <p class="atlas-instruction" id="atlas-instruction" hidden>
+              Drag to orbit · Scroll to zoom · Select a node
+            </p>
+
+            <div class="atlas-readout" id="atlas-readout" hidden>
+              <div class="atlas-readout-copy" aria-live="polite">
+                <p class="atlas-readout-meta">
+                  <span id="atlas-era">1956</span>
+                  <span id="atlas-position">01 / 11</span>
+                </p>
+                <h2 id="atlas-title">Dartmouth</h2>
+                <p id="atlas-subtitle">AI gets a name and a shared ambition</p>
+              </div>
+              <button class="atlas-open" id="atlas-open" type="button">
+                Open milestone <span aria-hidden="true">↗</span>
+              </button>
+            </div>
+
+            <div class="atlas-controls" id="atlas-controls" aria-label="3D atlas controls" hidden>
+              <button id="atlas-prev" type="button" aria-label="Previous milestone">←</button>
+              <button id="atlas-motion" type="button" aria-label="Pause automatic rotation" aria-pressed="false">
+                Pause
+              </button>
+              <button id="atlas-reset" type="button">Reset view</button>
+              <button id="atlas-next" type="button" aria-label="Next milestone">→</button>
+            </div>
+          </div>
         </div>
       </section>
 

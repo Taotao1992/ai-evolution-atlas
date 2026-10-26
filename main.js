@@ -2333,6 +2333,8 @@ const state = {
   libraryId: libraryItems[0].id,
 };
 
+let evolutionAtlasController;
+
 const libraryTopicGroups = {
   foundations: ["AI prehistory", "Neural learning", "Statistical ML", "Deep learning", "Search + learning", "Scaling"],
   language: ["Transformers", "Language models", "LLMs", "Alignment", "Reasoning"],
@@ -2740,11 +2742,7 @@ function renderTimelineNav() {
     setTabAttributes(button, `timeline-tab-${item.id}`, active, "timeline-detail");
     button.classList.toggle("is-active", active);
     button.innerHTML = `<strong>${item.era} - ${item.buttonTitle}</strong><span>${item.buttonSubtitle}</span>`;
-    button.addEventListener("click", () => {
-      state.timelineId = item.id;
-      renderTimelineNav();
-      renderTimelineDetail();
-    });
+    button.addEventListener("click", () => setTimelineSelection(item.id, { syncAtlas: true }));
     addMotionSurface(button, index);
     timelineNav.appendChild(button);
   });
@@ -2766,6 +2764,56 @@ function renderTimelineDetail() {
 
   clearNode(timelineLinks);
   item.links.forEach((link) => timelineLinks.appendChild(makeLink(link)));
+}
+
+function setTimelineSelection(id, { syncAtlas = false } = {}) {
+  if (!timelineItems.some((item) => item.id === id)) return;
+  state.timelineId = id;
+  renderTimelineNav();
+  renderTimelineDetail();
+  if (syncAtlas) evolutionAtlasController?.select(id, { hold: false });
+}
+
+function openTimelineFromAtlas(id) {
+  setTimelineSelection(id);
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.querySelector("#history").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  const tab = document.querySelector(`#timeline-tab-${id}`);
+  tab?.focus({ preventScroll: true });
+  tab?.scrollIntoView({ block: "nearest", inline: "center" });
+}
+
+function initEvolutionAtlas() {
+  const container = document.querySelector("#atlas-canvas");
+  const experience = document.querySelector("#atlas-experience");
+  if (!container || !experience) return;
+
+  const start = async () => {
+    experience.dataset.atlasState = "loading";
+    try {
+      const { mountEvolutionAtlas } = await import("./evolution-3d.js");
+      evolutionAtlasController = mountEvolutionAtlas({
+        container,
+        items: timelineItems,
+        selectedId: state.timelineId,
+        onSelect: (id) => setTimelineSelection(id),
+        onOpen: openTimelineFromAtlas,
+        onFallback: () => {
+          evolutionAtlasController = undefined;
+        },
+      });
+    } catch (error) {
+      experience.classList.remove("is-ready");
+      experience.dataset.atlasState = "fallback";
+      console.warn("Interactive 3D atlas unavailable; static artwork retained.", error);
+    }
+  };
+
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(start, { timeout: 800 });
+  } else {
+    window.setTimeout(start, 80);
+  }
 }
 
 function renderFrontierTabs() {
@@ -3279,6 +3327,7 @@ function init() {
   animateCounts();
   bindPointerGlow();
   updateScrollUI();
+  initEvolutionAtlas();
 
   window.addEventListener("scroll", updateScrollUI, { passive: true });
   window.addEventListener("resize", updateScrollUI);

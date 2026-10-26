@@ -1,0 +1,387 @@
+/* ==========================================================================
+   Interactive 3D evolution atlas — progressive enhancement for the hero
+   ========================================================================== */
+
+.hero-visual.atlas-experience {
+  padding: 24px 24px 24px 0;
+}
+
+.atlas-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid rgba(110, 231, 255, 0.18);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 55% 44%, rgba(27, 83, 111, 0.32), transparent 36%),
+    radial-gradient(circle at 72% 24%, rgba(184, 161, 255, 0.08), transparent 32%),
+    linear-gradient(150deg, rgba(11, 25, 40, 0.96), rgba(4, 10, 18, 0.98));
+  box-shadow:
+    inset 0 0 70px rgba(110, 231, 255, 0.035),
+    0 30px 80px rgba(0, 0, 0, 0.24);
+}
+
+.atlas-frame::before,
+.atlas-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.atlas-frame::before {
+  opacity: 0.18;
+  background-image:
+    linear-gradient(rgba(110, 231, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(110, 231, 255, 0.055) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(circle at center, black, transparent 78%);
+}
+
+.atlas-frame::after {
+  border-radius: inherit;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.018),
+    inset 0 -90px 100px rgba(3, 8, 15, 0.36);
+}
+
+.hero-visual .atlas-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.9;
+  filter: drop-shadow(0 24px 42px rgba(0, 0, 0, 0.22));
+  transition: opacity 500ms ease;
+}
+
+.atlas-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+  cursor: grab;
+  touch-action: none;
+  transition: opacity 600ms ease;
+}
+
+.atlas-canvas:active {
+  cursor: grabbing;
+}
+
+.atlas-canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  outline: none;
+}
+
+.atlas-experience.is-ready .atlas-canvas {
+  opacity: 1;
+}
+
+.atlas-experience.is-ready .atlas-fallback {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.atlas-topline {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  left: 20px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  color: rgba(222, 235, 245, 0.68);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.atlas-topline > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--accent);
+}
+
+.atlas-topline i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--mint);
+  box-shadow: 0 0 12px rgba(135, 255, 193, 0.7);
+}
+
+.atlas-instruction {
+  position: absolute;
+  top: 45px;
+  left: 20px;
+  z-index: 3;
+  margin: 0;
+  color: rgba(222, 235, 245, 0.48);
+  font-family: var(--font-mono);
+  font-size: 0.54rem;
+  letter-spacing: 0.025em;
+  pointer-events: none;
+}
+
+.atlas-readout {
+  position: absolute;
+  right: 18px;
+  bottom: 66px;
+  left: 18px;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: end;
+  padding: 14px 15px;
+  border: 1px solid rgba(140, 180, 205, 0.2);
+  border-radius: 14px;
+  background: rgba(5, 13, 23, 0.76);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(16px);
+}
+
+.atlas-readout-copy {
+  min-width: 0;
+}
+
+.atlas-readout-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 7px;
+  color: var(--amber);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+#atlas-position {
+  color: rgba(222, 235, 245, 0.48);
+}
+
+.atlas-readout h2 {
+  margin: 0;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: 1.08rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#atlas-subtitle {
+  margin: 5px 0 0;
+  overflow: hidden;
+  color: var(--text-soft);
+  font-size: 0.68rem;
+  line-height: 1.45;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.atlas-open,
+.atlas-controls button {
+  border: 1px solid rgba(140, 180, 205, 0.25);
+  background: rgba(9, 22, 36, 0.86);
+  color: var(--text);
+  font-family: var(--font-mono);
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.atlas-open {
+  min-height: 36px;
+  padding: 0 11px;
+  border-radius: 8px;
+  color: var(--accent);
+  font-size: 0.58rem;
+  letter-spacing: 0.025em;
+  white-space: nowrap;
+}
+
+.atlas-open span {
+  display: inline-block;
+  margin-left: 4px;
+}
+
+.atlas-open:hover,
+.atlas-controls button:hover {
+  border-color: var(--accent);
+  background: rgba(110, 231, 255, 0.12);
+  color: var(--accent);
+}
+
+.atlas-open:active,
+.atlas-controls button:active {
+  transform: translateY(1px);
+}
+
+.atlas-open:focus-visible,
+.atlas-controls button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.atlas-controls {
+  position: absolute;
+  right: 18px;
+  bottom: 17px;
+  left: 18px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.atlas-controls button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  min-height: 36px;
+  padding: 0 10px;
+  border-radius: 9px;
+  font-size: 0.6rem;
+}
+
+#atlas-prev,
+#atlas-next {
+  flex: 0 0 36px;
+  padding: 0;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+}
+
+#atlas-motion[aria-pressed="true"] {
+  border-color: rgba(255, 184, 107, 0.48);
+  color: var(--amber);
+}
+
+@media (max-width: 1150px) {
+  .hero-visual.atlas-experience {
+    padding-right: 18px;
+  }
+
+  .atlas-readout {
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .atlas-open {
+    padding: 0 9px;
+  }
+}
+
+@media (max-width: 1000px) and (min-width: 721px) {
+  .hero-visual.atlas-experience {
+    padding: 0;
+    opacity: 0.32;
+    pointer-events: none;
+  }
+
+  .atlas-topline,
+  .atlas-instruction,
+  .atlas-readout,
+  .atlas-controls {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero-visual.atlas-experience {
+    width: min(100%, 450px);
+    padding: 14px 18px 24px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .atlas-frame {
+    height: 440px;
+    aspect-ratio: auto;
+    border-radius: 22px;
+  }
+
+  .atlas-readout {
+    right: 14px;
+    bottom: 64px;
+    left: 14px;
+  }
+
+  .atlas-controls {
+    right: 14px;
+    bottom: 15px;
+    left: 14px;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero-visual.atlas-experience {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .atlas-frame {
+    height: 420px;
+  }
+
+  .atlas-topline {
+    top: 17px;
+    right: 16px;
+    left: 16px;
+    font-size: 0.52rem;
+  }
+
+  .atlas-instruction {
+    top: 41px;
+    left: 16px;
+    font-size: 0.5rem;
+  }
+
+  .atlas-readout {
+    gap: 8px;
+  }
+
+  .atlas-readout h2 {
+    font-size: 0.98rem;
+  }
+
+  #atlas-subtitle {
+    max-width: 22ch;
+    font-size: 0.62rem;
+  }
+
+  .atlas-open {
+    max-width: 86px;
+    line-height: 1.35;
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atlas-canvas,
+  .hero-visual .atlas-fallback,
+  .atlas-open,
+  .atlas-controls button {
+    transition: none;
+  }
+}
