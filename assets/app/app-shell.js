@@ -53,6 +53,27 @@
   function initRemoteNavigation() {
     const directions = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
 
+    function isFullyInViewport(rect) {
+      return rect.top >= 18 && rect.bottom <= window.innerHeight - 18;
+    }
+
+    function keepFocusInViewport(focusable) {
+      const active = document.activeElement;
+      if (!active || active === document.body) return;
+      const rect = active.getBoundingClientRect();
+      if (rect.bottom > 0 && rect.top < window.innerHeight) return;
+      const visible = focusable.find((element) => isFullyInViewport(element.getBoundingClientRect()));
+      if (visible) visible.focus({ preventScroll: true });
+      else active.blur();
+    }
+
+    function scrollForReading(direction, focusable) {
+      const maximum = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      const top = Math.min(maximum, Math.max(0, window.scrollY + direction * window.innerHeight * 0.7));
+      if (top !== window.scrollY) window.scrollTo({ top, behavior: "instant" });
+      keepFocusInViewport(focusable);
+    }
+
     window.addEventListener("keydown", (event) => {
       if (event.defaultPrevented || !directions.includes(event.key) || event.altKey || event.ctrlKey || event.metaKey) return;
       const active = document.activeElement;
@@ -71,19 +92,30 @@
         target = nextRemoteTarget(active, focusable, event.key);
       }
 
+      const vertical = event.key === "ArrowDown" || event.key === "ArrowUp";
       if (target) {
+        const targetRect = target.getBoundingClientRect();
+        if (vertical && !isFullyInViewport(targetRect)) {
+          event.preventDefault();
+          scrollForReading(event.key === "ArrowDown" ? 1 : -1, focusable);
+          return;
+        }
         event.preventDefault();
         target.focus({ preventScroll: true });
         target.scrollIntoView({ behavior: "instant", block: "nearest", inline: "nearest" });
         return;
       }
 
-      if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      if (vertical) {
+        if (event.key === "ArrowUp" && window.scrollY <= 1) {
+          if (typeof window.AtlasTV?.requestRouteFocus === "function") {
+            event.preventDefault();
+            window.AtlasTV.requestRouteFocus();
+          }
+          return;
+        }
         event.preventDefault();
-        window.scrollBy({
-          top: (event.key === "ArrowDown" ? 1 : -1) * window.innerHeight * 0.7,
-          behavior: "instant",
-        });
+        scrollForReading(event.key === "ArrowDown" ? 1 : -1, focusable);
       }
     });
   }
@@ -92,7 +124,7 @@
 
   if (!isNativeShell && !params.has("verify") && "serviceWorker" in navigator && window.isSecureContext) {
     const registerOfflineSupport = () => {
-      const workerUrl = new URL("./main.js?service-worker=20261026-app", window.location.href);
+      const workerUrl = new URL("./main.js?service-worker=20261027-tree", window.location.href);
       const scope = new URL("./", window.location.href);
       navigator.serviceWorker.register(workerUrl, { scope }).catch((error) => {
         console.warn("Offline support could not be enabled.", error);

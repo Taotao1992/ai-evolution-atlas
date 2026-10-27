@@ -1,20 +1,20 @@
 "use strict";
 
 const CACHE_PREFIX = "ai-evolution-atlas-";
-const CACHE_NAME = `${CACHE_PREFIX}20261026-app2`;
+const CACHE_NAME = `${CACHE_PREFIX}20261027-tree`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./styles.css?v=20261026-app",
-  "./assets/atlas.css?v=20261026-app",
-  "./main.js?v=20261026-app2",
-  "./assets/app/app-shell.js?v=20261026-app2",
-  "./assets/app/course.js?v=20261026-app",
+  "./styles.css?v=20261027-tree",
+  "./assets/atlas.css?v=20261027-tree",
+  "./main.js?v=20261027-tree",
+  "./assets/app/app-shell.js?v=20261027-tree",
+  "./assets/app/course.js?v=20261027-tree",
   "./assets/app/app.webmanifest",
   "./assets/app/offline-assets.json",
   "./assets/favicon.svg",
   "./assets/atlas-hero.svg",
-  "./assets/evolution-3d.js?v=20261026-app",
+  "./assets/evolution-3d.js?v=20261027-tree",
   "./assets/vendor/three.core.js",
   "./assets/vendor/three.module.min.js",
   "./assets/vendor/addons/controls/OrbitControls.js",

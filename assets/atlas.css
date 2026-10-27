@@ -923,7 +923,52 @@ body.native-shell-tv {
 }
 
 body.native-shell-tv main {
-  width: min(calc(100% - 80px), 1440px);
+  width: min(calc(100% - 48px), 1440px);
+}
+
+body.native-shell-tv .library-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+body.native-shell-tv .hero {
+  grid-template-columns: minmax(0, 1fr);
+  min-height: 0;
+}
+
+body.native-shell-tv .hero-content {
+  max-width: 760px;
+  padding: 36px 0 28px;
+}
+
+body.native-shell-tv .hero-visual.atlas-experience {
+  position: relative;
+  right: auto;
+  bottom: auto;
+  width: 100%;
+  padding: 0 0 28px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+body.native-shell-tv .atlas-frame {
+  height: 560px;
+  aspect-ratio: auto;
+}
+
+body.native-shell-tv .atlas-topline {
+  display: flex;
+}
+
+body.native-shell-tv .atlas-instruction {
+  display: block;
+}
+
+body.native-shell-tv .atlas-readout {
+  display: grid;
+}
+
+body.native-shell-tv .atlas-controls {
+  display: flex;
 }
 
 body.native-shell-tv :focus-visible {
@@ -942,6 +987,31 @@ body.native-shell-tv select {
 body.native-shell-tv .button,
 body.native-shell-tv button {
   min-height: 48px;
+}
+
+body.native-shell-tv :where(
+  small,
+  .eyebrow,
+  .section-kicker,
+  .section-index,
+  .hero-review,
+  .metric-card span,
+  .chip,
+  .tag,
+  .kicker,
+  .card-kicker,
+  .card-meta,
+  .resource-meta,
+  .assignment-meta,
+  .atlas-topline,
+  .atlas-instruction,
+  .atlas-readout-meta,
+  .atlas-open,
+  .atlas-controls button,
+  [role="tab"]
+) {
+  font-size: 0.75rem;
+  line-height: 1.45;
 }
 
 @media (display-mode: standalone) {

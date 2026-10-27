@@ -2333,6 +2333,50 @@ const state = {
   libraryId: libraryItems[0].id,
 };
 
+const isTVShell = document.body.classList.contains("native-shell-tv");
+const tvViewState = { routes: {}, selection: {} };
+if (isTVShell) {
+  try {
+    const saved = JSON.parse(sessionStorage.getItem("ai-atlas-tv-view-state-v1") || "null");
+    if (saved?.routes && typeof saved.routes === "object") tvViewState.routes = saved.routes;
+    if (saved?.selection && typeof saved.selection === "object") tvViewState.selection = saved.selection;
+  } catch {
+    // A fresh TV session can still use the complete course without saved state.
+  }
+}
+
+const tvSelectionCollections = {
+  weekId: courseWeeks,
+  assignmentId: assignmentBriefs,
+  timelineId: timelineItems,
+  frontierId: frontierItems,
+  stackStageId: lifecycleStages,
+  labId: labItems,
+  libraryId: libraryItems,
+};
+Object.entries(tvSelectionCollections).forEach(([key, collection]) => {
+  const savedId = tvViewState.selection[key];
+  if (collection.some((item) => item.id === savedId)) state[key] = savedId;
+});
+
+let tvSaveTimer;
+function saveTVViewState() {
+  if (!isTVShell) return;
+  Object.keys(tvSelectionCollections).forEach((key) => { tvViewState.selection[key] = state[key]; });
+  if (currentRoute) tvViewState.routes[currentRoute] = { scrollY: window.scrollY };
+  try {
+    sessionStorage.setItem("ai-atlas-tv-view-state-v1", JSON.stringify(tvViewState));
+  } catch {
+    // Storage can be unavailable without affecting course navigation.
+  }
+}
+
+function scheduleTVViewStateSave() {
+  if (!isTVShell) return;
+  clearTimeout(tvSaveTimer);
+  tvSaveTimer = setTimeout(saveTVViewState, 180);
+}
+
 let evolutionAtlasController;
 
 const libraryTopicGroups = {
@@ -2467,6 +2511,10 @@ function resolveRoute(hash = window.location.hash) {
 function applyRoute(route, { scroll = true, target = null } = {}) {
   const nextRoute = routeSections.some((section) => routeForSection(section) === route) ? route : "top";
   const routeChanged = currentRoute !== nextRoute;
+  if (isTVShell && routeChanged && currentRoute) saveTVViewState();
+  const savedTVScroll = isTVShell && routeChanged && !target?.dataset.assignmentId
+    ? tvViewState.routes[nextRoute]?.scrollY
+    : null;
   currentRoute = nextRoute;
   document.body.dataset.route = nextRoute;
 
@@ -2491,7 +2539,9 @@ function applyRoute(route, { scroll = true, target = null } = {}) {
 
   if (scroll) {
     const destination = target || routeSections.find((section) => section.id === nextRoute);
-    if (nextRoute === "top" && (!target || target.id === "top")) {
+    if (Number.isFinite(savedTVScroll)) {
+      requestAnimationFrame(() => window.scrollTo({ top: savedTVScroll, behavior: "instant" }));
+    } else if (nextRoute === "top" && (!target || target.id === "top")) {
       window.scrollTo({ top: 0, behavior: "instant" });
     } else if (destination) {
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -2885,7 +2935,7 @@ function initEvolutionAtlas() {
   const start = async () => {
     experience.dataset.atlasState = "loading";
     try {
-      const { mountEvolutionAtlas } = await import("../evolution-3d.js?v=20261026-app");
+      const { mountEvolutionAtlas } = await import("../evolution-3d.js?v=20261027-tree");
       evolutionAtlasController = mountEvolutionAtlas({
         container,
         items: timelineItems,
@@ -3308,21 +3358,22 @@ function bindFilters() {
 function bindTabKeyboard() {
   [weekRail, timelineNav, frontierTabs, document.querySelector(".stack-flow")].forEach((container) => {
     container.addEventListener("keydown", (event) => {
-      const navigationKeys = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"];
-      if (!navigationKeys.includes(event.key)) {
-        return;
-      }
+      const navigationKeys = ["ArrowLeft", "ArrowRight", "Home", "End"];
+      if (!navigationKeys.includes(event.key)) return;
 
       const tabs = [...container.querySelectorAll('[role="tab"]')];
+      if (!tabs.length) return;
       const currentIndex = Math.max(0, tabs.indexOf(document.activeElement));
+      const isTV = document.body.classList.contains("native-shell-tv");
       let nextIndex = currentIndex;
 
       if (event.key === "Home") nextIndex = 0;
       if (event.key === "End") nextIndex = tabs.length - 1;
-      if (["ArrowRight", "ArrowDown"].includes(event.key)) nextIndex = (currentIndex + 1) % tabs.length;
-      if (["ArrowLeft", "ArrowUp"].includes(event.key)) nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+      if (event.key === "ArrowRight") nextIndex = isTV ? Math.min(tabs.length - 1, currentIndex + 1) : (currentIndex + 1) % tabs.length;
+      if (event.key === "ArrowLeft") nextIndex = isTV ? Math.max(0, currentIndex - 1) : (currentIndex - 1 + tabs.length) % tabs.length;
 
       event.preventDefault();
+      if (nextIndex === currentIndex) return;
       tabs[nextIndex].click();
       const refreshedTabs = [...container.querySelectorAll('[role="tab"]')];
       refreshedTabs[nextIndex]?.focus();
@@ -3413,7 +3464,14 @@ function init() {
   initEvolutionAtlas();
 
   window.addEventListener("scroll", updateScrollUI, { passive: true });
+  window.addEventListener("scroll", scheduleTVViewStateSave, { passive: true });
   window.addEventListener("resize", updateScrollUI);
+  window.addEventListener("pagehide", saveTVViewState);
+  document.addEventListener("click", (event) => {
+    if (isTVShell && event.target.closest('[role="tab"], [data-stack-stage], [data-lab-filter], [data-filter]')) {
+      scheduleTVViewStateSave();
+    }
+  });
 }
 
 init();

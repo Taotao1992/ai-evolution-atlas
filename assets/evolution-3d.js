@@ -5,7 +5,9 @@ const CYAN = new THREE.Color("#6ee7ff");
 const MINT = new THREE.Color("#87ffc1");
 const VIOLET = new THREE.Color("#b8a1ff");
 const AMBER = new THREE.Color("#ffb86b");
-const HOME_TARGET = new THREE.Vector3(0, 0.1, 0);
+const GOLD = new THREE.Color("#ffd58a");
+const BARK = new THREE.Color("#39271f");
+const HOME_TARGET = new THREE.Vector3(0, 0.7, 0);
 
 function seededRandom(seed) {
   let value = seed >>> 0;
@@ -19,9 +21,9 @@ function seededRandom(seed) {
 }
 
 function colorAt(progress) {
-  if (progress < 0.38) return MINT.clone().lerp(CYAN, progress / 0.38);
-  if (progress < 0.74) return CYAN.clone().lerp(VIOLET, (progress - 0.38) / 0.36);
-  return VIOLET.clone().lerp(AMBER, (progress - 0.74) / 0.26);
+  if (progress < 0.36) return GOLD.clone().lerp(AMBER, progress / 0.36);
+  if (progress < 0.62) return CYAN.clone().lerp(VIOLET, (progress - 0.36) / 0.26);
+  return MINT.clone().lerp(GOLD, (progress - 0.62) / 0.38);
 }
 
 function makeGlowTexture() {
@@ -31,8 +33,8 @@ function makeGlowTexture() {
   const context = canvas.getContext("2d");
   const gradient = context.createRadialGradient(64, 64, 0, 64, 64, 64);
   gradient.addColorStop(0, "rgba(255,255,255,1)");
-  gradient.addColorStop(0.12, "rgba(255,255,255,0.92)");
-  gradient.addColorStop(0.36, "rgba(255,255,255,0.24)");
+  gradient.addColorStop(0.12, "rgba(255,255,255,0.94)");
+  gradient.addColorStop(0.34, "rgba(255,255,255,0.28)");
   gradient.addColorStop(1, "rgba(255,255,255,0)");
   context.fillStyle = gradient;
   context.fillRect(0, 0, 128, 128);
@@ -41,38 +43,34 @@ function makeGlowTexture() {
   return texture;
 }
 
-function makeParticleField({ count, curve, glowTexture, random, trail = false }) {
+function makeAmbientParticles({ count, random, glowTexture, centers = null }) {
   const positions = new Float32Array(count * 3);
   const colors = new Float32Array(count * 3);
-  const point = new THREE.Vector3();
-
   for (let index = 0; index < count; index += 1) {
-    if (trail) {
-      curve.getPointAt(random(), point);
-      positions[index * 3] = point.x + (random() - 0.5) * 0.7;
-      positions[index * 3 + 1] = point.y + (random() - 0.5) * 0.7;
-      positions[index * 3 + 2] = point.z + (random() - 0.5) * 0.7;
+    if (centers) {
+      const center = centers[index % centers.length];
+      positions[index * 3] = center.x + (random() + random() - 1) * 2.2;
+      positions[index * 3 + 1] = center.y + (random() + random() - 1) * 1.25;
+      positions[index * 3 + 2] = center.z + (random() + random() - 1) * 1.8;
     } else {
-      positions[index * 3] = (random() - 0.5) * 30;
-      positions[index * 3 + 1] = (random() - 0.5) * 19;
-      positions[index * 3 + 2] = -9 + random() * 14;
+      positions[index * 3] = (random() - 0.5) * 26;
+      positions[index * 3 + 1] = (random() - 0.5) * 17;
+      positions[index * 3 + 2] = -10 + random() * 14;
     }
-
-    const color = colorAt(trail ? index / count : random());
+    const color = colorAt(random());
     colors[index * 3] = color.r;
     colors[index * 3 + 1] = color.g;
     colors[index * 3 + 2] = color.b;
   }
-
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
   geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
   const material = new THREE.PointsMaterial({
-    name: trail ? "Atlas · Evidence dust" : "Atlas · Deep-space particles",
-    size: trail ? 0.09 : 0.074,
+    name: centers ? "AI tree · Canopy fireflies" : "AI tree · Deep-field dust",
+    size: centers ? 0.105 : 0.065,
     map: glowTexture,
     transparent: true,
-    opacity: trail ? 0.78 : 0.62,
+    opacity: centers ? 0.74 : 0.48,
     vertexColors: true,
     depthWrite: false,
     blending: THREE.AdditiveBlending,
@@ -81,126 +79,215 @@ function makeParticleField({ count, curve, glowTexture, random, trail = false })
   return new THREE.Points(geometry, material);
 }
 
-function makeGuideRing(radius, color, opacity, rotation) {
-  const points = [];
-  for (let index = 0; index < 160; index += 1) {
-    const angle = (index / 160) * Math.PI * 2;
-    points.push(new THREE.Vector3(Math.cos(angle) * radius, Math.sin(angle) * radius * 0.46, 0));
+function curveThrough(points) {
+  return new THREE.CatmullRomCurve3(points.map((point) => new THREE.Vector3(...point)), false, "catmullrom", 0.42);
+}
+
+function taperedGeometry(curve, startRadius, endRadius, segments = 56, radialSegments = 7) {
+  const frames = curve.computeFrenetFrames(segments, false);
+  const positions = [];
+  const indices = [];
+  const point = new THREE.Vector3();
+  const offset = new THREE.Vector3();
+
+  for (let index = 0; index <= segments; index += 1) {
+    const progress = index / segments;
+    curve.getPointAt(progress, point);
+    const radius = THREE.MathUtils.lerp(startRadius, endRadius, Math.pow(progress, 0.82));
+    for (let side = 0; side <= radialSegments; side += 1) {
+      const angle = (side / radialSegments) * Math.PI * 2;
+      offset.copy(frames.normals[index]).multiplyScalar(Math.cos(angle) * radius);
+      offset.addScaledVector(frames.binormals[index], Math.sin(angle) * radius);
+      positions.push(point.x + offset.x, point.y + offset.y, point.z + offset.z);
+    }
   }
-  const geometry = new THREE.BufferGeometry().setFromPoints(points);
-  const material = new THREE.LineBasicMaterial({
-    name: "Atlas · Orbital guide",
+
+  for (let index = 0; index < segments; index += 1) {
+    for (let side = 0; side < radialSegments; side += 1) {
+      const a = index * (radialSegments + 1) + side;
+      const b = (index + 1) * (radialSegments + 1) + side;
+      const c = b + 1;
+      const d = a + 1;
+      indices.push(a, b, d, b, c, d);
+    }
+  }
+
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+  geometry.setIndex(indices);
+  geometry.computeVertexNormals();
+  return geometry;
+}
+
+function makeBranch({ curve, startRadius, endRadius, color, veins = 2, delay = 0 }) {
+  const group = new THREE.Group();
+  const baseColor = color.clone().lerp(BARK, 0.58);
+  const material = new THREE.MeshStandardMaterial({
+    name: "AI tree · Living branch",
+    color: baseColor,
+    emissive: color,
+    emissiveIntensity: 0.2,
+    roughness: 0.62,
+    metalness: 0.24,
+  });
+  const geometry = taperedGeometry(curve, startRadius, endRadius);
+  const mesh = new THREE.Mesh(geometry, material);
+  group.add(mesh);
+
+  const segments = 64;
+  const frames = curve.computeFrenetFrames(segments, false);
+  const veinPositions = [];
+  const point = new THREE.Vector3();
+  const previous = new THREE.Vector3();
+  const current = new THREE.Vector3();
+  for (let vein = 0; vein < veins; vein += 1) {
+    for (let index = 1; index <= segments; index += 1) {
+      for (const step of [index - 1, index]) {
+        const progress = step / segments;
+        curve.getPointAt(progress, point);
+        const angle = (vein / veins) * Math.PI * 2 + progress * Math.PI * 3.4;
+        const radius = THREE.MathUtils.lerp(startRadius, endRadius, Math.pow(progress, 0.82)) * 1.018;
+        const target = step === index - 1 ? previous : current;
+        target.copy(point)
+          .addScaledVector(frames.normals[step], Math.cos(angle) * radius)
+          .addScaledVector(frames.binormals[step], Math.sin(angle) * radius);
+        veinPositions.push(target.x, target.y, target.z);
+      }
+    }
+  }
+  const veinGeometry = new THREE.BufferGeometry();
+  veinGeometry.setAttribute("position", new THREE.Float32BufferAttribute(veinPositions, 3));
+  const veinMaterial = new THREE.LineBasicMaterial({
+    name: "AI tree · Luminous growth rings",
     color,
     transparent: true,
-    opacity,
+    opacity: 0.5,
     depthWrite: false,
     blending: THREE.AdditiveBlending,
   });
-  const ring = new THREE.LineLoop(geometry, material);
-  ring.position.z = -3.8;
-  ring.rotation.set(...rotation);
-  return ring;
+  const veinLines = new THREE.LineSegments(veinGeometry, veinMaterial);
+  group.add(veinLines);
+  return { group, mesh, veinLines, curve, delay, indexCount: geometry.index.count, veinVertexCount: veinPositions.length / 3 };
 }
 
-function makeYearLabel(item, color) {
+function roundedRect(context, x, y, width, height, radius) {
+  context.beginPath();
+  context.moveTo(x + radius, y);
+  context.lineTo(x + width - radius, y);
+  context.quadraticCurveTo(x + width, y, x + width, y + radius);
+  context.lineTo(x + width, y + height - radius);
+  context.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+  context.lineTo(x + radius, y + height);
+  context.quadraticCurveTo(x, y + height, x, y + height - radius);
+  context.lineTo(x, y + radius);
+  context.quadraticCurveTo(x, y, x + radius, y);
+  context.closePath();
+}
+
+function makeNodeLabel(item, color) {
   const canvas = document.createElement("canvas");
-  canvas.width = 320;
-  canvas.height = 104;
+  canvas.width = 512;
+  canvas.height = 154;
   const context = canvas.getContext("2d");
-  context.textAlign = "center";
-  context.fillStyle = "#ffffff";
-  context.font = "600 34px 'IBM Plex Mono', monospace";
-  context.fillText(item.era, 160, 42, 290);
-  context.fillStyle = "rgba(255,255,255,0.72)";
-  context.font = "500 17px 'IBM Plex Mono', monospace";
-  context.fillText(item.buttonTitle.toUpperCase(), 160, 76, 292);
+  roundedRect(context, 8, 8, 496, 138, 28);
+  context.fillStyle = "rgba(4, 12, 20, 0.88)";
+  context.fill();
+  context.strokeStyle = color.getStyle();
+  context.globalAlpha = 0.5;
+  context.lineWidth = 2;
+  context.stroke();
+  context.globalAlpha = 1;
+  context.fillStyle = color.getStyle();
+  context.font = "600 22px 'IBM Plex Mono', monospace";
+  context.textAlign = "left";
+  context.fillText(item.era, 32, 48, 420);
+  context.fillStyle = "#f2f7fa";
+  context.font = "600 29px 'Manrope', sans-serif";
+  context.fillText(item.buttonTitle, 32, 101, 438);
   const texture = new THREE.CanvasTexture(canvas);
   texture.colorSpace = THREE.SRGBColorSpace;
   const material = new THREE.SpriteMaterial({
-    name: `Atlas · ${item.buttonTitle} year label`,
+    name: `AI tree · ${item.buttonTitle} label`,
     map: texture,
-    color,
     transparent: true,
     opacity: 0.62,
     depthTest: false,
     depthWrite: false,
   });
   const label = new THREE.Sprite(material);
-  label.scale.set(1.72, 0.56, 1);
-  label.position.set(0, 0.66, 0);
+  label.scale.set(2.3, 0.69, 1);
+  label.position.set(0, 0.72, 0);
+  label.renderOrder = 4;
+  return label;
+}
+
+function makeRootLabel(title, subtitle, position, color) {
+  const canvas = document.createElement("canvas");
+  canvas.width = 400;
+  canvas.height = 128;
+  const context = canvas.getContext("2d");
+  context.textAlign = "center";
+  context.fillStyle = color.getStyle();
+  context.font = "600 30px 'Manrope', sans-serif";
+  context.fillText(title, 200, 50);
+  context.fillStyle = "rgba(225,236,244,0.72)";
+  context.font = "500 18px 'IBM Plex Mono', monospace";
+  context.fillText(subtitle, 200, 88);
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  const label = new THREE.Sprite(new THREE.SpriteMaterial({
+    name: `AI tree · Root ${title}`,
+    map: texture,
+    transparent: true,
+    opacity: 0.82,
+    depthTest: false,
+    depthWrite: false,
+  }));
+  label.position.set(...position);
+  label.scale.set(2.5, 0.8, 1);
   label.renderOrder = 3;
   return label;
 }
 
-function makeIntelligenceCore(glowTexture) {
-  const group = new THREE.Group();
-  group.position.set(0, -0.1, -3.4);
-  const inner = new THREE.Mesh(
-    new THREE.IcosahedronGeometry(0.48, 2),
-    new THREE.MeshStandardMaterial({
-      name: "Atlas · Intelligence core prism",
-      color: 0x123f55,
-      emissive: 0x6ee7ff,
-      emissiveIntensity: 0.5,
-      roughness: 0.22,
-      metalness: 0.58,
-      transparent: true,
-      opacity: 0.68,
-    }),
-  );
-  const cage = new THREE.Mesh(
-    new THREE.IcosahedronGeometry(0.78, 1),
-    new THREE.MeshBasicMaterial({
-      name: "Atlas · Intelligence core cage",
-      color: 0x6ee7ff,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.15,
-      depthWrite: false,
-    }),
-  );
-  const outer = new THREE.Mesh(
-    new THREE.IcosahedronGeometry(1.08, 0),
-    new THREE.MeshBasicMaterial({
-      name: "Atlas · Intelligence outer lattice",
-      color: 0xb8a1ff,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.07,
-      depthWrite: false,
-    }),
-  );
-  const rings = [0.98, 1.28].map((radius, index) => {
-    const ring = new THREE.Mesh(
-      new THREE.TorusGeometry(radius, index === 0 ? 0.01 : 0.007, 6, 96),
-      new THREE.MeshBasicMaterial({
-        name: "Atlas · Intelligence gyroscope",
-        color: index === 0 ? 0x87ffc1 : 0xb8a1ff,
-        transparent: true,
-        opacity: index === 0 ? 0.2 : 0.12,
-        depthWrite: false,
-        blending: THREE.AdditiveBlending,
-      }),
-    );
-    ring.rotation.set(index === 0 ? 1.05 : 0.35, index === 0 ? 0.2 : 1.1, index * 0.5);
-    return ring;
+function makeCanopy({ random, centers, narrowScreen }) {
+  const count = narrowScreen ? 460 : 780;
+  const geometry = new THREE.IcosahedronGeometry(0.095, 0);
+  const material = new THREE.MeshStandardMaterial({
+    name: "AI tree · Faceted leaf canopy",
+    color: 0xffffff,
+    emissive: 0x396b50,
+    emissiveIntensity: 0.48,
+    roughness: 0.48,
+    metalness: 0.16,
+    transparent: true,
+    opacity: 0.9,
   });
-  const halo = new THREE.Sprite(
-    new THREE.SpriteMaterial({
-      name: "Atlas · Intelligence core aura",
-      map: glowTexture,
-      color: 0x6ee7ff,
-      transparent: true,
-      opacity: 0.11,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-    }),
-  );
-  halo.scale.setScalar(3.1);
-  const light = new THREE.PointLight(0x6ee7ff, 3, 8);
-  light.name = "Atlas · Intelligence core light";
-  group.add(inner, cage, outer, ...rings, halo, light);
-  return { group, inner, cage, outer, rings };
+  const leaves = new THREE.InstancedMesh(geometry, material, count);
+  leaves.name = "AI tree · Instanced leaf canopy";
+  const matrix = new THREE.Matrix4();
+  const position = new THREE.Vector3();
+  const quaternion = new THREE.Quaternion();
+  const scale = new THREE.Vector3();
+  const euler = new THREE.Euler();
+  for (let index = 0; index < count; index += 1) {
+    const center = centers[index % centers.length];
+    position.set(
+      center.x + (random() + random() - 1) * center.rx,
+      center.y + (random() + random() - 1) * center.ry,
+      center.z + (random() + random() - 1) * center.rz,
+    );
+    euler.set(random() * Math.PI, random() * Math.PI, random() * Math.PI);
+    quaternion.setFromEuler(euler);
+    const size = 0.65 + random() * 1.55;
+    scale.set(size * (0.65 + random() * 0.7), size, size * 0.7);
+    matrix.compose(position, quaternion, scale);
+    leaves.setMatrixAt(index, matrix);
+    const color = [MINT, CYAN, GOLD, VIOLET][index % 4].clone().lerp(new THREE.Color("#07131b"), 0.25 + random() * 0.45);
+    leaves.setColorAt(index, color);
+  }
+  leaves.instanceMatrix.needsUpdate = true;
+  if (leaves.instanceColor) leaves.instanceColor.needsUpdate = true;
+  return leaves;
 }
 
 export function mountEvolutionAtlas({
@@ -223,7 +310,7 @@ export function mountEvolutionAtlas({
   const random = seededRandom(19562026);
   const glowTexture = makeGlowTexture();
   const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x050b14, 0.022);
+  scene.fog = new THREE.FogExp2(0x050b14, 0.019);
 
   const renderer = new THREE.WebGLRenderer({
     antialias: true,
@@ -234,125 +321,167 @@ export function mountEvolutionAtlas({
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, narrowScreen ? 1.4 : 1.75));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.18;
+  renderer.toneMappingExposure = 1.16;
   renderer.domElement.dataset.engine = "three.js";
   renderer.domElement.setAttribute("aria-hidden", "true");
   container.appendChild(renderer.domElement);
 
-  const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 90);
+  const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
   controls.dampingFactor = 0.065;
   controls.enablePan = false;
-  controls.rotateSpeed = 0.55;
+  controls.rotateSpeed = 0.52;
   controls.zoomSpeed = 0.72;
-  controls.autoRotateSpeed = 0.32;
+  controls.autoRotateSpeed = 0.28;
   controls.target.copy(HOME_TARGET);
 
-  const ambient = new THREE.AmbientLight(0x9bc9dc, 1.25);
-  ambient.name = "Atlas · Soft ambient light";
-  const key = new THREE.DirectionalLight(0xd9f7ff, 2.4);
-  key.name = "Atlas · Cyan key light";
-  key.position.set(4, 7, 9);
-  const rim = new THREE.DirectionalLight(0xb8a1ff, 1.5);
-  rim.name = "Atlas · Violet rim light";
-  rim.position.set(-6, -2, -4);
-  scene.add(ambient, key, rim);
+  const ambient = new THREE.AmbientLight(0xb9d4d8, 1.35);
+  ambient.name = "AI tree · Soft ambient light";
+  const key = new THREE.DirectionalLight(0xffdfad, 3.1);
+  key.name = "AI tree · Warm canopy light";
+  key.position.set(-3, 8, 7);
+  const rim = new THREE.DirectionalLight(0x6ee7ff, 2.1);
+  rim.name = "AI tree · Cyan rim light";
+  rim.position.set(7, 3, -5);
+  const violetFill = new THREE.DirectionalLight(0xb8a1ff, 1.1);
+  violetFill.name = "AI tree · Violet fill light";
+  violetFill.position.set(-7, 1, -2);
+  scene.add(ambient, key, rim, violetFill);
 
-  const grid = new THREE.GridHelper(30, 30, 0x27667a, 0x17394c);
-  grid.name = "Atlas · Perspective reference grid";
-  grid.position.y = -4.1;
-  grid.material.name = "Atlas · Fading reference grid";
-  grid.material.transparent = true;
-  grid.material.opacity = 0.16;
-  grid.material.depthWrite = false;
-  scene.add(grid);
+  const ground = new THREE.Mesh(
+    new THREE.CircleGeometry(6.3, 64),
+    new THREE.MeshStandardMaterial({
+      name: "AI tree · Root island",
+      color: 0x07131a,
+      emissive: 0x102d2c,
+      emissiveIntensity: 0.18,
+      roughness: 0.95,
+      transparent: true,
+      opacity: 0.88,
+    }),
+  );
+  ground.rotation.x = -Math.PI / 2;
+  ground.position.y = -3.08;
+  ground.scale.y = 0.65;
+  scene.add(ground);
+
+  const tree = new THREE.Group();
+  tree.name = "AI history · Roots to frontier";
+  scene.add(tree);
+
+  const branches = [];
+  function addBranch(config) {
+    const branch = makeBranch(config);
+    branches.push(branch);
+    tree.add(branch.group);
+    return branch;
+  }
+
+  const trunk = addBranch({
+    curve: curveThrough([[0, -2.72, 0], [-0.52, -1.92, 0.18], [-0.32, -0.65, 0], [0.12, 0.85, -0.15], [0.35, 2.1, 0], [-0.05, 3.45, -0.28], [0.35, 4.75, -0.1]]),
+    startRadius: 0.62,
+    endRadius: 0.085,
+    color: GOLD,
+    veins: 3,
+    delay: 0,
+  });
+  const learningBranch = addBranch({
+    curve: curveThrough([[0.02, 0.55, -0.08], [-1.25, 1.15, 0.15], [-2.35, 1.82, 0.32], [-3.65, 2.5, 0.1]]),
+    startRadius: 0.25,
+    endRadius: 0.045,
+    color: CYAN,
+    veins: 2,
+    delay: 0.25,
+  });
+  const languageBranch = addBranch({
+    curve: curveThrough([[0.3, 1.55, 0], [1.25, 2.12, -0.18], [2.45, 2.8, 0.12], [3.45, 3.25, 0.22], [4.65, 3.85, 0.05]]),
+    startRadius: 0.27,
+    endRadius: 0.045,
+    color: VIOLET,
+    veins: 2,
+    delay: 0.42,
+  });
+  const agentBranch = addBranch({
+    curve: curveThrough([[0.14, 2.35, -0.12], [-1.15, 2.95, 0.12], [-2.55, 3.42, 0.35], [-4.35, 4.18, 0.08]]),
+    startRadius: 0.2,
+    endRadius: 0.035,
+    color: MINT,
+    veins: 2,
+    delay: 0.58,
+  });
+  const reasoningBranch = addBranch({
+    curve: curveThrough([[-0.02, 3.15, -0.24], [0.85, 3.85, -0.35], [1.12, 4.55, -0.18], [1.65, 5.18, 0]]),
+    startRadius: 0.17,
+    endRadius: 0.03,
+    color: VIOLET,
+    veins: 2,
+    delay: 0.72,
+  });
+  const worldBranch = addBranch({
+    curve: curveThrough([[2.42, 2.78, 0.1], [2.92, 3.82, 0.32], [3.65, 4.48, 0.28], [4.25, 5.12, 0.08]]),
+    startRadius: 0.16,
+    endRadius: 0.028,
+    color: GOLD,
+    veins: 2,
+    delay: 0.86,
+  });
+
+  const rootEnds = [
+    [-4.6, -3.02, 0.7], [-3.1, -3.05, -2.2], [-1.3, -3.06, 2.8],
+    [1.4, -3.06, 2.65], [3.4, -3.05, -2.1], [4.7, -3.02, 0.65],
+  ];
+  rootEnds.forEach((end, index) => {
+    const startX = (index - 2.5) * 0.08;
+    const root = makeBranch({
+      curve: curveThrough([[startX, -2.68, 0], [end[0] * 0.35, -2.82, end[2] * 0.32], [end[0] * 0.72, -2.96, end[2] * 0.72], end]),
+      startRadius: 0.24,
+      endRadius: 0.018,
+      color: index % 2 ? AMBER : GOLD,
+      veins: 0,
+    });
+    root.mesh.geometry.setDrawRange(0, root.indexCount);
+    root.veinLines.visible = false;
+    tree.add(root.group);
+  });
 
   scene.add(
-    makeGuideRing(5.2, 0x6ee7ff, 0.14, [0.18, 0.2, -0.22]),
-    makeGuideRing(7.4, 0xb8a1ff, 0.1, [-0.12, -0.18, 0.28]),
-    makeGuideRing(9.3, 0x87ffc1, 0.06, [0.3, 0.08, -0.46]),
+    makeRootLabel("Data", "evidence & examples", [-2.65, -2.5, 1.55], CYAN),
+    makeRootLabel("Algorithms", "learning & reasoning", [0, -2.82, 2.35], GOLD),
+    makeRootLabel("Compute", "training & scale", [2.65, -2.5, 1.55], MINT),
   );
 
-  const positions = items.map((item, index) => {
-    const progress = index / (items.length - 1);
-    const angle = progress * Math.PI * 2.6 - 0.8;
-    return new THREE.Vector3(
-      -6.2 + progress * 12.4,
-      Math.sin(angle) * 1.35 + (progress - 0.5) * 2,
-      Math.sin(angle) * 3.1 + Math.cos(progress * Math.PI * 2) * 0.45,
-    );
-  });
-  const curve = new THREE.CatmullRomCurve3(positions, false, "catmullrom", 0.34);
-  const intelligenceCore = makeIntelligenceCore(glowTexture);
-  scene.add(intelligenceCore.group);
+  const positions = [
+    new THREE.Vector3(-0.42, -1.72, 0.28),
+    new THREE.Vector3(-0.24, -0.55, 0.26),
+    new THREE.Vector3(0.18, 0.62, 0.2),
+    new THREE.Vector3(0.38, 1.65, 0.25),
+    new THREE.Vector3(-2.7, 2.03, 0.48),
+    new THREE.Vector3(1.62, 2.4, 0.28),
+    new THREE.Vector3(3.18, 3.12, 0.42),
+    new THREE.Vector3(4.5, 3.78, 0.28),
+    new THREE.Vector3(-3.25, 3.63, 0.5),
+    new THREE.Vector3(1.12, 4.55, 0.12),
+    new THREE.Vector3(4.02, 4.86, 0.28),
+  ];
 
-  const connectionVertices = [];
-  const connectionColors = [];
-  positions.forEach((position, index) => {
-    const color = colorAt(index / (items.length - 1));
-    connectionVertices.push(intelligenceCore.group.position.x, intelligenceCore.group.position.y, intelligenceCore.group.position.z);
-    connectionVertices.push(position.x, position.y, position.z);
-    connectionColors.push(CYAN.r * 0.25, CYAN.g * 0.25, CYAN.b * 0.25, color.r, color.g, color.b);
-  });
-  const connectionGeometry = new THREE.BufferGeometry();
-  connectionGeometry.setAttribute("position", new THREE.Float32BufferAttribute(connectionVertices, 3));
-  connectionGeometry.setAttribute("color", new THREE.Float32BufferAttribute(connectionColors, 3));
-  const connections = new THREE.LineSegments(
-    connectionGeometry,
-    new THREE.LineBasicMaterial({
-      name: "Atlas · Neural chronology filaments",
-      vertexColors: true,
-      transparent: true,
-      opacity: 0.09,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-    }),
-  );
-  scene.add(connections);
+  const canopyCenters = [
+    { x: -3.8, y: 3.65, z: 0, rx: 2.2, ry: 1.35, rz: 1.5 },
+    { x: -1.65, y: 4.65, z: -0.3, rx: 2.1, ry: 1.2, rz: 1.5 },
+    { x: 0.6, y: 5.0, z: -0.2, rx: 2.0, ry: 1.05, rz: 1.4 },
+    { x: 2.65, y: 4.55, z: 0, rx: 2.0, ry: 1.2, rz: 1.5 },
+    { x: 4.25, y: 3.75, z: 0.2, rx: 1.65, ry: 1.1, rz: 1.25 },
+  ];
+  const canopy = makeCanopy({ random, centers: canopyCenters, narrowScreen });
+  scene.add(canopy);
 
-  const trailOuter = new THREE.Mesh(
-    new THREE.TubeGeometry(curve, 220, 0.09, 8, false),
-    new THREE.MeshBasicMaterial({
-      name: "Atlas · Luminous trail atmosphere",
-      color: 0x6ee7ff,
-      transparent: true,
-      opacity: 0.055,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-    }),
-  );
-  const trailCore = new THREE.Mesh(
-    new THREE.TubeGeometry(curve, 220, 0.022, 6, false),
-    new THREE.MeshBasicMaterial({
-      name: "Atlas · Chronology core",
-      color: 0x9aedff,
-      transparent: true,
-      opacity: 0.7,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-    }),
-  );
-  scene.add(trailOuter, trailCore);
+  const stars = makeAmbientParticles({ count: narrowScreen ? 520 : 850, random, glowTexture });
+  const fireflies = makeAmbientParticles({ count: narrowScreen ? 90 : 160, random, glowTexture, centers: canopyCenters });
+  scene.add(stars, fireflies);
 
-  const stars = makeParticleField({
-    count: narrowScreen ? 650 : 1100,
-    curve,
-    glowTexture,
-    random,
-  });
-  const evidenceDust = makeParticleField({
-    count: narrowScreen ? 180 : 320,
-    curve,
-    glowTexture,
-    random,
-    trail: true,
-  });
-  scene.add(stars, evidenceDust);
-
-  const coreGeometry = new THREE.IcosahedronGeometry(0.2, 1);
-  const shellGeometry = new THREE.IcosahedronGeometry(0.34, 1);
-  const hitGeometry = new THREE.SphereGeometry(0.5, 8, 8);
+  const coreGeometry = new THREE.IcosahedronGeometry(0.235, 2);
+  const shellGeometry = new THREE.IcosahedronGeometry(0.37, 1);
+  const hitGeometry = new THREE.SphereGeometry(0.61, 8, 8);
   const nodes = [];
   const pickTargets = [];
 
@@ -361,49 +490,44 @@ export function mountEvolutionAtlas({
     const color = colorAt(progress);
     const group = new THREE.Group();
     group.position.copy(positions[index]);
-
     const core = new THREE.Mesh(
       coreGeometry,
       new THREE.MeshStandardMaterial({
-        name: `Atlas · ${item.buttonTitle} core`,
+        name: `AI tree · ${item.buttonTitle} fruit`,
         color,
         emissive: color,
         emissiveIntensity: 0.9,
-        roughness: 0.24,
-        metalness: 0.38,
+        roughness: 0.22,
+        metalness: 0.42,
       }),
     );
     const shell = new THREE.Mesh(
       shellGeometry,
       new THREE.MeshBasicMaterial({
-        name: `Atlas · ${item.buttonTitle} wire shell`,
+        name: `AI tree · ${item.buttonTitle} lattice`,
         color,
         wireframe: true,
         transparent: true,
-        opacity: 0.36,
+        opacity: 0.3,
         depthWrite: false,
       }),
     );
-    const halo = new THREE.Sprite(
-      new THREE.SpriteMaterial({
-        name: `Atlas · ${item.buttonTitle} halo`,
-        map: glowTexture,
-        color,
-        transparent: true,
-        opacity: 0.58,
-        depthWrite: false,
-        blending: THREE.AdditiveBlending,
-      }),
-    );
-    halo.scale.setScalar(1.25);
-    const label = makeYearLabel(item, color);
-
+    const halo = new THREE.Sprite(new THREE.SpriteMaterial({
+      name: `AI tree · ${item.buttonTitle} aura`,
+      map: glowTexture,
+      color,
+      transparent: true,
+      opacity: 0.5,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    }));
+    halo.scale.setScalar(1.45);
+    const label = makeNodeLabel(item, color);
     const hitMaterial = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false });
-    hitMaterial.name = `Atlas · ${item.buttonTitle} hit target`;
+    hitMaterial.name = `AI tree · ${item.buttonTitle} hit target`;
     hitMaterial.colorWrite = false;
     const hit = new THREE.Mesh(hitGeometry, hitMaterial);
     hit.userData.atlasId = item.id;
-
     group.add(core, shell, halo, label, hit);
     scene.add(group);
     nodes.push({ id: item.id, group, core, shell, halo, label, color });
@@ -411,54 +535,37 @@ export function mountEvolutionAtlas({
   });
 
   const selectionRing = new THREE.Mesh(
-    new THREE.TorusGeometry(0.42, 0.014, 6, 64),
-    new THREE.MeshBasicMaterial({
-      name: "Atlas · Selected milestone ring",
-      color: 0xffb86b,
-      transparent: true,
-      opacity: 0.92,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-    }),
+    new THREE.TorusGeometry(0.48, 0.016, 6, 64),
+    new THREE.MeshBasicMaterial({ name: "AI tree · Selected fruit ring", color: 0xffd58a, transparent: true, opacity: 0.92, depthWrite: false, blending: THREE.AdditiveBlending }),
   );
   const selectionOrbit = new THREE.Mesh(
-    new THREE.TorusGeometry(0.55, 0.008, 6, 64),
-    new THREE.MeshBasicMaterial({
-      name: "Atlas · Selected milestone orbit",
-      color: 0xffd5a0,
-      transparent: true,
-      opacity: 0.38,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-    }),
+    new THREE.TorusGeometry(0.62, 0.008, 6, 64),
+    new THREE.MeshBasicMaterial({ name: "AI tree · Selected fruit orbit", color: 0xffe8bd, transparent: true, opacity: 0.42, depthWrite: false, blending: THREE.AdditiveBlending }),
   );
-  const selectionHalo = new THREE.Sprite(
-    new THREE.SpriteMaterial({
-      name: "Atlas · Selected milestone glow",
-      map: glowTexture,
-      color: 0xffb86b,
-      transparent: true,
-      opacity: 0.32,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-    }),
-  );
-  selectionHalo.scale.setScalar(1.8);
+  const selectionHalo = new THREE.Sprite(new THREE.SpriteMaterial({
+    name: "AI tree · Selected fruit glow",
+    map: glowTexture,
+    color: 0xffcf70,
+    transparent: true,
+    opacity: 0.38,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+  }));
+  selectionHalo.scale.setScalar(2.1);
   scene.add(selectionRing, selectionOrbit, selectionHalo);
 
-  const pulses = Array.from({ length: narrowScreen ? 6 : 9 }, (_, index) => {
-    const pulse = new THREE.Sprite(
-      new THREE.SpriteMaterial({
-        name: "Atlas · Moving evidence pulse",
-        map: glowTexture,
-        color: index % 3 === 0 ? 0xffd5a0 : 0xbaf4ff,
-        transparent: true,
-        opacity: 0.88,
-        depthWrite: false,
-        blending: THREE.AdditiveBlending,
-      }),
-    );
-    pulse.scale.setScalar(index % 3 === 0 ? 0.32 : 0.24);
+  const pulseCurves = [trunk.curve, learningBranch.curve, languageBranch.curve, agentBranch.curve, reasoningBranch.curve, worldBranch.curve];
+  const pulses = Array.from({ length: narrowScreen ? 4 : 6 }, (_, index) => {
+    const pulse = new THREE.Sprite(new THREE.SpriteMaterial({
+      name: "AI tree · Traveling knowledge pulse",
+      map: glowTexture,
+      color: index % 3 === 0 ? 0xffd58a : 0xbaf4ff,
+      transparent: true,
+      opacity: 0.86,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    }));
+    pulse.scale.setScalar(index % 3 === 0 ? 0.3 : 0.22);
     scene.add(pulse);
     return pulse;
   });
@@ -496,9 +603,11 @@ export function mountEvolutionAtlas({
 
   function homePosition() {
     const aspect = Math.max(0.45, camera.aspect || 1);
-    const distance = Math.max(18.5, 15.4 / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * aspect));
-    const side = aspect < 0.9 ? 2.2 : 4.2;
-    return new THREE.Vector3(side, aspect < 0.9 ? 1.8 : 2.7, distance);
+    const verticalFov = THREE.MathUtils.degToRad(camera.fov);
+    const verticalFit = 10.8 / (2 * Math.tan(verticalFov / 2));
+    const horizontalFit = 12.4 / (2 * Math.tan(verticalFov / 2) * aspect);
+    const distance = Math.max(17.2, verticalFit, horizontalFit) * 1.06;
+    return new THREE.Vector3(aspect < 0.9 ? 2.7 : 4.1, 2.65, distance);
   }
 
   function updateMotionButton() {
@@ -509,12 +618,12 @@ export function mountEvolutionAtlas({
   }
 
   function beginCameraTransition(position, reset = false) {
-    const toTarget = reset ? HOME_TARGET.clone() : HOME_TARGET.clone().lerp(position, 0.13);
+    const toTarget = reset ? HOME_TARGET.clone() : HOME_TARGET.clone().lerp(position, 0.1);
     const toPosition = homePosition();
     if (!reset) {
-      toPosition.x += position.x * 0.065;
-      toPosition.y += position.y * 0.04;
-      toPosition.z -= 0.35;
+      toPosition.x += position.x * 0.05;
+      toPosition.y += position.y * 0.025;
+      toPosition.z -= 0.25;
     }
     cameraTween = {
       startedAt: clockTime,
@@ -589,7 +698,7 @@ export function mountEvolutionAtlas({
     camera.aspect = width / height;
     if (!userHasMoved && !cameraTween) camera.position.copy(homePosition());
     camera.updateProjectionMatrix();
-    controls.minDistance = homePosition().z * 0.42;
+    controls.minDistance = homePosition().z * 0.46;
     controls.maxDistance = homePosition().z * 1.65;
     controls.update();
   }
@@ -607,6 +716,16 @@ export function mountEvolutionAtlas({
     frameId = 0;
   }
 
+  function updateGrowth() {
+    branches.forEach((branch) => {
+      const progress = reduceMotion ? 1 : THREE.MathUtils.clamp((effectTime - branch.delay) / 1.5, 0, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      branch.mesh.geometry.setDrawRange(0, Math.floor((branch.indexCount * eased) / 6) * 6);
+      branch.veinLines.geometry.setDrawRange(0, Math.floor((branch.veinVertexCount * eased) / 2) * 2);
+    });
+    canopy.material.opacity = reduceMotion ? 0.9 : 0.9 * THREE.MathUtils.clamp((effectTime - 0.45) / 1.8, 0, 1);
+  }
+
   function tick(now) {
     frameId = 0;
     if (!shouldRun()) return;
@@ -616,6 +735,7 @@ export function mountEvolutionAtlas({
     if (!reduceMotion) effectTime += delta;
 
     updateCameraTransition();
+    updateGrowth();
     controls.autoRotate = motionEnabled && !cameraTween && !userInteracting && clockTime >= holdUntil;
     controls.update(delta);
 
@@ -623,60 +743,37 @@ export function mountEvolutionAtlas({
     nodes.forEach((node, index) => {
       const selected = index === selectedIndex;
       const hovered = node.id === hoveredId;
-      const targetScale = selected ? 1.6 : hovered ? 1.18 : 1;
+      const targetScale = selected ? 1.42 : hovered ? 1.18 : 1;
       const scale = THREE.MathUtils.damp(node.group.scale.x, targetScale, 8, dampDelta);
       node.group.scale.setScalar(scale);
-      node.core.rotation.y = effectTime * 0.36 + index * 0.4;
-      node.core.rotation.x = effectTime * 0.14 + index * 0.22;
-      node.shell.rotation.y = -effectTime * 0.2 + index * 0.3;
-      node.shell.rotation.z = effectTime * 0.12;
-      node.core.material.emissiveIntensity = THREE.MathUtils.damp(
-        node.core.material.emissiveIntensity,
-        selected ? 1.55 : hovered ? 1.1 : 0.72,
-        8,
-        dampDelta,
-      );
-      node.shell.material.opacity = THREE.MathUtils.damp(node.shell.material.opacity, selected ? 0.52 : 0.26, 8, dampDelta);
-      node.halo.material.opacity = THREE.MathUtils.damp(
-        node.halo.material.opacity,
-        selected ? 0.84 : hovered ? 0.64 : 0.34,
-        8,
-        dampDelta,
-      );
-      node.label.material.color.copy(selected ? AMBER : node.color);
-      node.label.material.opacity = THREE.MathUtils.damp(
-        node.label.material.opacity,
-        selected ? 0.98 : hovered ? 0.82 : 0.42,
-        8,
-        dampDelta,
-      );
+      node.core.rotation.y = effectTime * 0.28 + index * 0.4;
+      node.core.rotation.x = effectTime * 0.09 + index * 0.2;
+      node.shell.rotation.y = -effectTime * 0.17 + index * 0.3;
+      node.shell.rotation.z = effectTime * 0.1;
+      node.core.material.emissiveIntensity = THREE.MathUtils.damp(node.core.material.emissiveIntensity, selected ? 1.55 : hovered ? 1.12 : 0.76, 8, dampDelta);
+      node.shell.material.opacity = THREE.MathUtils.damp(node.shell.material.opacity, selected ? 0.54 : 0.25, 8, dampDelta);
+      node.halo.material.opacity = THREE.MathUtils.damp(node.halo.material.opacity, selected ? 0.88 : hovered ? 0.66 : 0.34, 8, dampDelta);
+      node.label.material.opacity = THREE.MathUtils.damp(node.label.material.opacity, selected ? 1 : hovered ? 0.86 : 0.48, 8, dampDelta);
     });
 
-    intelligenceCore.inner.rotation.y = effectTime * 0.2;
-    intelligenceCore.inner.rotation.x = effectTime * 0.09;
-    intelligenceCore.cage.rotation.y = -effectTime * 0.15;
-    intelligenceCore.cage.rotation.z = effectTime * 0.07;
-    intelligenceCore.outer.rotation.y = effectTime * 0.06;
-    intelligenceCore.outer.rotation.x = -effectTime * 0.045;
-    intelligenceCore.rings[0].rotation.z = effectTime * 0.17;
-    intelligenceCore.rings[1].rotation.z = 0.5 - effectTime * 0.12;
-
     pulses.forEach((pulse, index) => {
-      const progress = (effectTime * 0.03 + index / pulses.length) % 1;
+      const curve = pulseCurves[index % pulseCurves.length];
+      const progress = (effectTime * 0.055 + index / pulses.length) % 1;
       curve.getPointAt(progress, pulsePoint);
       pulse.position.copy(pulsePoint);
-      pulse.material.opacity = 0.52 + Math.sin((progress + effectTime * 0.08) * Math.PI * 2) * 0.18;
+      pulse.material.opacity = 0.55 + Math.sin((progress + effectTime * 0.08) * Math.PI * 2) * 0.18;
     });
 
     selectionRing.quaternion.copy(camera.quaternion);
-    selectionRing.rotateZ(effectTime * 0.18);
+    selectionRing.rotateZ(effectTime * 0.16);
     selectionOrbit.quaternion.copy(camera.quaternion);
-    selectionOrbit.rotateZ(-effectTime * 0.14 + 0.8);
+    selectionOrbit.rotateZ(-effectTime * 0.12 + 0.8);
     const selectionPulse = reduceMotion ? 1 : 1 + Math.sin(effectTime * 1.8) * 0.04;
     selectionOrbit.scale.setScalar(selectionPulse);
-    stars.rotation.y = effectTime * 0.0035;
-    stars.rotation.x = Math.sin(effectTime * 0.025) * 0.012;
-    evidenceDust.rotation.y = Math.sin(effectTime * 0.08) * 0.015;
+    canopy.rotation.z = Math.sin(effectTime * 0.22) * 0.006;
+    canopy.rotation.x = Math.sin(effectTime * 0.17) * 0.004;
+    stars.rotation.y = effectTime * 0.0028;
+    fireflies.rotation.y = Math.sin(effectTime * 0.08) * 0.012;
 
     renderer.render(scene, camera);
     schedule();
@@ -799,6 +896,7 @@ export function mountEvolutionAtlas({
   resize();
   controls.target.copy(HOME_TARGET);
   controls.update();
+  updateGrowth();
   renderer.render(scene, camera);
   container.dataset.nodeCount = String(items.length);
   experience.dataset.atlasState = "ready";
@@ -834,6 +932,8 @@ export function mountEvolutionAtlas({
       autoRotate: controls.autoRotate,
       inView,
       camera: camera.position.toArray(),
+      sceneModel: "ai-history-tree",
+      leaves: canopy.count,
     }),
   };
   container.__atlas = api;
