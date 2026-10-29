@@ -1,23 +1,19 @@
 "use strict";
 
 const CACHE_PREFIX = "ai-evolution-atlas-";
-const CACHE_NAME = `${CACHE_PREFIX}20261027-tree`;
+const CACHE_NAME = `${CACHE_PREFIX}20261029-canopy`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./styles.css?v=20261027-tree",
-  "./assets/atlas.css?v=20261027-tree",
-  "./main.js?v=20261027-tree",
-  "./assets/app/app-shell.js?v=20261027-tree",
-  "./assets/app/course.js?v=20261027-tree",
+  "./styles.css?v=20261029-canopy",
+  "./assets/atlas.css?v=20261029-canopy",
+  "./main.js?v=20261029-canopy",
+  "./assets/app/app-shell.js?v=20261029-canopy",
+  "./assets/app/course.js?v=20261029-canopy",
   "./assets/app/app.webmanifest",
   "./assets/app/offline-assets.json",
   "./assets/favicon.svg",
-  "./assets/atlas-hero.svg",
-  "./assets/evolution-3d.js?v=20261027-tree",
-  "./assets/vendor/three.core.js",
-  "./assets/vendor/three.module.min.js",
-  "./assets/vendor/addons/controls/OrbitControls.js",
+  "./assets/history-tree.js?v=20261029-canopy",
   "./assets/app/icon-192.png",
   "./assets/app/icon-512.png",
   "./assets/app/apple-touch-icon.png",

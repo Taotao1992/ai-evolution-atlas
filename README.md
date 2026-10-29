@@ -1,68 +1,93 @@
-# AI Evolution Atlas — CSC2220 Artificial Intelligence
+# AI Evolution Atlas
 
-A single-page interactive atlas for **CSC2220 Artificial Intelligence** at the
-University of Southern Queensland (UniSQ), created by Taotao Cai. It maps the
-field from Dartmouth and backpropagation through transformers, LLMs, reasoning
-models, agents, the training-to-inference infrastructure stack, frontier labs,
-and world models — with every claim linked to a primary source (paper, official
-docs, talk, or product page).
+An illustrated, interactive history of artificial intelligence, created by
+Taotao Cai. **Experimental course development / 课程开发测试版本.**
+This is an independent learning resource, not the official UniSQ CSC2220
+course website. Suggested modules, projects, weights, and rubrics are drafts.
 
-## File structure
+Live: https://taotao1992.github.io/ai-evolution-atlas/
 
+## Experience
+
+- A faithful adaptation of the golden tree from slide eight of the supplied
+  invited-talk deck, with 13 selectable historical landmarks, a chronological
+  rail, an optional guided tour, restrained ambient motion, zoom, and an
+  original-illustration dialog.
+- Thirteen short history chapters, each with an editable SVG concept diagram,
+  historical context, limitations, and source links.
+- Twelve learning modules and four optional project briefs.
+- Six frontier cases, three LLM lifecycle stages, nine research profiles,
+  82 selected resources, six video entries, and three open research questions.
+- Keyboard navigation, mobile layouts, reduced-motion support, and the
+  existing installable/offline and native-wrapper behavior.
+
+The illustration is a map of related ideas, not a formal taxonomy or proof of
+historical causation. AI traditions overlap and continue in parallel.
+
+## Development
+
+```sh
+npm run dev                 # zero-dependency development server
+npm run check               # data, references, assets, and route checks
+npm run offline-manifest    # refresh after adding/removing assets
+python3 tools/build_diagrams.py # regenerate editable concept plates
 ```
-index.html      # Page markup: hero, guide, timeline, frontier, LLM stack,
-                # labs, library, watch, future, footer
-styles.css      # Design system (dark ink + ice cyan/amber), layout, responsive
-main.js         # Content data arrays + all rendering/interaction logic
-assets/         # Images: SVG diagrams, generated art, watch thumbnails,
-                # and 560x360 cover cards under assets/covers/<collection>/
-scripts/        # Local dev server (zero dependencies)
-tools/          # Maintenance scripts (e.g. cover generator); not deployed
-.github/        # GitHub Actions workflow for Pages deployment
-```
 
-## Run locally
+Pushes to `main` trigger the existing GitHub Pages workflow. Only `index.html`,
+`styles.css`, `main.js`, and `assets/` are published; local tooling stays out
+of the deployment. No package installation or build step is required.
 
-```bash
-npm run dev                 # http://127.0.0.1:7100
-npm run dev -- --port 8080  # custom port (or PORT=8080)
-```
+## Files
 
-Any static file server works too (`python3 -m http.server`, `npx serve`, …).
+| Path | Purpose |
+| --- | --- |
+| `index.html` | Semantic page structure, navigation, identity and test-edition notes |
+| `styles.css` | Shared editorial layout and responsive styles |
+| `main.js` | Browser / service-worker entry point |
+| `assets/app/course.js` | Content collections and chapter/library interactions |
+| `assets/history-tree.js` | Original-artwork history interaction; no WebGL dependency |
+| `assets/atlas.css` | Tree scene, landmark labels, rail and mobile controls |
+| `assets/tree/` | Optimized cleaned tree and the exact original slide-eight image |
+| `assets/diagrams/` | Deterministic SVG concept plates |
+| `assets/fonts/` | Self-hosted Google Fonts and their OFL licenses |
+| `assets/app/` | Installable app shell, manifest, offline asset list and worker |
+| `docs/` | Design rationale and content review notes |
 
-## Deployment
+## Editing and review
 
-Pushing to the default branch triggers the GitHub Actions workflow in
-`.github/`, which publishes to GitHub Pages. Only these paths are deployed:
+Content data lives in the named arrays at the beginning of
+`assets/app/course.js`. Keep IDs stable: module readings and project briefs
+refer to library IDs. Add a corresponding landmark in `assets/history-tree.js`
+when adding a history chapter. Counts are derived from the collections.
 
-- `index.html`
-- `styles.css`
-- `main.js`
-- `assets/`
+After an asset change, rebuild the offline manifest. For a release, update the
+cache version consistently across `index.html`, `main.js`, `app-shell.js`,
+`service-worker.js`, and the dynamic tree import in `course.js`.
 
-Everything else (`scripts/`, `tools/`, this README) stays repo-local.
+First-party product pages state the provider’s claims; they do not establish
+independent replication or endorsement. Historical entries distinguish
+proposals, methods, benchmark results, and interpretations.
 
-## Editing content
+## Visual references and asset provenance
 
-All site content lives in the data arrays at the top of `main.js`:
+The user supplied `qld-sme-ai-2026-invited-talk (1).pdf`; its eighth page is the
+source of the golden tree. The exact embedded JPEG is retained for the
+original-view dialog. A built-in image edit removed all text, infographic
+plaques, and icons while preserving the tree’s composition, colors, bark,
+roots and foliage. The web copy is a 310 kB WebP; interactive text stays in
+HTML. This is a 2D illustration with optional subtle parallax, not a 3D model.
+The image-edit prompt is recorded in `docs/tree-art-direction.md`.
 
-| Array             | Section                       |
-| ----------------- | ----------------------------- |
-| `timelineItems`   | AI history timeline           |
-| `frontierItems`   | Frontier systems tabs         |
-| `lifecycleStages` | LLM pre/post-training + inference |
-| `labItems`        | Neo-lab cards + detail panel  |
-| `libraryItems`    | Curated library grid          |
-| `watchItems`      | Video cards                   |
+Design research included:
 
-Hero and "What's inside" counts are derived from these arrays automatically
-(`data-metric` / `data-source-count` attributes in `index.html`), so adding an
-item updates the numbers — no manual count edits needed.
+- [Distill](https://distill.pub/): explanations tied to a concrete visual.
+- [Transformer Explainer](https://poloclub.github.io/transformer-explainer/):
+  legible controls and interaction that reveals an idea.
+- [Lusion](https://lusion.co/): one strong focal visual and restrained UI.
+- [Bruno Simon](https://bruno-simon.com/): discoverable interaction and quality controls.
+- [EZ-Tree](https://github.com/dgreenheck/ez-tree) and
+  [Codrops](https://tympanus.net/codrops/hub/): procedural and interactive
+  references considered before the user selected faithful 2D artwork.
 
-### Cover images
-
-Detail panels and cards resolve artwork to
-`./assets/covers/<collection>/<id>.jpg` unless the item declares an explicit
-`image` field; a missing file falls back to `assets/generated/ai-atlas-motif.jpg`.
-Covers are 560×360 dark typographic cards; `tools/generate_covers.py` regenerates
-the most recent additions in the same style.
+No third-party site source code was copied. Fonts are Manrope, Instrument
+Serif, and IBM Plex Mono, licensed under the bundled SIL Open Font Licenses.

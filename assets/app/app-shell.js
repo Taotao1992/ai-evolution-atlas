@@ -124,7 +124,7 @@
 
   if (!isNativeShell && !params.has("verify") && "serviceWorker" in navigator && window.isSecureContext) {
     const registerOfflineSupport = () => {
-      const workerUrl = new URL("./main.js?service-worker=20261027-tree", window.location.href);
+      const workerUrl = new URL("./main.js?service-worker=20261029-canopy", window.location.href);
       const scope = new URL("./", window.location.href);
       navigator.serviceWorker.register(workerUrl, { scope }).catch((error) => {
         console.warn("Offline support could not be enabled.", error);
