@@ -12,7 +12,7 @@ const LANDMARKS = {
   transformer: { x: 53, y: 57, dx: -1, dy: 7, color: "#c6a4f4", branch: "attention", short: "Attention" },
   gpt3: { x: 73, y: 40, dx: 2, dy: 5, color: "#79e7d4", branch: "language", short: "Language at scale" },
   "generative-ai": { x: 89, y: 25, dx: -6, dy: 13, color: "#e9c879", branch: "assistants", short: "Generative assistants" },
-  agents: { x: 66, y: 64, dx: -17, dy: 7, color: "#bfd976", branch: "agents", short: "Models that act" },
+  agents: { x: 66, y: 64, dx: -17, dy: 11, color: "#bfd976", branch: "agents", short: "Models that act" },
   reasoning: { x: 56, y: 39, dx: 1, dy: -9, color: "#c6a4f4", branch: "reasoning", short: "Test-time reasoning" },
   "multimodal-frontier": { x: 79, y: 65, dx: 0, dy: -7, color: "#bfd976", branch: "worlds", short: "Systems & worlds" },
 };
@@ -86,7 +86,15 @@ export function mountEvolutionAtlas({ container, items, selectedId, onSelect, on
     const label = element("span", "landmark-label");
     label.append(element("span", "landmark-year", item.era), element("strong", "", location.short));
     node.append(label);
-    node.addEventListener("click", () => { stopTour(); select(item.id); }, { signal });
+    node.addEventListener("click", () => {
+      stopTour();
+      select(item.id);
+      // Keep the explanation visible now that it lives below the artwork.
+      const readout = experience.querySelector("#atlas-readout");
+      if (readout.getBoundingClientRect().bottom > innerHeight) {
+        readout.scrollIntoView({ block: "nearest", behavior: reduced.matches ? "instant" : "smooth" });
+      }
+    }, { signal });
     layers.append(node);
     buttons.set(item.id, node);
 

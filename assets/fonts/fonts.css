@@ -1,32 +1,4 @@
 @font-face {
-  font-family: 'IBM Plex Mono';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(./-F63fjptAgt5VM-kVkqdyU8n5ig.woff) format('woff');
-}
-@font-face {
-  font-family: 'IBM Plex Mono';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(./-F6qfjptAgt5VM-kVkqdyU8n3twJ8lc.woff) format('woff');
-}
-@font-face {
-  font-family: 'Instrument Serif';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url(./jizHRFtNs2ka5fXjeivQ4LroWlx-6zATiw.woff) format('woff');
-}
-@font-face {
-  font-family: 'Instrument Serif';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(./jizBRFtNs2ka5fXjeivQ4LroWlx-2zI.woff) format('woff');
-}
-@font-face {
   font-family: 'Manrope';
   font-style: normal;
   font-weight: 400;

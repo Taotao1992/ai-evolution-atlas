@@ -9,8 +9,8 @@ if (isServiceWorker) {
 } else {
   (async () => {
     try {
-      await import("./assets/app/app-shell.js?v=20261029-canopy");
-      await import("./assets/app/course.js?v=20261029-canopy");
+      await import("./assets/app/app-shell.js?v=20261029-grove");
+      await import("./assets/app/course.js?v=20261029-grove");
     } catch (error) {
       console.error("The AI Evolution Atlas could not be initialized.", error);
     }

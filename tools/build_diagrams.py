@@ -1,11 +1,14 @@
 """Deterministic, editable SVG concept plates for the history chapters."""
 from pathlib import Path
 from html import escape
+import base64
 import math
+import textwrap
 OUT=Path(__file__).resolve().parents[1]/'assets'/'diagrams';OUT.mkdir(exist_ok=True)
+FONT=base64.b64encode((OUT.parent/'fonts'/'xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk79FO_F.woff').read_bytes()).decode()
 G='#dec789';B='#84c9d0';V='#c6a4f4';M='#bfd976';T='#e4ebe4';D='#899e9b'
 def text(x,y,s,size=13,color=T,anchor='start'):
-    return f'<text x="{x}" y="{y}" font-size="{size}" fill="{color}" text-anchor="{anchor}">{escape(s)}</text>'
+    return f'<text x="{x}" y="{y}" font-size="{max(16,size)}" fill="{color}" text-anchor="{anchor}">{escape(s)}</text>'
 def line(x1,y1,x2,y2,color=G,width=1,extra=''):
     return f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="{color}" stroke-width="{width}" {extra}/>'
 def rect(x,y,w,h,color=G,fill='none',r=4):
@@ -13,10 +16,12 @@ def rect(x,y,w,h,color=G,fill='none',r=4):
 def circle(x,y,r,color=G,fill='#101c23'):
     return f'<circle cx="{x}" cy="{y}" r="{r}" stroke="{color}" fill="{fill}"/>'
 def box(x,y,w,h,label,color=G,sub=None):
-    return rect(x,y,w,h,color,'#122129')+text(x+w/2,y+h/2+(0 if sub else 5),label,15,color,'middle')+(text(x+w/2,y+h/2+22,sub,10,D,'middle') if sub else '')
+    return rect(x,y,w,h,color,'#122129')+text(x+w/2,y+h/2+(0 if sub else 6),label,18 if len(label)>14 else 19,color,'middle')+(text(x+w/2,y+h/2+22,sub,16,D,'middle') if sub else '')
 def arrow(x1,y1,x2,y2,color=G):return line(x1,y1,x2,y2,color,1.3,'marker-end="url(#arrow)"')
 def plate(id,title,body,caption):
-    s=f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 290" role="img" aria-labelledby="title desc"><title id="title">{escape(title)}</title><desc id="desc">{escape(caption)}</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10" fill="{G}"/></marker></defs><rect width="800" height="290" fill="#101b21"/><g font-family="ui-monospace,monospace" font-weight="400">{text(30,35,title.upper(),11,G)}{line(30,53,770,53,'#263b3e')}{body}{text(30,269,caption,10,D)}</g></svg>'''
+    footer=''.join(text(30,290+i*23,row,16,D) for i,row in enumerate(textwrap.wrap(caption,85)))
+    # Embed the same self-hosted face: image SVGs cannot inherit the page font.
+    s=f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 330" role="img" aria-labelledby="title desc"><title id="title">{escape(title)}</title><desc id="desc">{escape(caption)}</desc><style>@font-face{{font-family:Manrope;src:url(data:font/woff;base64,{FONT}) format('woff');font-weight:400;}}</style><defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10" fill="{G}"/></marker></defs><rect width="800" height="330" fill="#101b21"/><g font-family="Manrope,system-ui,sans-serif" font-weight="400">{text(30,35,title.upper(),18,G)}{line(30,53,770,53,'#263b3e')}{body}{line(30,264,770,264,'#263b3e')}{footer}</g></svg>'''
     (OUT/f'{id}.svg').write_text(s)
 # 01 — Turing: a proposed evaluation, not an intelligence definition.
 b=box(45,110,155,72,'Human judge',G,'observes text')+box(330,82,170,64,'Human',G)+box(330,164,170,64,'Machine',B)

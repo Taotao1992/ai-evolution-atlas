@@ -354,7 +354,7 @@ const frontierItems = [
       "personal agents",
       "permissions"
     ],
-    "image": "./assets/agent-loop.svg",
+    "image": "./assets/chapters/agent-workshop.webp",
     "links": [
       {
         "label": "OpenClaw on GitHub",
@@ -384,7 +384,7 @@ const frontierItems = [
       "open-ended search",
       "evaluation"
     ],
-    "image": "./assets/agent-loop.svg",
+    "image": "./assets/chapters/scientific-discovery.webp",
     "links": [
       {
         "label": "Recursive official site",
@@ -414,7 +414,7 @@ const frontierItems = [
       "video generation",
       "evaluation"
     ],
-    "image": "./assets/seedance-wave.svg",
+    "image": "./assets/chapters/multimodal-media.webp",
     "links": [
       {
         "label": "Dreamina Seedance 2.0",
@@ -440,7 +440,7 @@ const frontierItems = [
       "open weights",
       "self-hosting"
     ],
-    "image": "./assets/llm-attention.svg",
+    "image": "./assets/chapters/model-lifecycle.webp",
     "links": [
       {
         "label": "Beam release notes",
@@ -466,7 +466,7 @@ const frontierItems = [
       "guardrails",
       "observability"
     ],
-    "image": "./assets/media-surface.svg",
+    "image": "./assets/chapters/agent-workshop.webp",
     "links": [
       {
         "label": "OpenAI: Harness engineering",
@@ -500,7 +500,7 @@ const frontierItems = [
       "planning",
       "known limitations"
     ],
-    "image": "./assets/world-shell.svg",
+    "image": "./assets/chapters/spatial-worlds.webp",
     "links": [
       {
         "label": "Google DeepMind: Genie research",
@@ -622,7 +622,7 @@ const labItems = [
     "bet": "Automate cycles of proposing, implementing, and validating ideas.",
     "why": "Which improvements transfer to held-out tasks, and which are specific to the evaluation used?",
     "accent": "#5dd9ff",
-    "image": "./assets/agent-loop.svg",
+    "image": "./assets/chapters/scientific-discovery.webp",
     "chips": [
       "recursive self-improvement",
       "open-ended algorithms",
@@ -650,7 +650,7 @@ const labItems = [
     "bet": "Use evolutionary search and automated experiments to improve agents and research workflows.",
     "why": "Where do the evaluation function, compute budget, and human choices constrain the improvement loop?",
     "accent": "#87ffc1",
-    "image": "./assets/dl-stack.svg",
+    "image": "./assets/chapters/scientific-discovery.webp",
     "chips": [
       "Darwin Gödel Machine",
       "AI Scientist",
@@ -682,7 +682,7 @@ const labItems = [
     "bet": "Make interaction quality and responsiveness part of model design.",
     "why": "How should an evaluation measure collaboration, interruption, and user control as well as standalone task performance?",
     "accent": "#ffb67b",
-    "image": "./assets/harness-studio.svg",
+    "image": "./assets/chapters/agent-workshop.webp",
     "chips": [
       "neo lab",
       "interaction models",
@@ -714,7 +714,7 @@ const labItems = [
     "bet": "Support deployment and adaptation of a large open-weight model.",
     "why": "What hardware, license terms, serving stack, and reproducible evaluations would a deployment require?",
     "accent": "#ff8f7a",
-    "image": "./assets/llm-attention.svg",
+    "image": "./assets/chapters/model-lifecycle.webp",
     "chips": [
       "Apache 2.0",
       "open weights",
@@ -746,7 +746,7 @@ const labItems = [
     "bet": "Make tasks resettable, observable, and measurable while constraining their effects.",
     "why": "Does a sandbox isolate execution, define a useful task, provide a reward, or do all three? Do not assume these roles are interchangeable.",
     "accent": "#9ca7ff",
-    "image": "./assets/harness-studio.svg",
+    "image": "./assets/chapters/agent-workshop.webp",
     "chips": [
       "RL environments",
       "sandboxes",
@@ -782,7 +782,7 @@ const labItems = [
     "bet": "Learn representations that support generating and working with spatial environments.",
     "why": "Which claims concern visual reconstruction, which concern interaction, and which demonstrate prediction of physical consequences?",
     "accent": "#5dd9ff",
-    "image": "./assets/world-observatory.svg",
+    "image": "./assets/chapters/spatial-worlds.webp",
     "chips": [
       "spatial intelligence",
       "Marble",
@@ -814,7 +814,7 @@ const labItems = [
     "bet": "Combine scientific expertise with agents that search, use tools, and organize evidence.",
     "why": "Can a claim be traced to a source, reproduced, and experimentally validated? Where do experts make the decisions?",
     "accent": "#87ffc1",
-    "image": "./assets/harness-studio.svg",
+    "image": "./assets/chapters/scientific-discovery.webp",
     "chips": [
       "AI scientist",
       "biology",
@@ -846,7 +846,7 @@ const labItems = [
     "bet": "Transfer learned policies across tasks and robot settings.",
     "why": "What generalizes to new bodies, objects, and environments? How are unsuccessful or unsafe actions counted?",
     "accent": "#ffb67b",
-    "image": "./assets/world-shell.svg",
+    "image": "./assets/chapters/embodied-intelligence.webp",
     "chips": [
       "robot foundation models",
       "openpi",
@@ -878,7 +878,7 @@ const labItems = [
     "bet": "Advance capability and safety within a single research program.",
     "why": "What public methods, artifacts, and independent evidence would allow the proposed approach to be assessed?",
     "accent": "#ff8f7a",
-    "image": "./assets/media-surface.svg",
+    "image": "./assets/chapters/research-grove.webp",
     "chips": [
       "straight-shot lab",
       "safety + capability",
@@ -2315,7 +2315,7 @@ const watchItems = [
     "summary": "A step-by-step visual introduction to layers, activations, and learned weights.",
     "url": "https://www.youtube.com/watch?v=aircAruvnKk",
     "youtubeId": "aircAruvnKk",
-    "thumbnail": "./assets/watch/neural-network.jpg"
+    "thumbnail": "./assets/chapters/learning-garden.webp"
   },
   {
     "id": "watch-attention",
@@ -2324,7 +2324,7 @@ const watchItems = [
     "summary": "A visual unpacking of the architecture behind the LLM wave.",
     "url": "https://www.youtube.com/watch?v=eMlx5fFNoYc",
     "youtubeId": "eMlx5fFNoYc",
-    "thumbnail": "./assets/watch/transformers.jpg"
+    "thumbnail": "./assets/chapters/model-lifecycle.webp"
   },
   {
     "id": "watch-llm",
@@ -2333,7 +2333,7 @@ const watchItems = [
     "summary": "A dense but accessible map of what the modern LLM stack is actually doing.",
     "url": "https://www.youtube.com/watch?v=zjkBMFhNj_g",
     "youtubeId": "zjkBMFhNj_g",
-    "thumbnail": "./assets/watch/llm.jpg"
+    "thumbnail": "./assets/chapters/model-lifecycle.webp"
   },
   {
     "id": "watch-openclaw",
@@ -2342,7 +2342,7 @@ const watchItems = [
     "summary": "A good bridge from abstract agent talk to a more opinionated product direction.",
     "url": "https://www.youtube.com/watch?v=4uzGDAoNOZc",
     "youtubeId": "4uzGDAoNOZc",
-    "thumbnail": "./assets/watch/openclaw.jpg"
+    "thumbnail": "./assets/chapters/agent-workshop.webp"
   },
   {
     "id": "watch-harness",
@@ -2351,7 +2351,7 @@ const watchItems = [
     "summary": "A sharp explanation of the outer system layer around model intelligence.",
     "url": "https://www.youtube.com/watch?v=am_oeAoUhew",
     "youtubeId": "am_oeAoUhew",
-    "thumbnail": "./assets/watch/harness.jpg"
+    "thumbnail": "./assets/chapters/agent-workshop.webp"
   },
   {
     "id": "watch-world-models",
@@ -2360,7 +2360,7 @@ const watchItems = [
     "summary": "A current research lens on where AI may go after the current language-centric wave.",
     "url": "https://www.youtube.com/watch?v=yUmDRxV0krg",
     "youtubeId": "yUmDRxV0krg",
-    "thumbnail": "./assets/watch/world-models.jpg"
+    "thumbnail": "./assets/chapters/spatial-worlds.webp"
   }
 ];
 
@@ -3117,6 +3117,7 @@ function clearNode(node) {
 }
 
 function setImage(img, src, alt) {
+  img.loading = "lazy";
   img.onerror = () => {
     img.onerror = null;
     img.src = fallbackImagePath;
@@ -3453,7 +3454,7 @@ function initEvolutionAtlas() {
   const start = async () => {
     experience.dataset.atlasState = "loading";
     try {
-      const { mountEvolutionAtlas } = await import("../history-tree.js?v=20261029-canopy");
+      const { mountEvolutionAtlas } = await import("../history-tree.js?v=20261029-grove");
       evolutionAtlasController = mountEvolutionAtlas({
         container,
         items: timelineItems,
@@ -3541,6 +3542,7 @@ function renderStackDetail() {
   stackInfra.textContent = item.infra;
   stackRisk.textContent = item.risk;
   stackCoreLabel.textContent = item.coreLabel;
+  document.querySelector("#stack-art-caption").textContent = ({pretrain:"Pre-training · learning representations from data",posttrain:"Post-training · shaping behavior with feedback",inference:"Inference · serving useful outputs"})[item.id];
 
   clearNode(stackChips);
   item.chips.forEach((chip) => stackChips.appendChild(makeChip(chip)));

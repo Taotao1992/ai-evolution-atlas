@@ -1,19 +1,20 @@
 "use strict";
 
 const CACHE_PREFIX = "ai-evolution-atlas-";
-const CACHE_NAME = `${CACHE_PREFIX}20261029-canopy`;
+const CACHE_NAME = `${CACHE_PREFIX}20261029-grove`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./styles.css?v=20261029-canopy",
-  "./assets/atlas.css?v=20261029-canopy",
-  "./main.js?v=20261029-canopy",
-  "./assets/app/app-shell.js?v=20261029-canopy",
-  "./assets/app/course.js?v=20261029-canopy",
+  "./styles.css?v=20261029-grove",
+  "./assets/atlas.css?v=20261029-grove",
+  "./assets/chapters.css?v=20261029-grove",
+  "./main.js?v=20261029-grove",
+  "./assets/app/app-shell.js?v=20261029-grove",
+  "./assets/app/course.js?v=20261029-grove",
   "./assets/app/app.webmanifest",
   "./assets/app/offline-assets.json",
   "./assets/favicon.svg",
-  "./assets/history-tree.js?v=20261029-canopy",
+  "./assets/history-tree.js?v=20261029-grove",
   "./assets/app/icon-192.png",
   "./assets/app/icon-512.png",
   "./assets/app/apple-touch-icon.png",

@@ -40,10 +40,11 @@
       }
     </script>
     <link rel="preload" href="./assets/tree/ai-history-tree.webp" as="image" />
-    <link rel="stylesheet" href="./styles.css?v=20261029-canopy" />
-    <link rel="stylesheet" href="./assets/atlas.css?v=20261029-canopy" />
+    <link rel="stylesheet" href="./styles.css?v=20261029-grove" />
+    <link rel="stylesheet" href="./assets/atlas.css?v=20261029-grove" />
+    <link rel="stylesheet" href="./assets/chapters.css?v=20261029-grove" />
 
-    <script type="module" src="./main.js?v=20261029-canopy" defer></script>
+    <script type="module" src="./main.js?v=20261029-grove" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -68,10 +69,10 @@
       <section id="top" class="section hero" data-section="top" aria-labelledby="hero-title">
         <div class="hero-intro">
           <div><p class="eyebrow">Ideas take root. Intelligence branches out.</p><h1 id="hero-title">Every breakthrough <em>has roots.</em></h1></div>
-          <p class="hero-lead">Trace the ideas that shaped AI.<br />From rules and learning to models that generate, reason, and act.</p>
+          <p class="hero-lead">Trace the ideas that shaped AI. <br />From rules and learning to models that generate, reason, and act.</p>
         </div>
         <div class="atlas-experience" id="atlas-experience" data-motion="off">
-          <div class="tree-caption"><span><i aria-hidden="true"></i> THE LIVING HISTORY OF AI</span><span>1950 — 2026 <span aria-hidden="true">/</span> Select a branch to begin</span></div>
+          <div class="tree-caption"><span><i aria-hidden="true"></i> THE LIVING HISTORY OF AI</span><span class="tree-instruction"><span class="tree-date-range">1950–2026</span><span class="tree-action-hint">Select a branch to begin</span></span></div>
           <div class="tree-viewport" id="atlas-frame">
             <div class="tree-stage">
               <img class="tree-art" src="./assets/tree/ai-history-tree.webp" width="1672" height="941" alt="A luminous golden tree with deep roots and blue, violet, turquoise, and green branches, adapted from the tree in Taotao Cai’s slide eight." fetchpriority="high" />
@@ -80,18 +81,18 @@
             </div>
             <canvas id="tree-atmosphere" aria-hidden="true"></canvas>
             <div class="tree-root-note" aria-hidden="true"><span>THE ROOTS OF EVERY BRANCH</span><strong>Data <i>·</i> Algorithms <i>·</i> Compute</strong></div>
+            <div class="tree-view-tools" aria-label="Illustration controls" data-enhanced hidden>
+              <button id="atlas-zoom-out" type="button" aria-label="Zoom out" disabled>−</button><output id="atlas-zoom-status" aria-live="polite">100%</output><button id="atlas-zoom-in" type="button" aria-label="Zoom in">+</button><button id="atlas-reset" type="button" aria-label="Reset illustration view">↺</button>
+            </div>
+          </div>
             <div class="atlas-readout" id="atlas-readout" role="tabpanel" aria-labelledby="tree-year-turing">
               <div class="atlas-readout-copy" aria-live="polite" aria-atomic="true">
-                <p class="atlas-readout-meta"><span id="atlas-era">1950</span><span id="atlas-position">01 / 13</span></p>
+                <p class="atlas-readout-meta"><span class="readout-label">Selected milestone</span><span id="atlas-era">1950</span><span id="atlas-position">01 / 13</span></p>
                 <h2 id="atlas-title">Can machines think?</h2><p id="atlas-subtitle">Start with a question that helped shape the field.</p>
               </div>
               <button class="atlas-open" id="atlas-open" type="button" data-enhanced hidden>Read this chapter <span aria-hidden="true">↗</span></button>
               <noscript><a class="atlas-open" href="#history">Read the history →</a></noscript>
             </div>
-            <div class="tree-view-tools" aria-label="Illustration controls" data-enhanced hidden>
-              <button id="atlas-zoom-out" type="button" aria-label="Zoom out" disabled>−</button><output id="atlas-zoom-status" aria-live="polite">100%</output><button id="atlas-zoom-in" type="button" aria-label="Zoom in">+</button><button id="atlas-reset" type="button" aria-label="Reset illustration view">↺</button>
-            </div>
-          </div>
           <div class="tree-bottom-bar">
             <div class="tree-playback" data-enhanced hidden><button id="atlas-tour" type="button" aria-pressed="false">▶ Guided tour</button><button id="atlas-motion" type="button" aria-pressed="true">Enable motion</button></div>
             <p>One field. Many connected traditions.</p>
@@ -106,11 +107,11 @@
       </section>
 
       <section class="section guide-section" data-route="top" aria-labelledby="guide-title">
-        <div class="guide-heading"><p class="eyebrow">Choose your way in</p><h2 id="guide-title">Explore an idea.<br /><em>Then follow the evidence.</em></h2><p>A visual starting point, a structured learning path, and a shelf of sources to go deeper.</p></div>
+        <div class="guide-heading"><p class="eyebrow">Choose your way in</p><h2 id="guide-title">Explore an idea. <em>Then follow the evidence.</em></h2><p>A visual starting point, a structured learning path, and a shelf of sources to go deeper.</p></div>
         <div class="guide-entries">
-          <a class="guide-entry" href="#history"><span class="guide-number">01 / THE HISTORY</span><h3>Follow the branches <span aria-hidden="true">↗</span></h3><p>Meet the turning points, understand what changed, and open the work behind each idea.</p><span class="guide-link"><b data-source-count="timeline">13</b> historical landmarks →</span></a>
-          <a class="guide-entry" href="#learn"><span class="guide-number">02 / THE LEARNING PATH</span><h3>Build your understanding <span aria-hidden="true">↗</span></h3><p>Twelve modules connect foundations, hands-on experiments, and questions worth investigating.</p><span class="guide-link"><b data-source-count="weeks">12</b> modules · 4 optional projects →</span></a>
-          <a class="guide-entry" href="#library"><span class="guide-number">03 / THE SOURCE LIBRARY</span><h3>Go to the original <span aria-hidden="true">↗</span></h3><p>Find papers, author explanations, documentation, and projects by topic or resource type.</p><span class="guide-link"><b data-source-count="library">82</b> selected resources →</span></a>
+          <a class="guide-entry" href="#history"><img class="guide-entry-art" src="./assets/chapters/learning-garden.webp" width="1536" height="864" loading="lazy" alt="A garden of luminous golden saplings along a learning path."/><div class="guide-entry-copy"><span class="guide-number">01 / THE HISTORY</span><h3>Follow the branches <span aria-hidden="true">↗</span></h3><p>Meet the turning points, understand what changed, and open the work behind each idea.</p><span class="guide-link"><b data-source-count="timeline">13</b> historical landmarks →</span></div></a>
+          <a class="guide-entry" href="#learn"><img class="guide-entry-art" src="./assets/chapters/agent-workshop.webp" width="1536" height="864" loading="lazy" alt="A golden tree growing around books, instruments, and tools."/><div class="guide-entry-copy"><span class="guide-number">02 / THE LEARNING PATH</span><h3>Build your understanding <span aria-hidden="true">↗</span></h3><p>Twelve modules connect foundations, hands-on experiments, and questions worth investigating.</p><span class="guide-link"><b data-source-count="weeks">12</b> modules · 4 optional projects →</span></div></a>
+          <a class="guide-entry" href="#library"><img class="guide-entry-art" src="./assets/chapters/source-library.webp" width="1536" height="864" loading="lazy" alt="An open book whose pages support a luminous tree of knowledge."/><div class="guide-entry-copy"><span class="guide-number">03 / THE SOURCE LIBRARY</span><h3>Go to the original <span aria-hidden="true">↗</span></h3><p>Find papers, author explanations, documentation, and projects by topic or resource type.</p><span class="guide-link"><b data-source-count="library">82</b> selected resources →</span></div></a>
         </div>
       </section>
 
@@ -121,6 +122,7 @@
       </section>
 
       <section id="learn" class="section learn-section" data-section="learn" aria-labelledby="learn-title">
+        <div class="chapter-intro">
         <div class="section-heading">
           <p class="eyebrow">Learning path · 12 experimental modules</p>
           <h2 id="learn-title">Understand it. Build it. Test it.</h2>
@@ -128,6 +130,8 @@
             A suggested route from foundations to language models, agents, and evaluation. Each module pairs
             sources with an experiment and something concrete to show what you learned. Adapt the pace to your background.
           </p>
+        </div>
+          <figure class="chapter-art"><img src="./assets/chapters/learning-garden.webp" width="1536" height="864" alt="A path through a garden of increasingly mature golden trees." loading="lazy"/><figcaption>A learning path, from first ideas to practical experiments.</figcaption></figure>
         </div>
 
         <p class="learning-prerequisites">Suggested background: basic Python, introductory probability, and an interest in testing ideas. No fixed timetable or enrolment is required.</p>
@@ -227,6 +231,7 @@
       </section>
 
       <section id="now" class="section now-section" data-section="now" aria-labelledby="now-title">
+        <div class="chapter-intro">
         <div class="section-heading">
           <p class="eyebrow">Current briefing · October 2026</p>
           <h2 id="now-title">What changed since the last edition</h2>
@@ -234,6 +239,8 @@
             Four developments worth adding to the map. Dates refer to the linked sources; inclusion is for
             study, not endorsement. Vendor claims are starting points for comparison, not settled truth.
           </p>
+        </div>
+          <figure class="chapter-art"><img src="./assets/chapters/research-grove.webp" width="1536" height="864" alt="A grove of distinct luminous trees in a midnight landscape." loading="lazy"/><figcaption>Read each release in the context of the wider field.</figcaption></figure>
         </div>
 
         <div class="update-grid">
@@ -326,9 +333,10 @@
           <div class="timeline-nav" id="timeline-nav" role="tablist" aria-label="AI history timeline"></div>
 
           <article class="timeline-detail" id="timeline-detail" role="tabpanel" aria-live="polite">
-            <div class="timeline-art">
+            <div class="timeline-art" tabindex="0" role="region" aria-label="Concept diagram. Scroll horizontally to see the full diagram on smaller screens.">
               <img id="timeline-image" src="./assets/ml-matrix.svg" alt="" />
             </div>
+            <p class="diagram-hint">Concept diagram · scroll horizontally on smaller screens.</p>
             <div class="timeline-copy">
               <p class="detail-kicker" id="timeline-era">Era</p>
               <h3 id="timeline-title">Loading timeline item</h3>
@@ -436,17 +444,7 @@
               <div class="link-list" id="stack-links"></div>
             </div>
 
-            <div class="stack-visual" aria-hidden="true">
-              <div class="stack-orbit stack-orbit-one"></div>
-              <div class="stack-orbit stack-orbit-two"></div>
-              <div class="stack-core">
-                <span id="stack-core-label">LLM</span>
-              </div>
-              <div class="stack-node stack-node-a">data</div>
-              <div class="stack-node stack-node-b">RL</div>
-              <div class="stack-node stack-node-c">serve</div>
-              <div class="stack-node stack-node-d">evals</div>
-            </div>
+            <figure class="chapter-art stack-art"><img id="stack-image" src="./assets/chapters/model-lifecycle.webp" width="1536" height="864" loading="lazy" alt="Three stages of a luminous tree, from connected roots to refined branches and golden fruit."/><figcaption id="stack-art-caption">Pre-training · learning representations from data</figcaption><span id="stack-core-label" hidden>PRE</span></figure>
           </article>
 
           <div class="infra-grid" aria-label="Infrastructure themes">
@@ -475,6 +473,7 @@
       </section>
 
       <section id="labs" class="section labs-section" data-section="labs">
+        <div class="chapter-intro">
         <div class="section-heading">
           <p class="eyebrow">Research landscape · selected labs and programs</p>
           <h2>Different bets on what comes next.</h2>
@@ -484,6 +483,8 @@
             spatial intelligence, scientific discovery, embodiment, and safety. Profiles are teaching cases,
             not rankings or endorsements; treat each linked claim as a position to investigate.
           </p>
+        </div>
+          <figure class="chapter-art"><img src="./assets/chapters/research-grove.webp" width="1536" height="864" alt="A grove of distinct luminous trees representing parallel research programs." loading="lazy"/><figcaption>Different research questions. Different branches of the field.</figcaption></figure>
         </div>
 
         <div class="labs-toolbar" role="toolbar" aria-label="Lab filters">
@@ -529,6 +530,7 @@
       </section>
 
       <section id="library" class="section library-section" data-section="library">
+        <div class="chapter-intro">
         <div class="section-heading section-heading-inverse">
           <p class="eyebrow">Curated library · primary sources first</p>
           <h2>Find the right paper, talk, document, or project.</h2>
@@ -536,6 +538,8 @@
             Search by idea, combine a capability area with a resource type, then open the source itself.
             The shelf is deliberately selective: enough range to connect the course, not an endless feed.
           </p>
+        </div>
+          <figure class="chapter-art"><img src="./assets/chapters/source-library.webp" width="1536" height="864" alt="A finely detailed golden tree growing from the pages of an open book." loading="lazy"/><figcaption>Trace an idea back to the work that introduced it.</figcaption></figure>
         </div>
 
         <div class="library-discovery">
@@ -616,6 +620,7 @@
       </section>
 
       <section id="watch" class="section watch-section" data-section="watch">
+        <div class="chapter-intro">
         <div class="section-heading">
           <p class="eyebrow">Watch</p>
           <h2>Watch an explanation unfold.</h2>
@@ -623,6 +628,8 @@
             Some of the biggest shifts in AI are much easier to grasp visually than in prose. This layer
             pulls together explainers, talks, and demos that make the abstractions legible.
           </p>
+        </div>
+          <figure class="chapter-art"><img src="./assets/chapters/multimodal-media.webp" width="1536" height="864" alt="Golden branches unfolding into luminous visual and audio-like ribbons." loading="lazy"/><figcaption>See an idea unfold, then inspect the explanation.</figcaption></figure>
         </div>
 
         <div class="watch-grid" id="watch-grid"></div>
@@ -641,7 +648,7 @@
 
         <div class="future-grid">
           <article class="future-card">
-            <img src="./assets/covers/frontier/world-models.jpg" alt="Abstract world models cover art" />
+            <img src="./assets/chapters/spatial-worlds.webp" alt="A small illuminated world held within a glass terrarium and golden roots." loading="lazy" />
             <span class="horizon-number">01 / Interactive environments</span>
             <h3>When does a generated world become a useful model of consequences?</h3>
             <p>
@@ -656,7 +663,7 @@
             </div>
           </article>
           <article class="future-card">
-            <img src="./assets/covers/labs/futurehouse.jpg" alt="Abstract AI science cover art" />
+            <img src="./assets/chapters/scientific-discovery.webp" alt="An intricate golden tree growing inside a laboratory glass vessel." loading="lazy" />
             <span class="horizon-number">02 / Automated research</span>
             <h3>What evidence should turn an AI-assisted result into a scientific discovery?</h3>
             <p>
@@ -671,7 +678,7 @@
             </div>
           </article>
           <article class="future-card">
-            <img src="./assets/covers/labs/physical-intelligence.jpg" alt="Abstract embodied AI cover art" />
+            <img src="./assets/chapters/embodied-intelligence.webp" alt="A precision robotic hand carefully holding a golden seedling." loading="lazy" />
             <span class="horizon-number">03 / Embodiment</span>
             <h3>Which capabilities survive contact with the physical world?</h3>
             <p>

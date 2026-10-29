@@ -20,6 +20,8 @@ Live: https://taotao1992.github.io/ai-evolution-atlas/
   82 selected resources, six video entries, and three open research questions.
 - Keyboard navigation, mobile layouts, reduced-motion support, and the
   existing installable/offline and native-wrapper behavior.
+- A shared Manrope type system, larger reading sizes, a solid milestone dock
+  below the tree, and nine coordinated chapter illustrations.
 
 The illustration is a map of related ideas, not a formal taxonomy or proof of
 historical causation. AI traditions overlap and continue in parallel.
@@ -47,7 +49,9 @@ of the deployment. No package installation or build step is required.
 | `assets/app/course.js` | Content collections and chapter/library interactions |
 | `assets/history-tree.js` | Original-artwork history interaction; no WebGL dependency |
 | `assets/atlas.css` | Tree scene, landmark labels, rail and mobile controls |
+| `assets/chapters.css` | Unified readable typography, milestone dock and illustrated chapters |
 | `assets/tree/` | Optimized cleaned tree and the exact original slide-eight image |
+| `assets/chapters/` | Nine GPT Image illustrations extending the tree's visual language |
 | `assets/diagrams/` | Deterministic SVG concept plates |
 | `assets/fonts/` | Self-hosted Google Fonts and their OFL licenses |
 | `assets/app/` | Installable app shell, manifest, offline asset list and worker |
@@ -89,5 +93,7 @@ Design research included:
   [Codrops](https://tympanus.net/codrops/hub/): procedural and interactive
   references considered before the user selected faithful 2D artwork.
 
-No third-party site source code was copied. Fonts are Manrope, Instrument
-Serif, and IBM Plex Mono, licensed under the bundled SIL Open Font Licenses.
+No third-party site source code was copied. All interface typography uses
+self-hosted Manrope, licensed under the bundled SIL Open Font License.
+The chapter illustrations are conceptual artwork; labels and factual
+explanations remain in HTML. Their prompts are in `docs/chapter-art-direction.md`.
